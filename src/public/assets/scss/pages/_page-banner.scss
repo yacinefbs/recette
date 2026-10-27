@@ -1,0 +1,87 @@
+/*--
+/*  16 - Page Banner CSS
+/*----------------------------------------*/
+
+// Page Banner Section
+.page-banner-section {
+    background: #bcdfe4;
+    padding-top: 150px;
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    @media #{$tablet-device} {
+        min-height: 350px;
+        padding-top: 82px;
+    }
+    
+    &::before {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        content: "";
+        left: 0;
+        top: 0;
+        background-color: rgba(0, 0, 0, 0.72);
+        z-index: -1;
+    }
+
+}
+
+
+
+
+// Page Banner
+.page-banner {
+
+    & .section-title {
+
+        & .title {
+            color: $white;
+        }
+    }
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+    margin-top: 15px;
+
+    & .breadcrumb-item {
+        font-size: 16px;
+        font-family: $body-font;
+        font-weight: 400;
+        color: $white;
+
+
+        &+  .breadcrumb-item {
+            padding-left: 8px;
+
+            &::before {
+                content: "\f16e";
+                font-family: flaticon !important;
+                font-size: 11px;
+                padding-right: 8px;
+                position: relative;
+                top: 0;
+                color: $white;
+            }
+        }
+
+        &:hover {
+
+            & a {
+                color: $primary4;
+            }
+        }
+        &.active {
+            
+        }
+
+        
+    }
+}

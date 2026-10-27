@@ -1,0 +1,285 @@
+/*--
+/*  24. Footer CSS
+/*----------------------------------------*/
+
+// Footer Section
+.footer-top-section {
+    background: #07294D;
+}
+
+// Home Style Five
+.footer-section-02 {
+    background-color: #EEEBE7;
+
+    & .footer-top-section {
+        background: none;
+    }
+
+    & .footer-copyright-area {
+        background: none;
+        padding-top: 0;
+        padding-bottom: 0;
+
+        & .footer-copyright-wrap {
+            border-top: 1px solid #E1E1E1;
+            padding-top: 20px;
+            padding-bottom: 30px;
+        }
+    }
+
+    & .copyright-text {
+    
+        & p {
+            color: #29303B; 
+        }
+    }
+}
+
+// Home Style Six
+.footer-section-03 {
+    background-color: #EFF6F9;
+
+    & .footer-top-section {
+        background: none;
+    }
+
+    & .footer-copyright-area {
+
+        & .footer-copyright-wrap {
+            border-top: 1px solid #D7D7D7;
+        }
+    }
+
+    & .copyright-text {
+    
+        & p {
+            color: #29303B;
+        }
+    }
+}
+
+// Home Style Seven
+
+.footer-section-04 {
+
+    & .footer-top-section {
+        background: #000710;
+    }
+
+    & .footer-copyright-area {
+        background: #000103;
+    }
+
+    & .footer-copyright-links {
+    
+        & a {
+           
+            &:hover {
+                color: $primary4;
+            }
+        }
+    }
+
+}
+
+// Home Style Eight
+
+.footer-section-05 {
+
+    & .footer-top-section {
+        background: #000710;
+    }
+
+    & .footer-copyright-area {
+        background: #000103;
+    }
+
+    & .footer-copyright-links {
+    
+        & a {
+           
+            &:hover {
+                color: $primary5;
+            }
+        }
+    }
+
+}
+
+
+// Home Style Nine
+.footer-section-06 {
+    background-color: #111A24;
+
+    & .footer-top-section {
+        background: none;
+    }
+
+    & .footer-copyright-area {
+
+        & .footer-copyright-wrap {
+            border-top: 1px solid #FFFFFF1A;
+        }
+    }
+
+    & .copyright-text {
+    
+        & p {
+            color: $white;
+        }
+    }
+}
+
+// Home Style ten
+.footer-section-07 {
+    background-color: #ECF7F4;
+
+    & .footer-top-section {
+        background: none;
+    }
+
+    & .footer-copyright-area {
+
+        & .footer-copyright-wrap {
+            border-top: 1px solid #D7D7D7;
+        }
+    }
+
+    & .copyright-text {
+    
+        & p {
+            color: #29303B;
+        }
+    }
+}
+
+// Footer Logo
+.footer-logo {
+    max-width: 170px;
+}
+
+// Footer Copyright
+.footer-copyright-area {
+    background: #021D3A;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+
+
+// Footer Copyright Text
+.copyright-text {
+    margin-top: 10px;
+    @media #{$tablet-device} {
+        text-align: center;
+    }
+
+    & p {
+        font-size: 15px;
+        line-height: 26px;
+        color: $white; 
+    }
+}
+
+.footer-copyright-links {
+    text-align: right;
+    margin-top: 10px;
+    @media #{$tablet-device} {
+        text-align: center;
+    }
+
+    & a {
+       font-size: 15px;
+       line-height: 26px;
+       color: $white;    
+       margin-left: 10px;
+       padding-left: 12px;
+       position: relative;
+
+       &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: $white;
+        width: 1px;
+        height: 13px;
+       }
+       
+
+        &:first-child {
+            margin-left: 0;
+            padding-left: 0;
+
+            &::before {
+                display: none;
+            }
+        }
+
+        &:hover {
+            color: $primary;
+        }
+    }
+}
+
+
+
+// Back Button
+.progress-wrap {
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+    display: block;
+    border-radius: 50px;
+    box-shadow: inset 0 0 0 2px rgba(0, 93, 224,0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(130%);
+    z-index: 99;
+    transition: all 200ms linear;
+
+    &::after {
+        position: absolute;
+        content: "\f108";
+        font-family: flaticon !important;
+        text-align: center;
+        line-height: 45px;
+        font-size: 18px;
+        color: $primary;
+        left: 0;
+        top: 0;
+        height: 46px;
+        width: 46px;
+        transform: rotate(90deg);
+        cursor: pointer;
+        display: block;
+        z-index: 1;
+    }
+
+    & svg {
+
+        & path {
+            fill: none;
+        }
+
+        &.progress-circle {
+
+            & path {
+                stroke: $primary;
+                stroke-width: 4;
+                box-sizing: border-box;
+            }
+        }
+    }
+
+    &.active-progress {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+}
+

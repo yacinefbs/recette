@@ -1,0 +1,295 @@
+/*--
+/*  23 - Shop Details CSS
+/*----------------------------------------*/
+
+.product-details-slide {
+
+    & .gallery {
+        margin-bottom: 20px;
+    }
+
+    & .gallery-nav {
+        max-width: 450px;
+
+        & a {
+            border: 1px solid #e1e1e1;
+        }
+    }
+}
+
+
+.product-details-overview {
+    @media #{$large-mobile} {
+        margin-top: 40px;
+    }
+
+    & .title {
+        font-size: 50px;
+        line-height: 62px;
+        font-weight: 700;
+        color: #021E40;
+        margin-bottom: 10px;
+        @media #{$large-mobile} {
+            font-size: 36px;
+            line-height: 48px;
+        }
+        @media #{$small-mobile} {
+            font-size: 30px;
+            line-height: 42px;
+        }
+    }
+
+    & .product-price {
+        font-size: 24px;
+        margin-bottom: 10px;
+        color: $primary4;
+        line-height: 1.2;
+        font-weight: 700;
+    }
+
+    & .product-details-meta {
+        padding-top: 30px;
+
+        & p {
+            color: #696868;
+            font-weight: 500;
+
+            & span {
+                font-weight: 400;
+            }
+        }
+    }
+
+
+    & .text {
+        font-size: 16px;
+        line-height: 30px;
+        color: #696868;
+        margin-top: 25px;
+    }
+
+    & .product-details-menu-2 {
+
+        & .cart-plus-minus {
+            border: 1px solid #e1e1e1;
+            height: 50px;
+            line-height: 48px;
+            width: 110px;
+            border-radius: 0;
+            color: #939393;
+            font-family: $heading-font;
+            text-align: center;
+            background-color: #ffffff;
+            font-size: 24px;
+            font-weight: 400;
+            cursor: pointer;
+
+            & .dec {
+
+                &.qtybutton {
+                    height: 100%;
+                    width: 30%;
+                    float: left;
+                    border-right: 1px solid #e1e1e1;
+                }
+            }
+    
+            & .inc {
+    
+                &.qtybutton {
+                    height: 100%;
+                    width: 30%;
+                    float: right;
+                    border-right: 0;
+                    border-left: 1px solid #e1e1e1;
+                }
+            }
+        }
+
+        
+
+        & ul {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            & li {
+                list-style: none;
+                display: inline-block;
+                margin-right: 20px;
+                margin-top: 25px;
+
+                &:last-child {
+                    margin-right: 0;
+                }
+
+                & .btn {
+                    height: 50px;
+                    line-height: 50px;
+                    text-transform: capitalize;
+                    font-size: 14px;
+                    padding: 0 30px;
+                    background: $primary4;
+                    color: $white;
+                    border-radius: 0;
+
+                    &:hover {
+                        background: #021E40;
+                    }
+                }
+            }
+        }
+
+        & input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]), textarea {
+            background: transparent none repeat scroll 0 0;
+            box-shadow: none;
+            border: none;
+            height: 100%;
+            margin-bottom: 0;
+            padding: 0;
+            font-size: 16px;
+            font-family: "Poppins", sans-serif;
+            color: #222222;
+            text-align: center;
+            width: 40%;
+            font-weight: 600;
+        }
+    }
+
+    & .product-details-sku {
+        margin-top: 30px;
+
+        & p {
+            color: #696868;
+
+            & a {
+                color: #021E40;
+                
+                &:hover {
+                    color: $primary4;
+                }
+            }
+        }
+    }
+
+    
+}
+
+.shop-details-review-wrap {
+    margin-top: 40px;
+
+    & .product-desc {
+        margin-top: 40px;
+
+        & p {
+            color: #696868;
+        }
+    }
+
+    & .edubin-tabs-menu {
+        justify-content: center;
+    }
+}
+
+.product-review-reply {
+    margin-top: 40px;
+
+    & .title {
+        font-size: 24px;
+        color: #021E40;
+        margin-bottom: 30px;
+    }
+
+    & .add-review {
+        display: flex;
+        align-items: center;
+        & .comment-title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #021E40;
+            margin-right: 10px;
+        }
+
+        & .rating {
+
+            & li {
+                display: inline-block;
+                font-size: 14px;
+                color: #dfdfdf;
+                & a {
+
+                }
+            }
+        }
+    }
+
+    & .comment-form {
+
+        & .single-form {
+            position: relative;
+            margin-top: 20px;
+    
+            & input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+                display: block;
+                height: 50px;
+                max-width: 100%;
+                border: 1px solid #d6d5d7;
+                border-radius: 5px;
+                padding: 14px 20px 14px;
+                font-size: 13px;
+                color: #415674;
+                font-weight: 500;
+                line-height: 1.7;
+                text-transform: unset;
+
+                @include placeholder{
+                    opacity: 0.95;
+                    font-size: 13px;
+                    color: #4c4d56;
+                    font-weight: 400;
+                }
+            }
+
+            & textarea {
+                height: 120px;
+                font-size: 13px;
+                color: #415674;
+                padding: 14px 20px 14px;
+                font-weight: 500;
+                line-height: 1.7;
+                text-transform: unset;
+                border: 1px solid #d6d5d7;
+                border-radius: 5px;
+                resize: none;
+
+                @include placeholder{
+                    opacity: 0.95;
+                    font-size: 13px;
+                    color: #4c4d56;
+                    font-weight: 400;
+                }
+            }
+        }
+
+
+        & .comment-btn {
+
+            & .btn {
+                height: 45px;
+                line-height: 45px;
+                border-radius: 5px;
+                font-size: 14px;
+                font-family: $heading-font;
+                padding: 0 30px;
+                background: $primary4;
+                color: $white;
+                margin-top: 25px;
+
+                &:hover {
+                    background: #021E40;
+                }
+            }
+        }
+    }
+}

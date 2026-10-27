@@ -1,0 +1,136 @@
+/*--
+/*  19 - Event CSS
+/*----------------------------------------*/
+
+.event-wrap {
+    margin-top: -30px;
+}
+
+.event-item {
+    background: $white;
+    box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+    border: 1px solid #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 30px;
+
+    & .thum {
+        position: relative;
+
+        & .image {
+            overflow: hidden;
+            position: relative;
+
+            & a {
+                display: block;
+                position: relative;
+
+                & img {
+                    width: 100%;
+                    transition: $transition-default;
+                }
+            }
+
+            & .top-meta {
+
+                & .categories {
+                    position: absolute;
+                    top: 30px;
+                    left: 30px;
+                    max-width: 70%;
+
+                    & .tag {
+                        font-size: 14px;
+                        font-weight: 400;
+                        border-radius: 3px;
+                        padding: 3px 15px;
+                        line-height: 29px;
+                        display: inline-block;
+                        background: $primary4;
+                        color: $white;
+                        white-space: nowrap;
+                    }
+                }
+
+            }
+        }
+
+        & .price {
+            position: absolute;
+            right: 30px;
+            bottom: -30px;
+            
+            & span {
+                display: block;
+                font-size: 16px;
+                color: $white;
+                font-family: $heading-font;
+                font-weight: 600;
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                border-radius: 50%;
+                background-color: $primary4;
+                text-align: center;
+            }
+        }
+    }
+
+    & .content {
+        padding-top: 40px;
+        padding-bottom: 34px;
+        padding-left: 30px;
+        padding-right: 30px;
+        @media #{$desktop-device} {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        & .title {
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 32px;
+            color: #021E40;
+            margin-bottom: 10px;
+            transition: $transition-default;
+
+            &:hover {
+                color: $primary4;
+            }
+        }
+
+
+        & .event-place {
+            border-top: 1px solid #ebebeb;
+            padding-top: 10px;
+            margin-top: 15px;
+
+            & ul {
+                margin-top: 8px;
+
+                & li {
+                    font-size: 15px;
+                    color: #8a8a8a;
+
+                    & i {
+                        margin-right: 5px;
+                        color: $primary4;
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+
+        & .thum {
+
+            & .image {
+
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,405 @@
+/*--
+/*  14 - Counter CSS
+/*----------------------------------------*/
+
+.counter-section {
+    padding-bottom: 120px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+    @media #{$desktop-device} {
+        padding-bottom: 100px;
+    }
+    @media #{$tablet-device} {
+        padding-bottom: 80px;
+    }
+    @media #{$large-mobile} {
+        padding-bottom: 60px;
+    }
+
+    &::before {
+        background:#07294d none repeat scroll 0 0;
+        opacity: 0.8;
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+}
+
+.counter-wrap {
+    margin-top: -30px;
+}
+
+.single-counter {
+    margin-top: 30px;
+
+    & span {
+        font-size: 45px;
+        font-weight: 700;
+        color: $white;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -20px;
+            width: 50px;
+            height: 3px;
+            transform: translateX(-50%);
+            background: $primary;
+        }
+    }
+
+    & p {
+        font-size: 16px;
+        font-weight: 500;
+        color: $white;
+        margin-top: 40px;
+    }
+}
+
+
+// Home Style Three
+
+.counter-section-02 {
+    background: #EDF0F2;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    & .single-counter {
+    
+        & span {
+            color: #333333;
+        }
+    
+        & p {
+            color: #07294d;
+        }
+    }
+}
+
+// Home Style Five
+
+.edubin-counter-section-03 {
+
+    & .counter-wrap {
+        margin-top: -120px;
+        position: relative;
+        z-index: 1;
+    }
+}
+
+.single-counter-02 {
+    background: $white;
+    box-shadow: 0px 0px 90px 0px rgba(0, 0, 0, 0.16);
+    width: 205px;
+    height: 205px;
+    text-align: center;
+    border-radius: 50%;
+    padding: 55px 10px;
+    margin: 0 auto;
+    margin-top: 30px;
+    @media #{$large-mobile} {
+        width: 190px;
+        height: 190px;
+    }
+
+    & .title {
+        font-size: 48px;
+        font-weight: 700;
+        color: $black;
+        @media #{$large-mobile} {
+            font-size: 40px;
+        }
+    }
+
+    & p {
+        font-size: 15px;
+        color: $black;
+        margin-top: -5px;
+    }
+}
+
+// Home Style Six
+
+.counter-section-04 {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding-top: 35px;
+    padding-bottom: 65px;
+
+    & .counter-title-wrap {
+        @media #{$tablet-device} {
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        & .title {
+            font-size: 36px;
+            color: $white;
+        }
+    }
+}
+
+.single-counter-03 {
+    margin-top: 30px;
+
+    & .icon {
+        margin-bottom: 25px;
+    }
+
+    & span {
+        font-size: 36px;
+        font-weight: 700;
+        color: $white;
+    }
+
+    & p {
+        font-size: 14px;
+        color: $white;
+    }
+}
+
+
+// Home Style Seven
+.counter-section-05 {
+    background: #E9F3F9;
+    padding-top: 35px;
+    padding-bottom: 70px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+
+    & .shape-1 {
+        position: absolute;
+        left: -15px;
+        top: -15px;
+        z-index: -1;
+    }
+
+    & .shape-2 {
+        position: absolute;
+        right: -15px;
+        bottom: -15px;
+        z-index: -1;
+    }
+
+    & .single-counter-03 {
+        margin-top: 30px;
+    
+        & .icon {
+            margin-bottom: 25px;
+        }
+    
+        & span {
+            font-size: 36px;
+            font-weight: 700;
+            color: $primary4;
+        }
+    
+        & p {
+            font-size: 15px;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: #555555;
+        }
+    }
+    
+}
+
+// Home Style Eight
+
+.counter-section-06 {
+
+    & .counter-wrap-03 {
+        margin-top: -30px;
+    }
+}
+
+.single-counter-04 {
+    margin-top: 30px;
+    background: #FFF7EF;
+    border-radius: 10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &.item-2 {
+        background: #EEFAF8;
+
+        & span {
+            color: #3BBC9B;
+        }
+    }
+    &.item-3 {
+        background: #F7F3FF;
+
+        & span {
+            color: #9B51E0;
+        }
+    }
+    &.item-4 {
+        background: #FFFAEF;
+
+        & span {
+            color: #F8941F;
+        }
+    }
+
+    & span {
+        font-size: 34px;
+        font-weight: 700;
+        color: #EE4A62;
+    }
+
+    & p {
+        font-size: 15px;
+        color: #8a8a8a;
+    }
+}
+
+// Home Style Nine
+
+.counter-section-07 {
+    
+
+    & .counter-wrap-03 {
+        position: relative;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        border-radius: 5px;
+        overflow: hidden;
+        padding-top: 35px;
+        padding-bottom: 65px;
+        z-index: 1;
+        margin-top: -100px;
+
+        &::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: rgba(#EC5251, 0.9);
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+    }
+
+    & .single-counter-03 {
+        margin-top: 30px;
+        position: relative;
+
+        &::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 50%;
+            background: $white;
+            width: 1px;
+            height: 78px;
+            transform: translateY(-50%);
+        }
+
+        &.item-4 {
+
+            &::before {
+                display: none;
+            }
+        }
+    
+        & span {
+            font-size: 36px;
+            font-weight: 700;
+            color: $white;
+        }
+    
+        & p {
+            font-size: 16px;
+            color: $white;
+        }
+    }
+}
+
+.counter-section-07 {
+    @media #{$tablet-device} {
+        & .single-counter-03 {
+    
+            &::before {
+                display: none;
+            }
+    
+        }
+    }
+}
+
+// Home Style Ten
+
+.counter-section-08 {
+
+    & .counter-wrap-03 {
+        margin-top: -30px;
+    }
+
+    & .counter-cont-wrap {
+        padding-top: 30px;
+        padding-right: 50px;
+        @media #{$desktop-device} {
+            padding-right: 0;
+        }
+
+        & .title {
+            font-size: 36px;
+            color: #021E40;
+            @media #{$small-mobile} {
+                font-size: 30px;
+            }
+        }
+
+        & .text {
+            color: #8a8a8a;
+            margin-top: 20px;
+        }
+    }
+}
+
+// About Page
+
+.counter-section-09 {
+
+
+    &::before {
+        background:#000 none repeat scroll 0 0;
+        opacity: 0.65;
+        content: "";
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & .single-counter {
+    
+        & span {
+    
+            &::before {
+                background: #0071DC;
+            }
+        }
+    }
+
+}

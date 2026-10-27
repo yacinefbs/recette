@@ -1,0 +1,623 @@
+/*--
+/*  24.1 - Footer Widget CSS
+/*----------------------------------------*/
+
+// Footer Widget Area
+.footer-widget-wrap {
+    padding-top: 70px;
+    padding-bottom: 75px;
+    @media #{$tablet-device} {
+        padding-top: 50px;
+    }
+}
+
+
+
+// Footer Widget
+.footer-widget {
+    margin-top: 30px;
+
+    &.footer-widget-2,
+    &.footer-widget-3 {
+        padding-left: 40px;
+        @media #{$tablet-device} {
+            padding-left: 0px;
+        }
+    }
+}
+
+// Widget Info
+.widget-info {
+    padding-top: 20px;
+
+    &  ul {
+        
+
+        & li {
+            display: flex;
+            align-items: center;
+            flex-wrap: nowrap;
+            
+            & + li {
+                margin-top: 6px;
+            }
+    
+            & .info-text {
+                display: flex;
+                font-size: 15px;
+                line-height: 26px;
+                font-family: $heading-font;
+                font-weight: 400;
+                color: $white;
+
+                & .label-name {
+                    font-weight: 500;
+                }
+
+                & span {
+                    flex: 1;
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+}
+
+.footer-widget-about {
+    margin-top: 30px;
+
+    & p {
+        font-size: 15px;
+        line-height: 26px;
+        color: $white;
+        margin-top: 23px;
+    }
+}
+
+ 
+// Widget Social
+.footer-social {
+
+    & .social {
+        margin-top: 20px;
+        & li {
+            display: inline-block;
+
+            & + li {
+                margin-left: 10px;
+            }
+            
+            & a {
+                font-size: 16px;
+                color: $primary;
+
+                &:hover {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
+ 
+// Widget Title
+.footer-widget {
+    & .text {
+        font-size: 15px;
+        line-height: 26px;
+        color: $white;
+        margin-top: 30px;
+    }
+
+   & .footer-widget-title{
+        font-size: 18px;
+        line-height: 28px;
+        font-family: $heading-font;
+        font-weight: 700;
+        color: $white;
+    }
+
+
+}
+
+
+
+// Widget Link
+.widget-link{
+    padding-top: 25px;
+
+
+    & .link{
+        & li{
+            margin-top: 8px;
+
+            & a{
+                font-size: 15px;
+                color: $white; 
+                transition: $transition-default;
+             
+                &:hover {  
+                    color: $primary;
+                }
+            }
+        }
+    }
+}
+
+
+
+// Home Style Five
+.footer-section-02 {
+    
+    & .footer-widget-about {
+    
+        & p {
+            color: #29303B;
+        }
+    }
+
+    & .footer-widget {
+        & .text {
+            color: #29303B;
+        }
+    
+       & .footer-widget-title{
+            color: #29303B;
+        }
+    
+    
+    }
+
+    & .footer-social {
+
+        & .social {
+
+            & li {
+                
+                & a {
+                    color: #FF773D;
+    
+                    &:hover {
+                        color: #29303B; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: #29303B;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary2;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: #29303B;
+                 
+                    &:hover {  
+                        color: $primary2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Home Style Six
+.footer-section-03 {
+    
+
+    & .footer-social {
+
+        & .social {
+
+            & li {
+                
+                & a {
+                    color: $primary3;
+    
+                    &:hover {
+                        color: #29303B; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: #29303B;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary3;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: #29303B;
+                 
+                    &:hover {  
+                        color: $primary3;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Seven
+
+.footer-section-04 {
+    
+
+    & .footer-social {
+
+        & .social {
+
+            & li {
+                
+                & a {
+                    color: $primary4;
+    
+                    &:hover {
+                        color: $white; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: $white;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: $white;
+                 
+                    &:hover {  
+                        color: $primary4;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Eight
+
+.footer-section-05 {
+
+    & .footer-social {
+
+        & .social {
+
+            & li {
+                
+                & a {
+                    color: $primary5;
+    
+                    &:hover {
+                        color: $white; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: $white;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: $white;
+                 
+                    &:hover {  
+                        color: $primary5;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Nine
+
+.footer-section-06 {
+
+    & .footer-widget {
+    
+       & .footer-widget-title{
+            color: $white;
+        }
+    
+    
+    }
+
+    & .footer-widget-about {
+
+        & .widget-info {
+            display: flex;
+            align-items: center;
+            border-top: 1px solid #FFFFFF1A;
+            margin-top: 30px;
+
+            & .icon {
+
+                & svg {
+                    width: 25px;
+                    fill: $primary6;
+                }
+            }
+
+            & .cont {
+                flex: 1;
+                margin-left: 15px;
+
+                & .title {
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: $white;
+                }
+
+                & .number {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: $white;
+                    margin-top: 5px;
+                }
+            }
+        }
+    
+        & p {
+            color: $white;
+        }
+    }
+
+
+    & .footer-social {
+        text-align: right;
+        @media #{$tablet-device} {
+            text-align: center;
+        }
+
+        & .social {
+
+            & li {
+
+                & + li {
+                    margin-left: 15px;
+                }
+                
+                & a {
+                    color: $primary6;
+    
+                    &:hover {
+                        color: $white; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: $white;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: $white;
+                 
+                    &:hover {  
+                        color: $primary6;
+                    }
+                }
+            }
+        }
+    }
+
+    & .footer-widget {
+
+        & .widget-app {
+            padding-top: 18px;
+
+            & a {
+
+                & img {
+                    border-radius: 5px;
+                    margin-top: 20px;
+                }
+            }
+        }
+
+    }
+}
+
+// Home Style ten
+.footer-section-07 {
+
+    & .footer-social {
+
+        & .social {
+
+            & li {
+                
+                & a {
+                    color: $primary5;
+    
+                    &:hover {
+                        color: #29303B; 
+                    }
+                }
+            }
+        }
+    }
+    
+
+    & .widget-info {
+    
+        &  ul {
+            
+    
+            & li {
+        
+                & .info-text {
+                    color: #29303B;
+
+                    & span {
+
+                        & a {
+                            &:hover {
+                                color: $primary5;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .widget-link{
+        padding-top: 25px;
+    
+    
+        & .link{
+            & li{
+    
+                & a{
+                    color: #29303B;
+                 
+                    &:hover {  
+                        color: $primary5;
+                    }
+                }
+            }
+        }
+    }
+}

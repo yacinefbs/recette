@@ -1,0 +1,285 @@
+/*--
+/*  12 - Blog CSS
+/*----------------------------------------*/
+
+.blog-content-wrap {
+    padding-top: 15px;
+}
+
+// Single Blog
+.single-blog {
+    margin-top: 30px;
+    
+    & .blog-img {
+        position: relative;
+        overflow: hidden;
+        border-radius: 5px;
+
+        & a {
+            display: block;
+            & img {
+                width: 100%;
+                transition: $transition-default; 
+            }
+        }
+    }
+
+    & .blog-content {
+        padding-top: 25px; 
+
+        & .meta {
+            padding-bottom: 20px;
+
+            &  .blog-meta {
+                font-size: 14px;
+                color: #8a8a8a;
+                position: relative;
+                margin-right: 10px;
+
+                & i {
+                    color: $primary;
+                    margin-right: 2px;
+                }
+
+            }
+        }
+
+        & .title {
+            font-size: 24px;
+            line-height: 1.3;
+            color: $heading-color;
+            padding-right: 15px;
+            @media #{$tablet-device} {
+                padding-right: 0;
+            }
+        }
+
+        & p {
+            margin-top: 15px;
+        }
+
+    }
+
+    &:hover {
+        & .blog-img {
+            & a {
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+// Home Style Eight
+
+.edubin-blog-section-02 {
+
+    & .course-btn {
+        text-align: right;
+        @media #{$large-mobile} {
+            text-align: left;
+            margin-top: 25px;
+        }
+    
+        & .btn {
+            background: $primary5;
+            margin-top: 0;
+            color: $white;
+    
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+
+    & .single-blog {
+        
+        & .blog-img {
+    
+            & a {
+                display: block;
+                & img {
+                    height: 320px;
+                    object-fit: cover;
+                }
+            }
+        }
+    
+        & .blog-content {
+            padding-right: 15px;
+    
+            & .meta {
+    
+                &  .blog-meta {
+    
+                    & i {
+                        color: $primary5;
+                    }
+    
+                }
+            }
+    
+            & .title {
+                font-size: 18px;
+                line-height: 1.3;
+                color: #07294d;
+                padding-right: 15px;
+                
+                & a {
+                    &:hover {
+                        color: $primary5;
+                    }
+                }
+            }
+    
+            & p {
+                margin-top: 15px;
+            }
+    
+        }
+    }
+}
+
+
+// Home Style Nine
+
+.edubin-blog-section-03 {
+
+    & .single-blog {
+        background: $white;
+        box-shadow: 0 0 10px rgb(0 0 0 / 5%);
+        border: 1px solid #eee;
+        border-radius: 10px;
+        
+    
+        & .blog-content {
+            padding: 30px;
+
+            & .meta {
+    
+                &  .blog-meta {
+    
+                    & i {
+                        color: $primary6;
+                    }
+    
+                }
+            }
+    
+            & .title {
+                font-size: 24px;
+                
+                & a {
+                    &:hover {
+                        color: $primary6;
+                    }
+                }
+            }
+    
+            & p {
+                margin-top: 15px;
+                color: #8a8a8a;
+            }
+    
+        }
+    }
+}
+
+
+// Blog Grid
+
+.blog-grid-wrap {
+    margin-top: -30px;
+}
+
+.edubin-pagination {
+
+    & .pagination {
+        margin-top: 90px;
+        @media #{$small-mobile}{
+            margin-top: 60px;
+        }
+
+        & .page-item {
+            margin: 0 7px;
+            
+
+            &.active {
+
+                & .page-link {
+                    background-color: $primary4;
+                    border-color: $primary4;
+                    color: $white;
+                }
+            }
+
+            & .page-link {
+                width: 45px;
+                height: 45px;
+                padding: 0;
+                line-height: 44px;
+                font-size: 16px;
+                text-align: center;
+                color: #021E40;
+                border: 1px solid #ebebeb;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: $transition-default;
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &:hover {
+                    background: $primary4;
+                    border-color: $primary4;
+                    color: $white;
+                }
+
+                & i{
+                    line-height: 32px;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+}
+
+.edubin-blog-section-04 {
+
+    & .single-blog {
+        
+        & .blog-content {
+
+            & .meta {
+    
+                &  .blog-meta {
+
+                    & a {
+
+                        &:hover {
+                            color: $primary4;
+                        }
+                    }
+    
+                    & i {
+                        color: $primary4;
+                    }
+    
+                }
+            }
+    
+            & .title {
+                font-size: 24px;
+                
+                & a {
+                    &:hover {
+                        color: $primary4;
+                    }
+                }
+            }
+    
+        }
+    }
+}

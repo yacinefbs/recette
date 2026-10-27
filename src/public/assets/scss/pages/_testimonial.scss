@@ -1,0 +1,566 @@
+/*--
+/*  10 - Testimonial CSS
+/*----------------------------------------*/
+
+
+.edubin-testimonial-section {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        background: #07294d none repeat scroll 0 0;
+        content: "";
+        height: 100%;
+        opacity: 0.8;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & .testimonial-slider-wrap {
+        padding-top: 60px;
+    }
+
+    & .section-title {
+        @media #{$small-mobile} {
+            text-align: center;
+
+            & .sub-title {
+                &::before {
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+            }
+        }
+    }
+}
+
+.single-testimonial {
+    position: relative;
+
+    & .testimonial-thum {
+        position: absolute;
+        display: inline-block;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        @media #{$small-mobile} {
+            position: relative;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+            margin-top: 25px;
+        }
+
+        & img {
+            border-radius: 5px;
+        }
+
+        & .quote {
+            position: absolute;
+            right: -22px;
+            top: -22px;
+
+            & i {
+                width: 45px;
+                height: 45px;
+                line-height: 45px;
+                text-align: center;
+                background-color: #ffc600;
+                border-radius: 50%;
+                color: $white;
+                font-size: 18px;
+
+            }
+        }
+    }
+
+    & .testimonial-cont {
+        padding-left: 140px;
+        @media #{$small-mobile} {
+            padding-left: 0;
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        & p {
+            color: $white;
+            padding-bottom: 32px;
+        }
+
+        & .name {
+            font-size: 18px;
+            color: $white;
+            padding-bottom: 4px;
+        }
+
+        & span {
+            color: #fff;
+            font-size: 16px;
+        }
+    }
+}
+
+.testimonial-active{
+
+    & .swiper-pagination {
+        position: relative;
+        margin-top: 50px;
+
+        & .swiper-pagination-bullet {
+            margin: 0 6px;
+        }
+    }
+}
+
+
+.edubin-testimonial-section-02 {
+    
+    & .testimonial-wrap {
+        background: #F9EEE1;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        border-radius: 10px;
+        padding-top: 65px;
+        padding-bottom: 110px;
+        padding-left: 60px;
+        padding-right: 60px;
+    }
+
+    & .single-testimonial {
+        background: $white;
+        border-radius: 10px;
+        margin-top: 50px;
+        margin-bottom: 10px;
+        margin-left: 5px;
+        margin-right: 5px;
+        & .testimonial-content {
+            padding: 50px;
+
+    
+            & p {
+                color: #29303b;
+            }
+            & .testimonial-author {
+                display: flex;
+                align-items: center;
+                margin-top: 20px;
+    
+                & .author-thumb {
+                    & img {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                    }
+                }
+                & .author-text {
+                    margin-left: 25px;
+                    & .name {
+                        display: block;
+                        font-size: 18px;
+                        line-height: 20px;
+                        font-family: $heading-font;
+                        font-weight: 700;
+                        color: #29303b;
+                        margin-bottom: 5px;
+                    }
+                    & .designation {
+                        display: block;
+                        font-size: 14px;
+                        line-height: 20px;
+                        font-family: $heading-font;
+                        font-weight: 400;
+                        color: #8a8a8a;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.testimonial-2-active{
+
+    & .swiper-pagination {
+        position: relative;
+        margin-top: 40px;
+
+        & .swiper-pagination-bullet {
+            background-color: $white;
+              
+            &.swiper-pagination-bullet-active{
+                background-color: $primary2;
+            }
+        }
+    }
+
+}
+
+// Home Style Six
+
+.edubin-testimonial-section-03 {
+
+    & .testimonial-title-wrap {
+        background-color: #EFF6F9;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        padding-bottom: 245px;
+        @media #{$tablet-device} {
+            padding-bottom: 220px;
+        }
+    }
+
+    & .testimonial-slider-wrap {
+        background: $white;
+        padding: 50px;
+        padding-right: 80px;
+        margin-top: -170px;
+        @media #{$tablet-device} {
+            padding: 50px;
+            text-align: center;
+        }
+        @media #{$small-mobile} {
+            padding: 35px;
+        }
+    }
+}
+
+
+
+.single-testimonial-02 {
+    @media #{$tablet-device} {
+        margin-top: 50px;
+    }
+    
+
+    & .testimonial-cont {
+        
+
+        & p {
+            color: #383B46;
+            font-size: 18px;
+            line-height: 30px;
+            margin-bottom: 20px;
+        }
+
+        & .name {
+            font-size: 18px;
+            color: $black;
+            font-weight: 700;
+            padding-bottom: 5px;
+        }
+
+        & span {
+            color: #7B7B7B;
+            font-size: 14px;
+        }
+    }
+}
+
+.testimonial-3-active{
+
+    & .swiper-pagination {
+        text-align: left;
+        position: relative;
+        margin-top: 40px;
+        @media #{$tablet-device} {
+            text-align: center;
+        }
+
+        & .swiper-pagination-bullet {
+            background-color: #e3e3e3;
+              
+            &.swiper-pagination-bullet-active{
+                background-color: $primary3;
+            }
+        }
+    }
+
+}
+
+
+// Home Style Eight
+
+.edubin-testimonial-section-04 {
+    background: #F5F6F9;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    & .testimonial-content-wrap-02 {
+        padding-top: 40px;
+    }
+}
+
+.single-testimonial-03 {
+    background: $white;
+    border-radius: 20px;
+    width: 470px;
+    margin: 10px 80px;
+    position: relative;
+    @media #{$desktop-device}{
+        margin: 10px auto;
+    }
+    @media #{$large-mobile}{
+        width: 100%;
+        text-align: center;
+        border-radius: 20px 20px 20px 20px;
+    }
+
+    & .testimonial-thumb {
+        position: absolute;
+        left: -15%;
+        top: 50%;
+        transform: translateY(-65%);
+        z-index: 3;
+        @media #{$large-mobile}{
+            position: relative;
+            text-align: center;
+            left: 0;
+            top: 0;
+            padding-top: 40px;
+            margin-bottom: 15px;
+            transform: translateY(0%);
+        }
+
+        & img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+        }
+    }
+
+    & .testimonial-content {
+        padding: 50px 110px 60px;
+        padding-right: 40px;
+        @media #{$large-mobile}{
+            padding: 15px 45px 50px;
+        }
+        @media #{$extra-small-mobile}{
+            padding: 15px 30px 50px;
+        }
+
+        & i {
+            font-size: 48px;
+            color: $primary5;
+        }
+
+        & p {
+            font-size: 22px;
+            line-height: 36px;
+            font-weight: 400;
+            color: #7a7a7a;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+    
+        & .name {
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 20px;
+            color: #021E40;
+        }
+    }
+}
+
+.testimonial-04-active{
+
+    & .swiper-pagination {
+        text-align: center;
+        position: relative;
+        margin-top: 50px;
+
+        & .swiper-pagination-bullet {
+            background-color: #e3e3e3;
+              
+            &.swiper-pagination-bullet-active{
+                background-color: $primary5;
+            }
+        }
+    }
+
+}
+
+// Home Style Nine
+
+
+.single-testimonial-04 {
+
+    & .testimonial-cont {
+        padding: 40px;
+        margin: 0 0px 35px 0;
+        border-radius: 5px;
+        background-color: #00000075;
+        position: relative;
+
+        &::before {
+            content: '';
+            border:15px solid transparent;
+            position: absolute;
+            left: 40px;
+            bottom: -30px;
+            margin: auto;
+            width: 0;
+            height: 0;
+            border-top: 15px solid rgba(255, 255, 255, 0.1);
+            border-top-color: #00000075;
+        }
+
+        & .title {
+            color: #fff;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        & p {
+            color: $white;
+        }
+    }
+
+    & .testimonial-author-wrap {
+        display: flex;
+        align-items: center;
+
+        & .testimonial-thum {
+
+            & img {
+                border: 2px solid $white;
+                border-radius: 50%;
+                height: 70px;
+                width: 70px;
+                object-fit: cover;
+            }
+        }
+
+        & .testimonial-author-text {
+            flex: 1;
+            margin-left: 25px;
+
+            & .name {
+                font-size: 18px;
+                font-weight: 700;
+                color: $white;
+                margin-bottom: 5px;
+            }
+
+            & span {
+                color: #ddd;
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+// Home Style Ten
+
+.edubin-testimonial-section-05 {
+
+    & .testimonial-3-active{
+
+        & .swiper-pagination {
+    
+            & .swiper-pagination-bullet {
+                  
+                &.swiper-pagination-bullet-active{
+                    background-color: $primary5;
+                }
+            }
+        }
+    
+    }
+}
+
+// About Page
+
+.edubin-testimonial-section-06 {
+
+    &::before {
+        background: #000 none repeat scroll 0 0;
+        opacity: 0.65;
+    }
+
+
+    & .single-testimonial {
+        position: relative;
+    
+        & .testimonial-thum {
+    
+            & .quote {
+    
+                & i {
+                    background-color: #0071DC;
+                }
+            }
+        }
+    }
+
+    & .testimonial-active{
+
+        & .swiper-pagination {
+    
+            & .swiper-pagination-bullet {
+                  
+                &.swiper-pagination-bullet-active{
+                    background-color: #0071DC;
+                }
+            }
+        }
+    }
+}
+
+// Testimonial Page
+
+.edubin-testimonial-section-07 {
+    background: $white;
+
+    & .single-testimonial-03 {
+        background: $white;
+        box-shadow: 0px 0px 16px 0px rgba(0,0,0,0.07);
+        
+    
+        & .testimonial-content {
+    
+            & i {
+                color: $primary4;
+            }
+    
+        }
+    }
+
+    & .testimonial-04-active{
+
+        & .swiper-pagination {
+            text-align: center;
+            position: relative;
+            margin-top: 50px;
+    
+            & .swiper-pagination-bullet {
+                background-color: #e3e3e3;
+                  
+                &.swiper-pagination-bullet-active{
+                    background-color: $primary4;
+                }
+            }
+        }
+    
+    }
+}
+
+.edubin-testimonial-section-08 {
+    padding-bottom: 80px;
+
+    & .section-title2 {
+
+        & .title {
+
+            & span {
+                color: $primary4;
+            }
+        }
+    }
+}

@@ -1,0 +1,890 @@
+/*--
+/*  05 - About CSS
+/*----------------------------------------*/
+
+.edubin-about-section {
+    position: relative;
+    padding-bottom: 220px;
+
+    & .about-wrap {
+        margin-top: -50px;
+    }
+
+    & .about-content-wrap {
+        margin-top: 50px;
+    }
+
+    & .about-cont  {
+	
+        & p{
+            padding-top: 30px;
+        }
+    
+        & .btn {
+            margin-top: 55px;
+        }
+    }
+
+    & .about-event {
+        box-shadow: 0px 0px 191px 0px rgba(0, 0, 0, 0.06);
+        padding: 65px 70px 37px;
+        background-color: rgba(255, 255, 255, 0.95);
+        margin-top: 50px;
+        @media #{$small-mobile} {
+            padding: 40px 35px 37px;
+        }
+
+        & .event-title {
+
+            & .title {
+                font-size: 36px;
+                color: $black;
+                padding-bottom: 5px;
+                @media #{$small-mobile} {
+                    font-size: 28px;
+                }
+            }
+        }
+
+        & ul {
+
+            & li {
+
+                & .single-event {
+                    padding: 25px 0;
+                    border-bottom: 1px solid #cecece;
+
+                    & span {
+                        font-size: 14px;
+                        color: #8a8a8a;
+                        margin-right: 20px;
+
+                        & i {
+                            color: #ffc600;
+                            margin-right: 3px;
+                        }
+                    }
+
+                    & .title {
+                        padding-top: 5px;
+                        padding-bottom: 10px;
+                        color: $black;
+                        font-size: 24px;
+                        transition: $transition-default;
+
+                        &:hover {
+                            color: $primary;
+                        }
+                    }
+
+                    & a {
+                        display: block;
+                    }
+                }
+
+                &:last-child {
+
+                    & .single-event {
+                        border-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    & .about-bg {
+        width: 52%;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        z-index: -2;
+
+        &::before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 100%; 
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0) 60%, rgba(255, 255, 255, 1) 100%);
+        }
+
+        & img {
+            width: 100%;
+        }
+    }
+}
+
+
+// Home Style Three
+
+.edubin-about-section-02 {
+    padding-bottom: 120px;
+
+    & .about-wrap {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        padding: 70px 70px 70px;
+        margin-top: 0;
+        position: relative;
+        z-index: 1;
+        @media #{$large-mobile} {
+            padding: 70px 50px 70px;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(310deg, #07294DA3 0%, #07294D 100%);
+            z-index: -1;
+        }
+    }
+
+    & .about-event {
+        box-shadow: none;
+        padding: 0;
+        padding-right: 50px;
+        background-color: transparent;
+        margin-top: 0;
+
+        & .event-title {
+
+            & .title {
+                color: $white;
+            }
+        }
+
+        & ul {
+
+            & li {
+
+                & .single-event {
+
+                    & span {
+                        color: #C0C0C0;
+                    }
+
+                    & .title {
+                        color: $white;
+
+                        &:hover {
+                            color: $primary;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+
+    & .video {
+        @media #{$tablet-device} {
+            margin-top: 50px;
+        }
+
+        & a {
+            width: 90px;
+            height: 90px;
+            line-height: 90px;
+            text-align: center;
+            font-size: 20px;
+            background-color: $primary;
+            color: #07294d;
+            border-radius: 50%;
+
+            &:hover {
+                background: $white;
+                color: $primary;
+            }
+        }
+    }
+}
+
+
+// Home Style Four
+
+.edubin-about-section-03 {
+    padding-bottom: 150px;
+    overflow: hidden;
+    @media #{$large-mobile} {
+        padding-bottom: 120px;
+    }
+
+    & .about-image-two {
+        position: relative;
+        margin-top: 55px;
+        z-index: 1;
+
+        &::before {
+            position: absolute;
+            content: '';
+            background-image: url(../images/about/dot-shape.png);
+            background-position: center center;
+            background-size: contain;
+            width: 305px;
+            height: 370px;
+            left: -85px;
+            bottom: -60px;
+            z-index: -1;
+            @media #{$small-mobile} {
+                width: 80%;
+                height: 100%;
+                left: -40px;
+                bottom: -40px;
+            }
+        }
+
+        & > img {
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        & .about-shape-two {
+            position: absolute;
+            left: -36px;
+            bottom: 170px;
+            @media #{$small-mobile} {
+                bottom: 75px;
+                width: 40px;
+            }
+        }
+    
+        & .about-shape-three {
+            position: absolute;
+            bottom: -30px;
+            left: 85px;
+            @media #{$small-mobile} {
+                left: 35px;
+                width: 60px;
+            }
+        }
+    }
+
+}
+
+// Home Style Six
+
+.edubin-about-section-04 {
+
+    & .about-wrap {
+        margin-bottom: -120px;
+    }
+
+    & .about-img {
+        padding-left: 85px;
+        position: relative;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: -1;
+
+            & img {
+                width: 520px;
+            }
+        }
+    }
+
+    & .about-content-wrap {
+
+        & .main-title {
+            font-size: 36px;
+            color: #021E40;
+        }
+
+        & .text {
+            color: #696868;
+            margin-top: 35px;
+        }
+
+        & .about-list-wrap {
+            padding-top: 20px;
+
+            & .list-item {
+                margin-top: 20px;
+
+                & .title {
+                    font-size: 18px;
+                    color: #021E40;
+                    margin-bottom: 10px;
+                    margin-top: 25px;
+                }
+
+                & p {
+                    font-size: 14px;
+                    color: #696868;
+                }
+            }
+        }
+
+        & .btn {
+            background: $primary3;
+            margin-top: 25px;
+            color: $white;
+
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+}
+
+.edubin-about-section-04 {
+    @media #{$desktop-device} {
+        & .about-wrap {
+            margin-bottom: 0;
+        }
+        & .about-img {
+            padding-left: 0;
+            text-align: center;
+    
+            & .shape-1 {
+                left: 22%;
+    
+                & img {
+                    width: 520px;
+                }
+            }
+        }
+        & .about-content-wrap {
+            margin-top: 50px;
+    
+        }
+    }
+    @media #{$tablet-device} {
+
+        & .about-img {
+
+            & .shape-1 {
+                left: 15%;
+            }
+        }
+    }
+    @media #{$small-mobile} {
+
+        & .about-img {
+            padding-left: 0;
+            text-align: center;
+    
+            & .shape-1 {
+                left: 0%;
+    
+                & img {
+                    width: 420px;
+                }
+            }
+        }
+
+        & .about-content-wrap {
+
+            & .main-title {
+                font-size: 30px;
+            }
+        }
+
+    }
+}
+
+// Home Style Seven
+
+.edubin-about-section-05 {
+
+    & .about-content-wrap {
+        padding-right: 40px;
+    }
+
+    & .about-cont {
+
+        & .text {
+            color: #8a8a8a;
+            margin-top: 20px;
+        }
+
+        & .about-list-wrap {
+            padding-top: 10px;
+
+            & ul {
+
+                & li {
+                    font-size: 16px;
+                    font-weight: 600;
+                    color: $black;
+                    padding-left: 20px;
+                    position: relative;
+                    margin-top: 15px;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        left: 0;
+                        top: 50%;
+                        width: 10px;
+                        height: 10px;
+                        background: $primary4;
+                        border-radius: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+        }
+    }
+
+    & .about-image {
+        position: relative;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: 8%;
+            top: 20%;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: $primary4;
+            border-radius: 50%;
+            left: 21%;
+            top: 15%;
+            z-index: -1;
+        }
+    }
+}
+
+.edubin-about-section-05 {
+    @media #{$tablet-device} {
+        & .about-content-wrap {
+            padding-right: 0;
+        }
+        & .about-image {
+            margin-top: 50px;
+    
+            & .shape-1 {
+                left: 17%;
+            }
+    
+            & .shape-2 {
+                left: 28%;
+            }
+        }
+    }
+    @media #{$large-mobile} {
+        & .about-image {
+    
+            & .shape-1 {
+                left: 5%;
+            }
+        }
+    }
+    @media #{$small-mobile} {
+        & .about-image {
+    
+            & .shape-1 {
+                left: 1%;
+                width: 370px;
+            }
+        }
+    }
+}
+
+// Home Style Eight
+
+.edubin-about-section-06 {
+
+    & .about-img-wrap {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            top: 85px;
+            left: 80px;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            top: 0;
+            right: 35%;
+            z-index: -1;
+        }
+
+        & .shape-3 {
+            position: absolute;
+            bottom: 6%;
+            left: 0;
+            z-index: -1;
+        }
+
+        & .about-img-left {
+            padding-right: 15px;
+
+            & .about-img {
+
+                & img {
+                    border-radius: 10px;
+                }
+
+                &.img-2 {
+                    text-align: right;
+                    margin-top: 30px;
+                }
+
+            }
+        }
+
+        & .about-img-right {
+            padding-left: 15px;
+
+            & img {
+                border-radius: 10px;
+                width: 240px;
+            }
+        }
+    }
+
+    & .about-content-wrap {
+        @media #{$tablet-device} {
+            margin-top: 50px;
+        }
+
+        & .about-cont {
+
+            & .text {
+                margin-top: 25px;
+                color: #8a8a8a;
+            }
+
+            & .about-list-wrap {
+                padding-top: 10px;
+
+                & ul {
+
+                    & li {
+                        font-weight: 500;
+                        color: #8a8a8a;
+                        margin-top: 15px;
+
+                        & i {
+                            color: $primary5;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+
+            & .btn {
+                background: $primary5;
+                color: $white;
+                margin-top: 40px;
+
+                &:hover {
+                    background: #07294D;
+                }
+            }
+        }
+    }
+}
+
+// Home Style Nine
+
+.edubin-about-section-07 {
+    padding-top: 160px;
+    padding-bottom: 175px;
+    @media #{$desktop-device} {
+        padding-top: 130px;
+        padding-bottom: 100px;
+    }
+
+    & .about-img-wrap {
+        position: relative;
+        padding-left: 40px;
+        z-index: 1;
+
+        & img {
+            border-radius: 5px;
+        }
+
+        & .svg-shape {
+            position: absolute;
+            left: 0;
+            top: -40px;
+            z-index: -1;
+        }
+
+        & .about-img-big {
+
+            & img {
+                width: 465px;
+                height: 500px;
+                object-fit: cover;
+            }
+        }
+        & .about-img-sm {
+            position: absolute;
+            right: 30px;
+            bottom: -70px;
+        }
+    }
+
+    & .about-content-wrap {
+        padding-left: 90px;
+        @media #{$desktop-device} {
+            padding-left: 50px;
+        }
+        @media #{$tablet-device} {
+            padding-left: 0;
+            margin-top: 110px;
+        }
+
+        & .about-cont {
+
+            & .text {
+                color: #8a8a8a;
+                margin-top: 20px;
+            }
+
+            & .about-list-wrap {
+                padding-top: 10px;
+
+                & ul {
+
+                    & li {
+                        color: #8a8a8a;
+                        margin-top: 15px;
+
+                        & i {
+                            color: $primary6;
+                            margin-right: 5px;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        & .btn {
+            background: $primary6;
+            color: $white;
+            margin-top: 35px;
+
+            &:hover {
+                color: $white;
+                background: #FF3E4B;
+            }
+        }
+    }
+}
+
+.edubin-about-section-08 {
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-bottom: 120px;
+    position: relative;
+    z-index: 1;
+    @media #{$tablet-device}  {
+        padding-bottom: 90px;
+    }
+
+    &::before {
+        background: #07294d none repeat scroll 0 0;
+        content: "";
+        height: 100%;
+        opacity: 0.3;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & .testimonial-slider-wrap {
+        padding-right: 25px;
+        @media #{$tablet-device} {
+            padding-right: 0;
+            padding-top: 60px;
+        }
+    }
+
+    & .testimonial-3-active{
+
+        & .swiper-pagination {
+            text-align: center;
+            position: relative;
+            margin-top: 50px;
+    
+            & .swiper-pagination-bullet {
+                background-color: #e3e3e3;
+                  
+                &.swiper-pagination-bullet-active{
+                    background-color: $primary6;
+                }
+            }
+        }
+    
+    }
+
+    & .about-event {
+
+        & ul {
+
+            & li {
+
+                & .single-event {
+
+                    & span {
+
+                        & i {
+                            color: $primary6;
+                        }
+                    }
+
+                    & .title {
+
+                        &:hover {
+                            color: $primary6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Ten
+
+.edubin-about-section-09 {
+
+    & .about-wrap {
+        margin-bottom: 0;
+    }
+
+    & .about-img-wrap {
+        position: relative;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: 11%;
+            top: 9%;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            right: 17%;
+            top: 9%;
+            z-index: -1;
+        }
+
+        & .shape-3 {
+            position: absolute;
+            right: 19%;
+            top: 26%;
+            z-index: -1;
+        }
+
+        & .shape-4 {
+            position: absolute;
+            left: 8%;
+            top: 8%;
+            z-index: -1;
+        }
+    }
+
+    & .about-content-wrap {
+
+        & .btn {
+            background: $primary5;
+            color: $white;
+            margin-top: 30px;
+    
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+}
+
+.edubin-about-section-09 {
+    @media #{$tablet-device} {
+        & .about-img-wrap {
+    
+            & .shape-2 {
+                right: 28%;
+            }
+    
+            & .shape-3 {
+                right: 28%;
+                top: 29%;
+            }
+    
+        }
+    }
+    @media #{$large-mobile} {
+        & .about-img-wrap {
+    
+            & .shape-1 {
+                left: 14%;
+            }
+    
+            & .shape-2 {
+                right: 10%;
+            }
+    
+            & .shape-3 {
+                right: 4%;
+            }
+    
+        }
+    }
+}
+
+// About Page
+
+.edubin-mission-section {
+    padding-bottom: 120px;
+    @media #{$desktop-device} {
+        padding-bottom: 100px;
+    }
+    @media #{$tablet-device} {
+        padding-bottom: 80px;
+    }
+
+    & .mission-wrap {
+        margin-top: -20px;
+    }
+
+    & .single-item {
+        margin-top: 20px;
+        
+
+        & .number {
+            font-size: 60px;
+            font-weight: 500;
+            font-family: $body-font;
+            color: #CECECE;
+        }
+
+        & .title {
+            font-size: 26px;
+            line-height: 26px;
+            color: #021E40;
+            margin-top: 10px;
+        }
+
+        & p {
+            margin-top: 18px;
+        }
+    }
+}

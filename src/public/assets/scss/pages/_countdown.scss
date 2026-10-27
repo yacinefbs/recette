@@ -1,0 +1,139 @@
+/*--
+/*  15 - Countdown CSS
+/*----------------------------------------*/
+
+.countdown-section {
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    &::before {
+        background:#07294d none repeat scroll 0 0;
+        content: "";
+        opacity: 0.8;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & .countdown-cont {
+        @media #{$desktop-device} {
+            padding-right: 35px;
+        }
+        @media #{$tablet-device} {
+            padding-right: 150px;
+            margin-bottom: 50px;
+        }
+        @media #{$large-mobile} {
+            padding-right: 0;
+        }
+
+        & .sub-title {
+            font-size: 30px;
+            color: #fff;
+            font-weight: 500;
+            padding-bottom: 5px;
+            @media #{$small-mobile} {
+                font-size: 24px;
+            }
+        }
+
+        & .title {
+            font-size: 72px;
+            color: #ffc600;
+            font-weight: 700;
+            padding-bottom: 37px;
+            @media #{$large-mobile} {
+                font-size: 60px;
+            }
+            @media #{$small-mobile} {
+                font-size: 50px;
+            }
+            @media #{$small-mobile} {
+                font-size: 42px;
+            }
+        }
+    }
+
+    & .category-form {
+        margin-top: 0;
+
+        & .form-title {
+            background-color: #ffc600;
+    
+            & .title {
+                color: #07294D;
+            }
+    
+            & span {
+                font-size: 20px;
+                font-weight: 500;
+                color: #07294D;
+            }
+        }
+    }
+}
+
+.edubin-countdown{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+    & .single-countdown{
+        text-align: center;
+        position: relative;
+        padding: 40px 15px;
+        min-width: 115px;
+        height: 115px;
+        line-height: 115px;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        @media #{$small-mobile} {
+            padding: 26px 15px;
+            min-width: 90px;
+            height: 90px;
+            line-height: 90px;
+        }
+        @media #{$extra-small-mobile} {
+            min-width: 70px;
+            padding: 18px 10px;
+            width: 70px;
+            height: 70px;
+            line-height: 70px;
+        }
+    
+    
+        & .count {
+            font-size: 42px;
+            line-height: 12px;
+            font-family: $heading-font;
+            font-weight: 700;
+            display: block;
+            color: $white;
+            @media #{$small-mobile} {
+                font-size: 30px;
+            }
+            @media #{$extra-small-mobile} {
+                font-size: 24px;
+            }
+        }
+        & .value {
+            font-size: 15px;
+            line-height: 12px;
+            font-family: $body-font;
+            font-weight: 400;
+            display: block;
+            color: $white;
+            margin-top: 25px;
+            text-transform: capitalize;
+            @media #{$small-mobile} {
+                margin-top: 15px;
+            }
+        }
+    }
+}

@@ -1,0 +1,109 @@
+/*--
+/*  20 - Speaker CSS
+/*----------------------------------------*/
+
+.single-speaker {
+    margin-top: 30px;
+
+    & .speaker-img {
+        border-radius: 10px;
+        overflow: hidden;
+
+        & a {
+            display: block;
+            overflow: hidden;
+            position: relative;
+
+            & img {
+                width: 100%;
+            }
+        }
+    }
+
+    & .speaker-content {
+        position: relative;
+        margin-top: 15px;
+        transition: $transition-default;
+
+
+        & .speaker-social {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -65px);
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: $transition-default;
+            & .social {
+
+                & li {
+                    display: inline-block;
+
+                    & + li {
+                        margin-left: 8px;
+                    }
+
+                    & a {
+                        width: 35px;
+                        height: 35px;
+                        line-height: 35px;
+                        text-align: center;
+                        font-size: 15px;
+                        transform: translate3d(0, 0, 0);
+                        background: $white;
+                        border-radius: 50%;
+                        color: #021E40;
+                    }
+
+                    &:hover {
+
+                        & a {
+                            transform: translateY(-5px);
+                            color: $primary4;
+                        }
+                    }
+                }
+            }
+        }
+
+        & .name {
+            font-size: 18px;
+            line-height: 30px;
+            color: #021E40;
+
+            &:hover {
+
+                & a {
+                    color: $primary4;
+                }
+            }
+        }
+        & .designation {
+            font-size: 16px;
+            line-height: 24px;
+            color: #696868;
+        }
+    }
+
+    &:hover {
+
+        & .speaker-img {
+            & a {
+                & img {
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        & .speaker-content {
+    
+            & .speaker-social {
+                opacity: 1;
+                visibility: visible;
+                transform: translate(-50%, -95px);
+            }
+        }
+    }
+}
+

@@ -1,0 +1,324 @@
+/*--
+/*  21 - Course Filter CSS
+/*----------------------------------------*/
+
+
+// Course Top Bar
+.course-top-bar{
+    padding-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & .label{
+        font-size: 15px;
+        font-weight: 400;
+        color: $body-color;
+        white-space: nowrap;
+        margin-right: 10px;
+    }
+}
+
+// Course Top text
+.course-top-text{
+    margin-top: 15px;
+
+    & p{
+        font-weight: 500;
+        color: #838383;
+        & span{
+            color: $heading-color;
+        }
+    }
+}
+
+// Course Top inner
+.course-top-inner{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & > * {
+        margin-right: 30px;
+
+        &:last-child{
+            margin-right: 0;
+        }
+    }
+}
+
+// Course Top Menu
+.course-top-menu{
+    display: flex;
+    align-items: center;
+    margin-top: 15px;
+    
+    & .nav{
+        & li{
+            margin-right: 10px;
+
+            &:last-child{
+                margin-right: 0;
+            }
+
+            & button{
+                padding: 0;
+                border: 0;
+                background-color: transparent;
+                color: $body-color;
+                font-size: 15px;
+
+                &.active{
+                    color: $primary4;
+                }
+            }
+        }
+    }
+}
+
+// Course Top Action
+.course-top-action{
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+    padding: 0 20px;
+    border-radius: 5px;
+    background-color: #f6f7f9;
+    height: 40px;
+    line-height: 40px;
+
+    & .nice-select{
+        float: none;
+        height: auto;
+        line-height: 1;
+        padding: 0;
+        padding-right: 20px;
+        border: 0;
+        color: $heading-color;
+        font-weight: 700;
+        font-size: 15px;
+        background: none;
+
+        &::after{
+            right: 0;
+            width: 8px;
+            height: 8px;
+            border-bottom: 1px solid $heading-color;
+            border-right: 1px solid $heading-color;
+            margin-top: -6px;
+        }
+
+        & .current{}
+
+        & .option {
+            line-height: 35px;
+            padding-left: 15px;
+            padding-right: 22px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}
+
+.course-collapse-btn{
+    margin-top: 15px;
+
+    & .btn{
+        height: 40px;
+        line-height: 40px;
+        padding: 0 25px;
+        background-color: $white;
+        border: 1px solid #ebebeb;
+        color: #a9a9a9;
+
+        & span {
+            color: $primary4;
+        }
+
+        & i{
+            margin: 0 3px;
+            transition: $transition-default;
+
+            &:last-child {
+                color: $heading-color;
+            }
+        }
+
+        &.collapsed{
+            background-color: $white;
+        }
+        &:hover{
+            border: 1px solid $primary4;
+
+            & i {
+                color: $primary4;
+            }
+        }
+    }
+}
+
+.course-collapse{
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-top: 50px;
+    padding: 35px 40px ;
+    transition: $transition-default;
+}
+
+// Widget Checkbox
+.widget-checkbox{
+    margin-top: 18px;
+
+    & .checkbox-list{
+        & li{
+            min-height: auto;
+            margin-bottom: 0;
+            margin-top: 18px;
+
+            & label {
+                line-height: 1.3;
+            }
+        }
+    }
+
+    & .rating{
+        position: relative;
+        display: inline-block;
+
+        &::before{
+            content: '\f13b \f13b \f13b \f13b \f13b';
+            font-family: "flaticon";
+            color: #dedede;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        & .rating-on{
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            overflow: hidden;
+
+            &::before{
+                content: '\f13b \f13b \f13b \f13b \f13b';
+                font-family: "flaticon";
+                color: #fda000;
+                font-size: 14px;
+                letter-spacing: 2px;
+            }
+        }
+    }
+}
+
+//Sidebar Widget 02
+.sidebar-widget-02{
+
+    & .widget-title {
+        font-size: 18px;
+    }
+
+    & + .sidebar-widget-02{
+        padding-top: 22px;
+    }    
+}
+
+//Sidebar Wrapper 02
+.sidebar-wrap-02{
+    background-color: #f9f9f9;
+    border-radius: 5px;
+    padding: 35px 40px;
+    margin-top: 50px;
+
+    @media #{$desktop-device, $small-mobile}{
+        padding: 35px 25px;
+    } 
+    @media #{$tablet-device} {
+        margin-top: 0;
+    }
+}
+
+.course-list-items {
+
+    & .course-list {
+        display: flex;
+        overflow: hidden;
+        border-radius: 5px;
+        box-shadow: 0 6px 12px rgb(0 0 0 / 6%);
+        background:#ffffff;
+        
+        & .thum {
+    
+            & .image {
+    
+                & a {
+    
+                    & img {
+                        height: 270px;
+                        object-fit: cover;
+                        @media #{$tablet-device} {
+                            height: 330px;
+                        }
+                    }
+                }
+
+                & .top-meta {
+
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary4;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+
+        }
+
+        & .content {
+            padding: 30px;
+
+            & .price {
+
+                & span {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #021E40;
+                }
+            }
+
+            & .title {
+                font-size: 22px;
+                line-height: 32px;
+                margin-top: 5px;
+
+                &:hover {
+                    color: $primary4;
+                }
+            }
+
+            & p {
+                margin-top: 10px;
+            }
+
+            & .course-lesson {
+
+                & ul {
+                    margin-top: 10px;
+
+                    & li {
+                        font-size: 15px;
+                        color: #8a8a8a;
+
+                        & i {
+                            margin-right: 5px;
+                            color: $primary4;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

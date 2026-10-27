@@ -1,0 +1,41 @@
+/*--
+/*  06 - Apply CSS
+/*----------------------------------------*/
+
+.apply-section {
+    padding-top: 0;
+
+    & .apply-wrap {
+        overflow: hidden;
+        border-radius: 5px;
+        margin-top: -100px;
+    }
+
+    & .apply-cont {
+        background-color: #07294d;
+        padding: 45px 50px 50px;
+
+        &.apply-color-2 {
+            background-color: #092e56;
+        }
+
+        & .title {
+            font-size: 30px;
+            color: $white;
+            padding-bottom: 15px;
+        }
+
+        & p {
+            color: $white;
+            padding-bottom: 45px;
+        }
+
+        & .btn {
+
+            &:hover {
+                background: $white;
+                color: $secondary;
+            }
+        }
+    }
+}

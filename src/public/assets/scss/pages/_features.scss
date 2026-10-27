@@ -1,0 +1,230 @@
+/*--
+/*  18 - Features CSS
+/*----------------------------------------*/
+
+
+.features-content-wrap {
+    padding-top: 10px;
+}
+
+.features-item {
+    margin-top: 30px;
+
+    & .features-img {
+
+    }
+
+    & .features-content {
+        padding: 0 30px;
+        @media #{$large-mobile} {
+            padding: 0;
+        }
+
+        & .title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #383B46;
+            margin-top: 20px;
+        }
+
+        & p {
+            color: #383B46;
+        }
+    }
+}
+
+
+// Home Style Six
+
+.edubin-features-section-02 {
+    background-color: #EFF6F9;
+    padding-top: 15px;
+    padding-bottom: 45px;
+}
+
+.features-item-02 {
+    display: flex;
+    align-items: center;
+    border: 1px dashed $primary3;
+    padding: 25px;
+    border-radius: 0 40px 40px 40px;
+    margin-top: 30px;
+
+    &.features-02 {
+        border-radius: 40px 40px 0px 40px;
+    }
+
+    & .features-img {
+
+    }
+
+    & .features-content {
+        flex: 1;
+        margin-left: 25px;
+
+        & .title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #383B46;
+        }
+
+        & p {
+            color: #383B46;
+            font-size: 14px;
+        }
+    }
+}
+
+// Home Style Seven
+
+.edubin-features-section-03 {
+    background: $primary4;
+    padding-top: 30px;
+    padding-bottom: 70px;
+    position: relative;
+    z-index: 1;
+
+    & .shape-1 {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        z-index: -1;
+    }
+}
+
+.features-item-03 {
+    display: flex;
+    align-items: center;
+    margin-top: 30px;
+
+
+    & .features-img {
+
+    }
+
+    & .features-content {
+        flex: 1;
+        margin-left: 25px;
+
+        & .title {
+            font-size: 20px;
+            font-weight: 700;
+            color: $white;
+        }
+    }
+}
+
+// Home Style Eight
+
+.edubin-features-section-04 {
+
+
+    & .category-form {
+        margin-top: -380px;
+        @media #{$tablet-device} {
+            margin-top: 50px;
+        }
+    
+        & .form-title {
+            background-color: $white;
+            padding-top: 45px;
+            padding-bottom: 0;
+    
+            & .title {
+                color: $black;
+            }
+    
+            & span {
+                font-size: 17px;
+                color: #021E40;
+            }
+        }
+    
+        & .main-form {
+    
+            & .single-form {
+    
+                & .btn {
+                    background: $primary5;
+                    color: $white;
+    
+                    &:hover {
+                        background: #07294D;
+                    }
+                }
+            }
+        }
+    }
+
+    & .features-content-wrap {
+        margin-top: -30px;
+        padding-top: 0;
+    }
+}
+
+.features-item-04 {
+    margin-top: 30px;
+
+    & .icon {
+        width: 80px;
+        height: 80px;
+        line-height: 80px;
+        text-align: center;
+        border-radius: 50%;
+        background: $primary5;
+        font-size: 30px;
+        color: $white;
+    }
+
+    & .cont {
+
+        & .title {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #021E40;
+            margin-top: 20px;
+        }
+
+        & p {
+            color: #8a8a8a;
+        }
+    }
+}
+
+
+// Home Style Ten
+
+.edubin-features-section-05 {
+
+    & .features-wrap {
+        margin-top: -30px;
+    }
+}
+
+.features-item-05 {
+    border: 1px solid #EBEBEB;
+    border-radius: 10px;
+    padding: 40px 40px 50px 40px;
+    margin-top: 30px;
+
+    & .features-img {
+        
+    }
+
+    & .features-content {
+
+        & .title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: $black;
+            margin-top: 20px;
+        }
+
+        & p {
+            color: #8a8a8a;
+            margin-top: 20px;
+        }
+    }
+}

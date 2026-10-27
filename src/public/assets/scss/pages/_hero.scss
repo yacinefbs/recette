@@ -1,0 +1,1693 @@
+/*--
+/*  03 - Hero CSS
+/*----------------------------------------*/
+
+.slider-item {
+    height: 920px;
+    overflow: hidden;
+    position: relative;
+    padding-top: 85px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 1;
+
+    &::before {
+        background: #07294d none repeat scroll 0 0;
+        content: "";
+        height: 100%;
+        opacity: 0.4;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    & .slider-content {
+        padding-top: 215px;
+
+        & .title {
+            font-size: 60px;
+            line-height: 1.2;
+            font-weight: 700;
+            color: $white;
+        }
+
+        & p {
+            font-size: 16px;
+            line-height: 28px;
+            color: $white;
+            padding-right: 65px;
+            margin-top: 30px;
+        }
+
+
+        & .hero-btn {
+            padding-top: 25px;
+
+            & ul {
+
+                & li {
+                    display: inline-block;
+                    margin-right: 15px;
+                    margin-top: 15px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    & .btn {
+                        color: #021E40;
+
+                        &:hover {
+                            color: $white;
+                        }
+                    }
+
+                    & .btn-white {
+                        background: $white;
+
+                        &:hover {
+                            background: $secondary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+ 
+.slider-active {
+
+    & .slider-arrow  {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        border-radius: 50%;
+        transform: translateY(50%);
+        border: 1px solid $white;
+        box-shadow: 0px 5px 57px 0px rgba(0, 0, 0, 0.15);
+        color: $white;
+        opacity: 0;
+        visibility: hidden;
+        transition: $transition-default;
+        @media #{$tablet-device} {
+            transform: translateY(90%);
+        }
+        &.swiper-button-prev {
+            left: 0;
+            &::after {
+                content: "\f16d";
+                font-family: flaticon !important;
+                font-size: 16px;
+            }
+        }
+        &.swiper-button-next {
+            right: 0;
+            &::after {
+                content: "\f16e";
+                font-family: flaticon !important;
+                font-size: 16px;
+            }
+        }
+        &:hover {
+            color: $secondary;
+            background: $primary;
+            border-color: $primary;
+        }
+    }
+    &:hover {
+        & .slider-arrow {
+            opacity: 1;
+            visibility: visible;
+            
+            &.swiper-button-prev {
+                left: 50px;
+                @media #{$extra-small-mobile} {
+                    left: 20px;
+                }
+            }
+            &.swiper-button-next {
+                right: 50px;
+                @media #{$extra-small-mobile} {
+                    right: 20px;
+                }
+            }
+        }
+    }
+
+    & .swiper-slide-active {
+
+        & .slider-content {
+
+            & p,
+            & .title,
+            & .hero-btn {
+                animation-fill-mode: both;
+                animation-name: fadeInUp;
+            }
+
+            & .title {
+                animation-delay: 0.6s;
+                animation-duration: 0.6s;
+            }
+            & p {
+                animation-delay: 0.8s;
+                animation-duration: 0.8s;
+            }
+            & .hero-btn {
+                animation-delay: 0.9s;
+                animation-duration: 0.9s;
+            }
+        }
+
+    }
+}
+ 
+
+.slider-item {
+    
+    @media #{$tablet-device} {
+        height: 780px;
+
+        & .slider-content {
+            padding-top: 80px;
+    
+            & .title {
+                font-size: 52px;
+            }
+        }
+
+    }
+    @media #{$large-mobile} {
+        height: 720px;
+
+        & .slider-content {
+    
+            & .title {
+                font-size: 36px;
+            }
+
+            & p {
+                padding-right: 0;
+            }
+    
+        }
+    }
+    @media #{$extra-small-mobile} {
+
+        & .slider-content {
+            padding-top: 50px;
+    
+            & .title {
+                font-size: 30px;
+            }
+    
+        }
+    }
+}
+
+
+// Home Style Two
+
+.edubin-slider-section-02 {
+
+    & .slider-item {
+        height: 870px;
+        @media #{$tablet-device} {
+            height: 680px;
+        }
+        @media #{$small-mobile} {
+            height: 650px;
+        }
+    }
+}
+
+// Home Style Three
+
+.edubin-slider-section-03 {
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding-top: 350px;
+    padding-bottom: 120px;
+    z-index: 1;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.45);
+        z-index: -1;
+    }
+
+    & .slider-cont {
+        position: relative;
+        z-index: 5;
+        background-color: rgba(7, 41, 77, 0.8);
+        padding: 70px 100px 80px;
+
+        & .title {
+            font-size: 48px;
+            color: $white;
+            padding-bottom: 8px;
+        }
+
+        & span {
+            font-size: 24px;
+            color: $white;
+        }
+    }
+
+    & .slider-search {
+        position: relative;
+        margin-top: 55px;
+
+        & input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]){
+            width: 100%;
+            height: 50px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #999999;
+            padding: 0 30px;
+            padding-right: 195px;
+            background-color: transparent;
+            border: 1px solid $white;
+            border-radius: 50px;
+
+            @include placeholder{
+                font-size: 15px;
+                color: #999999;
+                font-weight: 500;
+            }
+
+            &:focus{
+                outline: none;
+                border-color: $primary;
+            }
+    
+            @media #{$small-mobile}{
+                height: 50px;
+                padding: 0 25px;
+                font-size: 16px;
+            }
+        }
+
+        & .btn{
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 50px;
+            line-height: 50px;
+            border-top-right-radius: 50px;
+            border-bottom-right-radius: 50px;
+            font-size: 16px;
+            min-width: 80px;
+    
+            // @media #{$small-mobile}{
+            //     position: relative;
+            //     width: 100%;
+            //     margin-top: 10px;
+            // }
+        }
+    }
+}
+
+.edubin-slider-section-03 {
+    @media #{$desktop-device} {
+
+        & .slider-cont {
+            padding: 70px 60px 80px;
+    
+            & .title {
+                font-size: 40px;
+            }
+        }
+    }
+    @media #{$tablet-device} {
+        padding-top: 200px;
+
+        & .slider-cont {
+            padding: 70px 55px 80px;
+    
+            & .title {
+                font-size: 40px;
+            }
+        }
+    }
+    @media #{$large-mobile} {
+        padding-top: 180px;
+
+        & .slider-cont {
+            padding: 60px 45px 70px;
+    
+            & .title {
+                font-size: 35px;
+            }
+
+            & span {
+                font-size: 20px;
+            }
+        }
+    }
+    @media #{$small-mobile} {
+        padding-top: 180px;
+
+        & .slider-cont {
+            padding: 50px 30px 60px;
+    
+            & .title {
+                font-size: 28px;
+            }
+
+        }
+    }
+}
+
+.slider-feature {
+    padding: 0 100px;
+    padding-top: 50px;
+    @media #{$desktop-device} {
+        padding: 0 75px;
+        padding-top: 50px;
+    }
+}
+
+.single-slider-feature {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 30px;
+
+    & .icon {
+
+        & img {
+            max-width: 75px;
+        }
+    }
+
+    & .cont {
+        flex: 1;
+        margin-left: 25px;
+
+        & .title {
+            font-size: 24px;
+            color: $white;
+            margin-bottom: 15px;
+        }
+
+        & span {
+            font-size: 15px;
+            color: $white;
+        }
+    }
+}
+
+// Home Style Four
+
+.edubin-slider-section-04 {
+    
+    & .slider-item {
+        height: 980px;
+    
+        &::before {
+            display: none;
+        }
+    
+        & .slider-content {
+            max-width: 750px;
+            margin: 0 auto;
+            padding-top: 215px;
+    
+            & .title {
+                color: #07294D;
+            }
+    
+            & p {
+                color: #07294D;
+            }
+        }
+    
+    }
+}
+
+.edubin-slider-section-04 {
+    @media #{$desktop-device} {
+        & .slider-item {
+            height: 905px;
+        
+            & .slider-content {
+                padding-top: 190px;
+            }
+        
+        }
+    }
+    @media #{$tablet-device} {
+        & .slider-item {
+            height: 780px;
+        
+        
+            & .slider-content {
+                padding-top: 95px;
+            }
+        
+        }
+    }
+    @media #{$large-mobile} {
+        & .slider-item {
+            height: 720px;
+        
+        
+            & .slider-content {
+                padding-top: 80px;
+            }
+        
+        }
+    }
+}
+
+// Home Style Five
+
+.edubin-slider-section-05 {
+    position: relative;
+    height: 920px;
+    background: #F9EEE1;
+    z-index: 1;
+
+    & .svg-shape {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 5;
+
+        & svg {
+            height: 40px;
+            fill: $white;
+            display: block;
+            left: 50%;
+            position: relative;
+            transform: translateX(-50%);
+            width: calc(100% + 1.3px);
+        }
+    }
+
+    & .shape-3 {
+        position: absolute;
+        top: 21%;
+        left: 8%;
+        z-index: -1;
+    }
+
+    & .shape-4 {
+        position: absolute;
+        bottom: 22%;
+        left: 4%;
+        z-index: -1;
+        animation: round-01 5s linear infinite;
+    }
+
+    & .shape-5 {
+        position: absolute;
+        right: 7%;
+        top: 15%;
+        z-index: -1;
+    }
+
+    & .hero-image {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 50%;
+        height: 100%;
+        display: flex;
+        padding-left: 20px;
+        padding-right: 30px;
+        justify-content: center;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            right: 35%;
+            top: 21%;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            left: 32%;
+            bottom: 21%;
+            z-index: -1;
+        }
+
+        & .image {
+            padding-top: 220px;
+            display: flex;
+
+            & .image-1 {
+                padding-right: 20px;
+
+                & img {
+                    border-radius: 100px 100px 0 100px;
+                }
+            }
+
+            & .image-2 {
+                padding-top: 120px;
+                padding-left: 20px;
+
+                & img {
+                    border-radius: 100px 0 100px 100px;
+                }
+            }
+        }
+    }
+
+    & .hero-content {
+        padding-top: 225px;
+
+        & .title {
+            font-size: 56px;
+
+            & span {
+                color: $primary2;
+            }
+        }
+
+        & p {
+            color: #383B46;
+            margin-top: 30px;
+            margin-bottom: 25px;
+        }
+
+        & .hero-btn {
+
+            & .btn {
+                background: $primary2;
+                color: $white;
+                margin-top: 40px;
+
+                &:hover {
+                    background: #021E40;
+                }
+            }
+        }
+    }
+}
+
+.edubin-slider-section-05 {
+    @media #{$desktop-device} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 42px;
+            }
+        }
+    }
+    @media #{$tablet-device} {
+        height: auto;
+
+        & .hero-content {
+            padding-top: 130px;
+        }
+
+        & .hero-image {
+            position: relative;
+            width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+    
+            & .shape-1 {
+                position: absolute;
+                right: 35%;
+                top: 21%;
+                z-index: -1;
+            }
+    
+            & .shape-2 {
+                position: absolute;
+                left: 32%;
+                bottom: 21%;
+                z-index: -1;
+            }
+    
+            & .image {
+                padding-top: 60px;
+                padding-bottom: 180px;
+            }
+        }
+    }
+    @media #{$small-mobile} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 36px;
+            }
+    
+        }
+
+        & .hero-image {
+    
+            & .shape-1 {
+                width: 90px;
+                right: 23%;
+                top: 12%;
+            }
+    
+            & .shape-2 {
+                width: 90px;
+                left: 29%;
+                bottom: 30%;
+            }
+    
+        }
+    }
+    @media #{$extra-small-mobile} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 30px;
+            }
+    
+        }
+
+    }
+}
+
+// Home Style Six
+.edubin-hero-section-06 {
+    padding-top: 140px;
+
+
+    & .hero-content {
+        padding-top: 105px;
+        position: relative;
+        z-index: 1;
+
+        & .shape-3 {
+            position: absolute;
+            left: -12%;
+            top: 20%;
+            z-index: -1;
+        }
+
+        & .shape-4 {
+            position: absolute;
+            right: 8%;
+            top: 48%;
+            z-index: -1;
+        }
+
+        & .title {
+            font-size: 60px;
+
+            & span {
+                color: $primary3;
+            }
+        }
+
+        & p {
+            color: #383B46;
+            margin-top: 30px;
+            margin-bottom: 25px;
+        }
+
+        & .hero-btn {
+
+            & .btn {
+                background: $primary3;
+                color: $white;
+                margin-top: 40px;
+
+                &:hover {
+                    background: #021E40;
+                }
+            }
+        }
+    }
+
+    & .hero-images {
+        position: relative;
+        text-align: center;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            left: 0;
+            top: 25px;
+            z-index: -1;
+        }
+
+        & .image-content {
+            display: flex;
+            align-items: center;
+            background:#ffffff;
+            box-shadow: 0px 24px 59px 0px rgba(0, 0, 0, 0.13);
+            border-radius:10px;
+            position: absolute;
+            left: -8%;
+            top: 57.5%;
+            padding: 20px;
+            padding-right: 40px;
+
+            & .icon-img {
+
+                & img {
+                    width: 30px;
+                }
+            }
+
+            & .image-text {
+                flex: 1;
+                text-align: left;
+                margin-left: 15px;
+
+                & .title {
+                    font-size: 15px;
+                    color: $black;
+                }
+
+                & p {
+                    font-size: 14px;
+                    font-weight: 400;
+                    color: #999898;
+                }
+            }
+        }
+    }
+}
+
+.edubin-hero-section-06 {
+    @media #{$desktop-device} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 48px;
+            }
+    
+        }
+    }
+    @media #{$tablet-device} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 36px;
+            }
+    
+        }
+    }
+    @media #{$large-mobile} {
+        padding-top: 120px;
+        & .hero-content {
+            padding-top: 0;
+        }
+        & .hero-images {
+            padding-top: 60px;
+    
+            & .shape-1 {
+                left: 35px;
+                top: 95px;
+
+                & img {
+                    width: 420px;
+                }
+            }
+    
+            & .shape-2 {
+                top: 90px;
+
+                & img {
+                    width: 550px;
+                }
+            }
+    
+            & .image-content {
+                left: 0;
+    
+                & .icon-img {
+    
+                    & img {
+                        width: 30px;
+                    }
+                }
+    
+                & .image-text {
+                    flex: 1;
+                    text-align: left;
+                    margin-left: 15px;
+    
+                    & .title {
+                        font-size: 15px;
+                        color: $black;
+                    }
+    
+                    & p {
+                        font-size: 14px;
+                        font-weight: 400;
+                        color: #999898;
+                    }
+                }
+            }
+        }
+    }
+    @media #{$small-mobile} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 30px;
+            }
+    
+        }
+    }
+}
+
+
+// Home Style Seven
+.edubin-hero-section-07 {
+    position: relative;
+    overflow: hidden;
+
+    & .hero-shape-3 {
+        width: 1100px;
+        height: 1100px;
+        background: none;
+        border: 1px solid #efedfc;
+        border-radius: 50%;
+        position: absolute;
+        left: -32%;
+        top: -47%;
+
+        &::before {
+            content: "";
+            width: 1100px;
+            height: 1100px;
+            background: none;
+            border: 1px solid #efedfc;
+            border-radius: 50%;
+            transform: scale(.75);
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    & .hero-content {
+        max-width: 550px;
+
+        & .sub-title {
+            font-size: 14px;
+            line-height: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: $primary4;
+        }
+        & .title {
+            font-size: 52px;
+            line-height: 72px;
+            margin-top: 25px;
+            color: #021E40;
+
+            & span {
+                color: $primary4;
+            }
+        }
+
+        & .hero-btn {
+
+            & .btn {
+                background: $primary4;
+                color: $white;
+                margin-top: 40px;
+
+                &:hover {
+                    background: #021E40;
+                }
+            }
+        }
+
+        & .link-text {
+            font-size: 18px;
+            line-height: 30px;
+            color: #8a8a8a;
+            margin-top: 15px;
+
+            & a {
+                font-weight: 700;
+                color: $primary4;
+                text-decoration: underline;
+                text-decoration-color: $primary4;
+
+            }
+        }
+    }
+
+    & .hero-images-02 {
+        padding-top: 260px;
+        padding-bottom: 120px;
+        position: relative;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: -105px;
+            bottom: 170px;
+            z-index: -1;
+        }
+        & .shape-2 {
+            position: absolute;
+            top: 360px;
+            left: 235px;
+            z-index: -1;
+        }
+
+        & .image {
+            position: relative;
+            z-index: 1;
+
+            & .image-content {
+                position: absolute;
+                left: 180px;
+                bottom: 60px;
+                text-align: left;
+                padding-left: 35px;
+                padding-right: 28px;
+                padding-top: 30px;
+                padding-bottom: 25px;
+                width: 315px;
+                background-color: $white;
+                box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.05);
+                border-radius: 10px;
+
+                & .image-icon {
+                    position: absolute;
+                    left: 25px;
+                    top: -45px;
+                }
+                & .image-ext {
+                    & p {
+                        font-size: 16px;
+                        line-height: 28px;
+                        font-family: $heading-font;
+                        font-weight: 400;
+                        color: $heading-color;
+
+                        & span {
+                            font-weight: 700;
+                            color: $primary4;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.edubin-hero-section-07 {
+    @media #{$desktop-device} {
+        & .hero-shape-3 {
+            width: 920px;
+            height: 920px;
+    
+            &::before {
+                width: 920px;
+                height: 920px;
+            }
+        }
+        & .hero-content {
+
+            & .title {
+                font-size: 48px;
+                line-height: 66px;
+            }
+        }
+        & .hero-images-02 {
+    
+            & .image {
+    
+                & .image-content {
+                    left: 20px;
+                    bottom: 35px;
+                }
+            }
+        }
+    }
+    @media #{$tablet-device} {
+        padding-top: 150px;
+
+        & .hero-images-02 {
+            padding-top: 60px;
+            text-align: center;
+    
+            & .shape-1 {
+                left: -15px;
+            }
+            & .shape-2 {
+                top: 170px;
+                left: 270px;
+            }
+    
+            & .image {
+    
+                & .image-content {
+                    left: 110px;
+                    bottom: 90px;
+                }
+            }
+        }
+    }
+    @media #{$large-mobile} {
+
+        & .hero-content {
+
+            & .title {
+                font-size: 36px;
+                line-height: 52px;
+            }
+        }
+        & .hero-images-02 {
+    
+            & .shape-1 {
+                width: 160px;
+            }
+            & .shape-2 {
+                left: 180px;
+            }
+    
+            & .image {
+    
+                & .image-content {
+                    left: 45px;
+                    bottom: 60px;
+                }
+            }
+        }
+    }
+    @media #{$large-mobile} {
+
+        & .hero-content {
+
+            & .title {
+                font-size: 30px;
+                line-height: 44px;
+            }
+        }
+        & .hero-images-02 {
+    
+            & .shape-1 {
+                left: -5px;
+            }
+            & .shape-2 {
+                left: 110px;
+                top: 120px;
+                width: 120px;
+            }
+    
+            & .image {
+    
+                & .image-content {
+                    left: 0;
+                    bottom: 25px;
+                }
+            }
+        }
+    }
+}
+
+// Home Style Eight
+
+.edubin-slider-section-08 {
+    position: relative;
+    height: 920px;
+    background: #F9EEE1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    z-index: 1;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-image: linear-gradient(360deg, #030B14 50%, #02070E 100%);
+        opacity: 0.6;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+    }
+
+    & .shape-1 {
+        position: absolute;
+        width: 100%;
+        height: 130px;
+        right: 0;
+        left: 0px;
+        bottom: -130px;
+        background: #ffffff;
+        transform: skewY(-3deg);
+        transform-origin: 0;
+        z-index: 2;
+    }
+
+
+    & .hero-content {
+        padding-top: 225px;
+
+        & .sub-title {
+            font-size: 13px;
+            color: $primary5;
+            letter-spacing: 1px;
+            margin-bottom: 14px;
+        }
+
+        & .main-title {
+            font-size: 52px;
+            line-height: 70px;
+            color: $white;
+        }
+
+        & .text {
+            color: $white;
+            margin-top: 30px;
+        }
+
+        & .hero-btn-wrap {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+
+            & .hero-btn {
+
+                & .btn {
+                    border-radius: 50px;
+                    background: $primary5;
+                    color: $white;
+                    margin-right: 25px;
+
+                    & i {
+                        margin-left: 5px;
+                    }
+    
+                    &:hover {
+                        background: #021E40;
+                    }
+                }
+            }
+
+            & .info-call {
+
+                & p {
+                    font-size: 18px;
+                    color: $white;
+
+                    & i {
+                        margin-right: 5px;
+                    }
+                }
+            }
+        }
+
+        & .st-img-wrap {
+            display: flex;
+            align-items: center;
+            margin-top: 40px;
+
+            & .img {
+                
+                & img {
+                    border-radius: 150px;
+                }
+            }
+
+            & .con {
+                flex: 1;
+                margin-left: 30px;
+
+                & .title {
+                    font-size: 20px;
+                    color: $white;
+                }
+
+                & p {
+                    font-size: 13px;
+                    letter-spacing: 1px;
+                    font-weight: 600;
+                    color: $primary5;
+                }
+            }
+        }
+
+    }
+}
+
+.edubin-slider-section-08 {
+    @media #{$desktop-device} {
+
+        & .shape-1 {
+            bottom: -70px;
+        }
+
+        & .hero-content {
+            padding-top: 200px;
+    
+            & .main-title {
+                font-size: 42px;
+                line-height: 60px;
+            }
+    
+        }
+    }
+
+    @media #{$tablet-device} {
+        height: 850px;
+
+        & .shape-1 {
+            bottom: -42px;
+            height: 110px;
+        }
+
+        & .hero-content {
+            padding-top: 150px;
+        }
+    }
+    @media #{$large-mobile} {
+        & .hero-content {
+    
+            & .main-title {
+                font-size: 36px;
+                line-height: 50px;
+            }
+    
+        }
+    }
+    @media #{$small-mobile} {
+        & .hero-content {
+    
+            & .main-title {
+                font-size: 30px;
+                line-height: 42px;
+            }
+    
+        }
+    }
+}
+
+// Home Style Nine
+
+.edubin-slider-section-09 {
+
+    & .slider-item {
+        height: 1020px;
+
+        &::before {
+            background: #07294d none repeat scroll 0 0;
+            content: "";
+            height: 100%;
+            opacity: 0.4;
+            left: 0;
+            position: absolute;
+            top: 0;
+            width: 100%;
+            z-index: -1;
+        }
+    
+        & .slider-content {
+            padding-top: 215px;
+    
+            & .title {
+                font-size: 60px;
+                line-height: 1.2;
+                font-weight: 700;
+                color: $white;
+                @media #{$desktop-device} {
+                    font-size: 52px;
+                }
+                @media #{$large-mobile} {
+                    font-size: 36px;
+                }
+                @media #{$small-mobile} {
+                    font-size: 30px;
+                }
+
+                & span {
+                    color: $primary6;
+                }
+            }
+    
+            & p {
+                font-size: 16px;
+                line-height: 28px;
+                color: $white;
+                padding-right: 65px;
+                margin-top: 30px;
+                @media #{$large-mobile} {
+                    padding-right: 0;
+                }
+            }
+
+            & .hero-btn {
+                padding-top: 25px;
+    
+                & ul {
+    
+                    & li {
+                        display: inline-block;
+                        margin-right: 15px;
+                        margin-top: 15px;
+    
+                        &:last-child {
+                            margin-right: 0;
+                        }
+    
+                        & .btn {
+                            background: $primary6;
+                            color: $white;
+    
+                            &:hover {
+                                color: $white;
+                                background: #FF3E4B;
+                            }
+                        }
+    
+                        & .btn-white {
+                            border: 2px solid $white;
+                            line-height: 48px;
+                            background: transparent;
+                            color: $white;
+    
+                            &:hover {
+                                background: $primary6;
+                                border: 2px solid $primary6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+
+    & .slider-category {
+        padding-top: 110px;
+    }
+
+    & .category-item-03 {
+        display: flex;
+        align-items: center;
+        background: $primary6;
+        border-radius: 5px;
+        padding: 30px 40px 35px;
+        margin-top: 30px;
+        @media #{$small-mobile} {
+            padding: 30px 30px 35px;
+        }
+
+        & .icon {
+
+            & img {
+                width: 60px;
+            }
+        }
+
+        & .cont {
+            flex: 1;
+            margin-left: 35px;
+
+            & .title {
+                color: #ffffff;
+                font-size: 28px;
+                font-weight: 700;
+            }
+
+            & .view-more {
+                font-size: 15px;
+                color: $white;
+                margin-top: 10px;
+                transition: $transition-default;
+
+                & i {
+                    margin-left: 3px;
+                }
+
+                &:hover {
+                    margin-left: 5px;
+                }
+            }
+        }
+    }
+
+    & .slider-active {
+
+        & .slider-arrow  {
+            
+            &:hover {
+                color: $secondary;
+                background: $primary6;
+                border-color: $primary6;
+            }
+        }
+
+    }
+}
+
+.edubin-slider-section-09 {
+    @media #{$tablet-device} {
+        & .slider-item {
+            height: auto;
+        
+            & .slider-content {
+                padding-top: 60px;
+            }
+        
+        }
+
+        & .slider-category {
+            padding-top: 70px;
+            padding-bottom: 100px;
+        }
+    }
+}
+
+// Home Style Ten
+.edubin-hero-section-10 {
+    background: #EDF9F5;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    padding-top: 140px;
+    z-index: 1;
+
+    & .svg-shape {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        z-index: 5;
+
+        & svg {
+            height: 40px;
+            fill: $white;
+            display: block;
+            left: 50%;
+            position: relative;
+            transform: translateX(-50%);
+            width: calc(100% + 1.3px);
+        }
+    }
+
+    & .shape-3 {
+        position: absolute;
+        left: 9%;
+        top: 38%;
+        z-index: -1;
+    }
+
+
+    & .hero-content {
+        position: relative;
+        z-index: 1;
+
+        & .title {
+            font-size: 56px;
+            line-height: 70px;
+
+            & span {
+                color: $primary3;
+            }
+        }
+
+        & p {
+            color: #8a8a8a;
+            margin-top: 30px;
+        }
+
+        & .hero-btn {
+
+            & .btn {
+                background: $primary5;
+                color: $white;
+                margin-top: 40px;
+
+                &:hover {
+                    background: #021E40;
+                }
+            }
+        }
+    }
+
+    & .hero-images {
+        padding-top: 150px;
+        position: relative;
+        text-align: center;
+        z-index: 1;
+
+        & .shape-1 {
+            position: absolute;
+            left: 2%;
+            top: 21%;
+            z-index: -1;
+        }
+
+        & .shape-2 {
+            position: absolute;
+            right: 5%;
+            top: 29%;
+            z-index: -1;
+        }
+
+        & .images {
+            text-align: right;
+        }
+
+        & .image-content {
+            display: flex;
+            align-items: center;
+            background:#ffffff;
+            box-shadow: 0px 24px 59px 0px rgba(0, 0, 0, 0.13);
+            border-radius:10px;
+            position: absolute;
+            left: -13%;
+            top: 73.5%;
+            padding: 20px;
+            padding-right: 30px;
+
+            & .icon-img {
+                background: #EBEBEB;
+                width: 70px;
+                height: 70px;
+                line-height: 70px;
+                text-align: center;
+                border-radius: 10px;
+
+                & img {
+                    width: 30px;
+                }
+            }
+
+            & .image-text {
+                flex: 1;
+                text-align: left;
+                margin-left: 15px;
+
+                & .title {
+                    color: #021E40;
+                    font-size: 36px;
+                    font-weight: 700;
+                    line-height: 40px;
+                }
+
+                & p {
+                    font-size: 16px;
+                    font-weight: 400;
+                    color: #999898;
+                }
+            }
+        }
+    }
+}
+
+.edubin-hero-section-10 {
+    @media #{$desktop-device} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 42px;
+                line-height: 60px;
+            }
+        }
+        & .hero-images {
+            padding-top: 110px;
+        }
+    }
+    @media #{$tablet-device} {
+        & .hero-content {
+    
+            & .title {
+                font-size: 32px;
+                line-height: 48px;
+            }
+        }
+    }
+    @media #{$large-mobile} {
+
+        & .hero-images {
+            padding-top: 80px;
+            padding-left: 35px;
+            padding-right: 35px;
+
+            & .images {
+                text-align: center;
+            }
+
+            & .image-content {
+                left: 0%;
+                top: 67.5%;
+            }
+        }
+    }
+    @media #{$small-mobile} {
+
+        & .hero-images {
+            padding-top: 60px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes round-01 {
+    0% {
+        transform: rotate(15deg);
+      }
+      50% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(15deg);
+    }
+}

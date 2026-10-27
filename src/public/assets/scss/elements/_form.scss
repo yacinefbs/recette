@@ -1,0 +1,43 @@
+/*--
+/*  2.4 - Form CSS
+/*----------------------------------------*/
+
+label {
+	display: block;
+	line-height: 1;
+	margin-bottom: 10px;
+	font-weight: 400;
+	text-transform: capitalize;
+}
+
+/*Input Field & Select*/
+input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+textarea {
+	border: 1px solid #ebebeb;
+	box-shadow: none;
+	color: #415674;
+	border-radius: 4px;
+	background-color: $white;
+	margin-bottom: 0;
+	padding: 10px 25px;
+	max-width: 100%;
+	width: 100%;
+	font-size: 13px;
+	line-height: 30px;
+	font-weight: 600;
+	transition: $transition-default;
+	  
+
+	&:focus{
+		outline: none;
+		border-color: $primary;
+	}
+
+	@include placeholder{
+		opacity: 0.95;
+		font-size: 13px;
+		color: #898c94;
+		font-weight: 600;
+	}
+}
+

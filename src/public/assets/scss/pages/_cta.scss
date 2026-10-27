@@ -1,0 +1,230 @@
+/*--
+/*  17 - CTA CSS
+/*----------------------------------------*/
+
+
+.edubin-cta-section {
+    background: #F9EEE1;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    position: relative;
+    z-index: 1;
+
+    & .shape-3 {
+        position: absolute;
+        left: 65px;
+        top: 140px;
+        z-index: -1;
+        animation: zoom-in 3s infinite;
+    }
+
+    & .cta-wrap {
+        margin-top: -30px;
+    }
+}
+.cta-item {
+    background: $white;
+    border-radius: 10px;
+    padding: 40px 40px;
+    position: relative;
+    z-index: 1;
+    margin-top: 30px;
+    @media #{$desktop-device} {
+        padding: 40px 30px;
+    }
+
+    & .shape-1 {
+        position: absolute;
+        right: 0;
+        top: 45px;
+        z-index: -1;
+    }
+
+    & .cta-content {
+
+        & .title {
+            font-size: 30px;
+        }
+
+        & p {
+            font-size: 14px;
+            color: #383B46;
+            padding-top: 20px;
+        }
+
+        & .btn {
+            height: 45px;
+            line-height: 45px;
+            background: $primary2;
+            color: $white;
+            margin-top: 20px;
+
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+
+    & .cta-img {
+        @media #{$small-mobile} {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        & img {
+            width: 135px;
+            height: 135px;
+            border-radius: 50%;
+        }
+    }
+}
+
+
+// Home Style Eight
+
+.edubin-cta-section-02 {
+
+    & .cta-wrap {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        padding: 90px 90px 100px;
+        position: relative;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-bottom: -120px;
+        z-index: 1;
+    }
+
+    & .cta-cont {
+        padding-left: 290px;
+
+        & .title {
+            font-size: 30px;
+            color: $white;
+        }
+    }
+
+    & .cta-btn {
+        text-align: right;
+
+        & .btn {
+            background: $white;
+            border: 2px solid $white;
+            line-height: 50px;
+            color: $black;
+
+            &:hover {
+                border: 2px solid $white;
+                background: transparent;
+                color: $white;
+            }
+        }
+    }
+}
+
+.edubin-cta-section-02 {
+    @media #{$desktop-device} {
+        & .cta-cont {
+            padding-left: 0;
+        }
+    }
+    @media #{$tablet-device} {
+        & .cta-wrap {
+            padding: 80px 80px 90px;
+        }
+        & .cta-btn {
+            text-align: center;
+            margin-top: 30px;
+        }
+    }
+    @media #{$large-mobile} {
+        & .cta-wrap {
+            padding: 70px 35px 80px;
+        }
+    }
+}
+
+// Home Style Nine
+
+.edubin-cta-section-03 {
+
+    & .cta-wrap {
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    & .cta-cont {
+
+        & .title {
+            font-size: 52px;
+            line-height: 62px;
+            color: $white;
+            @media #{$desktop-device} {
+                font-size: 48px;
+                line-height: 58px;
+            }
+            @media #{$large-mobile}{
+                font-size: 30px;
+                line-height: 36px;
+            }
+
+            & span {
+                color: $primary6;
+            }
+        }
+
+        & .cta-btn {
+            margin-top: 25px;
+
+            & ul {
+    
+                & li {
+                    display: inline-block;
+                    margin-right: 15px;
+                    margin-top: 15px;
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+
+                    & .btn {
+                        background: $primary6;
+                        color: $white;
+
+                        &:hover {
+                            color: $white;
+                            background: #FF3E4B;
+                        }
+                    }
+
+                    & .btn-white {
+                        border: 2px solid $white;
+                        line-height: 48px;
+                        background: transparent;
+                        color: $white;
+
+                        &:hover {
+                            background: $primary6;
+                            border: 2px solid $primary6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes zoom-in {
+    0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.8);
+      }
+      100% {
+        transform: scale(1);
+    }
+}

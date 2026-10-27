@@ -1,0 +1,257 @@
+
+/*----------------------------------------*/
+/*  00. Sidebar CSS START
+/*----------------------------------------*/
+
+
+// sidebar
+.sidebar{
+    &__area{
+        position: fixed;
+        right: -485px;
+        top: 0;
+        width: 465px;
+        height: 100%;
+        background: $white  none repeat scroll 0 0;
+        overflow-y: scroll;
+        box-shadow : -5px 0 20px -5px rgba(0, 0, 0, 0.5);
+        transition: all .3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+        z-index: 9999;
+        @media #{$small-mobile} {
+            width: 360px;
+        }
+        @media #{$extra-small-mobile} {
+            width: 290px;
+        }
+  
+  
+        &.sidebar-opened{
+            right: 0px;
+        }
+    }
+    &__wrapper{
+        position: relative;
+        padding: 45px;
+        background: #f7f7f7;
+        @media #{$extra-small-mobile} {
+            padding: 20px;
+        }
+        
+    }
+    &__close{
+        position: absolute;
+        top: 35px;
+        right: 45px;
+        @media #{$extra-small-mobile} {
+            top: 22px;
+            right: 20px;
+        }
+
+        &-btn{
+            display: inline-block;
+            font-size: 16px;
+            height: 45px;
+            width: 45px;
+            line-height: 49px;
+            background: #000;
+            color: #fff;
+			outline: none;
+			border: none;
+            border-radius: 50%;
+            &:hover{
+                background: $primary;
+            }
+        }
+      
+    }
+    &__logo{
+        padding-bottom: 20px;
+		margin-bottom: 40px;
+        border-bottom: 1px solid #ebebeb;
+    }
+    &__search{
+        position: relative;
+		margin-bottom: 25px;
+        & input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]){
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            padding-right: 20px;
+            background: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid #ebebeb;
+            font-size: 16px;
+			font-weight: 500;
+            color: #415674;
+            &::placeholder{
+                color: #415674;
+				font-weight: 500;
+            }
+            &:focus{
+                border-color: $primary;
+            }
+        }
+        & button{
+            position: absolute;
+            top: 50%;
+            right: 0;
+            transform : translateY(-50%);
+            font-size: 14px;
+            color: #aeaeae;
+			outline: none;
+			border: none;
+			background: transparent;
+            transition: .3s;
+            &:hover{
+                color: $primary;
+            }
+        }
+    }
+    &__text{
+        & p{
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+    }
+    &__contact{
+		margin-top: 30px;
+		margin-bottom: 20px;
+        & h4{
+            font-size: 30px;
+            margin-bottom: 20px;
+            color: $black;
+        }
+        & ul{
+            & li{
+                &:not(:last-child){
+                    margin-bottom: 20px;
+                }
+                &:hover{
+                    & i{
+                        background: $primary;
+                        color: $white;
+                        border-color: #ebebeb;
+                    }
+                    & a{
+                        color: $primary;
+                    }
+                }
+            }
+        }
+        &-icon{
+			margin-right: 15px;
+            & i{
+                display: inline-block;
+                color: #343a40;
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                border: 1px solid #ebebeb;
+                border-radius : 7px;
+            }
+        }
+        &-text{
+            & a{
+                font-size: 18px;
+                font-weight: 400;
+                color: #343a40;
+            }
+        }
+    }
+    &__img {
+        margin-bottom: 20px;
+    }
+    &__single-img {
+        margin-bottom: 10px;
+    }
+    &__map{
+        & iframe{
+            width: 100%;
+            height: 200px;
+            border: none;
+        }
+    }
+	&__social{
+        & ul{
+            & li{
+                display: inline-block;
+                &:not(:last-child){
+                    margin-right: 5px;
+                }
+                & a{
+                    display: inline-block;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 42px;
+                    text-align: center;
+                    background: #f1f1f1;
+                    color: #343a40;
+                    border-radius :5px;
+                    &:hover{
+                        background: $primary;
+                        color: $white;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+.side-menu-icon {
+    margin-left: 30px;
+}
+
+.side-menu-icon {
+    width: 52px;
+    height: 52px;
+    line-height: 70px;
+    background: $primary;
+    text-align: center;
+    border-radius: 50%;
+
+    & span {
+        width: 20px;
+        height: 2px;
+        background: #1A1A1A;
+        margin: 6px 0;
+        display: block;
+        transition: $transition-default;
+
+    }
+
+    &:hover {
+        & span {
+    
+            &:first-child {
+               width: 20px;
+            }
+        }
+    }
+}
+
+
+// overlay
+.body-overlay{
+    background-color: rgba($color: #000000, $alpha: .5);
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 999;
+	left: 0;
+	opacity: 0;
+	visibility: hidden;
+	transition : .3s;
+
+	&:hover{
+		cursor: pointer;
+	}
+}
+
+.body-overlay.opened{
+	opacity: 1;
+    visibility: visible;
+}

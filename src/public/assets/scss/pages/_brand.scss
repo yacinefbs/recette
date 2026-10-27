@@ -1,0 +1,48 @@
+/*--
+/*  13 - Brand CSS
+/*----------------------------------------*/
+
+
+.edubin-brand-section {
+    background: #F9F9F9;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+// Home Style Five
+
+.edubin-brand-section-02 {
+
+    & .brand-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: #021E40;
+        margin-bottom: 60px;
+    }
+}
+
+// Home Style Six
+
+.edubin-brand-section-03 {
+    padding-top: 60px;
+    @media #{$tablet-device} {
+        padding-top: 30px;
+    }
+}
+
+// Home Style Eight
+
+.edubin-brand-section-04 {
+    background: #F5F6F9;
+
+    & .brand-title {
+        font-size: 38px;
+        
+        & span {
+            color: $primary5;
+        }
+    }
+}

@@ -1,0 +1,1213 @@
+/*--
+/*  07 - Course CSS
+/*----------------------------------------*/
+
+.course-section {
+    background: #F9F9F9;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+
+    & .course-content-wrap {
+        padding-top: 15px;
+    }
+
+    & .course-btn {
+
+        & .btn {
+            margin-top: 60px;
+        }
+    }
+}
+
+.single-course {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 30px;
+
+    & .thum {
+        position: relative;
+
+        & .image {
+            overflow: hidden;
+            position: relative;
+
+            & a {
+                display: block;
+                position: relative;
+
+                & img {
+                    width: 100%;
+                    transition: $transition-default;
+                }
+            }
+
+            & .top-meta {
+
+                & .categories {
+                    position: absolute;
+                    top: 25px;
+                    left: 25px;
+                    max-width: 70%;
+
+                    & .tag {
+                        font-size: 13px;
+                        font-weight: 400;
+                        border-radius: 3px;
+                        padding: 0 11px;
+                        line-height: 29px;
+                        display: inline-block;
+                        background: $primary;
+                        color: #021E40;
+                        white-space: nowrap;
+                    }
+                }
+
+                & .wishlist {
+
+                    & a {
+                        background: #ffffff;
+                        color: #021E40;
+                        font-size: 16px;
+                        border-radius: 50%;
+                        position: absolute;
+                        top: 25px;
+                        right: 25px;
+                        width: 32px;
+                        height: 32px;
+                        line-height: 34px;
+                        text-align: center;  
+
+                        &:hover {
+                            background: $secondary;
+                            color: $white;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        & .price {
+            position: absolute;
+            right: 60px;
+            bottom: -24px;
+            
+            & span {
+                display: block;
+                font-size: 14px;
+                color: #07294d;
+                font-family: $heading-font;
+                font-weight: 500;
+                width: 55px;
+                height: 55px;
+                line-height: 55px;
+                border-radius: 50%;
+                background-color: #ffc600;
+                text-align: center;
+            }
+        }
+    }
+
+    & .content {
+        padding-top: 40px;
+        padding-bottom: 34px;
+        padding-left: 30px;
+        padding-right: 30px;
+        @media #{$desktop-device} {
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        & .title {
+            font-weight: 600;
+            font-size: 24px;
+            color: #021E40;
+            margin-bottom: 10px;
+            transition: $transition-default;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+
+        & > ul {
+            display: inline-block;
+            margin-right: 10px;
+
+            & li {
+                display: inline-block;
+                margin: 1px;
+
+                & i {
+                    font-size: 13px;
+                    color: #ffc600;
+                }
+            }
+        }
+
+        & span {
+            font-size: 13px;
+            color: #000;
+        }
+
+        & .course-teacher {
+            border-top: 1px solid #e0e0e0;
+            padding-top: 20px;
+            margin-top: 30px;
+            overflow: hidden;
+
+            & > .thum {
+                display: inline-block;
+
+                & a {
+
+                    & img {
+                        border-radius: 50%;
+                        width: 40px;
+                        height: 40px;
+                    }
+                }
+            }
+
+            & .name {
+                display: inline-block;
+                margin-left: 10px;
+                @media #{$desktop-device} {
+                    margin-left: 5px;
+                }
+
+                & h6 {
+                    font-size: 15px;
+                    color: #24486e;
+                }
+            }
+
+            & .course-lesson {
+                float: right;
+                overflow: hidden;
+
+                & ul {
+                    margin-top: 8px;
+
+                    & li {
+                        font-size: 15px;
+                        color: #8a8a8a;
+
+                        & i {
+                            margin-right: 5px;
+                            color: $primary;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &:hover {
+
+        & .thum {
+
+            & .image {
+
+                & img {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+// Home Style Three
+
+.course-section-02 {
+
+    & .single-course {
+        background-color: #fff;
+        border: 1px solid #ebebeb;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 30px;
+    
+        & .thum {
+            position: relative;
+            padding: 10px;
+    
+            & .image {
+                border-top-right-radius: 10px;
+                border-top-left-radius: 10px;
+                overflow: hidden;
+            }
+    
+            & .author-img {
+                position: absolute;
+                right: 30px;
+                bottom: -15px;
+                border: 3px solid $white;
+                overflow: hidden;
+                border-radius: 50%;
+            }
+        }
+    
+        & .content {
+            padding-top: 30px;
+            padding-left: 20px;
+            padding-bottom: 0;
+            padding-right: 20px;
+    
+            & .title {
+                font-size: 18px;
+                line-height: 26px;
+            }
+        }
+
+        & .course-teacher {
+            border-top: 1px solid #e0e0e0;
+            padding: 15px 20px;
+            padding-top: 10px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            & .course-lesson {
+                float: none;
+
+                & ul {
+                    margin-top: 8px;
+
+                    & li {
+                        font-size: 15px;
+                        color: #8a8a8a;
+
+                        & i {
+                            margin-right: 5px;
+                            color: $primary;
+                        }
+                    }
+                }
+            }
+
+            & .view-details {
+
+                & .read-more {
+                    font-size: 15px;
+                    font-weight: 700;
+                    color: $primary;
+                    margin-top: 8px;
+
+                    &:hover {
+                        color: $secondary;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+// Home Style Five
+
+.course-section-03 {
+
+    & .course-btn {
+        text-align: right;
+        @media #{$large-mobile} {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        & .btn {
+            background: $primary2;
+            color: $white;
+
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+
+    & .course-content-wrap {
+        padding-top: 20px;
+    }
+
+    & .single-course {
+        background-color: none;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 30px;
+    
+        & .thum {
+            position: relative;
+    
+            & .image {
+                overflow: hidden;
+                position: relative;
+    
+                & a {
+                    display: block;
+                    position: relative;
+    
+                    & img {
+                        width: 100%;
+                        transition: $transition-default;
+                    }
+                }
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: #ff4830;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    
+        & .content {
+            padding-top: 25px;
+            padding-bottom: 0;
+            padding-left: 0;
+            padding-right: 0;
+
+            & .course-categories {
+
+                & .tag {
+                    font-size: 13px;
+                    font-weight: 400;
+                    border-radius: 3px;
+                    padding: 0 15px;
+                    line-height: 29px;
+                    display: inline-block;
+                    background: #ff48301c;
+                    color: #ff4830;
+                    white-space: nowrap;
+
+                    &.color-2 {
+                        background: rgba(#6cbd7f, 0.15);
+                        color: #6cbd7f;
+                    }
+                    &.color-3 {
+                        background: rgba(#8e56ff, 0.15);
+                        color: #8e56ff;
+                    }
+                    &.color-4 {
+                        background: rgba(#17b8c1, 0.15);
+                        color: #17b8c1;
+                    }
+                }
+            }
+    
+            & .title {
+                font-weight: 600;
+                font-size: 18px;
+                line-height: 28px;
+                color: #021E40;
+                margin-bottom: 10px;
+                transition: $transition-default;
+                margin-top: 20px;
+    
+                &:hover {
+                    color: $primary2;
+                }
+            }
+    
+            & .course-lesson {
+
+                & ul {
+                    margin-top: 8px;
+
+                    & li {
+                        font-size: 15px;
+                        color: #8a8a8a;
+
+                        & i {
+                            margin-right: 5px;
+                            color: $primary2;
+                        }
+                    }
+                }
+            }
+
+            & .author-name {
+
+                & p {
+                    margin-bottom: 5px;
+                    color: #8a8a8a;
+                    font-size: 15px;
+
+                    & a {
+                        color: #0071dc;
+                    }
+                }
+            }
+
+            & .price {
+
+                & p {
+                    font-weight: 15px;
+                    font-weight: 600;
+                    color: $primary2;
+                }
+            }
+        }
+    
+        &:hover {
+    
+            & .thum {
+    
+                & .image {
+    
+                    & img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Six
+
+.course-section-04 {
+
+    & .course-btn {
+        text-align: right;
+        @media #{$large-mobile} {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        & .btn {
+            background: $primary3;
+            margin-top: 0;
+            color: $white;
+
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+
+    & .course-content-wrap {
+        padding-top: 20px;
+    }
+
+    & .single-course {
+        background-color: none;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 30px;
+    
+        & .thum {
+    
+            & .image {
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary3;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    
+        & .content {
+            padding-top: 20px;
+            padding-bottom: 0;
+            padding-left: 20px;
+            padding-right: 20px;
+
+    
+            & .title {
+                font-weight: 600;
+                font-size: 22px;
+                color: #021E40;
+                margin-bottom: 10px;
+                transition: $transition-default;
+                margin-top: 20px;
+    
+                &:hover {
+                    color: $primary3;
+                }
+            }
+
+            
+        }
+
+        & .course-teacher {
+
+
+            & .course-lesson {
+
+                & ul {
+
+                    & li {
+
+                        & i {
+                            color: $primary3;
+                        }
+                    }
+                }
+            }
+
+            & .view-details {
+
+                & .read-more {
+                    font-size: 15px;
+                    font-weight: 700;
+                    color: $primary3;
+                    margin-top: 8px;
+
+                    &:hover {
+                        color: $secondary;
+                    }
+                }
+            }
+        }
+    
+        &:hover {
+    
+            & .thum {
+    
+                & .image {
+    
+                    & img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Home Style Seven
+
+.course-section-05 {
+    background: none;
+
+    & .course-btn {
+        text-align: right;
+        @media #{$large-mobile} {
+            text-align: left;
+            margin-top: 25px;
+        }
+
+        & .btn {
+            background: $primary4;
+            margin-top: 0;
+            color: $white;
+
+            &:hover {
+                background: #021E40;
+            }
+        }
+    }
+
+    & .course-content-wrap {
+        padding-top: 20px;
+    }
+
+    & .single-course {
+        margin-top: 30px;
+        background: $white;
+        box-shadow: 0 6px 12px rgb(0 0 0 / 6%);
+    
+        & .thum {
+    
+            & .image {
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary4;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    
+        & .content {
+            padding-top: 20px;
+            padding-bottom: 0;
+            padding-left: 30px;
+            padding-right: 30px;
+
+    
+            & .title {
+                font-size: 18px;
+                line-height: 28px;
+                margin-top: 10px;
+    
+                &:hover {
+                    color: $primary4;
+                }
+            }
+
+            & .course-author {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+
+                & .thum {
+
+                    & a {
+
+                        & img {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 100px;
+                            margin-right: 5px;
+                            display: inline-block;
+                            border: 2px solid #cccccc;
+                        }
+                    }
+                }
+
+                & .name {
+                    margin-left: 5px;
+                    
+                    & h6 {
+                        font-size: 15px;
+                        font-weight: 500;
+                        color: #8a8a8a;
+                    }
+                }
+            }
+            
+        }
+
+        & .course-teacher {
+            border-top: 1px solid #e0e0e0;
+            padding: 15px 30px;
+            padding-top: 10px;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+            & .course-lesson {
+                float: none;
+
+                & ul {
+                    margin-top: 8px;
+
+                    & li {
+                        font-size: 15px;
+                        color: #8a8a8a;
+
+                        & i {
+                            margin-right: 5px;
+                            color: $primary4;
+                        }
+                    }
+                }
+            }
+
+            & .price {
+                margin-top: 8px;
+
+                & span {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #021E40;
+                }
+            }
+        }
+    
+        &:hover {
+    
+            & .thum {
+    
+                & .image {
+    
+                    & img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+// Home Style Eight
+.course-section-06 {
+    background: #F5F7FA;
+    padding-top: 220px;
+
+    & .single-course {
+    
+        & .thum {
+    
+            & .image {
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary5;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    
+        & .content {
+
+    
+            & .title {
+    
+                &:hover {
+                    color: $primary5;
+                }
+            }
+            
+        }
+
+        & .course-teacher {
+
+            & .course-lesson {
+
+                & ul {
+
+                    & li {
+
+                        & i {
+                            color: $primary5;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Testimonial Arrow
+.course-active {
+
+   & .course-arrow  {
+        width: 45px;
+        height: 45px;
+        line-height: 45px;
+        border-radius: 50%;
+        transform: translateY(-30%);
+        border: 2px solid $primary5;
+        box-shadow: 0px 5px 57px 0px rgba(0, 0, 0, 0.15);
+        color: $primary5;
+        opacity: 0;
+        visibility: hidden;
+        transition: $transition-default;
+        &.swiper-button-prev {
+            left: 0;
+            &::after {
+                content: "\f16d";
+                font-family: flaticon !important;
+                font-size: 18px;
+            }
+        }
+        &.swiper-button-next {
+            right: 0;
+            &::after {
+                content: "\f16e";
+                font-family: flaticon !important;
+                font-size: 18px;
+            }
+        }
+        &:hover {
+            color: $white;
+            background: $primary5;
+        }
+    }
+    &:hover {
+        & .course-arrow {
+            opacity: 1;
+            visibility: visible;
+            &.swiper-button-prev {
+                left: 10px;
+            }
+            &.swiper-button-next {
+                right: 10px;
+            }
+        }
+    }
+}
+
+
+// Home Style Nine
+
+.course-section-07 {
+
+    & .course-slider-wrap {
+        padding-top: 40px;
+    }
+
+    & .single-course {
+        box-shadow: 0 6px 12px rgb(0 0 0 / 6%);
+        background: #ffffff;
+        margin: 10px;
+    
+        & .thum {
+    
+            & .image {
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary6;
+                            color: $white;
+                        }
+                    }
+                }
+            }
+        }
+    
+        & .content {
+
+    
+            & .title {
+    
+                &:hover {
+                    color: $primary6;
+                }
+            }
+            
+        }
+
+        & .course-teacher {
+
+            & .course-lesson {
+
+                & ul {
+
+                    & li {
+
+                        & i {
+                            color: $primary6;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    & .course-btn {
+
+        & .btn {
+            background: $primary6;
+            margin-top: 60px;
+            color: $white;
+            @media #{$large-mobile} {
+                margin-top: 30px;
+            }
+
+            &:hover {
+                background: #FF3E4B;
+            }
+        }
+    }
+
+    & .course-active {
+
+        & .course-arrow  {
+            border: 2px solid $primary6;
+            color: $primary6;
+
+            &:hover {
+                 color: $white;
+                 background: $primary6;
+            }
+        }
+    }
+}
+
+// Home Style Ten
+
+.course-section-08 {
+    background: #ECF7F4;
+    padding-top: 195px;
+
+    & .section-title2 {
+
+        & .title {
+            margin-top: 10px;
+        }
+    }
+
+    & .course-content-wrap {
+        padding-top: 30px;
+    }
+
+    & .single-course {
+        box-shadow: 0 6px 12px rgb(0 0 0 / 6%);
+        background: #ffffff;
+        border-radius: 20px;
+        margin-top: 30px;
+
+    
+        & .thum {
+    
+            & .image {
+                background: #e5572e;
+                height: 200px;
+                width: auto;
+                position: relative;
+                z-index: 1;
+
+                &.color-2 {
+                    background: #2bc183;
+                }
+
+                &.color-3 {
+                    background: #0870da;
+                }
+
+                &.color-4 {
+                    background: #7044b3;
+                }
+
+                &.color-5 {
+                    background: #ea9c0b;
+                }
+
+
+                & .shape-1 {
+                    left: -27px;
+                    bottom: -38px;
+                    position: absolute;
+                    border: 2px solid #ffffff3d;
+                    height: 80px;
+                    border-radius: 50%;
+                    width: 80px;
+                    z-index: -1;
+                }
+
+                & .shape-2 {
+                    height: 120px;
+                    width: 200px;
+                    background-color: #ffffff1f;
+                    bottom: -33px;
+                    right: -34px;
+                    top: 0;
+                    position: absolute;
+                    z-index: -1;
+                }
+
+                & .shape-3 {
+                    height: 180px;
+                    width: 180px;
+                    background-color: #ffffff1f;
+                    border-radius: 50%;
+                    position: absolute;
+                    right: -55px;
+                    top: 77px;
+                }
+    
+                & .top-meta {
+    
+                    & .title {
+                        color: $white;
+                        font-size: 22px;
+                        font-weight: 700;
+                        padding-top: 25px;
+                        padding-left: 30px;
+                        padding-right: 70px;
+
+                        &:hover {
+                            
+                            & a {
+                                color: $white;
+                                opacity: 0.8;
+                            }
+                        }
+    
+                    }
+                }
+            }
+        }
+        
+
+        & .content {
+            padding-top: 20px;
+            padding-bottom: 25px;
+            padding-left: 30px;
+            padding-right: 30px;
+
+    
+            & p {
+                color: #8a8a8a;
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+
+            & .course-author {
+                display: flex;
+                align-items: center;
+                margin-top: 10px;
+
+                & .thum {
+
+                    & a {
+
+                        & img {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 100px;
+                            margin-right: 5px;
+                            display: inline-block;
+                            border: 2px solid #cccccc;
+                        }
+                    }
+                }
+
+                & .name {
+                    margin-left: 5px;
+                    
+                    & h6 {
+                        font-size: 15px;
+                        font-weight: 500;
+                        color: #8a8a8a;
+                    }
+                }
+            }
+            
+        }
+
+        & .course-teacher {
+           display: flex;
+           align-items: center;
+           justify-content: space-between;
+
+            & .price {
+                margin-top: 0;
+
+                & span {
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #021E40;
+                }
+            }
+
+            & .read-more {
+
+                & .btn {
+                    height: 35px;
+                    line-height: 35px;
+                    font-size: 15px;
+                    font-weight: 500;
+                    color: #ffffff;
+                    background:#2bc183;
+                    padding: 0 15px;
+                    border-radius:5px;
+
+                    &:hover {
+                        opacity: 0.75;
+                    }
+                }
+            }
+        }
+        
+    }
+
+    & .course-btn {
+
+        & .btn {
+            background: $primary5;
+            color: $white;
+            margin-top: 50px;
+    
+            &:hover {
+                background: #021E40;
+            }
+        }
+
+    }
+
+}
+
+
+// Course Grid
+
+.course-section-09 {
+    background: $white;
+
+    & .course-grid-wrap {
+        margin-top: -30px;
+    }
+
+    & .single-course {
+        background-color: #fff;
+        box-shadow: 0 6px 12px rgb(0 0 0 / 6%);
+    
+        & .thum {
+    
+            & .image {
+    
+                & .top-meta {
+    
+                    & .categories {
+    
+                        & .tag {
+                            background: $primary4;
+                            color: $white;
+                        }
+                    }
+    
+                }
+            }
+    
+            & .price {
+                
+                & span {
+                    color: $white;
+                    background-color: $primary4;
+                }
+            }
+        }
+    
+        & .content {
+    
+            & .title {
+    
+                &:hover {
+                    color: $primary4;
+                }
+            }
+
+            & .course-teacher {
+    
+                & .course-lesson {
+
+                    & ul {
+    
+                        & li {
+    
+                            & i {
+                                color: $primary4;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    
+    }
+}

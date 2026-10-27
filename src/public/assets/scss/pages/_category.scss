@@ -1,0 +1,427 @@
+/*--
+/*  04 - Category CSS
+/*----------------------------------------*/
+
+.category-wrap {
+    background: $secondary;
+    border-radius: 10px;
+    padding-top: 40px;
+    padding-bottom: 80px;
+    margin-top: -150px;
+    position: relative;
+    z-index: 5;
+
+    & .category-text {
+        padding-top: 40px;
+        @media #{$tablet-device} {
+            text-align: center;
+        }
+
+        & .title {
+            font-size: 36px;
+            color: #fff;
+            padding: 0 50px;
+            @media #{$small-mobile} {
+                font-size: 32px;
+            }
+        }
+    }
+}
+.category-slider-wrap {
+    margin-top: 40px;
+}
+.single-category {
+    padding: 20px 0;
+    margin: 0 auto;
+    border-radius: 5px;
+    display: block;
+
+    &.color-1 {
+        background-color: #4886ff;
+    }
+    &.color-2 {
+        background-color: #b5d56a;
+    }
+    &.color-3 {
+        background-color: #ff6f6f;
+    }
+
+    & .icon {
+        display: inline-block;
+    }
+
+    & .cont {
+        display: block;
+
+        & span {
+            display: inline-block;
+            color: $white;
+            font-size: 18px;
+            padding-top: 15px;
+            font-family: $heading-font;
+            font-weight: 700;
+        }
+    }
+}
+
+.category-active {
+    position: relative;
+
+    & a {
+        display: block;
+    }
+
+    & .slider-arrow  {
+        position: absolute;
+        top: 50%;
+        right: -50px;
+        transform: translateY(-10%);
+        width: 35px;
+        height: 35px;
+        line-height: 35px;
+        border-radius: 50%;
+        background-color: #557495;
+        text-align: center;
+        color: #fff;
+        cursor: pointer;
+        transition: $transition-default;
+        @media #{$tablet-device} {
+            transform: translateY(90%);
+        }
+        &.swiper-button-prev {
+            right: auto;
+            left: -50px;
+            &::after {
+                content: "\f16d";
+                font-family: flaticon !important;
+                font-size: 14px;
+            }
+        }
+        &.swiper-button-next {
+            right: -50px;
+            &::after {
+                content: "\f16e";
+                font-family: flaticon !important;
+                font-size: 14px;
+            }
+        }
+        &:hover {
+            color: $white;
+            background: $primary;
+            border-color: $primary;
+        }
+    }
+    &:hover {
+        & .slider-arrow {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
+}
+
+// Home Style Two
+
+.edubin-category-section-02 {
+    padding-bottom: 120px;
+    @media #{$desktop-device} {
+        padding-bottom: 100px;
+    }
+    @media #{$tablet-device} {
+        padding-bottom: 80px;
+    }
+}
+
+.category-2-items {
+    padding-top: 20px;
+
+    & .single-items {
+        position: relative;
+        margin-top: 30px;
+
+        & .items-image {
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(7, 41, 77, 0.8);
+                border-radius: 5px;
+            }
+
+            & img {
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+
+        & .items-cont {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            transform: translateY(-50%);
+
+            & .title {
+                font-size: 18px;
+                color: $white;
+                transition: $transition-default;
+
+                &:hover {
+                    color: $primary;
+                }
+            }
+
+            & p {
+                font-size: 14px;
+                color: $white;
+            }
+        }
+    }
+}
+
+.category-form {
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0px 0px 75px 0px rgba(0, 0, 0, 0.1);
+    margin-top: -160px;
+    position: relative;
+    z-index: 5;
+    @media #{$tablet-device} {
+        margin-top: 50px;
+    }
+
+    & .form-title {
+        background-color: #07294d;
+        padding-top: 35px;
+        padding-bottom: 40px;
+        padding-left: 5px;
+        padding-right: 5px;
+
+        & .title {
+            color: #ffc600;
+            font-size: 36px;
+            margin-bottom: 10px;
+            @media #{$small-mobile} {
+                font-size: 28px;
+            }
+        }
+
+        & span {
+            font-size: 24px;
+            font-family: $heading-font;
+            color: #fff;
+        }
+    }
+
+    & .main-form {
+        padding-top: 30px;
+        padding-left: 40px;
+        padding-right: 40px;
+        padding-bottom: 55px;
+        background-color: #fff;
+
+        & .single-form {
+            margin-top: 20px;
+
+            & input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+            textarea {
+                width: 100%;
+                height: 45px;
+                padding: 0 20px;
+                font-size: 14px;
+                color: #8a8a8a;
+                border: 1px solid #ebebeb;
+                border-radius: 3px;
+                font-weight: 400;
+
+                @include placeholder{
+                    opacity: 0.95;
+                    font-size: 14px;
+                    color: #8a8a8a;
+                    font-weight: 400;
+                }
+            }
+
+            & textarea {
+                height: 100px;
+                line-height: 50px;
+            }
+
+            & .btn {
+                width: 100%;
+                height: 45px;
+                line-height: 45px;
+                border-radius: 3px;
+                background: #07294D;
+                color: $white;
+
+                &:hover {
+                    background: $primary;
+                }
+            }
+        }
+    }
+}
+
+// Home Style Three
+
+.edubin-category-section-03 {
+    background: #EDF0F2;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    padding-top: 70px;
+    padding-bottom: 100px;
+    @media #{$desktop-device} {
+        padding-top: 50px;
+    }
+    @media #{$tablet-device} {
+        padding-top: 30px;
+    }
+}
+
+// Home Style Four
+
+.edubin-category-section-04 {
+
+    & .category-wrap {
+        background: $white;
+        box-shadow: 0px 0px 60px 0px rgba(0, 0, 0, 0.1);
+    
+        & .category-text {
+    
+            & .title {
+                color: #002639;
+            }
+        }
+    }
+}
+
+// Home Style Five
+.edubin-category-section-05 {
+
+    & .category-content-wrap {
+        position: relative;
+        margin-top: 50px;
+
+        &::before {
+            content: "";
+            background: #E1E1E1;
+            width: 100%;
+            margin: auto;
+            height: 1px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+        }
+    }
+
+    & .edubin-category-box {
+        border-right: 1px solid #E1E1E1;
+
+        &.category-box-03 {
+            border-right: 0;
+        }
+
+        & .category-item {
+            display: flex;
+            align-items: center;
+            padding: 40px 60px;
+
+            & .category-content {
+                margin-left: 20px;
+
+                & .title {
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #021E40;
+
+                    &:hover {
+                        color: $primary2;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.edubin-category-section-05  {
+    @media #{$tablet-device} {
+        & .edubin-category-box {
+    
+            & .category-item {
+                padding: 40px 20px;
+            }
+        }
+    }
+    @media #{$large-mobile} {
+        & .category-content-wrap {
+            margin-top: 20px;
+    
+            &::before {
+                display: none;
+            }
+        }
+        & .edubin-category-box {
+            border-right: 0;
+    
+            & .category-item {
+                justify-content: center;
+                padding: 0;
+                margin-top: 30px;
+    
+                & .category-content {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+// Home Style Six
+
+.category-wrap-03 {
+    padding-top: 20px;
+}
+
+.category-item-02 {
+    display: flex;
+    align-items: center;
+    background: #EFF6F9;
+    padding: 20px 30px 20px 30px;
+    border-radius: 5px 5px 5px 5px;
+    margin-top: 30px;
+
+    & .category-content {
+        flex: 1;
+        margin-left: 25px;
+
+        & .title {
+            font-size: 18px;
+            color: #021E40;
+            transition: $transition-default;
+        }
+    }
+
+    &:hover {
+        background: $primary3;
+    }
+}
+
+// Home Style Seven
+
+.edubin-category-section-07 {
+
+    & .category-item-02 {
+    
+        &:hover {
+            background: #F1F9F3;
+        }
+    }
+
+}

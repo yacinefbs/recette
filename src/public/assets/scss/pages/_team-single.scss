@@ -1,0 +1,223 @@
+/*--
+/*  26 - Team Single CSS
+/*----------------------------------------*/
+
+// Team Profile Wrapper
+.team-profile-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+// Team Profile
+.team-profile {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    @media #{$desktop-device}{
+        width: 70%;
+    }
+    @media #{$tablet-device, $large-mobile}{
+        width: 100%;
+    }
+
+    & .profile-img {
+        
+        @media #{$desktop-device}{
+            max-width: 42%;
+        }
+        @media #{$tablet-device, $large-mobile}{
+            text-align: left;
+            max-width: 100%;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        & img {
+            width: 285px;
+            height: 285px;
+            border-radius: 5px;
+            image-rendering: crisp-edges;
+        }
+    }
+
+    & .profile-content {
+        flex: 1;
+        padding-left: 55px;
+        padding-right: 60px;
+        padding-top: 15px;
+        @media #{$laptop-device}{
+            padding-right: 35px;
+        }
+        @media #{$desktop-device}{
+            padding-left: 35px;
+            padding-right: 40px;
+        }
+        @media #{$tablet-device, $large-mobile}{
+            padding-left: 0px;
+            padding-right: 40px;
+        }
+        @media #{$small-mobile}{
+            padding-left: 0px;
+            padding-right: 0;
+        }
+
+        & .name {
+            font-size: 30px;
+            line-height: 30px;
+            font-weight: 700;
+            color: #021E40;
+            @media #{$large-mobile}{
+                font-size: 28px;
+            }
+        }
+
+        & .designation {
+            font-size: 16px;
+            line-height: 16px;
+            font-weight: 600;
+            color: #021E40;
+            display: inline-block;
+            margin-top: 15px;
+        }
+
+        & p {
+            font-size: 16px;
+            line-height: 30px;
+            color: #696868;
+            margin-top: 15px;
+        }
+    }
+}
+
+// Team Profile Info
+.team-profile-info {
+    width: 30%;
+    border-left: 1px solid #ddd;
+    padding-left: 50px;
+    padding-top: 60px;
+    @media #{$laptop-device}{
+        padding-left: 35px;
+    }
+    @media #{$desktop-device}{
+        width: 30%;
+        padding-left: 35px;
+    }
+    @media #{$tablet-device, $large-mobile}{
+        width: 100%;
+        border-left: 0;
+        padding-left: 0;
+        padding-top: 30px;
+    }
+    & ul {
+
+        & .team-info {
+            font-size: 16px;
+            line-height: 21px;
+            color: #696868;
+            margin-bottom: 20px;
+
+            & span {
+                font-weight: 700;
+                color: #021E40;
+                padding-right: 10px;
+                @media #{$laptop-device, $desktop-device}{
+                    padding-right: 8px;
+                }
+            }
+        }
+    }
+
+    & .profile-social-wrap {
+        margin-top: 30px;
+        & ul {
+
+            & li {
+                display: inline-block;
+                margin-right: 10px;
+
+                & a {
+                    font-size: 18px;
+                    transition: $transition-default;
+
+                    &.profile-twitter {
+                        color: $twitter;
+                    }
+                    &.profile-facebook {
+                        color: $facebook;
+                    }
+                    &.profile-instagram {
+                        color: $instagram;
+                    }
+
+                    &:hover {
+                        opacity: 0.9;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Team Profile Description
+.team-profile-description {
+    padding-top: 115px;
+    @media #{$tablet-device}{
+        padding-top: 50px;
+    }
+    @media #{$large-mobile}{
+        padding-top: 40px;
+    }
+
+    & .title {
+        font-size: 30px;
+        line-height: 30px;
+        font-weight: 700;
+        color: #021E40;
+        margin-bottom: 35px;
+        @media #{$large-mobile}{
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+    }
+
+    & p {
+        font-size: 16px;
+        line-height: 30px;
+        color: #696868;
+    }
+}
+
+// Skill Section
+.skill-section {
+    padding-top: 15px;
+}
+
+.team-details-skill-section {
+    padding-bottom: 120px;
+}
+
+// Skill Description
+.skill-descrption {
+    margin-top: 40px;
+    & .title {
+        font-size: 30px;
+        line-height: 30px;
+        font-weight: 700;
+        color: #021E40;
+        margin-bottom: 30px;
+        @media #{$large-mobile}{
+            font-size: 28px;
+        }
+    }
+
+    & p {
+        font-size: 16px;
+        line-height: 30px;
+        color: #696868;
+
+        &.text {
+            padding-bottom: 20px;
+        }
+    }
+}
+
+

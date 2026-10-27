@@ -1,0 +1,165 @@
+/*--
+/*  2.3 - Button CSS
+/*----------------------------------------*/
+
+.btn-margin{
+	margin-top: 40px;
+}
+
+.btn-wrap {
+	display: flex;
+	flex-wrap: wrap;
+	margin: -5px;
+	& .btn {
+		margin: 5px;
+	}
+}
+
+   
+// Button
+.btn {
+	display: inline-block;
+	overflow: hidden;
+	transform: perspective(0) translateZ(0);
+	background: $primary;
+	box-shadow: 0 0 1px rgba(0,0,0,0);
+	border-color: transparent;
+	color: #021E40;
+	border-radius: 5px;
+	font-size: 15px;
+	font-family: $heading-font;
+	font-weight: 600;
+	height: 55px;
+	line-height: 55px;
+	padding: 0px 35px;
+	border: 0;
+	border-style: solid;
+	box-shadow: none;
+	transition: all 0.5s ease 0s;
+	cursor: pointer;
+	z-index: 1;
+	position: relative;
+
+
+
+	&:focus,
+	&:focus:active{
+		box-shadow: none;
+	}
+	
+	&:hover{
+		background: $secondary;
+		color: $white;
+	}
+}
+
+.btn-2 {
+	background: $secondary;
+	color: $white;
+
+
+	&:hover {
+		background: $primary;
+		color: #021E40;
+	}
+}
+
+.btn-3 {
+	background: #0071dc;
+	color: $white;
+
+
+	&:hover {
+		background: 021E40;
+		color: $white;
+	}
+}
+
+.btn-4 {
+	height: 50px;
+	line-height: 48px;
+	font-size: 18px;
+	padding: 0 45px;
+	background: $primary;
+	box-shadow: 11px 10px 38px 0 rgba(46, 63, 99, 0.15);
+	color: $white;
+
+	&:hover {
+		background: $white;
+		color: $primary;
+	}
+}
+
+
+  
+// Button Style
+.btn-round {
+	border-radius: 100px;
+}
+.btn-square {
+	border-radius: 0;
+}
+
+// Button With Icon
+[class*="btn-icon-"] {
+	& i {
+		position: absolute;
+		top: 0;
+		width: 60px;
+		height: 60px;
+		line-height: 28px;
+		text-align: center;
+		padding: 15px;
+		background-color: rgba($black, 0.1);
+	}
+}
+.btn-icon-left {
+	padding-left: 69px;
+	& i {
+		left: 0;
+		right: auto;
+	}
+}
+.btn-icon-right {
+	padding-right: 69px;
+	& i {
+		left: auto;
+		right: 0;
+	}
+}
+
+
+// Button Colors
+.btn-primary {
+	background-color: $primary;
+	border-color: $primary;
+	color: $white;
+
+	&:hover {
+		background-color: $primary;
+		border-color: $primary;
+	}
+}
+.btn-secondary {
+	background-color: $secondary;
+	border-color: $secondary;
+	color: $white;
+	&:hover {
+		background-color: $secondary;
+		border-color: $secondary;
+	}
+}
+.btn-white {
+	background-color: $white;
+	border-color: $white;
+	color: $heading-color;
+	box-shadow: 11px 10px 38px 0 rgba(46, 63, 99, 0.15);
+
+	&::after {
+		background: $primary;
+	}
+	&::before {
+		background: $primary;
+	}
+
+}
