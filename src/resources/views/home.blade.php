@@ -110,61 +110,15 @@
                             <div class="header-menu d-none d-lg-block">
                                 <div class="main-menu">
                                     <nav id="mobile-menu">
-
-                                        <ul>
-                                            <li class="has-dropdown active-menu"><a href="/index">Home</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/index">Home 01</a></li>
-                                                    <li><a href="/index-2">Home 02</a></li>
-                                                    <li><a href="/index-3">Home 03</a></li>
-                                                    <li class="active"><a href="/index-4">Home 04</a></li>
-                                                    <li><a href="/index-5">Home 05</a></li>
-                                                    <li><a href="/index-6">Home 06</a></li>
-                                                    <li><a href="/index-7">Home 07</a></li>
-                                                    <li><a href="/index-8">Home 08</a></li>
-                                                    <li><a href="/index-9">Home 09</a></li>
-                                                    <li><a href="/index-10">Home 10</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/about">Courses</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/course-grid">Course Grid</a></li>
-                                                    <li><a href="/course-filter">Course Sidebar</a></li>
-                                                    <li><a href="/course-details">Course Details</a></li>
-                                                    <li><a href="/course-details2">Course Details Two</a></li>
-                                                    <li><a href="/course-details3">Course Details Three</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/about">Pages</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/about">About Us</a></li>
-                                                    <li><a href="/event">Event Grid</a></li>
-                                                    <li><a href="/event-details">Event Details</a></li>
-                                                    <li><a href="/team">Team</a></li>
-                                                    <li><a href="/team-details">Team Details</a></li>
-                                                    <li><a href="/testimonial">Testimonial</a></li>
-                                                    <li><a href="/pricing">Pricing</a></li>
-                                                    <li><a href="/faq">FAQ Page</a></li>
-                                                    <li><a href="/404">404 Page</a></li>
-                                                    <li><a href="/login">Login & Register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/blog">Shop</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/shop">Shop Grid</a>
-                                                    <li><a href="/shop-details">Shop Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/blog">Blog</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/blog">Blog Grid</a>
-                                                    <li><a href="/blog-list">Blog List</a></li>
-                                                    <li><a href="/blog-details">Blog Single</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="/contact">Contact</a></li>
-                                        </ul>
-                                    </nav>
+<ul>
+<li class="active-menu"><a href="/">Home</a></li>
+<li class="has-dropdown"><a href="/recipes">Pages</a>
+<ul class="sub-menu">
+<li><a href="/recipes">Recipes</a></li>
+</ul>
+</li>
+</ul>
+</nav>
                                 </div>
                             </div>
                             <!-- Header Meta Start -->
@@ -347,209 +301,8 @@
 
 
 
-
-        <!-- Hero Start -->
-        <div class="edubin-hero-section-07 section" style="background-image: url(/assets/images/bg/hero3-bg.jpg);">
-            <div class="hero-shape-3"></div>
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <!-- Hero Content Start -->
-                        <div class="hero-content">
-                            <h3 class="sub-title" data-aos="fade-up" data-aos-delay="700">Recettes faciles et gourmandes</h3>
-                            <h1 class="title" data-aos="fade-up" data-aos-delay="800">Cuisinez de <span>délicieuses</span> recettes au quotidien</h1>
-                            <div class="hero-btn" data-aos="fade-up" data-aos-delay="900">
-                                <a class="btn" href="/recipes">Voir les recettes</a>
-                            </div>
-                        </div>
-                        <!-- Hero Content End -->
-                    </div>
-                    <div class="col-lg-6">
-                        <!-- Hero Images Start -->
-                        <div class="hero-images-02">
-                            <img class="shape-1 parallaxed" src="/assets/images/shape/h7-shape1.png" alt="">
-                            <img class="shape-2 parallaxed" src="/assets/images/shape/h7-shape2.png" alt="">
-                            <div class="image">
-                                <img src="/assets/images/hero-img7.png" alt="Recettes de cuisine faciles et gourmandes" fetchpriority="high">
-                                <div class="image-content">
-                                    <div class="image-icon">
-                                        <img src="/assets/images/all-icon/img-icon.png" alt="">
-                                    </div>
-                                    <div class="image-ext">
-                                        <p>Des recettes détaillées, étape par <span>étape</span></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Hero Images End -->
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <!-- Hero End -->
-
-        <!-- Features Start -->
-        <div class="section edubin-features-section-03">
-            <img class="shape-1" src="/assets/images/shape/feat-sh1.png" alt="">
-            <div class="container">
-                <div class="features-wrap">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6">
-                            <!-- Features Item Start -->
-                            <div class="features-item-03">
-                                <div class="features-img">
-                                    <img src="/assets/images/all-icon/feat-7.png" alt="">
-                                </div>
-                                <div class="features-content">
-                                    <h3 class="title">Des centaines de <br> recettes à découvrir</h3>
-                                </div>
-                            </div>
-                            <!-- Features Item End -->
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <!-- Features Item Start -->
-                            <div class="features-item-03">
-                                <div class="features-img">
-                                    <img src="/assets/images/all-icon/feat-8.png" alt="">
-                                </div>
-                                <div class="features-content">
-                                    <h3 class="title">Ingrédients et étapes <br> clairement détaillés</h3>
-                                </div>
-                            </div>
-                            <!-- Features Item End -->
-                        </div>
-                        <div class="col-lg-4 col-md-6">
-                            <!-- Features Item Start -->
-                            <div class="features-item-03">
-                                <div class="features-img">
-                                    <img src="/assets/images/all-icon/feat-9.png" alt="">
-                                </div>
-                                <div class="features-content">
-                                    <h3 class="title">Photos et temps <br> de préparation</h3>
-                                </div>
-                            </div>
-                            <!-- Features Item End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Features End -->
-
-        <!-- Category Start -->
-        <div class="section edubin-category-section-06 edubin-category-section-07 section-padding-02">
-            <div class="container">
-                <div class="section-title2 text-center">
-                    <h2 class="title color-3">Recettes <span>populaires</span> </h2>
-                </div>
-                <div class="category-wrap-03">
-                    <div class="row">
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=chicken" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-16.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Poulet</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=pasta" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-17.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Pâtes</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=beef" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-18.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Boeuf</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=salad" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-19.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Salades</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=dessert" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-20.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Desserts</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=soup" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-21.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Soupes</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=vegan" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-22.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Desserts</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                        <div class="col-xl-3 col-lg-4 col-md-6">
-                            <!-- Category Item Start -->
-                            <a href="/recipes?q=breakfast" class="category-item-02">
-                                <div class="category-icon">
-                                    <img src="/assets/images/all-icon/cat-23.png" alt="">
-                                </div>
-                                <div class="category-content">
-                                    <h3 class="title">Soupes</h3>
-                                </div>
-                            </a>
-                            <!-- Category Item End -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Category End -->
-
-
         <!-- Course Start -->
-        <div class="section course-section course-section-05 section-padding">
+        <div class="section course-section course-section-05 section-padding" style="margin-top:60px">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
@@ -599,329 +352,104 @@
         @verbatim
         <!-- Course End -->
 
-        <!-- Counter Start -->
-        <div class="section counter-section-05">
-            <img class="shape-1" src="/assets/images/shape/counter-sh1.png" alt="">
-            <img class="shape-2" src="/assets/images/shape/counter-sh2.png" alt="">
+         <!-- Category Start -->
+        <div class="section edubin-category-section-06 edubin-category-section-07 section-padding-02" style="margin-top:30px;margin-bottom:80px">
             <div class="container">
-                <div class="counter-wrap-03">
+                <div class="section-title2 text-center">
+                    <h1 class="title color-3">Recettes <span>populaires</span></h1>
+                </div>
+                <div class="category-wrap-03">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-counter-03 text-center">
-                                <div class="icon">
-                                    <img src="/assets/images/all-icon/counter-4.png" alt="Icon">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=chicken" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-drumstick-bite" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Poulet</h3>
                                 </div>
-                                <span><span class="counter">2.1</span>M</span>
-                                <p>Hours of learning</p>
-                            </div> <!-- single counter -->
+                            </a>
+                            <!-- Category Item End -->
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-counter-03 text-center">
-                                <div class="icon">
-                                    <img src="/assets/images/all-icon/counter-5.png" alt="Icon">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=pasta" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-utensils" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Pâtes</h3>
                                 </div>
-                                <span><span class="counter">10</span>k+</span>
-                                <p>Monthly Views</p>
-                            </div> <!-- single counter -->
+                            </a>
+                            <!-- Category Item End -->
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-counter-03 text-center">
-                                <div class="icon">
-                                    <img src="/assets/images/all-icon/counter-6.png" alt="Icon">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=beef" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-hamburger" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Boeuf</h3>
                                 </div>
-                                <span><span class="counter">25</span>Lakh</span>
-                                <p>Doubts Resolved</p>
-                            </div> <!-- single counter -->
+                            </a>
+                            <!-- Category Item End -->
                         </div>
-                        <div class="col-lg-3 col-md-6">
-                            <div class="single-counter-03 text-center">
-                                <div class="icon">
-                                    <img src="/assets/images/all-icon/counter-7.png" alt="Icon">
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=salad" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-leaf" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Salades</h3>
                                 </div>
-                                <span><span class="counter">153</span>+</span>
-                                <p>Countries Served</p>
-                            </div> <!-- single counter -->
+                            </a>
+                            <!-- Category Item End -->
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=dessert" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-ice-cream" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Desserts</h3>
+                                </div>
+                            </a>
+                            <!-- Category Item End -->
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=soup" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-pepper-hot" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Soupes</h3>
+                                </div>
+                            </a>
+                            <!-- Category Item End -->
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=vegan" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-carrot" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Desserts</h3>
+                                </div>
+                            </a>
+                            <!-- Category Item End -->
+                        </div>
+                        <div class="col-xl-3 col-lg-4 col-md-6">
+                            <!-- Category Item Start -->
+                            <a href="/recipes?q=breakfast" class="category-item-02">
+                                <div class="category-icon"><i class="fas fa-bread-slice" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
+                                <div class="category-content">
+                                    <h3 class="title">Soupes</h3>
+                                </div>
+                            </a>
+                            <!-- Category Item End -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Counter End -->
+        <!-- Category End -->
 
-        <!-- About Start -->
-        <div class="section edubin-about-section-05 section-padding">
-            <div class="container">
-                <div class="about-wrap">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="about-content-wrap">
-                                <div class="section-title2">
-                                    <h2 class="title color-3">Our results reflect the passion, <span>handwork</span> and efforts</h2>
-                                </div> <!-- section title -->
-                                <div class="about-cont">
-                                    <p class="text">Edubin is a reliable kidcare platform that matches parents Perfect for OnlineLorem ipsum dolor sit amet, consectetur cing elit. Suspe ndisse suscipit sagittis leo sit met um dolor sit amecond </p>
-                                    <div class="about-list-wrap">
-                                        <ul>
-                                            <li>Unlimited access to 25,000+ top Udemy courses,</li>
-                                            <li>International course collection in 14 languages</li>
-                                            <li>Learning New Languages, Connect To The World</li>
-                                        </ul>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div> <!-- about cont -->
-                        <div class="col-lg-6">
-                            <div class="about-image text-center">
-                                <img class="shape-1 parallaxed" src="/assets/images/shape/ab-sh3.png" alt="">
-                                <div class="shape-2 parallaxed"></div>
-                                <div class="image">
-                                    <img src="/assets/images/ab-img3.png" alt="">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> <!-- container -->
-        </div>
-        <!-- About End -->
-
-        <!-- Testimonial Start -->
-        <div class="section edubin-testimonial-section-03">
-            <div class="testimonial-title-wrap section-padding" style="background-image: url(/assets/images/bg/testi-bg3.png)">
-                <div class="container">
-                    <div class="section-title2 text-center">
-                        <h2 class="title color-2">Student <span>Testimonial</span></h2>
-                    </div> <!-- section title -->
-                </div>
-            </div>
-            <div class="container">
-
-                <!-- Testimonial Slider Wrap Start -->
-                <div class="testimonial-slider-wrap">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6">
-                            <div class="testimonial-img">
-                                <img src="/assets/images/testi-img.png" alt="">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="swiper-container testimonial-3-active">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <!-- Single Testimonial Start -->
-                                        <div class="single-testimonial-02">
-                                            <div class="testimonial-cont">
-                                                <p>I am grateful for your wonderful course! Your tutors are the best, and I am completely satisfied with the level of professional teaching. I recommend these courses to everyone</p>
-                                                <h6 class="name">James Smith</h6>
-                                                <span>CFO Apple Corp</span>
-                                            </div>
-                                        </div>
-                                        <!-- Single Testimonial End -->
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <!-- Single Testimonial Start -->
-                                        <div class="single-testimonial-02">
-                                            <div class="testimonial-cont">
-                                                <p>I am grateful for your wonderful course! Your tutors are the best, and I am completely satisfied with the level of professional teaching. I recommend these courses to everyone</p>
-                                                <h6 class="name">Mark Alen</h6>
-                                                <span>Manager</span>
-                                            </div>
-                                        </div>
-                                        <!-- Single Testimonial End -->
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <!-- Single Testimonial Start -->
-                                        <div class="single-testimonial-02">
-                                            <div class="testimonial-cont">
-                                                <p>I am grateful for your wonderful course! Your tutors are the best, and I am completely satisfied with the level of professional teaching. I recommend these courses to everyone</p>
-                                                <h6 class="name">Monica Blews</h6>
-                                                <span>Manager</span>
-                                            </div>
-                                        </div>
-                                        <!-- Single Testimonial End -->
-                                    </div>
-                                </div>
-                                <div class="swiper-pagination"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Testimonial Slider Wrap End -->
-            </div>
-        </div>
-        <!-- Testimonial End -->
-
-
-        <!-- Brand Logo Start -->
-        <div class="section edubin-brand-section-02 edubin-brand-section-03 section-padding">
-            <div class="container">
-                <!-- Brand Wrapper Start -->
-                <div class="brand-wrapper text-center">
-                    <h3 class="brand-title">Our vast mentor network includes experts from leading companies like </h3>
-                    <!-- Brand Active Start -->
-                    <div class="brand-2-active">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-1.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-2.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-3.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-4.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-5.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                                <!-- Single Brand Start -->
-                                <div class="swiper-slide single-brand">
-                                    <img src="/assets/images/brand/brand-6.png" alt="Brand">
-                                </div>
-                                <!-- Single Brand End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Brand Active End -->
-                </div>
-                <!-- Brand Wrapper End -->
-            </div>
-        </div>
-        <!-- Brand Logo End -->
-
-
-
-
-        <!-- Footer Section Start -->
-        <div class="section footer-section footer-section-04">
-
-
-            <div class="footer-top-section">
-                <div class="container">
-                    <!-- Footer Widget Wrap Start -->
-                    <div class="footer-widget-wrap">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget-about">
-                                    <a class="footer-logo" href="/index"><img src="/assets/images/logo-white.png" alt="Logo"></a>
-                                    <p>Edubin perfect for online courses and other institutes. It’s a complete solution with lms features and functionalities. Lorem ipsum dolor sit amet </p>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget footer-widget-2">
-                                    <h4 class="footer-widget-title">Our Services</h4>
-
-                                    <div class="widget-link">
-                                        <ul class="link">
-                                            <li><a href="#">Business </a></li>
-                                            <li><a href="#">Loss risk managment</a></li>
-                                            <li><a href="#">Marketing</a></li>
-                                            <li><a href="#">Finance Advice </a></li>
-                                            <li><a href="#">Growth Talk </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget footer-widget-3">
-                                    <h4 class="footer-widget-title">Other Link</h4>
-
-                                    <div class="widget-link">
-                                        <ul class="link">
-                                            <li><a href="#">Home </a></li>
-                                            <li><a href="#">Our Services </a></li>
-                                            <li><a href="#">Who we are</a></li>
-                                            <li><a href="#">Our Case Study </a></li>
-                                            <li><a href="#">Privacy & Policy </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget">
-                                    <h4 class="footer-widget-title">Newsletter</h4>
-                                    <p class="text">PO Box 16122 Collins Street West Victoria 8007 Melbourne Australia </p>
-                                    <div class="widget-info">
-                                        <ul>
-                                            <li>
-                                                <div class="info-text">
-                                                    <p class="label-name">Phone :</p>
-                                                    <span><a href="#">+91 458 654 528</a></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="info-text">
-                                                    <p class="label-name">Email :</p>
-                                                    <span><a href="#">info@example.com</a></span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="footer-social">
-                                        <ul class="social">
-                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Footer Widget Wrap End -->
-                </div>
-            </div>
-
-            <!-- Footer Copyright Start -->
-            <div class="footer-copyright-area">
-                <div class="container">
-                    <div class="footer-copyright-wrap">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <!-- Footer Copyright Text Start -->
-                                <div class="copyright-text">
-                                    <p>&copy; Copyrights <span id="year"></span> Edubin | Developed By Pixelcurve. </p>
-                                </div>
-                                <!-- Footer Copyright Text End -->
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="footer-copyright-links">
-                                    <a href="/faq">Trams & Condition</a>
-                                    <a href="/contact">Privacy Policy </a>
-                                    <a href="/contact">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Copyright End -->
-        </div>
-        <!-- Footer Section End -->
+        
+        @endverbatim
+@include('partials.footer')
+@verbatim
 
         <!-- back to top start -->
         <div class="progress-wrap">

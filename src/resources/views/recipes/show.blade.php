@@ -110,60 +110,15 @@
                             <div class="header-menu d-none d-lg-block">
                                 <div class="main-menu">
                                     <nav id="mobile-menu">
-                                        <ul>
-                                            <li class="has-dropdown"><a href="/index">Home</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/index">Home 01</a></li>
-                                                    <li><a href="/index-2">Home 02</a></li>
-                                                    <li><a href="/index-3">Home 03</a></li>
-                                                    <li><a href="/index-4">Home 04</a></li>
-                                                    <li><a href="/index-5">Home 05</a></li>
-                                                    <li><a href="/index-6">Home 06</a></li>
-                                                    <li><a href="/index-7">Home 07</a></li>
-                                                    <li><a href="/index-8">Home 08</a></li>
-                                                    <li><a href="/index-9">Home 09</a></li>
-                                                    <li><a href="/index-10">Home 10</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/about">Courses</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/course-grid">Course Grid</a></li>
-                                                    <li><a href="/course-filter">Course Sidebar</a></li>
-                                                    <li><a href="/course-details">Course Details</a></li>
-                                                    <li><a href="/course-details2">Course Details Two</a></li>
-                                                    <li><a href="/course-details3">Course Details Three</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown active-menu"><a href="/about">Pages</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/about">About Us</a></li>
-                                                    <li><a href="/event">Event Grid</a></li>
-                                                    <li><a href="/event-details">Event Details</a></li>
-                                                    <li class="active"><a href="/team">Team</a></li>
-                                                    <li><a href="/team-details">Team Details</a></li>
-                                                    <li><a href="/testimonial">Testimonial</a></li>
-                                                    <li><a href="/pricing">Pricing</a></li>
-                                                    <li><a href="/faq">FAQ Page</a></li>
-                                                    <li><a href="/404">404 Page</a></li>
-                                                    <li><a href="/login">Login & Register</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/blog">Shop</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/shop">Shop Grid</a>
-                                                    <li><a href="/shop-details">Shop Details</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="has-dropdown"><a href="/blog">Blog</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="/blog">Blog Grid</a>
-                                                    <li><a href="/blog-list">Blog List</a></li>
-                                                    <li><a href="/blog-details">Blog Single</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="/contact">Contact</a></li>
-                                        </ul>
-                                    </nav>
+<ul>
+<li><a href="/">Home</a></li>
+<li class="has-dropdown active-menu"><a href="/recipes">Pages</a>
+<ul class="sub-menu">
+<li><a href="/recipes">Recipes</a></li>
+</ul>
+</li>
+</ul>
+</nav>
                                 </div>
                             </div>
                             <!-- Header Meta Start -->
@@ -411,122 +366,9 @@
 
 
 
-        <!-- Footer Section Start -->
-        <div class="section footer-section footer-section-04">
-
-
-            <div class="footer-top-section">
-                <div class="container">
-                    <!-- Footer Widget Wrap Start -->
-                    <div class="footer-widget-wrap">
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget-about">
-                                    <a class="footer-logo" href="/index"><img src="/assets/images/logo-white.png" alt="Logo"></a>
-                                    <p>Edubin perfect for online courses and other institutes. It’s a complete solution with lms features and functionalities. Lorem ipsum dolor sit amet </p>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget footer-widget-2">
-                                    <h4 class="footer-widget-title">Our Services</h4>
-
-                                    <div class="widget-link">
-                                        <ul class="link">
-                                            <li><a href="#">Business </a></li>
-                                            <li><a href="#">Loss risk managment</a></li>
-                                            <li><a href="#">Marketing</a></li>
-                                            <li><a href="#">Finance Advice </a></li>
-                                            <li><a href="#">Growth Talk </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget footer-widget-3">
-                                    <h4 class="footer-widget-title">Other Link</h4>
-
-                                    <div class="widget-link">
-                                        <ul class="link">
-                                            <li><a href="#">Home </a></li>
-                                            <li><a href="#">Our Services </a></li>
-                                            <li><a href="#">Who we are</a></li>
-                                            <li><a href="#">Our Case Study </a></li>
-                                            <li><a href="#">Privacy & Policy </a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                            <div class="col-lg-3 col-sm-6">
-                                <!-- Footer Widget Start -->
-                                <div class="footer-widget">
-                                    <h4 class="footer-widget-title">Newsletter</h4>
-                                    <p class="text">PO Box 16122 Collins Street West Victoria 8007 Melbourne Australia </p>
-                                    <div class="widget-info">
-                                        <ul>
-                                            <li>
-                                                <div class="info-text">
-                                                    <p class="label-name">Phone :</p>
-                                                    <span><a href="#">+91 458 654 528</a></span>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <div class="info-text">
-                                                    <p class="label-name">Email :</p>
-                                                    <span><a href="#">info@example.com</a></span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="footer-social">
-                                        <ul class="social">
-                                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-pinterest-p"></i></a></li>
-                                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!-- Footer Widget End -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Footer Widget Wrap End -->
-                </div>
-            </div>
-
-            <!-- Footer Copyright Start -->
-            <div class="footer-copyright-area">
-                <div class="container">
-                    <div class="footer-copyright-wrap">
-                        <div class="row align-items-center">
-                            <div class="col-lg-6">
-                                <!-- Footer Copyright Text Start -->
-                                <div class="copyright-text">
-                                    <p>&copy; Copyrights <span id="year"></span> Edubin | Developed By Pixelcurve. </p>
-                                </div>
-                                <!-- Footer Copyright Text End -->
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="footer-copyright-links">
-                                    <a href="/faq">Trams & Condition</a>
-                                    <a href="/contact">Privacy Policy </a>
-                                    <a href="/contact">Contact Us</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Footer Copyright End -->
-        </div>
-        <!-- Footer Section End -->
+        @endverbatim
+@include('partials.footer')
+@verbatim
 
         <!-- back to top start -->
         <div class="progress-wrap">
