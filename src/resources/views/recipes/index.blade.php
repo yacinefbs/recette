@@ -1,4 +1,4 @@
-@verbatim
+﻿@verbatim
 <!doctype html>
 <html class="no-js" lang="fr">
 
@@ -10,7 +10,7 @@
 @verbatim
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/svg+xml" href="/assets/images/favicon.svg">
 
     <!-- CSS
 	============================================ -->
@@ -84,12 +84,6 @@
                                     <li><a href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="login-register">
-                                <ul>
-                                    <li><a href="/login">Login</a></li>
-                                    <li><a href="/login">Register</a></li>
-                                </ul>
-                            </div>
                         </div>
                         <!-- Header Social Wrap End  -->
                     </div>
@@ -103,7 +97,7 @@
                     <div class="header-wrap">
 
                         <div class="header-logo">
-                            <a href="/index"><img src="/assets/images/logo.png" alt=""></a>
+                            <a href="/"><img src="/assets/images/logo.svg" alt=""></a>
                         </div>
 
                         <div class="header-right">
@@ -241,8 +235,8 @@
                 </div>
                 <div class="sidebar__content">
                     <div class="sidebar__logo">
-                        <a href="/index">
-                            <img src="/assets/images/logo.png" alt="logo">
+                        <a href="/">
+                            <img src="/assets/images/logo.svg" alt="logo">
                         </a>
                     </div>
                     <div class="sidebar__search">

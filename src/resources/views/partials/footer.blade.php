@@ -1,4 +1,4 @@
-        <!-- Footer Section Start -->
+﻿        <!-- Footer Section Start -->
         <footer class="section footer-section footer-section-04">
             <div class="footer-top-section">
                 <div class="container">
@@ -6,7 +6,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-sm-6">
                                 <div class="footer-widget-about">
-                                    <a class="footer-logo" href="{{ url('/') }}"><img src="{{ asset('assets/images/logo-white.png') }}" alt="{{ config('app.name') }}" width="150" height="40"></a>
+                                    <a class="footer-logo" href="{{ url('/') }}"><img src="{{ asset('assets/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="180" height="40"></a>
                                     <p>{{ config('app.name') }} brings together easy and delicious recipes: photos, ingredients, detailed steps and preparation times to help you cook every day.</p>
                                 </div>
                             </div>
