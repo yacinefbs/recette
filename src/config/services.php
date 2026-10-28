@@ -31,6 +31,7 @@ return [
     'tasty' => [
         'key' => env('RAPIDAPI_KEY'),
         'host' => env('RAPIDAPI_TASTY_HOST', 'tasty.p.rapidapi.com'),
+        'feed_token' => env('RECIPES_FEED_TOKEN'),
     ],
 
     'slack' => [

@@ -104,6 +104,20 @@ class RecipeController extends Controller
         return view('recipes.show', ['recipe' => $recipe->toArray() + ['image' => $recipe->image], 'seo' => $seo]);
     }
 
+    public function feed(Request $request, TastyService $tasty)
+    {
+        $expected = (string) config('services.tasty.feed_token');
+        abort_unless($expected !== '' && hash_equals($expected, (string) $request->query('token', '')), 403);
+
+        try {
+            $count = $tasty->import(trim((string) $request->query('q', '')));
+        } catch (RequestException $e) {
+            return response()->json(['ok' => false, 'error' => 'Tasty API error'], $e->response->status() === 429 ? 429 : 502);
+        }
+
+        return response()->json(['ok' => true, 'imported' => $count, 'total' => Recipe::count()]);
+    }
+
     public function import(Request $request, TastyService $tasty)
     {
         $q = trim((string) $request->input('q', ''));

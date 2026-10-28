@@ -16,6 +16,7 @@ Route::get('/laravel', function () {
 
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
+Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->whereNumber('recipe')->name('recipes.show');
 
 Route::get('/{page}', function (string $page) {

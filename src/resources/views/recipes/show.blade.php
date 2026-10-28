@@ -311,11 +311,18 @@
                             <!-- Page Banner Content Start -->
                             <div class="page-banner text-center">
                                 <div class="section-title text-center">
-                                    @endverbatim<h1 class="title">{{ $recipe['name'] }}</h1>@verbatim
+
+@endverbatim
+                                    <h1 class="title">{{ $recipe['name'] }}</h1>
+@verbatim
                                 </div>
                                 <ul class="breadcrumb justify-content-center">
                                     <li class="breadcrumb-item"><a href="/">Accueil</a></li><li class="breadcrumb-item"><a href="/recipes">Recettes</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">@endverbatim{{ $recipe['name'] }}@verbatim</li>
+                                    <li class="breadcrumb-item active" aria-current="page">
+@endverbatim
+{{ $recipe['name'] }}
+@verbatim
+                                    </li>
                                 </ul>
                             </div>
                             <!-- Page Banner Content End -->

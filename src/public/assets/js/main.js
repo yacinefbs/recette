@@ -558,7 +558,8 @@
         Year
     -----------------------------------*/  
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    var yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = new Date().getFullYear();
 
    /*--
         AOS

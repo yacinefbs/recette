@@ -7,7 +7,8 @@ cd /var/www/html
 grep -q '^APP_KEY=base64' .env || php artisan key:generate --force
 
 mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs bootstrap/cache
-chown -R www-data:www-data storage bootstrap/cache
+mkdir -p public/images/recipes
+chown -R www-data:www-data storage bootstrap/cache public/images
 
 php artisan migrate --force || echo "Migration ignorée (DB pas prête ?)"
 
