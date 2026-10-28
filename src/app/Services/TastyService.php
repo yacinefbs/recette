@@ -10,10 +10,10 @@ class TastyService
 {
     public const BATCH_SIZE = 40;
 
-    /** Récupère un lot de recettes depuis l'API et les enregistre en base. Retourne le nombre de recettes traitées. */
+    /** Fetches a batch of recipes from the API and saves them to the database. Returns the number of recipes processed. */
     public function import(string $query = ''): int
     {
-        // Sans recherche, chaque import continue là où le précédent s'est arrêté
+        // Without a search term, each import continues where the previous one stopped
         $params = ['from' => $query === '' ? Recipe::count() : 0, 'size' => self::BATCH_SIZE];
         if ($query !== '') {
             $params['q'] = $query;
@@ -31,7 +31,7 @@ class TastyService
 
         $count = 0;
         foreach ($results as $r) {
-            // Les entrées sans instructions (ex: compilations) ne sont pas des recettes
+            // Entries without instructions (e.g. compilations) are not recipes
             if (empty($r['id']) || empty($r['name']) || empty($r['instructions'])) {
                 continue;
             }
@@ -52,7 +52,7 @@ class TastyService
         return $count;
     }
 
-    /** Télécharge l'image dans public/images/recipes et mémorise son chemin. */
+    /** Downloads the image into public/images/recipes and stores its path. */
     public function downloadImage(Recipe $recipe): void
     {
         if (! $recipe->thumbnail_url || ($recipe->image_path && is_file(public_path($recipe->image_path)))) {

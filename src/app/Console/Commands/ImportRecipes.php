@@ -9,9 +9,9 @@ use Illuminate\Support\Facades\File;
 
 class ImportRecipes extends Command
 {
-    protected $signature = 'recipes:import {--fresh : Vide la table et le dossier d\'images avant l\'import} {--q= : Mot-clé de recherche} {--batches=1 : Nombre de lots de 40}';
+    protected $signature = 'recipes:import {--fresh : Empties the table and the images folder before importing} {--q= : Search keyword} {--batches=1 : Number of batches of 40}';
 
-    protected $description = 'Importe les recettes depuis l\'API Tasty avec images stockées localement';
+    protected $description = 'Imports recipes from the Tasty API with locally stored images';
 
     public function handle(TastyService $tasty): int
     {
@@ -25,7 +25,7 @@ class ImportRecipes extends Command
             $total += $tasty->import((string) $this->option('q'));
         }
 
-        $this->info("$total recette(s) importée(s) ; ".Recipe::whereNotNull('image_path')->count().' / '.Recipe::count().' avec image locale.');
+        $this->info("$total recipe(s) imported; ".Recipe::whereNotNull('image_path')->count().' / '.Recipe::count().' with a local image.');
 
         return self::SUCCESS;
     }

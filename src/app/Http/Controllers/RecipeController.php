@@ -26,18 +26,18 @@ class RecipeController extends Controller
         $canonical = ! $filtered && $page > 1 ? route('recipes.index', ['page' => $page]) : route('recipes.index');
 
         $seo = [
-            'title' => "Recettes de cuisine".($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
-            'description' => 'Parcourez nos recettes de cuisine faciles : photos, ingrédients, étapes détaillées et temps de préparation. Trouvez votre prochaine recette.',
+            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
+            'description' => 'Browse our easy cooking recipes: photos, ingredients, detailed steps and preparation times. Find your next recipe.',
             'canonical' => $canonical,
-            // Les pages de recherche sont des doublons à faible valeur : on ne les indexe pas
+            // Search result pages are low-value duplicates: do not index them
             'robots' => $filtered ? 'noindex,follow' : null,
             'schema' => [
                 [
                     '@context' => 'https://schema.org',
                     '@type' => 'BreadcrumbList',
                     'itemListElement' => [
-                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Accueil', 'item' => url('/')],
-                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Recettes', 'item' => route('recipes.index')],
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Recipes', 'item' => route('recipes.index')],
                     ],
                 ],
                 [
@@ -64,7 +64,7 @@ class RecipeController extends Controller
             ->filter()->values();
         $steps = collect($recipe->instructions ?? [])->pluck('display_text')->filter()->values();
         $description = trim(strip_tags((string) $recipe->description))
-            ?: "Recette {$recipe->name} : {$ingredients->count()} ingrédients, {$steps->count()} étapes".($recipe->total_time_minutes ? ", prête en {$recipe->total_time_minutes} min." : '.');
+            ?: "{$recipe->name} recipe: {$ingredients->count()} ingredients, {$steps->count()} steps".($recipe->total_time_minutes ? ", ready in {$recipe->total_time_minutes} min." : '.');
 
         $schema = array_filter([
             '@context' => 'https://schema.org',
@@ -76,13 +76,13 @@ class RecipeController extends Controller
             'dateModified' => $recipe->updated_at?->toIso8601String(),
             'author' => ['@type' => 'Organization', 'name' => $site],
             'totalTime' => $recipe->total_time_minutes ? 'PT'.$recipe->total_time_minutes.'M' : null,
-            'recipeYield' => $recipe->num_servings ? $recipe->num_servings.' portions' : null,
+            'recipeYield' => $recipe->num_servings ? $recipe->num_servings.' servings' : null,
             'recipeIngredient' => $ingredients->all(),
             'recipeInstructions' => $steps->map(fn ($t) => ['@type' => 'HowToStep', 'text' => $t])->all(),
         ]);
 
         $seo = [
-            'title' => Str::limit($recipe->name, 50, '').' – Recette | '.$site,
+            'title' => Str::limit($recipe->name, 50, '').' – Recipe | '.$site,
             'description' => Str::limit($description, 155),
             'canonical' => route('recipes.show', $recipe),
             'type' => 'article',
@@ -93,8 +93,8 @@ class RecipeController extends Controller
                     '@context' => 'https://schema.org',
                     '@type' => 'BreadcrumbList',
                     'itemListElement' => [
-                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Accueil', 'item' => url('/')],
-                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Recettes', 'item' => route('recipes.index')],
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Recipes', 'item' => route('recipes.index')],
                         ['@type' => 'ListItem', 'position' => 3, 'name' => $recipe->name, 'item' => route('recipes.show', $recipe)],
                     ],
                 ],
@@ -112,12 +112,12 @@ class RecipeController extends Controller
             $count = $tasty->import($q);
         } catch (RequestException $e) {
             $msg = $e->response->status() === 429
-                ? 'Quota de l\'API atteint, réessayez plus tard.'
-                : 'Impossible de récupérer les recettes pour le moment.';
+                ? 'API quota reached, please try again later.'
+                : 'Unable to fetch recipes at the moment.';
 
             return redirect()->route('recipes.index')->with('error', $msg);
         }
 
-        return redirect()->route('recipes.index')->with('success', "$count recette(s) récupérée(s) et enregistrée(s).");
+        return redirect()->route('recipes.index')->with('success', "$count recipe(s) fetched and saved.");
     }
 }

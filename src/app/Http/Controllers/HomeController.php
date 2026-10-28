@@ -11,8 +11,8 @@ class HomeController extends Controller
         $site = config('app.name');
 
         $seo = [
-            'title' => "$site – Recettes de cuisine faciles et gourmandes",
-            'description' => 'Découvrez des recettes de cuisine faciles et gourmandes : ingrédients, étapes détaillées, temps de préparation et photos pour cuisiner chaque jour.',
+            'title' => "$site – Easy and delicious cooking recipes",
+            'description' => 'Discover easy and delicious cooking recipes: ingredients, detailed steps, preparation times and photos to cook every day.',
             'canonical' => url('/'),
             'type' => 'website',
             'schema' => [
@@ -21,7 +21,7 @@ class HomeController extends Controller
                     '@type' => 'WebSite',
                     'name' => $site,
                     'url' => url('/'),
-                    'inLanguage' => 'fr',
+                    'inLanguage' => 'en',
                     'potentialAction' => [
                         '@type' => 'SearchAction',
                         'target' => url('/recipes').'?q={search_term_string}',
