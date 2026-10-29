@@ -1,3 +1,16 @@
 RewriteEngine On
+
+# Canonical host: www -> apex, and force HTTPS in a single 301
+RewriteCond %{HTTP_HOST} ^www\.topictrail\.me$ [NC]
+RewriteRule ^ https://topictrail.me%{REQUEST_URI} [L,R=301]
+
+RewriteCond %{HTTP_HOST} ^topictrail\.me$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^ https://topictrail.me%{REQUEST_URI} [L,R=301]
+
+# Redirect legacy URLs that leaked the internal path
+RewriteRule ^src/public/(.*)$ /$1 [L,R=301]
+
 RewriteRule ^$ /src/public/ [L]
 RewriteRule ^(.*)$ /src/public/$1 [L]
