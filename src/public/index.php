@@ -17,4 +17,10 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+// Use .env.production (server credentials) on any non-local host; .env stays for local development
+$host = strtolower(explode(':', $_SERVER['HTTP_HOST'] ?? 'localhost')[0]);
+if (! in_array($host, ['localhost', '127.0.0.1', '::1'], true) && is_file($prod = __DIR__.'/../.env.production')) {
+    $app->loadEnvironmentFrom(basename($prod));
+}
+
 $app->handleRequest(Request::capture());

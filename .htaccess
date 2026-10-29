@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^$ /src/public/ [L]
+RewriteRule ^(.*)$ /src/public/$1 [L]
