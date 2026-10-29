@@ -28,6 +28,11 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'social' => [
+        'facebook_app_id' => env('FACEBOOK_APP_ID'),
+        'twitter' => env('TWITTER_HANDLE'),
+    ],
+
     'tasty' => [
         'key' => env('RAPIDAPI_KEY'),
         'host' => env('RAPIDAPI_TASTY_HOST', 'tasty.p.rapidapi.com'),

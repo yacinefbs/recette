@@ -14,10 +14,29 @@
     <meta property="og:description" content="{{ $seo['description'] }}">
     <meta property="og:url" content="{{ $seo['canonical'] }}">
     <meta property="og:image" content="{{ $seo['image'] ?? asset('assets/images/hero-img7.png') }}">
+    <meta property="og:image:secure_url" content="{{ $seo['image'] ?? asset('assets/images/hero-img7.png') }}">
+    <meta property="og:image:alt" content="{{ $seo['title'] }}">
+    @if (config('services.social.facebook_app_id'))
+    <meta property="fb:app_id" content="{{ config('services.social.facebook_app_id') }}">
+    @endif
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:domain" content="{{ parse_url(config('app.url'), PHP_URL_HOST) }}">
+    <meta name="twitter:url" content="{{ $seo['canonical'] }}">
+    @if (config('services.social.twitter'))
+    <meta name="twitter:site" content="{{ config('services.social.twitter') }}">
+    <meta name="twitter:creator" content="{{ config('services.social.twitter') }}">
+    @endif
     <meta name="twitter:title" content="{{ $seo['title'] }}">
     <meta name="twitter:description" content="{{ $seo['description'] }}">
     <meta name="twitter:image" content="{{ $seo['image'] ?? asset('assets/images/hero-img7.png') }}">
+    <meta name="twitter:image:alt" content="{{ $seo['title'] }}">
+    <meta name="pinterest-rich-pin" content="true">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="application-name" content="{{ config('app.name') }}">
+    <meta name="apple-mobile-web-app-title" content="{{ config('app.name') }}">
+    <meta itemprop="name" content="{{ $seo['title'] }}">
+    <meta itemprop="description" content="{{ $seo['description'] }}">
+    <meta itemprop="image" content="{{ $seo['image'] ?? asset('assets/images/hero-img7.png') }}">
     @foreach ($seo['schema'] ?? [] as $schema)
     <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
     @endforeach
