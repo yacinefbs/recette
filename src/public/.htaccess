@@ -6,6 +6,15 @@
 
     RewriteEngine On
 
+    # Canonical host: www -> apex, and force HTTPS in a single 301
+    RewriteCond %{HTTP_HOST} ^www\.topictrail\.me$ [NC]
+    RewriteRule ^ https://topictrail.me%{REQUEST_URI} [L,R=301]
+
+    RewriteCond %{HTTP_HOST} ^topictrail\.me$ [NC]
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+    RewriteRule ^ https://topictrail.me%{REQUEST_URI} [L,R=301]
+
     # Preserve Authorization header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
