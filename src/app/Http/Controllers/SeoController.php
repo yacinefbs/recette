@@ -60,17 +60,23 @@ class SeoController extends Controller
             $entries[] = [route('pages.show', $slug), null, 'yearly', '0.3'];
         }
 
-        foreach (Recipe::select('id', 'updated_at')->orderBy('id')->cursor() as $recipe) {
-            $entries[] = [route('recipes.show', $recipe), $recipe->updated_at, 'monthly', '0.8'];
+        foreach (Recipe::select('id', 'name', 'image_path', 'updated_at')->orderBy('id')->cursor() as $recipe) {
+            $entries[] = [route('recipes.show', $recipe), $recipe->updated_at, 'monthly', '0.8', $recipe->image_path ? [$recipe->image, $recipe->name] : null];
         }
 
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
-        foreach ($entries as [$loc, $lastmod, $freq, $prio]) {
+        $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n".'<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">'."\n";
+        foreach ($entries as $entry) {
+            [$loc, $lastmod, $freq, $prio] = $entry;
+            $img = $entry[4] ?? null;
             $xml .= '  <url><loc>'.e($loc).'</loc>';
             if ($lastmod) {
                 $xml .= '<lastmod>'.\Illuminate\Support\Carbon::parse($lastmod)->toAtomString().'</lastmod>';
             }
-            $xml .= "<changefreq>$freq</changefreq><priority>$prio</priority></url>\n";
+            $xml .= "<changefreq>$freq</changefreq><priority>$prio</priority>";
+            if ($img) {
+                $xml .= '<image:image><image:loc>'.e($img[0]).'</image:loc><image:title>'.e($img[1]).'</image:title></image:image>';
+            }
+            $xml .= "</url>\n";
         }
         $xml .= '</urlset>';
 
