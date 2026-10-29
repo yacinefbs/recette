@@ -5,6 +5,13 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+// Legacy URLs that leaked the internal folder (/src/public/...) -> clean URL
+$uri = $_SERVER['REQUEST_URI'] ?? '';
+if (preg_match('#^/src/public(/.*)?$#i', $uri, $m)) {
+    header('Location: '.($m[1] ?? '/') , true, 301);
+    exit;
+}
+
 // Determine if the application is in maintenance mode...
 if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
