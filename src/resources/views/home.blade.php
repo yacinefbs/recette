@@ -1,4 +1,4 @@
-﻿@verbatim
+@verbatim
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -39,6 +39,9 @@
 </head>
 
 <body>
+@endverbatim
+@include('partials.gtm-noscript')
+@verbatim
 
     <div class="main-wrapper">
 

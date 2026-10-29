@@ -12,6 +12,7 @@
 </head>
 
 <body>
+@include('partials.gtm-noscript')
     <header class="py-3 border-bottom bg-white">
         <div class="container d-flex align-items-center justify-content-between flex-wrap">
             <a href="{{ url('/') }}"><img src="/assets/images/logo.svg" alt="{{ $site }}" width="200" height="44"></a>
