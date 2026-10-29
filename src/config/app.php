@@ -15,6 +15,11 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
+    'contact_email' => env('CONTACT_EMAIL', 'contact@topictrail.me'),
+
+    // Google Search Console "HTML tag" verification token (content value only)
+    'google_site_verification' => env('GOOGLE_SITE_VERIFICATION'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Environment

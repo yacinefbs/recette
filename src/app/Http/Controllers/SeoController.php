@@ -13,6 +13,11 @@ class SeoController extends Controller
         return response($body, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }
 
+    public function ads()
+    {
+        return response("google.com, pub-3690879797577737, DIRECT, f08c47fec0942fa0\n", 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+    }
+
     public function sitemap()
     {
         $latest = Recipe::max('updated_at');
@@ -20,6 +25,10 @@ class SeoController extends Controller
             [url('/'), $latest, 'daily', '1.0'],
             [route('recipes.index'), $latest, 'daily', '0.9'],
         ];
+
+        foreach (array_keys(PageController::PAGES) as $slug) {
+            $entries[] = [route('pages.show', $slug), null, 'yearly', '0.3'];
+        }
 
         foreach (Recipe::select('id', 'updated_at')->orderBy('id')->cursor() as $recipe) {
             $entries[] = [route('recipes.show', $recipe), $recipe->updated_at, 'monthly', '0.8'];

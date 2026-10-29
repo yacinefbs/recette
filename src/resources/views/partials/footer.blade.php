@@ -54,6 +54,13 @@
                             <div class="col-lg-12">
                                 <div class="copyright-text">
                                     <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
+                                    <p>
+                                        <a href="{{ route('pages.show', 'about') }}">About</a> ·
+                                        <a href="{{ route('pages.show', 'contact') }}">Contact</a> ·
+                                        <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> ·
+                                        <a href="{{ route('pages.show', 'terms') }}">Terms of Use</a> ·
+                                        <a href="#" onclick="openCookieSettings();return false;">Cookie settings</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
