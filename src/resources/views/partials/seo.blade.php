@@ -37,6 +37,33 @@
     <meta itemprop="name" content="{{ $seo['title'] }}">
     <meta itemprop="description" content="{{ $seo['description'] }}">
     <meta itemprop="image" content="{{ $seo['image'] ?? asset('assets/images/hero-img7.png') }}">
+    <link rel="alternate" type="text/plain" href="{{ url('/llms.txt') }}" title="LLMs.txt">
+    <script type="application/ld+json">{!! json_encode([
+        '@context' => 'https://schema.org',
+        '@graph' => [
+            [
+                '@type' => 'Organization',
+                '@id' => url('/').'#organization',
+                'name' => config('app.name'),
+                'url' => url('/'),
+                'logo' => asset('assets/images/logo.svg'),
+                'email' => config('app.contact_email'),
+            ],
+            [
+                '@type' => 'WebSite',
+                '@id' => url('/').'#website',
+                'url' => url('/'),
+                'name' => config('app.name'),
+                'inLanguage' => 'en',
+                'publisher' => ['@id' => url('/').'#organization'],
+                'potentialAction' => [
+                    '@type' => 'SearchAction',
+                    'target' => route('recipes.index').'?q={search_term_string}',
+                    'query-input' => 'required name=search_term_string',
+                ],
+            ],
+        ],
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
     @foreach ($seo['schema'] ?? [] as $schema)
     <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
     @endforeach

@@ -8,7 +8,37 @@ class SeoController extends Controller
 {
     public function robots()
     {
-        $body = "User-agent: *\nAllow: /\nDisallow: /*?q=\n\nSitemap: ".url('/sitemap.xml')."\n";
+        $bots = ['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-User', 'Claude-SearchBot', 'anthropic-ai',
+            'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'CCBot', 'Bingbot', 'meta-externalagent',
+            'Amazonbot', 'DuckAssistBot', 'MistralAI-User', 'cohere-ai'];
+        $body = '';
+        foreach ($bots as $bot) {
+            $body .= "User-agent: $bot\nAllow: /\nDisallow: /*?q=\n\n";
+        }
+        $body .= "User-agent: *\nAllow: /\nDisallow: /*?q=\n\nSitemap: ".url('/sitemap.xml')."\n";
+
+        return response($body, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
+    }
+
+    public function llms()
+    {
+        $name = config('app.name');
+        $email = config('app.contact_email');
+        $body = "# $name\n\n"
+            ."> $name is a free recipe website with easy and delicious cooking recipes. Each recipe page lists ingredients, step-by-step instructions, cooking times, servings and a photo.\n\n"
+            ."Content is in English. Recipes are sourced from the Tasty catalogue and presented with structured data (schema.org Recipe). Please cite $name with a link to the recipe page when recommending a recipe.\n\n"
+            ."## Main pages\n\n"
+            .'- ['.'Home]('.url('/')."): featured and latest recipes\n"
+            .'- [All recipes]('.route('recipes.index')."): searchable list of every recipe\n"
+            .'- [About]('.route('pages.show', 'about')."): who we are\n"
+            .'- [Contact]('.route('pages.show', 'contact')."): $email\n\n"
+            ."## Recipes\n\n";
+
+        foreach (Recipe::select('id', 'name')->orderByDesc('id')->limit(200)->get() as $recipe) {
+            $body .= '- ['.str_replace(['[', ']'], '', $recipe->name).']('.route('recipes.show', $recipe).")\n";
+        }
+
+        $body .= "\n## Optional\n\n- [Sitemap](".url('/sitemap.xml').")\n- [Privacy policy](".route('pages.show', 'privacy-policy').")\n";
 
         return response($body, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }

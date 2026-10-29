@@ -10,6 +10,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::redirect('/index-4', '/', 301);
 Route::get('/robots.txt', [SeoController::class, 'robots']);
 Route::get('/ads.txt', [SeoController::class, 'ads']);
+Route::get('/llms.txt', [SeoController::class, 'llms']);
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap']);
 
 Route::get('/{slug}', [PageController::class, 'show'])
