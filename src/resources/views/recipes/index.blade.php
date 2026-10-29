@@ -1,6 +1,6 @@
 ﻿@verbatim
 <!doctype html>
-<html class="no-js" lang="fr">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -62,35 +62,7 @@
         <!-- Header Start  -->
         <div class="section header-section header-section-4">
 
-            <div class="header-top-section d-none d-lg-block">
-                <div class="container">
-                    <div class="header-top-wrap">
-                        <!-- Header Top Info Start  -->
-                        <div class="header-top-info">
-                            <ul>
-                                <li><i class="fas fa-phone-alt"></i> 91 458 654 528</li>
-                                <li><i class="far fa-envelope"></i> info@example.com </li>
-                            </ul>
-                        </div>
-                        <!-- Header Top Info End  -->
-                        <!-- Header Social Wrap Start  -->
-                        <div class="header-social-wrap">
-                            <div class="header-social">
-                                <span class="follow-us">Follow Us :</span>
-                                <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i> </a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Header Social Wrap End  -->
-                    </div>
-                </div>
-            </div>
-
-            <div id="header" class="header-bottom-section">
+<div id="header" class="header-bottom-section">
                 <div class="container">
 
                     <!-- Header Wrap Start  -->
@@ -305,11 +277,11 @@
                             <!-- Page Banner Content Start -->
                             <div class="page-banner text-center">
                                 <div class="section-title text-center">
-                                    <h1 class="title">Recettes de cuisine</h1>
+                                    <h1 class="title">Cooking Recipes</h1>
                                 </div>
                                 <ul class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="/">Accueil</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Recettes</li>
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Recipes</li>
                                 </ul>
                             </div>
                             <!-- Page Banner Content End -->
@@ -333,8 +305,8 @@
                     <div class="col-lg-8">
                         <form method="GET" action="{{ route('recipes.index') }}">
                             <div class="input-group">
-                                <input type="text" name="q" value="{{ $q }}" class="form-control" placeholder="Rechercher dans mes recettes...">
-                                <div class="input-group-append"><button class="btn btn-primary" type="submit">Rechercher</button></div>
+                                <input type="text" name="q" value="{{ $q }}" class="form-control" placeholder="Search recipes...">
+                                <div class="input-group-append"><button class="btn btn-primary" type="submit">Search</button></div>
                             </div>
                         </form>
                     </div>
@@ -342,7 +314,7 @@
                         <form method="POST" action="{{ route('recipes.import') }}">
                             @csrf
                             <input type="hidden" name="q" value="{{ $q }}">
-                            <button type="submit" class="btn btn-success">Récupérer les recettes{{ $q !== '' ? ' « '.$q.' »' : '' }}</button>
+                            <button type="submit" class="btn btn-success">Fetch recipes{{ $q !== '' ? ' “'.$q.'”' : '' }}</button>
                         </form>
                     </div>
                 </div>
@@ -362,16 +334,16 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="col-12 text-center"><p>Aucune recette en base. Cliquez sur « Récupérer les recettes ».</p></div>
+                            <div class="col-12 text-center"><p>No recipes yet. Click “Fetch recipes”.</p></div>
                         @endforelse
                     </div>
                 </div>
 
                 @if ($recipes->hasPages())
                     <div class="text-center mt-4">
-                        @if ($recipes->previousPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->previousPageUrl() }}">&laquo; Précédent</a>@endif
+                        @if ($recipes->previousPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->previousPageUrl() }}">&laquo; Previous</a>@endif
                         <span class="mx-3">Page {{ $recipes->currentPage() }} / {{ $recipes->lastPage() }}</span>
-                        @if ($recipes->nextPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->nextPageUrl() }}">Suivant &raquo;</a>@endif
+                        @if ($recipes->nextPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->nextPageUrl() }}">Next &raquo;</a>@endif
                     </div>
                 @endif
             </div>

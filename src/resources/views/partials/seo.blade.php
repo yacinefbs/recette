@@ -1,9 +1,10 @@
-<title>{{ $seo['title'] }}</title>
+@include('partials.analytics')
+    <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="robots" content="{{ $seo['robots'] ?? 'index,follow,max-image-preview:large,max-snippet:-1' }}">
     <link rel="canonical" href="{{ $seo['canonical'] }}">
     <meta property="og:site_name" content="{{ config('app.name') }}">
-    <meta property="og:locale" content="fr_FR">
+    <meta property="og:locale" content="en_US">
     <meta property="og:type" content="{{ $seo['type'] ?? 'website' }}">
     <meta property="og:title" content="{{ $seo['title'] }}">
     <meta property="og:description" content="{{ $seo['description'] }}">

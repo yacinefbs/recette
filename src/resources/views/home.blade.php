@@ -1,6 +1,6 @@
 ﻿@verbatim
 <!doctype html>
-<html class="no-js" lang="fr">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -62,35 +62,7 @@
         <!-- Header Start  -->
         <div class="section header-section header-section-4">
 
-            <div class="header-top-section d-none d-lg-block">
-                <div class="container">
-                    <div class="header-top-wrap">
-                        <!-- Header Top Info Start  -->
-                        <div class="header-top-info">
-                            <ul>
-                                <li><i class="fas fa-phone-alt"></i> 91 458 654 528</li>
-                                <li><i class="far fa-envelope"></i> info@example.com </li>
-                            </ul>
-                        </div>
-                        <!-- Header Top Info End  -->
-                        <!-- Header Social Wrap Start  -->
-                        <div class="header-social-wrap">
-                            <div class="header-social">
-                                <span class="follow-us">Follow Us :</span>
-                                <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i> </a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Header Social Wrap End  -->
-                    </div>
-                </div>
-            </div>
-
-            <div id="header" class="header-bottom-section">
+<div id="header" class="header-bottom-section">
                 <div class="container">
 
                     <!-- Header Wrap Start  -->
@@ -301,7 +273,7 @@
                 <div class="row">
                     <div class="col-md-7">
                         <div class="section-title2">
-                            <h2 class="title color-3">Dernières <span>recettes</span></h2>
+                            <h2 class="title color-3">Latest <span>recipes</span></h2>
                         </div> <!-- section title -->
                     </div>
                     <div class="col-md-5">
@@ -329,7 +301,7 @@
                                 <div class="course-teacher">
                                     <div class="course-lesson">
                                         <ul>
-                                            <li><i class="fas fa-list-ol"></i> {{ count($recipe->instructions ?? []) }} étapes</li>
+                                            <li><i class="fas fa-list-ol"></i> {{ count($recipe->instructions ?? []) }} steps</li>
                                         </ul>
                                     </div>
                                     <div class="price">
@@ -350,7 +322,7 @@
         <div class="section edubin-category-section-06 edubin-category-section-07 section-padding-02" style="margin-top:30px;margin-bottom:80px">
             <div class="container">
                 <div class="section-title2 text-center">
-                    <h1 class="title color-3">Recettes <span>populaires</span></h1>
+                    <h1 class="title color-3">Popular <span>recipes</span></h1>
                 </div>
                 <div class="category-wrap-03">
                     <div class="row">
@@ -369,7 +341,7 @@
                             <a href="/recipes?q=pasta" class="category-item-02">
                                 <div class="category-icon"><i class="fas fa-utensils" style="font-size:42px;color:#309255" aria-hidden="true"></i></div>
                                 <div class="category-content">
-                                    <h3 class="title">Pâtes</h3>
+                                    <h3 class="title">Pasta</h3>
                                 </div>
                             </a>
                             <!-- Category Item End -->

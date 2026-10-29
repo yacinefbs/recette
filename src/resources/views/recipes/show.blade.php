@@ -1,6 +1,6 @@
 ﻿@verbatim
 <!doctype html>
-<html class="no-js" lang="fr">
+<html class="no-js" lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -62,35 +62,7 @@
         <!-- Header Start  -->
         <div class="section header-section header-section-4">
 
-            <div class="header-top-section d-none d-lg-block">
-                <div class="container">
-                    <div class="header-top-wrap">
-                        <!-- Header Top Info Start  -->
-                        <div class="header-top-info">
-                            <ul>
-                                <li><i class="fas fa-phone-alt"></i> 91 458 654 528</li>
-                                <li><i class="far fa-envelope"></i> info@example.com </li>
-                            </ul>
-                        </div>
-                        <!-- Header Top Info End  -->
-                        <!-- Header Social Wrap Start  -->
-                        <div class="header-social-wrap">
-                            <div class="header-social">
-                                <span class="follow-us">Follow Us :</span>
-                                <ul>
-                                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-twitter"></i> </a></li>
-                                    <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
-                                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Header Social Wrap End  -->
-                    </div>
-                </div>
-            </div>
-
-            <div id="header" class="header-bottom-section">
+<div id="header" class="header-bottom-section">
                 <div class="container">
 
                     <!-- Header Wrap Start  -->
@@ -311,7 +283,7 @@
 @verbatim
                                 </div>
                                 <ul class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="/">Accueil</a></li><li class="breadcrumb-item"><a href="/recipes">Recettes</a></li>
+                                    <li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item"><a href="/recipes">Recipes</a></li>
                                     <li class="breadcrumb-item active" aria-current="page">
 @endverbatim
 {{ $recipe['name'] }}
@@ -339,10 +311,10 @@
                     <div class="col-lg-7">
                         
                         @if (!empty($recipe['description']))<p>{!! strip_tags($recipe['description']) !!}</p>@endif
-                        @if (!empty($recipe['num_servings']))<p><strong>Portions :</strong> {{ $recipe['num_servings'] }}</p>@endif
-                        @if (!empty($recipe['total_time_minutes']))<p><strong>Durée :</strong> {{ $recipe['total_time_minutes'] }} min</p>@endif
+                        @if (!empty($recipe['num_servings']))<p><strong>Servings:</strong> {{ $recipe['num_servings'] }}</p>@endif
+                        @if (!empty($recipe['total_time_minutes']))<p><strong>Time:</strong> {{ $recipe['total_time_minutes'] }} min</p>@endif
                         @if (!empty($recipe['sections']))
-                            <h2 class="h5 mt-4">Ingrédients</h2>
+                            <h2 class="h5 mt-4">Ingredients</h2>
                             @foreach ($recipe['sections'] as $section)
                                 @if (!empty($section['name']))<h6>{{ $section['name'] }}</h6>@endif
                                 <ul>
@@ -351,12 +323,12 @@
                             @endforeach
                         @endif
                         @if (!empty($recipe['instructions']))
-                            <h2 class="h5 mt-4">Préparation</h2>
+                            <h2 class="h5 mt-4">Instructions</h2>
                             <ol>
                                 @foreach ($recipe['instructions'] as $step)<li>{{ $step['display_text'] ?? '' }}</li>@endforeach
                             </ol>
                         @endif
-                        <a href="{{ route('recipes.index') }}" class="btn btn-outline-primary mt-3">&laquo; Retour aux recettes</a>
+                        <a href="{{ route('recipes.index') }}" class="btn btn-outline-primary mt-3">&laquo; Back to recipes</a>
                     </div>
                 </div>
             </div>
