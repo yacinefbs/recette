@@ -76,7 +76,10 @@ class RecipeController extends Controller
             'dateModified' => $recipe->updated_at?->toIso8601String(),
             'author' => ['@type' => 'Organization', 'name' => $site],
             'totalTime' => $recipe->total_time_minutes ? 'PT'.$recipe->total_time_minutes.'M' : null,
+            'prepTime' => $recipe->prep_time_minutes ? 'PT'.$recipe->prep_time_minutes.'M' : null,
+            'cookTime' => $recipe->cook_time_minutes ? 'PT'.$recipe->cook_time_minutes.'M' : null,
             'recipeYield' => $recipe->num_servings ? $recipe->num_servings.' servings' : null,
+            'nutrition' => $this->nutrition($recipe->nutrition),
             'recipeCategory' => $this->category($recipe->name),
             'recipeCuisine' => 'International',
             'keywords' => $this->keywords($recipe->name),
@@ -85,6 +88,7 @@ class RecipeController extends Controller
                 '@type' => 'HowToStep',
                 'name' => 'Step '.($i + 1),
                 'text' => $t,
+                'url' => route('recipes.show', $recipe).'#step-'.($i + 1),
                 'image' => $recipe->image,
             ])->all(),
         ]);
@@ -110,6 +114,29 @@ class RecipeController extends Controller
         ];
 
         return view('recipes.show', ['recipe' => $recipe->toArray() + ['image' => $recipe->image], 'seo' => $seo]);
+    }
+
+    private function nutrition(?array $n): ?array
+    {
+        if (! $n) {
+            return null;
+        }
+        $map = [
+            'calories' => ['calories', ' kcal'],
+            'carbohydrates' => ['carbohydrateContent', ' g'],
+            'fat' => ['fatContent', ' g'],
+            'fiber' => ['fiberContent', ' g'],
+            'protein' => ['proteinContent', ' g'],
+            'sugar' => ['sugarContent', ' g'],
+        ];
+        $out = ['@type' => 'NutritionInformation'];
+        foreach ($map as $key => [$prop, $unit]) {
+            if (isset($n[$key])) {
+                $out[$prop] = $n[$key].$unit;
+            }
+        }
+
+        return count($out) > 1 ? $out : null;
     }
 
     private function category(string $name): string
@@ -146,7 +173,9 @@ class RecipeController extends Controller
         abort_unless($expected !== '' && hash_equals($expected, (string) $request->query('token', '')), 403);
 
         try {
-            $count = $tasty->import(trim((string) $request->query('q', '')));
+            $count = $request->boolean('refresh')
+                ? $tasty->refresh()
+                : $tasty->import(trim((string) $request->query('q', '')));
         } catch (RequestException $e) {
             return response()->json(['ok' => false, 'error' => 'Tasty API error'], $e->response->status() === 429 ? 429 : 502);
         }

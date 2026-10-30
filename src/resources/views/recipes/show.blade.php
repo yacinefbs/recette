@@ -328,7 +328,7 @@
                         @if (!empty($recipe['instructions']))
                             <h2 class="h5 mt-4">Instructions</h2>
                             <ol>
-                                @foreach ($recipe['instructions'] as $step)<li>{{ $step['display_text'] ?? '' }}</li>@endforeach
+                                @foreach ($recipe['instructions'] as $step)<li id="step-{{ $loop->iteration }}">{{ $step['display_text'] ?? '' }}</li>@endforeach
                             </ol>
                         @endif
                         <a href="{{ route('recipes.index') }}" class="btn btn-outline-primary mt-3">&laquo; Back to recipes</a>

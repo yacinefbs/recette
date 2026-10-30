@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['tasty_id', 'name', 'description', 'thumbnail_url', 'image_path', 'total_time_minutes', 'num_servings', 'sections', 'instructions'])]
+#[Fillable(['tasty_id', 'name', 'description', 'thumbnail_url', 'image_path', 'total_time_minutes', 'prep_time_minutes', 'cook_time_minutes', 'num_servings', 'nutrition', 'sections', 'instructions'])]
 class Recipe extends Model
 {
     public function getImageAttribute(): string
@@ -18,6 +18,7 @@ class Recipe extends Model
         return [
             'sections' => 'array',
             'instructions' => 'array',
+            'nutrition' => 'array',
         ];
     }
 }

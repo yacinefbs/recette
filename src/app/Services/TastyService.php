@@ -31,25 +31,67 @@ class TastyService
 
         $count = 0;
         foreach ($results as $r) {
-            // Entries without instructions (e.g. compilations) are not recipes
-            if (empty($r['id']) || empty($r['name']) || empty($r['instructions'])) {
-                continue;
+            if ($this->store($r)) {
+                $count++;
             }
-
-            $recipe = Recipe::updateOrCreate(['tasty_id' => $r['id']], [
-                'name' => $r['name'],
-                'description' => $r['description'] ?? null,
-                'thumbnail_url' => $r['thumbnail_url'] ?? null,
-                'total_time_minutes' => $r['total_time_minutes'] ?? null,
-                'num_servings' => $r['num_servings'] ?? null,
-                'sections' => $r['sections'] ?? [],
-                'instructions' => $r['instructions'],
-            ]);
-            $this->downloadImage($recipe);
-            $count++;
         }
 
         return $count;
+    }
+
+    /** Re-fetches every recipe from the API to fill in newly stored fields. Returns the number updated. */
+    public function refresh(): int
+    {
+        $total = 0;
+        for ($from = 0; $from < Recipe::count() + self::BATCH_SIZE; $from += self::BATCH_SIZE) {
+            $results = Http::baseUrl('https://'.config('services.tasty.host'))
+                ->withHeaders([
+                    'x-rapidapi-key' => config('services.tasty.key'),
+                    'x-rapidapi-host' => config('services.tasty.host'),
+                ])
+                ->timeout(20)
+                ->get('/recipes/list', ['from' => $from, 'size' => self::BATCH_SIZE])
+                ->throw()
+                ->json('results', []);
+
+            if (! $results) {
+                break;
+            }
+            foreach ($results as $r) {
+                $total += $this->store($r, true) ? 1 : 0;
+            }
+        }
+
+        return $total;
+    }
+
+    private function store(array $r, bool $onlyExisting = false): bool
+    {
+        // Entries without instructions (e.g. compilations) are not recipes
+        if (empty($r['id']) || empty($r['name']) || empty($r['instructions'])) {
+            return false;
+        }
+        if ($onlyExisting && ! Recipe::where('tasty_id', $r['id'])->exists()) {
+            return false;
+        }
+
+        $nutrition = collect($r['nutrition'] ?? [])->only(['calories', 'carbohydrates', 'fat', 'fiber', 'protein', 'sugar'])->all();
+
+        $recipe = Recipe::updateOrCreate(['tasty_id' => $r['id']], [
+            'name' => $r['name'],
+            'description' => $r['description'] ?? null,
+            'thumbnail_url' => $r['thumbnail_url'] ?? null,
+            'total_time_minutes' => $r['total_time_minutes'] ?? null,
+            'prep_time_minutes' => $r['prep_time_minutes'] ?? null,
+            'cook_time_minutes' => $r['cook_time_minutes'] ?? null,
+            'num_servings' => $r['num_servings'] ?? null,
+            'nutrition' => $nutrition ?: null,
+            'sections' => $r['sections'] ?? [],
+            'instructions' => $r['instructions'],
+        ]);
+        $this->downloadImage($recipe);
+
+        return true;
     }
 
     /** Downloads the image into public/images/recipes and stores its path. */
