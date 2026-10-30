@@ -77,8 +77,16 @@ class RecipeController extends Controller
             'author' => ['@type' => 'Organization', 'name' => $site],
             'totalTime' => $recipe->total_time_minutes ? 'PT'.$recipe->total_time_minutes.'M' : null,
             'recipeYield' => $recipe->num_servings ? $recipe->num_servings.' servings' : null,
+            'recipeCategory' => $this->category($recipe->name),
+            'recipeCuisine' => 'International',
+            'keywords' => $this->keywords($recipe->name),
             'recipeIngredient' => $ingredients->all(),
-            'recipeInstructions' => $steps->map(fn ($t) => ['@type' => 'HowToStep', 'text' => $t])->all(),
+            'recipeInstructions' => $steps->map(fn ($t, $i) => [
+                '@type' => 'HowToStep',
+                'name' => 'Step '.($i + 1),
+                'text' => $t,
+                'image' => $recipe->image,
+            ])->all(),
         ]);
 
         $seo = [
@@ -102,6 +110,34 @@ class RecipeController extends Controller
         ];
 
         return view('recipes.show', ['recipe' => $recipe->toArray() + ['image' => $recipe->image], 'seo' => $seo]);
+    }
+
+    private function category(string $name): string
+    {
+        $map = [
+            'Dessert' => ['cake', 'cookie', 'brownie', 'pie', 'pudding', 'muffin', 'ice cream', 'chocolate', 'cheesecake', 'cupcake', 'bread', 'tart', 'fudge', 'candy'],
+            'Breakfast' => ['pancake', 'waffle', 'omelet', 'omelette', 'breakfast', 'oatmeal', 'granola', 'french toast', 'egg'],
+            'Salad' => ['salad', 'slaw'],
+            'Soup' => ['soup', 'stew', 'chili', 'broth'],
+            'Appetizer' => ['dip', 'appetizer', 'wings', 'bites', 'snack', 'chutney', 'sauce'],
+            'Drink' => ['smoothie', 'cocktail', 'lemonade', 'drink', 'tea', 'coffee'],
+        ];
+        $lower = strtolower($name);
+        foreach ($map as $category => $words) {
+            foreach ($words as $word) {
+                if (str_contains($lower, $word)) {
+                    return $category;
+                }
+            }
+        }
+
+        return 'Main course';
+    }
+
+    private function keywords(string $name): string
+    {
+        return collect(preg_split('/[^a-z0-9]+/i', strtolower($name)))
+            ->filter(fn ($w) => strlen($w) > 2)->push('recipe')->unique()->implode(', ');
     }
 
     public function feed(Request $request, TastyService $tasty)
