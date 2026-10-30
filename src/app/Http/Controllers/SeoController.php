@@ -13,9 +13,9 @@ class SeoController extends Controller
             'Amazonbot', 'DuckAssistBot', 'MistralAI-User', 'cohere-ai'];
         $body = '';
         foreach ($bots as $bot) {
-            $body .= "User-agent: $bot\nAllow: /\nDisallow: /*?q=\n\n";
+            $body .= "User-agent: $bot\nAllow: /\n\n";
         }
-        $body .= "User-agent: *\nAllow: /\nDisallow: /*?q=\n\nSitemap: ".url('/sitemap.xml')."\n";
+        $body .= "User-agent: *\nAllow: /\n\nSitemap: ".url('/sitemap.xml')."\n";
 
         return response($body, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }

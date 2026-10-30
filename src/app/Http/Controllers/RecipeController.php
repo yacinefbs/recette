@@ -90,7 +90,7 @@ class RecipeController extends Controller
         ]);
 
         $seo = [
-            'title' => Str::limit($recipe->name, 50, '').' – Recipe | '.$site,
+            'title' => Str::limit($recipe->name, 38, '').' – Recipe | '.$site,
             'description' => Str::limit($description, 155),
             'canonical' => route('recipes.show', $recipe),
             'type' => 'article',

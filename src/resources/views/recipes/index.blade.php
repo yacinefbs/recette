@@ -72,7 +72,7 @@
                     <div class="header-wrap">
 
                         <div class="header-logo">
-                            <a href="/"><img src="/assets/images/logo.svg" alt=""></a>
+                            <a href="/"><img src="/assets/images/logo.svg" alt="topictrail.me logo" width="200" height="44"></a>
                         </div>
 
                         <div class="header-right">
