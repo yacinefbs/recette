@@ -165,7 +165,7 @@
                 </div>
 
                 @if ($category)
-                    <div class="alert alert-light border mt-5"><strong>Tip:</strong> {{ $category['tip'] }}</div>
+                    <div class="alert alert-light border mt-5"><strong>Tip:</strong> {{ $category['tip'] }} <a href="{{ route('meal-planner.index') }}">Plan a full week of meals &raquo;</a></div>
                 @endif
                 @if ($recipes->hasPages())
                     <div class="text-center mt-4">
