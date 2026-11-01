@@ -95,7 +95,9 @@
 
     function busy(on) {
         var b = document.getElementById('mp-generate');
-        b.disabled = on; b.textContent = on ? 'Generating…' : 'Generate my meal plan';
+        b.disabled = on;
+        var lbl = b.querySelector('.mp-generate-label');
+        if (lbl) { lbl.textContent = on ? 'Generating…' : 'Generate my meal plan'; } else { b.textContent = on ? 'Generating…' : 'Generate my meal plan'; }
     }
 
     function generate() {

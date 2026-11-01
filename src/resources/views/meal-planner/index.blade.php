@@ -31,6 +31,20 @@
         #mp .mp-chip span { display: inline-block; padding: .55rem 1.1rem; border-radius: 999px; border: 1.5px solid #e7ddd0; background: #fffdfa; font-weight: 600; font-size: .9rem; color: #475569; cursor: pointer; transition: all .15s; }
         #mp .mp-chip input:checked + span { background: var(--mp-primary); border-color: var(--mp-primary); color: #fff; box-shadow: 0 6px 14px -6px rgba(255,119,61,.7); }
         #mp .mp-chip input:focus-visible + span { outline: 3px solid rgba(255,119,61,.4); outline-offset: 2px; }
+        #mp .mp-actionbar { display: flex; flex-wrap: wrap; align-items: center; gap: .9rem 1.2rem; margin-top: .4rem; padding-top: 1.4rem; border-top: 1px dashed #eadfce; }
+        #mp .mp-generate { position: relative; overflow: hidden; display: inline-flex; align-items: center; justify-content: center; gap: .7rem; min-height: 58px; padding: 0 2rem; border: 0; border-radius: 16px; background: linear-gradient(135deg, #ff6a2b 0%, #ff9a3d 100%); color: #fff; font-family: inherit; font-size: 1.08rem; font-weight: 700; letter-spacing: .01em; cursor: pointer; box-shadow: 0 14px 28px -12px rgba(255,106,43,.85), inset 0 1px 0 rgba(255,255,255,.35); transition: transform .18s, box-shadow .18s, filter .18s; }
+        #mp .mp-generate::after { content: ""; position: absolute; top: 0; left: -60%; width: 40%; height: 100%; background: linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent); transform: skewX(-20deg); transition: left .6s; }
+        #mp .mp-generate:hover { transform: translateY(-2px); filter: saturate(1.08); box-shadow: 0 20px 34px -12px rgba(255,106,43,.95), inset 0 1px 0 rgba(255,255,255,.35); }
+        #mp .mp-generate:hover::after { left: 120%; }
+        #mp .mp-generate:active { transform: translateY(0); }
+        #mp .mp-generate:focus-visible { outline: 3px solid rgba(255,198,0,.8); outline-offset: 3px; }
+        #mp .mp-generate .mp-arrow { transition: transform .18s; }
+        #mp .mp-generate:hover .mp-arrow { transform: translateX(4px); }
+        #mp .mp-generate:disabled { cursor: progress; opacity: .85; transform: none; filter: grayscale(.2); }
+        #mp .mp-generate:disabled .mp-arrow { display: none; }
+        #mp .mp-generate:disabled .mp-ico { animation: mp-spin 1s linear infinite; }
+        #mp .mp-hint { color: var(--mp-muted); font-size: .85rem; }
+        @keyframes mp-spin { to { transform: rotate(360deg); } }
         #mp .mp-btn { background: linear-gradient(135deg, var(--mp-primary), #ff9a3d); border: 0; color: #fff; border-radius: 999px; padding: .85rem 2.2rem; font-weight: 700; font-size: 1rem; box-shadow: 0 12px 24px -10px rgba(255,119,61,.8); transition: transform .15s, box-shadow .15s; }
         #mp .mp-btn:hover { transform: translateY(-1px); color: #fff; box-shadow: 0 16px 28px -10px rgba(255,119,61,.9); }
         #mp .mp-btn:disabled { opacity: .7; transform: none; }
@@ -84,6 +98,7 @@
         @media (max-width: 575px) {
             .mp-hero { padding: 120px 0 80px; }
             #mp .mp-card { padding: 1.2rem; border-radius: 18px; }
+            #mp .mp-generate { width: 100%; }
             #mp .mp-btn { width: 100%; }
             #mp .mp-days { grid-template-columns: 1fr; }
         }
@@ -183,7 +198,14 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn mp-btn" id="mp-generate">Generate my meal plan</button>
+                <div class="mp-actionbar">
+                    <button type="submit" class="mp-generate" id="mp-generate">
+                        <svg class="mp-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 17l.8 2.2L22 20l-2.2.8L19 23l-.8-2.2L16 20l2.2-.8z"/></svg>
+                        <span class="mp-generate-label">Generate my meal plan</span>
+                        <svg class="mp-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                    </button>
+                    <span class="mp-hint">Free · no sign-up · takes a few seconds</span>
+                </div>
                 <p class="mp-note mt-3 mb-0">Diet filters use each recipe's ingredient list and nutrition data; always check labels if you have allergies. Budget is a selection preference (simpler, cheaper-style recipes first), not a price calculation.</p>
             </form>
         </div>
@@ -266,5 +288,5 @@
 
 @push('scripts')
     <script>if (window.jQuery) { jQuery('#mp select').niceSelect('destroy'); }</script>
-    <script src="{{ asset('assets/js/meal-planner.js') }}?v=2" defer></script>
+    <script src="{{ asset('assets/js/meal-planner.js') }}?v=3" defer></script>
 @endpush

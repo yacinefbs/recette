@@ -1,5 +1,7 @@
-@include('partials.analytics')
-@include('partials.adsense')
+@unless (in_array(request()->getHost(), ['localhost', '127.0.0.1', '[::1]'], true))
+    @include('partials.analytics')
+    @include('partials.adsense')
+@endunless
 @if (config('app.google_site_verification'))
     <meta name="google-site-verification" content="{{ config('app.google_site_verification') }}">
 @endif
