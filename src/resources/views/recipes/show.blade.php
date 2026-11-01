@@ -136,6 +136,7 @@
                             <div class="alert alert-light border mt-4"><strong>{{ $category['label'] }} tip:</strong> {{ $category['tip'] }}
                                 <a href="{{ route('categories.show', $category['slug']) }}">More {{ strtolower($category['label']) }} recipes &raquo;</a></div>
                         @endif
+                        <div class="alert alert-light border mt-3">Planning your week? <a href="{{ route('meal-planner.index') }}">Build a meal plan and grocery list with our free Weekly Meal Planner &raquo;</a></div>
                         <a href="{{ route('recipes.index') }}" class="btn btn-outline-primary mt-3">&laquo; Back to recipes</a>
                     </div>
                 </div>

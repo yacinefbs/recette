@@ -21,6 +21,7 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            <li class="{{ request()->is('weekly-meal-planner') ? 'active-menu' : '' }}"><a href="{{ route('meal-planner.index') }}">Meal Planner</a></li>
                                             <li class="has-dropdown"><a href="{{ route('tools.converter') }}">Tools</a>
                                                 <ul class="sub-menu">
                                                     <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
