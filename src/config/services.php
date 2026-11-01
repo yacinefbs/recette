@@ -31,6 +31,15 @@ return [
     'social' => [
         'facebook_app_id' => env('FACEBOOK_APP_ID'),
         'twitter' => env('TWITTER_HANDLE'),
+        // Profile URLs: icons are only shown for the ones that are set
+        'urls' => [
+            'facebook' => env('SOCIAL_FACEBOOK'),
+            'instagram' => env('SOCIAL_INSTAGRAM'),
+            'x' => env('SOCIAL_X'),
+            'pinterest' => env('SOCIAL_PINTEREST'),
+            'youtube' => env('SOCIAL_YOUTUBE'),
+            'tiktok' => env('SOCIAL_TIKTOK'),
+        ],
     ],
 
     'tasty' => [

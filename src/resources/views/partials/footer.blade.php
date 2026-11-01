@@ -1,4 +1,4 @@
-﻿        <!-- Footer Section Start -->
+        <!-- Footer Section Start -->
         <footer class="section footer-section footer-section-04">
             <div class="footer-top-section">
                 <div class="container">
@@ -7,7 +7,7 @@
                             <div class="col-lg-4 col-sm-6">
                                 <div class="footer-widget-about">
                                     <a class="footer-logo" href="{{ url('/') }}"><img src="{{ asset('assets/images/logo-white.svg') }}" alt="{{ config('app.name') }}" width="180" height="40"></a>
-                                    <p>{{ config('app.name') }} brings together easy and delicious recipes: photos, ingredients, detailed steps and preparation times to help you cook every day.</p>
+                                    <p>{{ config('app.name') }} is a free site to discover ideas worth trying. We start with easy and delicious recipes: photos, ingredients, detailed steps and preparation times.</p>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-sm-6">
@@ -24,14 +24,12 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="footer-widget footer-widget-3">
-                                    <h4 class="footer-widget-title">Popular Recipes</h4>
+                                    <h4 class="footer-widget-title">Categories</h4>
                                     <div class="widget-link">
                                         <ul class="link">
-                                            <li><a href="{{ route('recipes.index', ['q' => 'chicken']) }}">Chicken</a></li>
-                                            <li><a href="{{ route('recipes.index', ['q' => 'pasta']) }}">Pasta</a></li>
-                                            <li><a href="{{ route('recipes.index', ['q' => 'salad']) }}">Salads</a></li>
-                                            <li><a href="{{ route('recipes.index', ['q' => 'dessert']) }}">Desserts</a></li>
-                                            <li><a href="{{ route('recipes.index', ['q' => 'soup']) }}">Soups</a></li>
+                                            @foreach (array_slice(\App\Support\Categories::all(), 0, 6) as $c)
+                                                <li><a href="{{ route('categories.show', $c['slug']) }}">{{ $c['label'] }}</a></li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -39,7 +37,8 @@
                             <div class="col-lg-3 col-sm-6">
                                 <div class="footer-widget">
                                     <h4 class="footer-widget-title">About</h4>
-                                    <p class="text">Recipes come from the Tasty API and are updated regularly.</p>
+                                    <p class="text">Fresh ideas every day, starting with easy recipes. New recipes are added regularly.</p>
+                                    @include('partials.social-links', ['wrapClass' => 'footer-social mt-3'])
                                 </div>
                             </div>
                         </div>

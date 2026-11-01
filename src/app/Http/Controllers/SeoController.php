@@ -56,6 +56,10 @@ class SeoController extends Controller
             [route('recipes.index'), $latest, 'daily', '0.9'],
         ];
 
+        foreach (array_keys(\App\Support\Categories::ALL) as $slug) {
+            $entries[] = [route('categories.show', $slug), $latest, 'weekly', '0.8'];
+        }
+
         foreach (array_keys(PageController::PAGES) as $slug) {
             $entries[] = [route('pages.show', $slug), null, 'yearly', '0.3'];
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Services\TastyService;
+use App\Support\Categories;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -26,7 +27,7 @@ class RecipeController extends Controller
         $canonical = ! $filtered && $page > 1 ? route('recipes.index', ['page' => $page]) : route('recipes.index');
 
         $seo = [
-            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
+            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " â€“ page $page" : '')." | $site",
             'description' => 'Browse our easy cooking recipes: photos, ingredients, detailed steps and preparation times. Find your next recipe.',
             'canonical' => $canonical,
             // Search result pages are low-value duplicates: do not index them
@@ -53,7 +54,47 @@ class RecipeController extends Controller
             ],
         ];
 
-        return view('recipes.index', ['recipes' => $recipes, 'q' => $q, 'seo' => $seo]);
+        return view('recipes.index', ['recipes' => $recipes, 'q' => $q, 'seo' => $seo, 'category' => null]);
+    }
+
+    public function categoryPage(string $slug)
+    {
+        $category = Categories::find($slug);
+        abort_unless($category, 404);
+
+        $recipes = Categories::constrain(Recipe::query(), $slug)
+            ->orderByDesc('id')
+            ->paginate(12);
+
+        $site = config('app.name');
+        $page = $recipes->currentPage();
+        $url = route('categories.show', $slug);
+
+        $seo = [
+            'title' => $category['label'].' Recipes'.($page > 1 ? " ? page $page" : '').' | '.$site,
+            'description' => Str::limit($category['intro'], 155),
+            'canonical' => $page > 1 ? $url.'?page='.$page : $url,
+            'schema' => [
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'BreadcrumbList',
+                    'itemListElement' => [
+                        ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+                        ['@type' => 'ListItem', 'position' => 2, 'name' => 'Recipes', 'item' => route('recipes.index')],
+                        ['@type' => 'ListItem', 'position' => 3, 'name' => $category['label'], 'item' => $url],
+                    ],
+                ],
+                [
+                    '@context' => 'https://schema.org',
+                    '@type' => 'CollectionPage',
+                    'name' => $category['label'].' recipes',
+                    'description' => $category['intro'],
+                    'url' => $url,
+                ],
+            ],
+        ];
+
+        return view('recipes.index', ['recipes' => $recipes, 'q' => '', 'seo' => $seo, 'category' => $category]);
     }
 
     public function show(Recipe $recipe)
@@ -94,7 +135,7 @@ class RecipeController extends Controller
         ]);
 
         $seo = [
-            'title' => Str::limit($recipe->name, 38, '').' – Recipe | '.$site,
+            'title' => Str::limit($recipe->name, 38, '').' â€“ Recipe | '.$site,
             'description' => Str::limit($description, 155),
             'canonical' => route('recipes.show', $recipe),
             'type' => 'article',
@@ -113,7 +154,26 @@ class RecipeController extends Controller
             ],
         ];
 
-        return view('recipes.show', ['recipe' => $recipe->toArray() + ['image' => $recipe->image], 'seo' => $seo]);
+        $categorySlug = Categories::forName($recipe->name);
+        $related = collect();
+        if ($categorySlug) {
+            $related = Categories::constrain(Recipe::query(), $categorySlug)
+                ->where('id', '!=', $recipe->id)
+                ->inRandomOrder()->limit(4)->get();
+        }
+        if ($related->count() < 4) {
+            $related = $related->concat(
+                Recipe::query()->where('id', '!=', $recipe->id)->whereNotIn('id', $related->pluck('id'))
+                    ->inRandomOrder()->limit(4 - $related->count())->get()
+            );
+        }
+
+        return view('recipes.show', [
+            'recipe' => $recipe->toArray() + ['image' => $recipe->image],
+            'seo' => $seo,
+            'category' => $categorySlug ? Categories::find($categorySlug) : null,
+            'related' => $related,
+        ]);
     }
 
     private function nutrition(?array $n): ?array
@@ -164,7 +224,8 @@ class RecipeController extends Controller
     private function keywords(string $name): string
     {
         return collect(preg_split('/[^a-z0-9]+/i', strtolower($name)))
-            ->filter(fn ($w) => strlen($w) > 2)->push('recipe')->unique()->implode(', ');
+            ->filter(fn ($w) => strlen($w) > 2 && ! in_array($w, ['the', 'and', 'with', 'best', 'how', 'for'], true))
+            ->push($this->category($name), 'easy recipe', 'homemade')->map('strtolower')->unique()->implode(', ');
     }
 
     public function feed(Request $request, TastyService $tasty)
@@ -185,6 +246,8 @@ class RecipeController extends Controller
 
     public function import(Request $request, TastyService $tasty)
     {
+        abort_unless(app()->environment('local'), 404);
+
         $q = trim((string) $request->input('q', ''));
 
         try {
