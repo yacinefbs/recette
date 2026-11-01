@@ -48,6 +48,15 @@ return [
         'feed_token' => env('RECIPES_FEED_TOKEN'),
     ],
 
+    'adsense' => [
+        // Ad unit IDs (create them in AdSense); a slot renders nothing until its ID is set.
+        'slots' => [
+            'after_search' => env('ADSENSE_SLOT_AFTER_SEARCH'),
+            'after_results' => env('ADSENSE_SLOT_AFTER_RESULTS'),
+            'guide' => env('ADSENSE_SLOT_GUIDE'),
+        ],
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

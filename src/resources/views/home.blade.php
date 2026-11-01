@@ -30,7 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/topictrail.css?v=1">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=2">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->

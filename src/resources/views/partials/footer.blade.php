@@ -20,6 +20,7 @@
                                             <li><a href="{{ route('meal-planner.index') }}">Weekly Meal Planner</a></li>
                                             <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
                                             <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>
+                                            <li><a href="{{ route('tools.ingredient-substitution') }}">Ingredient Substitutions</a></li>
                                             <li><a href="{{ url('/sitemap.xml') }}">Sitemap</a></li>
                                         </ul>
                                     </div>

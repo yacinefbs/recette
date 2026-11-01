@@ -173,6 +173,67 @@
     .tt-recipe-side { position: static; }
     .tt-cta { padding: 1.75rem; }
 }
+/* Ingredient substitution tool */
+.tt-sub-layout { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 1.75rem; align-items: start; margin-top: -2rem; position: relative; z-index: 2; }
+.tt-sub-side { position: sticky; top: 90px; }
+.tt-sub-form, .tt-sub-main { background: #fff; border: 1px solid var(--tt-line); border-radius: 20px; box-shadow: var(--tt-shadow); padding: 1.5rem; }
+.tt-sub-main { min-height: 280px; outline: 0; }
+.tt-sub-form__title { font-size: 1.2rem; color: var(--tt-ink); margin-bottom: 1rem; }
+.tt-field { border: 0; padding: 0; margin: 0 0 1.1rem; min-width: 0; }
+.tt-field label, .tt-field legend { display: block; font-weight: 700; font-size: .92rem; color: var(--tt-ink); margin-bottom: .45rem; width: auto; }
+.tt-field legend small { color: var(--tt-muted); font-weight: 400; }
+.tt-field input[type=text], .tt-field input[type=number] { width: 100%; border: 1px solid #e4d8c9; border-radius: 12px; padding: .7rem .9rem; font-size: 1rem; color: var(--tt-ink); background: #fff; }
+.tt-field input[type=text]:focus, .tt-field input[type=number]:focus { border-color: var(--tt-primary); outline: 3px solid rgba(255, 119, 61, .2); }
+.tt-field input[aria-invalid=true] { border-color: #c0392b; }
+.tt-error { color: #b03a2e; font-size: .88rem; margin: .4rem 0 0; }
+.tt-pills { display: flex; flex-wrap: wrap; gap: .4rem; }
+.tt-pills--sm { margin-top: .6rem; }
+.tt-pills label { margin: 0; font-weight: 600; cursor: pointer; }
+.tt-pills input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.tt-pills span { display: inline-block; padding: .4rem .85rem; border: 1px solid #e4d8c9; border-radius: 999px; font-size: .85rem; color: var(--tt-ink); background: #fff; transition: all .15s; }
+.tt-pills label:hover span { border-color: var(--tt-primary); }
+.tt-pills input:checked + span { background: var(--tt-primary); border-color: var(--tt-primary); color: #fff; }
+.tt-pills input:focus-visible + span { outline: 3px solid rgba(255, 119, 61, .35); outline-offset: 2px; }
+.tt-btn--block { display: block; width: 100%; border: 0; cursor: pointer; text-align: center; }
+.tt-sub-main h2 { color: var(--tt-ink); font-size: 1.5rem; }
+.tt-muted { color: var(--tt-muted); }
+.tt-sub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 1rem; margin: 1.25rem 0; }
+.tt-sub-card { border: 1px solid var(--tt-line); border-radius: 16px; padding: 1.15rem; background: #fffdfa; display: flex; flex-direction: column; gap: .6rem; }
+.tt-sub-card.is-best { border-color: var(--tt-primary); box-shadow: 0 8px 24px -14px rgba(255, 119, 61, .7); background: #fff; }
+.tt-sub-card__head { display: flex; gap: .75rem; align-items: center; position: relative; }
+.tt-sub-card__head h3 { font-size: 1.05rem; margin: 0; color: var(--tt-ink); }
+.tt-sub-card__icon { flex: none; width: 46px; height: 46px; border-radius: 14px; background: var(--tt-warm); color: var(--tt-primary-d); display: grid; place-items: center; font-size: 1.15rem; }
+.tt-badge { margin-left: auto; background: var(--tt-gold); color: var(--tt-ink); font-size: .7rem; font-weight: 800; padding: .25rem .6rem; border-radius: 999px; white-space: nowrap; }
+.tt-sub-card__uses, .tt-sub-card__tags { margin: 0; display: flex; flex-wrap: wrap; gap: .3rem; }
+.tt-tag { font-size: .72rem; font-weight: 700; padding: .2rem .55rem; border-radius: 999px; background: #eaf6ef; color: #1f7a45; }
+.tt-tag--use { background: var(--tt-warm); color: var(--tt-primary-d); }
+.tt-tag--warn { background: #fdecea; color: #b03a2e; }
+.tt-sub-card__ratio { background: var(--tt-warm); border-radius: 10px; padding: .6rem .75rem; margin: 0; font-size: .92rem; color: var(--tt-ink); }
+.tt-sub-card__calc { background: #eef6ff; border-radius: 10px; padding: .6rem .75rem; font-size: .92rem; color: var(--tt-ink); }
+.tt-sub-card__calc small { display: block; color: var(--tt-muted); margin-top: .25rem; }
+.tt-sub-card__details { margin: 0; font-size: .9rem; }
+.tt-sub-card__details dt { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; color: var(--tt-muted); margin-top: .5rem; }
+.tt-sub-card__details dd { margin: 0; color: var(--tt-ink); }
+.tt-disclaimer { font-size: .85rem; color: var(--tt-muted); }
+.tt-sub-empty .tt-chips { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.tt-sub-empty .tt-chip { display: inline-block; padding: .35rem .8rem; border-radius: 999px; background: var(--tt-warm); border: 1px solid var(--tt-line); font-size: .85rem; }
+.tt-sub-article { margin-top: 2rem; }
+.tt-sub-h2 { color: var(--tt-ink); font-size: 1.5rem; margin-top: 2rem; }
+.tt-ad { margin: 1.25rem 0; min-height: 100px; text-align: center; }
+.tt-sub-card { position: relative; }
+.tt-sub-card, .tt-sub-card p, .tt-sub-card dd, .tt-sub-card dl, .tt-sub-card small { line-height: 1.5; }
+.tt-sub-card__head > div { flex: 1; min-width: 0; }
+.tt-sub-card .tt-badge { position: absolute; top: -11px; right: 14px; margin: 0; }
+.tt-sub-card__uses .tt-tag { line-height: 1.3; }
+.tt-sub-article ul { list-style: disc; padding-left: 1.4rem; }
+.tt-sub-article ol { list-style: decimal; padding-left: 1.4rem; }
+.tt-sub-article li { padding-left: .2rem; margin-bottom: .3rem; }
+.tt-sub-form label, .tt-sub-form legend, .tt-sub-form span { text-transform: none; }
+.tt-sub-form .tt-field input[type=text], .tt-sub-form .tt-field input[type=number] { padding-left: 1rem !important; }
+@media (max-width: 991px) {
+    .tt-sub-layout { grid-template-columns: 1fr; margin-top: 1rem; }
+    .tt-sub-side { position: static; }
+}
 @media print {
     .tt-hero, .tt-search, .tt-chips { display: none !important; }
     .tt-prose-wrap { margin-top: 0; }

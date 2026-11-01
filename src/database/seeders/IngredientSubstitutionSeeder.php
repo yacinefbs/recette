@@ -1,0 +1,542 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Ingredient;
+use App\Models\IngredientSubstitute;
+use App\Services\IngredientConversionService;
+use App\Services\IngredientSubstitutionService;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
+/**
+ * Initial substitution catalogue. Ratios follow widely published culinary guidance and are
+ * flagged as editorial drafts: `verified_on` stays null until a human reviews each row.
+ * Run with: php artisan db:seed --class=IngredientSubstitutionSeeder (safe to re-run).
+ */
+class IngredientSubstitutionSeeder extends Seeder
+{
+    private const SOURCE = 'Editorial draft based on widely published culinary guidance; pending review.';
+
+    public function run(): void
+    {
+        $conv = app(IngredientConversionService::class);
+
+        foreach ($this->catalogue() as $data) {
+            $subs = $data['subs'];
+            unset($data['subs']);
+
+            $ingredient = Ingredient::updateOrCreate(['slug' => Str::slug($data['name'])], $data);
+            IngredientSubstitute::where('ingredient_id', $ingredient->id)->delete();
+
+            $singular = Str::lower(Str::singular($ingredient->name));
+            foreach ($subs as $s) {
+                IngredientSubstitute::create([
+                    'ingredient_id' => $ingredient->id,
+                    'substitute_name' => $s['name'],
+                    'icon' => $s['icon'],
+                    'purposes' => $s['purposes'],
+                    'original_quantity' => $s['oq'],
+                    'original_unit' => $s['ou'],
+                    'components' => array_map(fn ($c) => [
+                        'name' => $c[0], 'qty' => $c[1], 'unit' => $c[2], 'qty_max' => $c[3] ?? null,
+                    ], $s['components']),
+                    'ratio_description' => $conv->describeRatio($s['oq'], $s['ou'], $singular, $s['components']),
+                    'advantages' => $s['pros'],
+                    'limitations' => $s['cons'],
+                    'impact' => $s['impact'],
+                    'tip' => $s['tip'],
+                    'dietary_tags' => $this->tags($s['tags']),
+                    'allergens' => $s['allergens'],
+                    'quality_score' => $s['score'],
+                    'source' => self::SOURCE,
+                    'verified_on' => null,
+                    'is_active' => true,
+                ]);
+            }
+        }
+
+        IngredientSubstitutionService::forgetCache();
+    }
+
+    /** 'vegan' implies the three other plant-based tags; the others are explicit. */
+    private function tags(array $short): array
+    {
+        $map = ['V' => 'vegan', 'VG' => 'vegetarian', 'DF' => 'dairy-free', 'GF' => 'gluten-free', 'NF' => 'nut-free', 'EF' => 'egg-free'];
+        $out = [];
+        foreach ($short as $t) {
+            $out[] = $map[$t];
+            if ($t === 'V') {
+                array_push($out, 'vegetarian', 'dairy-free', 'egg-free');
+            }
+        }
+
+        return array_values(array_unique($out));
+    }
+
+    private function sub(string $name, string $icon, array $purposes, float $oq, string $ou, array $components, string $pros, string $cons, string $impact, string $tip, array $tags, array $allergens, int $score): array
+    {
+        return compact('name', 'icon', 'purposes', 'oq', 'ou', 'components', 'pros', 'cons', 'impact', 'tip', 'tags', 'allergens', 'score');
+    }
+
+    private function catalogue(): array
+    {
+        $s = fn (...$a) => $this->sub(...$a);
+
+        return [
+            [
+                'name' => 'Butter', 'category' => 'dairy', 'icon' => 'fa-cheese', 'grams_per_cup' => 227,
+                'aliases' => ['unsalted butter', 'salted butter'],
+                'description' => 'Butter brings fat, flavour and moisture. When it is creamed with sugar it also traps air, which gives cakes and cookies their texture.',
+                'guide_published' => true,
+                'guide_intro' => 'Butter does several jobs at once: it adds richness, carries flavour, keeps baked goods tender and, when creamed with sugar, helps them rise. That is why the best substitute depends on what you are making. Below you will find the most reliable alternatives with ratios, what changes in taste and texture, and which dietary needs each one meets.',
+                'faqs' => [
+                    ['q' => 'Can I replace butter with oil in a cake?', 'a' => 'Often yes. Use about ¾ cup of a neutral oil for every 1 cup of butter. Oil makes cakes moist and tender, but you lose butter flavour and the light structure created by creaming butter with sugar, so it suits snack cakes, muffins and quick breads better than recipes that start with creamed butter.'],
+                    ['q' => 'Does applesauce change the taste of cookies?', 'a' => 'Unsweetened applesauce adds very little flavour, but it changes the texture. Because it brings moisture instead of fat, cookies turn softer and more cake-like and spread less. Start by replacing only part of the butter rather than all of it.'],
+                    ['q' => 'Can I use coconut oil instead of butter?', 'a' => 'Yes, usually 1:1 by volume. Coconut oil is pure fat while butter also contains water, so results can be slightly different. Refined coconut oil is neutral; virgin coconut oil tastes of coconut. Use it solid and at cool room temperature when a recipe asks you to cream the butter.'],
+                ],
+                'subs' => [
+                    $s('Coconut oil', 'fa-oil-can', ['baking', 'cooking', 'desserts'], 1, 'cup', [['coconut oil', 1, 'cup']],
+                        'A simple 1:1 swap that works in cookies, brownies, muffins and for sautéing. Solid at room temperature, so it can be creamed.',
+                        'Pure fat, so baked goods can be a little more crumbly. Virgin coconut oil tastes of coconut.',
+                        'Refined: neutral taste and a tender crumb. Virgin: a noticeable coconut flavour.',
+                        'Use it solid, not melted, when the recipe says to cream butter and sugar.',
+                        ['V', 'GF'], ['coconut'], 88),
+                    $s('Vegetable or olive oil', 'fa-tint', ['cooking', 'baking'], 1, 'cup', [['neutral oil or light olive oil', 0.75, 'cup']],
+                        'Easy to find, works for sautéing, roasting and many mixed (not creamed) batters.',
+                        'Cannot be creamed, so it will not give the same lift in cakes and cookies that rely on creamed butter.',
+                        'Moist, tender crumb; no butter flavour. Cookies spread more and stay softer.',
+                        'Choose a neutral or light olive oil for baking; extra virgin olive oil has a strong flavour.',
+                        ['V', 'GF', 'NF'], [], 84),
+                    $s('Vegan butter sticks', 'fa-leaf', ['baking', 'cooking', 'desserts'], 1, 'cup', [['vegan butter (stick form)', 1, 'cup']],
+                        'The closest 1:1 swap for texture, because it is made to be solid and creamable.',
+                        'Brands differ in water and fat content, so results vary. Some contain soy or nuts.',
+                        'Close to butter in baking; flavour depends on the brand.',
+                        'Use stick-style products rather than soft spreads in tubs, which contain more water.',
+                        ['V'], ['check the label'], 86),
+                    $s('Unsweetened applesauce', 'fa-apple-alt', ['baking', 'desserts'], 1, 'cup', [['unsweetened applesauce', 0.5, 'cup', 0.75]],
+                        'Cuts fat and adds moisture to cakes, muffins and quick breads.',
+                        'Adds moisture but no fat, so crisp cookies, pastry and shortbread do not work well.',
+                        'Softer, denser and more cake-like; slight fruity sweetness.',
+                        'Start by replacing half of the butter with applesauce, and keep the rest as butter or oil.',
+                        ['V', 'GF', 'NF'], [], 74),
+                    $s('Plain Greek yogurt', 'fa-ice-cream', ['baking', 'desserts'], 1, 'cup', [['plain full-fat Greek yogurt', 0.5, 'cup', 0.75]],
+                        'Keeps muffins, quick breads and some cakes moist and tender.',
+                        'Contains little fat compared with butter, so it is not suitable for cookies, pastry or frying.',
+                        'Moist, slightly tangy and denser crumb.',
+                        'Use full-fat yogurt and consider replacing only part of the butter.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 68),
+                ],
+            ],
+            [
+                'name' => 'Eggs', 'category' => 'dairy & eggs', 'icon' => 'fa-egg', 'grams_per_cup' => null,
+                'aliases' => ['egg', 'large egg', 'whole egg'],
+                'description' => 'Eggs bind ingredients, add moisture and richness, and help baked goods rise and set.',
+                'guide_published' => true,
+                'guide_intro' => 'In a recipe an egg can bind, add moisture, create lift or set a custard, and no single substitute does all of these. A flax egg binds, applesauce and banana add moisture, and aquafaba whips like egg white. Pick the substitute that matches what the egg is doing in your recipe. Egg replacers work best when a recipe uses one or two eggs.',
+                'faqs' => [
+                    ['q' => 'What is the best vegan substitute for eggs?', 'a' => 'It depends on the job the egg does. Flax or chia eggs bind muffins, cookies and pancakes; applesauce and mashed banana add moisture to cakes; aquafaba whips like egg white for meringues and mousse. When eggs provide the main structure, as in quiche, custard or soufflé, a simple swap rarely works and a recipe designed to be egg-free is a better choice.'],
+                    ['q' => 'How do I make a flax egg?', 'a' => 'Stir 1 tablespoon of ground flaxseed into 3 tablespoons of water and leave it for about 5 minutes until it thickens. This replaces one egg. Use ground flaxseed, not whole seeds.'],
+                    ['q' => 'Can I replace more than two eggs?', 'a' => 'It is risky. Flax, applesauce and banana work best for one or two eggs. When a recipe calls for three or more, eggs are usually providing the structure and the result is less predictable.'],
+                ],
+                'subs' => [
+                    $s('Flax egg', 'fa-seedling', ['baking'], 1, 'item', [['ground flaxseed', 1, 'tbsp'], ['water', 3, 'tbsp']],
+                        'Binds well in muffins, pancakes, cookies and quick breads.',
+                        'Does not add lift or lightness. Not suitable for meringues, custards or recipes with many eggs.',
+                        'Slightly denser and nuttier, with a visible brown fleck.',
+                        'Stir and let it rest for about 5 minutes until it turns gel-like before adding.',
+                        ['V', 'GF', 'NF'], [], 90),
+                    $s('Chia egg', 'fa-seedling', ['baking'], 1, 'item', [['chia seeds', 1, 'tbsp'], ['water', 3, 'tbsp']],
+                        'A good binder with no flavour; useful if you have no flaxseed.',
+                        'Adds a gel-like texture and visible seeds. Not for light or airy bakes.',
+                        'Slightly denser crumb with tiny dark seeds.',
+                        'Let the mixture gel for 5 to 10 minutes. Ground chia disappears better into pale batters.',
+                        ['V', 'GF', 'NF'], [], 86),
+                    $s('Unsweetened applesauce', 'fa-apple-alt', ['baking', 'desserts'], 1, 'item', [['unsweetened applesauce', 0.25, 'cup']],
+                        'Adds moisture to cakes, muffins and brownies.',
+                        'Adds moisture but not binding or lift. Best for one or two eggs.',
+                        'Moist, slightly denser and softer; mild fruity note.',
+                        'Add ½ tsp baking powder if the cake feels heavy.',
+                        ['V', 'GF', 'NF'], [], 80),
+                    $s('Mashed ripe banana', 'fa-carrot', ['baking', 'desserts'], 1, 'item', [['mashed ripe banana', 0.25, 'cup']],
+                        'Adds moisture and natural sweetness; perfect for pancakes, muffins and banana bread.',
+                        'Adds banana flavour, so it only suits recipes where this is welcome.',
+                        'Moist, dense, with a clear banana taste.',
+                        'Use very ripe bananas, mashed until smooth, and consider reducing the sugar slightly.',
+                        ['V', 'GF', 'NF'], [], 76),
+                    $s('Aquafaba (chickpea liquid)', 'fa-flask', ['baking', 'desserts'], 1, 'item', [['aquafaba', 3, 'tbsp']],
+                        'Whips into foam, so it can replace egg whites in meringues, macarons and mousses.',
+                        'Needs whipping, and the result is less stable than real egg white.',
+                        'Light and airy, with a neutral flavour once baked.',
+                        'Use the liquid from unsalted canned chickpeas, and whip until stiff peaks form.',
+                        ['V', 'GF', 'NF'], ['chickpeas'], 72),
+                ],
+            ],
+            [
+                'name' => 'Milk', 'category' => 'dairy', 'icon' => 'fa-tint', 'grams_per_cup' => 240,
+                'aliases' => ['whole milk', 'cow milk', "cow's milk"],
+                'description' => 'Milk adds liquid, a little fat and protein, and helps baked goods brown.',
+                'guide_published' => true,
+                'guide_intro' => 'Milk is mostly water, with some fat, protein and sugar. That makes it one of the easiest ingredients to replace: most plant milks work 1:1 in muffins, pancakes and sauces. The real differences show up in sweetness, flavour and how well the milk behaves when heated or mixed with acid.',
+                'faqs' => [
+                    ['q' => 'Can I use water instead of milk?', 'a' => 'In many recipes, yes: pancakes, muffins, quick breads and boxed mixes usually work with water at a 1:1 ratio. The result is less rich and browns less. A tablespoon of melted butter or oil per cup helps replace the missing fat. Avoid it in custards, puddings and white sauces, which rely on milk for flavour and structure.'],
+                    ['q' => 'Which plant milk is best for baking?', 'a' => 'Unsweetened soy milk is the closest to cow milk in protein and behaves very similarly in baking. Oat and almond milk work well in most cakes, muffins and pancakes. Choose plain, unsweetened versions for savoury dishes.'],
+                    ['q' => 'Can I use evaporated milk instead of milk?', 'a' => 'Yes. Mix equal parts evaporated milk and water to replace regular milk. It has a slightly cooked, caramel-like flavour.'],
+                ],
+                'subs' => [
+                    $s('Soy milk', 'fa-leaf', ['baking', 'cooking', 'desserts'], 1, 'cup', [['unsweetened soy milk', 1, 'cup']],
+                        'The closest plant milk to dairy in protein; works 1:1 in baking and sauces.',
+                        'Soy is a major allergen. Some people notice a beany flavour.',
+                        'Very similar texture to milk; mild flavour.',
+                        'Choose unsweetened and unflavoured soy milk for savoury cooking.',
+                        ['V', 'GF', 'NF'], ['soy'], 90),
+                    $s('Oat milk', 'fa-seedling', ['baking', 'cooking', 'desserts'], 1, 'cup', [['unsweetened oat milk', 1, 'cup']],
+                        'Creamy and lightly sweet; works 1:1 in muffins, pancakes and soups.',
+                        'Can be thinner in sauces, and may not be gluten-free because oats are often cross-contaminated.',
+                        'Soft, slightly sweet flavour and a tender crumb.',
+                        'If you avoid gluten, look for a product labelled gluten-free.',
+                        ['V', 'NF'], ['check the label'], 84),
+                    $s('Almond milk', 'fa-leaf', ['baking', 'desserts', 'cooking'], 1, 'cup', [['unsweetened almond milk', 1, 'cup']],
+                        'Light and neutral; a simple 1:1 swap in cakes, pancakes and smoothies.',
+                        'Contains tree nuts. Thinner than milk, so sauces may need a little thickener.',
+                        'Lighter body and a faint nutty flavour.',
+                        'Choose unsweetened almond milk to avoid adding unwanted sugar.',
+                        ['V', 'GF'], ['tree nuts'], 78),
+                    $s('Water', 'fa-tint', ['baking', 'cooking'], 1, 'cup', [['water', 1, 'cup']],
+                        'Always available; works in pancakes, muffins and many mixes.',
+                        'Adds no fat, protein or flavour, so results are less rich and brown less.',
+                        'Lighter, less rich and paler.',
+                        'Add 1 tablespoon of melted butter or oil per cup for a richer result.',
+                        ['V', 'GF', 'NF'], [], 55),
+                    $s('Evaporated milk and water', 'fa-cheese', ['cooking', 'baking', 'desserts'], 1, 'cup', [['evaporated milk', 0.5, 'cup'], ['water', 0.5, 'cup']],
+                        'A pantry staple that gives a creamy result in soups, sauces and baking.',
+                        'Contains dairy. Has a slightly cooked flavour.',
+                        'Creamy, with a mild caramelised note.',
+                        'Use full-fat evaporated milk and stir the water in thoroughly.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 74),
+                ],
+            ],
+            [
+                'name' => 'Heavy cream', 'category' => 'dairy', 'icon' => 'fa-ice-cream', 'grams_per_cup' => null,
+                'aliases' => ['heavy whipping cream', 'whipping cream'],
+                'description' => 'Heavy cream is high in fat. It adds richness, thickens sauces and can be whipped.',
+                'guide_published' => true,
+                'guide_intro' => 'Heavy cream is valued for its fat, which makes sauces rich and lets it whip into peaks. Most substitutes copy only one of those abilities: some give richness in cooking, but almost none will whip. Use the notes below to match the substitute to the job.',
+                'faqs' => [
+                    ['q' => 'Can I whip a heavy cream substitute?', 'a' => 'Only a few. Chilled full-fat coconut cream, which is the thick part at the top of a chilled can, whips to soft peaks. Milk with butter and evaporated milk will not whip.'],
+                    ['q' => 'Can I use milk instead of heavy cream in a soup or sauce?', 'a' => 'Milk alone gives a thinner, less rich result and can curdle when boiled with acidic ingredients. Mixing ¾ cup of milk with ¼ cup of melted butter per cup of cream is a better cooking substitute, and a little cornstarch can thicken it further. It will not whip.'],
+                    ['q' => 'What is the best dairy-free substitute for heavy cream?', 'a' => 'Full-fat canned coconut cream is the closest in richness and can be whipped. It tastes of coconut, which suits curries and desserts better than delicate savoury sauces.'],
+                ],
+                'subs' => [
+                    $s('Coconut cream', 'fa-leaf', ['cooking', 'desserts', 'baking'], 1, 'cup', [['full-fat coconut cream', 1, 'cup']],
+                        'Rich and dairy-free; the only common option that whips when well chilled.',
+                        'Tastes of coconut, and brands vary in thickness.',
+                        'Rich, thick, with a clear coconut flavour.',
+                        'Chill the can overnight and use only the thick cream at the top for whipping.',
+                        ['V', 'GF'], ['coconut'], 86),
+                    $s('Evaporated milk', 'fa-cheese', ['cooking', 'baking'], 1, 'cup', [['evaporated milk', 1, 'cup']],
+                        'Good in soups, sauces, quiches and some baked dishes.',
+                        'Lower in fat than cream and will not whip. Has a slightly cooked flavour.',
+                        'Less rich and a bit thinner than cream.',
+                        'Add it off the heat or at the end to reduce the chance of curdling.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 76),
+                    $s('Milk and melted butter', 'fa-tint', ['cooking', 'baking'], 1, 'cup', [['whole milk', 0.75, 'cup'], ['melted butter', 0.25, 'cup']],
+                        'Easy to make with common ingredients; works in sauces, soups and baking.',
+                        'Will not whip. Do not use it for dishes that need whipped cream.',
+                        'Rich enough for most cooking, slightly lighter than cream.',
+                        'Whisk the butter and milk together well before adding.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 78),
+                ],
+            ],
+            [
+                'name' => 'Buttermilk', 'category' => 'dairy', 'icon' => 'fa-tint', 'grams_per_cup' => null,
+                'aliases' => [],
+                'description' => 'Buttermilk is tangy and acidic. It tenderises batters and reacts with baking soda to help baked goods rise.',
+                'subs' => [
+                    $s('Milk and lemon juice', 'fa-lemon', ['baking', 'cooking', 'desserts'], 1, 'cup', [['lemon juice', 1, 'tbsp'], ['milk', 15, 'tbsp']],
+                        'The most common substitute; gives the acidity needed to activate baking soda.',
+                        'Thinner than real buttermilk, and not as tangy.',
+                        'Slightly less thick, but works well in pancakes, cakes and biscuits.',
+                        'Stir the lemon juice into the milk and leave it for 5 to 10 minutes before using.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 88),
+                    $s('Milk and white vinegar', 'fa-wine-bottle', ['baking', 'cooking', 'desserts'], 1, 'cup', [['white vinegar', 1, 'tbsp'], ['milk', 15, 'tbsp']],
+                        'Equally effective as lemon juice, and usually already in the pantry.',
+                        'Thinner than buttermilk; the vinegar has no citrus note.',
+                        'Very similar to the lemon version in baking.',
+                        'Rest for 5 to 10 minutes; it will look slightly curdled, which is normal.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 86),
+                    $s('Plain yogurt and milk', 'fa-ice-cream', ['baking', 'cooking'], 1, 'cup', [['plain yogurt', 0.75, 'cup'], ['milk', 0.25, 'cup']],
+                        'Naturally tangy and thick; good for marinades, pancakes and cakes.',
+                        'Thicker than buttermilk unless thinned. Contains dairy.',
+                        'Closest in tang and thickness.',
+                        'Whisk the yogurt and milk until smooth.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 84),
+                    $s('Soy milk and lemon juice', 'fa-leaf', ['baking'], 1, 'cup', [['lemon juice', 1, 'tbsp'], ['unsweetened soy milk', 15, 'tbsp']],
+                        'A dairy-free option; soy milk thickens well when mixed with acid.',
+                        'Contains soy. Flavour is slightly different from dairy buttermilk.',
+                        'Works well in baking; slightly different flavour.',
+                        'Use unsweetened soy milk and let it rest for 10 minutes.',
+                        ['V', 'GF', 'NF'], ['soy'], 76),
+                ],
+            ],
+            [
+                'name' => 'Sour cream', 'category' => 'dairy', 'icon' => 'fa-ice-cream', 'grams_per_cup' => null,
+                'aliases' => [],
+                'description' => 'Sour cream adds tang, richness and moisture to dips, sauces and baked goods.',
+                'subs' => [
+                    $s('Plain Greek yogurt', 'fa-ice-cream', ['cooking', 'baking', 'desserts'], 1, 'cup', [['plain full-fat Greek yogurt', 1, 'cup']],
+                        'A simple 1:1 swap with similar tang and thickness.',
+                        'Lower in fat, and may split if boiled.',
+                        'Slightly tangier and less rich.',
+                        'Stir it in at the end of cooking, away from direct heat.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 90),
+                    $s('Plain yogurt', 'fa-ice-cream', ['baking', 'cooking'], 1, 'cup', [['plain full-fat yogurt', 1, 'cup']],
+                        'Works well in cakes, muffins and dips.',
+                        'Thinner than sour cream; may need a little draining for dips.',
+                        'Lighter and tangier.',
+                        'Strain regular yogurt through a cloth for 20 to 30 minutes if the recipe needs it thick.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 80),
+                    $s('Crème fraîche', 'fa-cheese', ['cooking', 'baking', 'desserts'], 1, 'cup', [['crème fraîche', 1, 'cup']],
+                        'Richer and less likely to curdle in hot dishes.',
+                        'Can be harder to find and more expensive.',
+                        'Rich and mildly tangy.',
+                        'Excellent for soups and sauces that are heated.',
+                        ['VG', 'EF', 'GF', 'NF'], ['milk'], 84),
+                    $s('Unsweetened soy yogurt', 'fa-leaf', ['cooking', 'baking'], 1, 'cup', [['plain unsweetened soy yogurt', 1, 'cup']],
+                        'A dairy-free option for dips, dressings and baking.',
+                        'Contains soy; thinner and less rich than sour cream.',
+                        'Mild tang; lighter body.',
+                        'Add a squeeze of lemon juice if you want more tang.',
+                        ['V', 'NF'], ['soy'], 66),
+                ],
+            ],
+            [
+                'name' => 'Baking powder', 'category' => 'baking', 'icon' => 'fa-flask', 'grams_per_cup' => null,
+                'aliases' => [],
+                'description' => 'Baking powder is a leavening agent: it contains baking soda and an acid, so it makes batters rise without any other acidic ingredient.',
+                'guide_published' => true,
+                'guide_intro' => 'Baking powder is baking soda already paired with a dry acid and a little starch. To replace it you must give baking soda an acid to react with, otherwise you get little lift and a metallic taste. The homemade versions below use ingredients most kitchens already have.',
+                'faqs' => [
+                    ['q' => 'Can I use baking soda instead of baking powder?', 'a' => 'Not on its own, and not 1:1. Baking soda needs an acid to react. Use ¼ teaspoon of baking soda with ½ teaspoon of cream of tartar for each teaspoon of baking powder, or baking soda with an acid such as lemon juice or vinegar. Baking soda alone can leave a soapy or metallic taste.'],
+                    ['q' => 'How do I make homemade baking powder?', 'a' => 'Mix 2 parts cream of tartar with 1 part baking soda, for example 2 teaspoons of cream of tartar with 1 teaspoon of baking soda, which makes 3 teaspoons of baking powder. Use it straight away, since homemade versions do not keep as well as store-bought ones.'],
+                    ['q' => 'Are baking soda and baking powder the same?', 'a' => 'No. Baking soda is pure sodium bicarbonate and needs an acidic ingredient to work. Baking powder already contains the acid, so it works on its own. In most recipes, one teaspoon of baking soda does the work of roughly three teaspoons of baking powder.'],
+                ],
+                'subs' => [
+                    $s('Baking soda and cream of tartar', 'fa-flask', ['baking'], 1, 'tsp', [['baking soda', 0.25, 'tsp'], ['cream of tartar', 0.5, 'tsp']],
+                        'The classic homemade version that behaves like double-acting baking powder.',
+                        'Needs cream of tartar, which not every kitchen has.',
+                        'Very similar rise and taste to store-bought baking powder.',
+                        'Mix well and use right away; homemade versions lose strength over time.',
+                        ['V', 'GF', 'NF'], [], 92),
+                    $s('Baking soda and lemon juice or vinegar', 'fa-lemon', ['baking'], 1, 'tsp', [['baking soda', 0.25, 'tsp'], ['lemon juice or white vinegar', 0.5, 'tsp']],
+                        'Uses ingredients most people already have.',
+                        'Reacts right away, so bake quickly. Adds a little liquid and acidity to the batter.',
+                        'Good rise if the batter is baked straight away; can taste slightly tangy.',
+                        'Add the acid at the last moment and bake without delay.',
+                        ['V', 'GF', 'NF'], [], 70),
+                ],
+            ],
+            [
+                'name' => 'Baking soda', 'category' => 'baking', 'icon' => 'fa-flask', 'grams_per_cup' => null,
+                'aliases' => ['bicarbonate of soda', 'bicarb', 'bicarbonate'],
+                'description' => 'Baking soda (sodium bicarbonate) leavens batters that contain an acidic ingredient such as buttermilk, yogurt, honey or cocoa.',
+                'subs' => [
+                    $s('Baking powder', 'fa-flask', ['baking'], 1, 'tsp', [['baking powder', 3, 'tsp']],
+                        'Works on its own because it already contains an acid.',
+                        'Needs about three times as much, which can add a slightly bitter or salty taste. Not ideal where a recipe relies on baking soda to neutralise an acid.',
+                        'A little less browning and a slightly different flavour.',
+                        'Reduce added salt a little, since baking powder contains some.',
+                        ['V', 'GF', 'NF'], [], 80),
+                ],
+            ],
+            [
+                'name' => 'All-purpose flour', 'category' => 'baking', 'icon' => 'fa-bread-slice', 'grams_per_cup' => 120,
+                'aliases' => ['all purpose flour', 'plain flour', 'flour', 'ap flour'],
+                'description' => 'All-purpose flour gives structure to baked goods and thickens sauces.',
+                'subs' => [
+                    $s('Gluten-free flour blend', 'fa-seedling', ['baking', 'cooking', 'desserts'], 1, 'cup', [['gluten-free 1:1 flour blend', 1, 'cup']],
+                        'Designed to replace wheat flour 1:1 in cakes, cookies and pancakes.',
+                        'Brands differ a lot; yeast breads are harder. Some blends contain nuts or other allergens.',
+                        'Slightly more crumbly or gritty than wheat flour.',
+                        'Choose a blend that already includes xanthan gum, and rest the batter for 15 to 30 minutes.',
+                        ['V', 'GF'], ['check the label'], 82),
+                    $s('Oat flour', 'fa-bread-slice', ['baking', 'desserts'], 1, 'cup', [['oat flour', 120, 'g']],
+                        'Adds a mild, sweet flavour to cookies, muffins and pancakes.',
+                        'Has less gluten, so breads and structured cakes may be dense or crumbly. Oats are often cross-contaminated with gluten.',
+                        'Softer, denser and slightly sweet.',
+                        'Replace by weight rather than by volume, and start by replacing part of the flour.',
+                        ['V', 'NF'], ['check the label'], 72),
+                    $s('Whole wheat flour', 'fa-bread-slice', ['baking', 'cooking'], 1, 'cup', [['whole wheat flour', 1, 'cup']],
+                        'Adds fibre and a nutty flavour.',
+                        'Absorbs more liquid and gives a heavier result.',
+                        'Denser, nuttier and a bit drier.',
+                        'Start by replacing half of the flour, and add a tablespoon or two of extra liquid if the batter is stiff.',
+                        ['V', 'NF'], ['wheat'], 70),
+                ],
+            ],
+            [
+                'name' => 'Breadcrumbs', 'category' => 'pantry', 'icon' => 'fa-bread-slice', 'grams_per_cup' => null,
+                'aliases' => ['bread crumbs', 'panko'],
+                'description' => 'Breadcrumbs bind meatballs and meatloaf, and create a crisp coating or topping.',
+                'subs' => [
+                    $s('Crushed crackers', 'fa-cookie', ['cooking'], 1, 'cup', [['finely crushed crackers', 1, 'cup']],
+                        'Works for binding and coating, and adds salty flavour.',
+                        'Contains wheat and is already salted.',
+                        'Crisp and savoury.',
+                        'Reduce the salt in the recipe a little.',
+                        ['VG', 'DF'], ['wheat'], 86),
+                    $s('Rolled oats', 'fa-seedling', ['cooking'], 1, 'cup', [['rolled oats', 1, 'cup']],
+                        'A good binder for meatballs, burgers and meatloaf.',
+                        'Will not give a crisp coating. Oats may contain gluten through cross-contamination.',
+                        'Soft and hearty, with no crunch.',
+                        'Pulse in a blender for a finer texture.',
+                        ['V', 'NF'], ['check the label'], 70),
+                ],
+            ],
+            [
+                'name' => 'Honey', 'category' => 'sweeteners', 'icon' => 'fa-tint', 'grams_per_cup' => 340,
+                'aliases' => [],
+                'description' => 'Honey sweetens, adds moisture and a distinct flavour, and helps baked goods brown.',
+                'subs' => [
+                    $s('Maple syrup', 'fa-leaf', ['baking', 'cooking', 'desserts'], 1, 'cup', [['pure maple syrup', 1, 'cup']],
+                        'A simple 1:1 swap that is vegan and pours easily.',
+                        'Thinner than honey, with a distinct maple taste.',
+                        'Slightly less sticky, with maple flavour.',
+                        'Use pure maple syrup rather than pancake syrup.',
+                        ['V', 'GF', 'NF'], [], 90),
+                    $s('Agave syrup', 'fa-leaf', ['baking', 'cooking', 'desserts'], 1, 'cup', [['agave syrup', 1, 'cup']],
+                        'Mild flavour and a similar consistency; vegan.',
+                        'Sweeter than honey, so you may use a little less. Browns faster.',
+                        'Neutral flavour; a slightly softer texture.',
+                        'Lower the oven temperature slightly or check baking earlier, because it browns quickly.',
+                        ['V', 'GF', 'NF'], [], 82),
+                    $s('Sugar and water', 'fa-cookie', ['baking', 'cooking', 'desserts'], 1, 'cup', [['granulated sugar', 1.25, 'cup'], ['water', 0.25, 'cup']],
+                        'Uses pantry staples when no liquid sweetener is available.',
+                        'Lacks honey flavour and some of its moisture-holding quality.',
+                        'Plain sweetness; a slightly drier result.',
+                        'Dissolve the sugar fully in the water before adding.',
+                        ['VG', 'DF', 'EF', 'GF', 'NF'], [], 70),
+                ],
+            ],
+            [
+                'name' => 'Lemon juice', 'category' => 'pantry', 'icon' => 'fa-lemon', 'grams_per_cup' => null,
+                'aliases' => ['lemon'],
+                'description' => 'Lemon juice adds acidity and brightness, and activates baking soda.',
+                'subs' => [
+                    $s('Lime juice', 'fa-lemon', ['cooking', 'baking', 'desserts'], 1, 'tbsp', [['lime juice', 1, 'tbsp']],
+                        'The closest match in acidity and brightness.',
+                        'Tastes of lime rather than lemon.',
+                        'A sharper, slightly more bitter citrus note.',
+                        'Works best in marinades, dressings, guacamole and baking.',
+                        ['V', 'GF', 'NF'], [], 90),
+                    $s('White wine vinegar or apple cider vinegar', 'fa-wine-bottle', ['cooking'], 1, 'tbsp', [['white wine vinegar or apple cider vinegar', 0.5, 'tbsp']],
+                        'Provides acidity for dressings, marinades and sauces.',
+                        'Has no citrus aroma and is stronger, so start with less and taste.',
+                        'Sharper and less fruity.',
+                        'Begin with the lower amount, then adjust to taste. Not suitable for drinks or desserts.',
+                        ['V', 'GF', 'NF'], [], 60),
+                ],
+            ],
+            [
+                'name' => 'Cornstarch', 'category' => 'baking', 'icon' => 'fa-balance-scale', 'grams_per_cup' => null,
+                'aliases' => ['corn starch', 'cornflour'],
+                'description' => 'Cornstarch thickens sauces, soups and fruit fillings, and makes baked goods tender.',
+                'subs' => [
+                    $s('Arrowroot powder', 'fa-seedling', ['cooking', 'desserts'], 1, 'tbsp', [['arrowroot powder', 1, 'tbsp']],
+                        'A 1:1 thickener that gives a clear, glossy result.',
+                        'Can become slimy with dairy and loses thickening power if boiled for long.',
+                        'Clear and glossy; no flavour.',
+                        'Add near the end of cooking and remove from the heat once thickened.',
+                        ['V', 'GF', 'NF'], [], 86),
+                    $s('Tapioca starch', 'fa-seedling', ['cooking', 'desserts'], 1, 'tbsp', [['tapioca starch', 2, 'tbsp']],
+                        'Good for fruit pies and glossy sauces.',
+                        'Can be stringy if overused, and does not freeze well in all dishes.',
+                        'Glossy and slightly chewy.',
+                        'Mix with cold liquid first and simmer gently.',
+                        ['V', 'GF', 'NF'], [], 74),
+                    $s('All-purpose flour', 'fa-bread-slice', ['cooking'], 1, 'tbsp', [['all-purpose flour', 2, 'tbsp']],
+                        'Found in every kitchen; fine for gravies and stews.',
+                        'Makes sauces cloudy, needs to be cooked out, and is not gluten-free.',
+                        'Opaque and a little heavier than cornstarch.',
+                        'Cook for a few minutes to remove the raw flour taste.',
+                        ['V', 'NF'], ['wheat'], 70),
+                ],
+            ],
+            [
+                'name' => 'Vegetable oil', 'category' => 'oils', 'icon' => 'fa-oil-can', 'grams_per_cup' => null,
+                'aliases' => ['cooking oil', 'neutral oil'],
+                'description' => 'Vegetable oil is a neutral fat used for frying, sautéing and keeping baked goods moist.',
+                'subs' => [
+                    $s('Canola oil', 'fa-oil-can', ['baking', 'cooking', 'desserts'], 1, 'cup', [['canola oil', 1, 'cup']],
+                        'A neutral 1:1 swap for frying, baking and dressings.',
+                        'Highly refined; nothing noteworthy in flavour.',
+                        'Identical in practice.',
+                        'Use it for frying as well as baking.',
+                        ['V', 'GF', 'NF'], [], 92),
+                    $s('Sunflower oil', 'fa-oil-can', ['baking', 'cooking', 'desserts'], 1, 'cup', [['sunflower oil', 1, 'cup']],
+                        'Neutral and suitable for most cooking temperatures.',
+                        'Some people are allergic to sunflower seeds.',
+                        'Practically unnoticeable in recipes.',
+                        'Choose refined sunflower oil for high-heat frying.',
+                        ['V', 'GF', 'NF'], [], 90),
+                    $s('Light olive oil', 'fa-tint', ['cooking', 'baking'], 1, 'cup', [['light olive oil', 1, 'cup']],
+                        'Works in cakes, muffins and for sautéing.',
+                        'Extra virgin olive oil has a stronger taste and a lower smoke point.',
+                        'Slight olive note; best in savoury or citrus-based bakes.',
+                        'Use light or mild olive oil for baking.',
+                        ['V', 'GF', 'NF'], [], 80),
+                    $s('Applesauce and oil', 'fa-apple-alt', ['baking', 'desserts'], 1, 'cup', [['unsweetened applesauce', 0.5, 'cup'], ['neutral oil', 0.5, 'cup']],
+                        'Cuts fat in muffins, quick breads and cakes while keeping them moist.',
+                        'Replace only half of the oil: using applesauce alone makes the result gummy and dense.',
+                        'Moister and denser, with a faint apple sweetness.',
+                        'Use unsweetened applesauce and reduce the sugar slightly if using a sweetened variety.',
+                        ['V', 'GF', 'NF'], [], 68),
+                ],
+            ],
+            [
+                'name' => 'Parmesan', 'category' => 'dairy', 'icon' => 'fa-cheese', 'grams_per_cup' => null,
+                'aliases' => ['parmesan cheese', 'parmigiano reggiano', 'parmigiano'],
+                'description' => 'Parmesan is a hard, aged cheese that adds salty, nutty umami to pasta, soups and salads.',
+                'subs' => [
+                    $s('Pecorino Romano', 'fa-cheese', ['cooking'], 1, 'cup', [['grated Pecorino Romano', 1, 'cup']],
+                        'The closest 1:1 swap for grating on pasta, salads and sauces.',
+                        'Sharper and saltier, and made from sheep milk.',
+                        'More pungent; usually needs less added salt.',
+                        'Taste before adding extra salt to the dish.',
+                        ['EF', 'GF', 'NF'], ['milk'], 90),
+                    $s('Grana Padano', 'fa-cheese', ['cooking'], 1, 'cup', [['grated Grana Padano', 1, 'cup']],
+                        'Very close in taste, a bit milder and often cheaper.',
+                        'Usually contains egg-derived lysozyme, so it is not suitable for people with egg allergy.',
+                        'Slightly milder and less crumbly.',
+                        'A good everyday alternative on pasta and risotto.',
+                        ['GF', 'NF'], ['milk', 'egg'], 88),
+                    $s('Nutritional yeast', 'fa-seedling', ['cooking'], 1, 'cup', [['nutritional yeast', 0.5, 'cup']],
+                        'A dairy-free, cheesy and nutty flavour that suits vegan pasta and popcorn.',
+                        'A different flavour from Parmesan; it does not melt.',
+                        'Savoury and nutty, but not cheesy in the same way.',
+                        'Start with half the amount and add more to taste.',
+                        ['V', 'GF', 'NF'], [], 60),
+                ],
+            ],
+            [
+                'name' => 'Soy sauce', 'category' => 'pantry', 'icon' => 'fa-wine-bottle', 'grams_per_cup' => null,
+                'aliases' => ['soya sauce'],
+                'description' => 'Soy sauce adds salt and savoury umami depth to marinades, stir-fries and dressings.',
+                'subs' => [
+                    $s('Tamari', 'fa-wine-bottle', ['cooking'], 1, 'tbsp', [['tamari', 1, 'tbsp']],
+                        'Closest in flavour and saltiness; usually used for gluten-free cooking.',
+                        'Contains soy. Not every tamari is gluten-free, so check the label.',
+                        'Slightly richer and less sharp than regular soy sauce.',
+                        'Look for a bottle labelled gluten-free if you avoid gluten.',
+                        ['V', 'GF', 'NF'], ['soy'], 92),
+                    $s('Coconut aminos', 'fa-leaf', ['cooking'], 1, 'tbsp', [['coconut aminos', 1, 'tbsp']],
+                        'A soy-free and gluten-free option for marinades and stir-fries.',
+                        'Sweeter and less salty, so you may need a pinch of salt.',
+                        'Milder and sweeter; slightly less umami.',
+                        'Add a pinch of salt or a splash more to reach the saltiness you want.',
+                        ['V', 'GF'], ['coconut'], 74),
+                ],
+            ],
+        ];
+    }
+}

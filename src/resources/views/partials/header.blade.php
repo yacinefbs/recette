@@ -26,6 +26,7 @@
                                                 <ul class="sub-menu">
                                                     <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
                                                     <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>
+                                                    <li><a href="{{ route('tools.ingredient-substitution') }}">Ingredient Substitutions</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="{{ route('pages.show', 'about') }}">About</a></li>

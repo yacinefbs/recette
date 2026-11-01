@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IngredientSubstitutionController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SeoController;
@@ -23,6 +24,12 @@ Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recip
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
 Route::get('/tools/cooking-converter', [\App\Http\Controllers\ToolController::class, 'converter'])->name('tools.converter');
 Route::get('/what-can-i-cook', [\App\Http\Controllers\ToolController::class, 'whatCanICook'])->name('tools.what');
+
+Route::get('/tools/ingredient-substitution', [IngredientSubstitutionController::class, 'index'])->name('tools.ingredient-substitution');
+Route::post('/tools/ingredient-substitution/search', [IngredientSubstitutionController::class, 'search'])
+    ->middleware('throttle:60,1')->name('tools.ingredient-substitution.search');
+Route::get('/ingredient-substitutes/{slug}', [IngredientSubstitutionController::class, 'guide'])
+    ->where('slug', '[a-z0-9-]+')->name('ingredient-guides.show');
 
 Route::prefix('weekly-meal-planner')->name('meal-planner.')->group(function () {
     Route::get('/', [WeeklyMealPlannerController::class, 'index'])->name('index');

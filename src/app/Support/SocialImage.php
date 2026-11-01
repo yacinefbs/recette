@@ -8,6 +8,7 @@ class SocialImage
         'weekly-meal-planner' => 'weekly-meal-planner',
         'tools/cooking-converter' => 'cooking-converter',
         'what-can-i-cook' => 'what-can-i-cook',
+        'tools/ingredient-substitution' => 'ingredient-substitution',
         'editorial-policy' => 'editorial-policy',
     ];
 
@@ -15,7 +16,7 @@ class SocialImage
     public static function forUrl(?string $url): ?array
     {
         $path = trim((string) parse_url((string) $url, PHP_URL_PATH), '/');
-        $slug = self::MAP[$path] ?? null;
+        $slug = self::MAP[$path] ?? (str_starts_with($path, 'ingredient-substitutes/') ? 'ingredient-substitution' : null);
         if (! $slug) {
             return null;
         }

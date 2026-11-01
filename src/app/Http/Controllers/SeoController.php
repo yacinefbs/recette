@@ -33,6 +33,7 @@ class SeoController extends Controller
             .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
             .'- [What Can I Cook?]('.route('tools.what')."): find recipes from the ingredients you have\n"
+            .'- [Ingredient Substitution Tool]('.route('tools.ingredient-substitution')."): find substitutes with ratios for missing ingredients\n"
             .'- [Editorial policy]('.route('pages.show', 'editorial-policy')."): sources, credits, corrections\n"
             .'- [About]('.route('pages.show', 'about')."): who we are\n"
             .'- [Contact]('.route('pages.show', 'contact')."): $email\n\n"
@@ -62,8 +63,16 @@ class SeoController extends Controller
 
         $entries[] = [route('meal-planner.index'), null, 'monthly', '0.8'];
 
-        foreach ([route('tools.converter'), route('tools.what')] as $toolUrl) {
+        foreach ([route('tools.converter'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
+        }
+
+        try {
+            foreach (app(\App\Services\IngredientSubstitutionService::class)->catalog()->where('guide_published', true) as $g) {
+                $entries[] = [route('ingredient-guides.show', $g->slug), null, 'monthly', '0.6'];
+            }
+        } catch (\Throwable) {
+            // Tables not migrated yet.
         }
 
         foreach (array_keys(\App\Support\Categories::ALL) as $slug) {
