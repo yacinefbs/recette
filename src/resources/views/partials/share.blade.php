@@ -34,7 +34,7 @@
 <div class="tt-share" id="{{ $shareId }}" data-url="{{ $tag('copy') }}" data-title="{{ $shareTitle }}">
     @if (!empty($meta) || $shareImage)
         <div class="tt-share-head">
-            @if ($shareImage)<img src="{{ $shareImage }}" alt="" loading="lazy" width="64" height="64">@endif
+            @if ($shareImage)<img src="{{ $shareImage }}" alt="{{ $shareTitle }}" loading="lazy" width="64" height="64">@endif
             <div>
                 <strong>{{ $shareTitle }}</strong>
                 @if (!empty($meta))<small>{{ $meta }}</small>@endif
