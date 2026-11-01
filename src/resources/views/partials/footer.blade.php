@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-lg-3 col-sm-6">
                                 <div class="footer-widget">
-                                    <h4 class="footer-widget-title">About Us</h4>
+                                    <h4 class="footer-widget-title">About</h4>
                                     <p class="text">Fresh ideas every day, starting with easy recipes. New recipes are added regularly.</p>
                                     @include('partials.social-links', ['wrapClass' => 'footer-social mt-3'])
                                 </div>
