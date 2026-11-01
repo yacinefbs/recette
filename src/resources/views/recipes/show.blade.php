@@ -116,6 +116,15 @@
                         @if (!empty($recipe['description']))<p>{!! strip_tags($recipe['description']) !!}</p>@endif
                         @if (!empty($recipe['num_servings']))<p><strong>Servings:</strong> {{ $recipe['num_servings'] }}</p>@endif
                         @if (!empty($recipe['total_time_minutes']))<p><strong>Time:</strong> {{ $recipe['total_time_minutes'] }} min</p>@endif
+                        @include('partials.share', [
+                            'url' => $seo['canonical'],
+                            'title' => $recipe['name'],
+                            'image' => $recipe['image'] ?? null,
+                            'meta' => collect([
+                                !empty($recipe['total_time_minutes']) ? $recipe['total_time_minutes'] . ' min' : null,
+                                !empty($recipe['num_servings']) ? $recipe['num_servings'] . ' servings' : null,
+                            ])->filter()->implode(' · '),
+                        ])
                         @if (!empty($recipe['sections']))
                             <h2 class="h5 mt-4">Ingredients</h2>
                             @foreach ($recipe['sections'] as $section)
