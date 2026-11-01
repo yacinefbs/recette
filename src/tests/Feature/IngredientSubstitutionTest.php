@@ -125,6 +125,10 @@ class IngredientSubstitutionTest extends TestCase
         $r->assertSee('"@type":"Article"', false)->assertSee('Can I replace butter with oil in a cake?');
         $r->assertDontSee('FAQPage', false);
         $this->get(route('ingredient-guides.show', 'honey'))->assertNotFound();
+        foreach (['butter', 'eggs', 'milk', 'heavy-cream', 'baking-powder'] as $slug) {
+            preg_match('/<title>(.*?)<\/title>/s', $this->get(route('ingredient-guides.show', $slug))->getContent(), $m);
+            $this->assertLessThanOrEqual(70, mb_strlen(html_entity_decode($m[1])), $slug);
+        }
         $this->get('/ingredient-substitutes/unknown')->assertNotFound();
     }
 

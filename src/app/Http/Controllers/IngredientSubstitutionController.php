@@ -30,7 +30,7 @@ class IngredientSubstitutionController extends Controller
 
         $site = config('app.name');
         $name = $ingredient->name;
-        $title = "What Can I Use Instead of $name? Best Substitutes & Ratios";
+        $title = "$name Substitutes: Best Ratios & Swaps";
         $description = "Out of ".mb_strtolower($name)."? Compare the best substitutes with ratios, what changes in taste and texture, and dietary notes.";
         $canonical = route('ingredient-guides.show', $ingredient->slug);
 
