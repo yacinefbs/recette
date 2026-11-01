@@ -1,4 +1,4 @@
-@verbatim
+﻿@verbatim
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -30,7 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/topictrail.css?v=2">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=3">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -113,7 +113,7 @@
                             'meta' => collect([
                                 !empty($recipe['total_time_minutes']) ? $recipe['total_time_minutes'] . ' min' : null,
                                 !empty($recipe['num_servings']) ? $recipe['num_servings'] . ' servings' : null,
-                            ])->filter()->implode(' · '),
+                            ])->filter()->implode(' Â· '),
                         ])
                         @if (!empty($recipe['sections']))
                             <div class="tt-box">

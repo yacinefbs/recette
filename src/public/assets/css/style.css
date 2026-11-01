@@ -47,7 +47,6 @@
 /*  01. Theme default CSS
 /*----------------------------------------*/
 /*-- Google Font --*/
-@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700|Roboto:300,400,500,700");
 /*-- Common Style --*/
 *, *::after, *::before {
   box-sizing: border-box;

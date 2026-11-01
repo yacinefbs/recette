@@ -2,7 +2,11 @@
 $social = empty($seo['image']) ? \App\Support\SocialImage::forUrl($seo['canonical'] ?? null) : null;
 $ogImage = $seo['image'] ?? ($social['url'] ?? asset('assets/images/hero-img7.png'));
 @endphp
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7CRoboto:400,500,700&amp;display=swap">
 @unless (in_array(request()->getHost(), ['localhost', '127.0.0.1', '[::1]'], true))
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     @include('partials.analytics')
     @include('partials.adsense')
 @endunless

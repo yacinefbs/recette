@@ -238,3 +238,6 @@
     .tt-hero, .tt-search, .tt-chips { display: none !important; }
     .tt-prose-wrap { margin-top: 0; }
 }
+
+/* The theme preloader waited for window.load (ads, analytics, images) and delayed first paint. */
+.preloader{display:none!important}

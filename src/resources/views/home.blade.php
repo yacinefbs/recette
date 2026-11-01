@@ -1,4 +1,4 @@
-@verbatim
+﻿@verbatim
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -30,7 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/topictrail.css?v=2">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=3">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->

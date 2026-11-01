@@ -1,4 +1,4 @@
-@verbatim
+﻿@verbatim
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -30,7 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/topictrail.css?v=2">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=3">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -111,7 +111,7 @@
                         <form method="POST" action="{{ route('recipes.import') }}">
                             @csrf
                             <input type="hidden" name="q" value="{{ $q }}">
-                            <button type="submit" class="tt-btn tt-btn--ghost" style="border-color:#f0e6da;cursor:pointer">Fetch recipes{{ $q !== '' ? ' “'.$q.'”' : '' }}</button>
+                            <button type="submit" class="tt-btn tt-btn--ghost" style="border-color:#f0e6da;cursor:pointer">Fetch recipes{{ $q !== '' ? ' â€œ'.$q.'â€' : '' }}</button>
                         </form>
                     @endif
                 </div>
@@ -131,7 +131,7 @@
                                 </div>
                             </div>
                         @empty
-                            <div class="col-12 text-center"><p>No recipes yet. Click “Fetch recipes”.</p></div>
+                            <div class="col-12 text-center"><p>No recipes yet. Click â€œFetch recipesâ€.</p></div>
                         @endforelse
                     </div>
                 </div>
