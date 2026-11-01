@@ -140,6 +140,7 @@
                             </a>
                         </div>
                         @endforeach
+                        <div class="col-12 text-center mt-4"><a href="{{ route('meal-planner.index') }}" class="btn btn-outline-primary">Plan your week with our free Weekly Meal Planner &raquo;</a></div>
 @verbatim
                     </div>
                 </div>

@@ -30,6 +30,7 @@ class SeoController extends Controller
             ."## Main pages\n\n"
             .'- ['.'Home]('.url('/')."): featured and latest recipes\n"
             .'- [All recipes]('.route('recipes.index')."): searchable list of every recipe\n"
+            .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
             .'- [What Can I Cook?]('.route('tools.what')."): find recipes from the ingredients you have\n"
             .'- [Editorial policy]('.route('pages.show', 'editorial-policy')."): sources, credits, corrections\n"
@@ -58,6 +59,8 @@ class SeoController extends Controller
             [url('/'), $latest, 'daily', '1.0'],
             [route('recipes.index'), $latest, 'daily', '0.9'],
         ];
+
+        $entries[] = [route('meal-planner.index'), null, 'monthly', '0.8'];
 
         foreach ([route('tools.converter'), route('tools.what')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
