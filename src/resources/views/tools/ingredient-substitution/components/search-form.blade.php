@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route('tools.ingredient-substitution.search') }}" class="tt-sub-form" novalidate>
+<form method="POST" action="{{ route('tools.ingredient-substitution.search') }}#results" class="tt-sub-form" novalidate>
     @csrf
     <h2 class="tt-sub-form__title">Find an ingredient substitute</h2>
 
