@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/assets/css/plugins/nice-select.css">
     <link rel="stylesheet" href="/assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=1">
     @stack('head')
 </head>
 
@@ -46,10 +47,24 @@
                 @yield('content')
             </main>
         @else
-            <main class="container py-5" style="max-width: {{ ($wide ?? false) ? '1140px' : '860px' }};">
-                <h1 class="mb-4">{{ $pageTitle }}</h1>
-                @yield('content')
-            </main>
+            <section class="tt-hero tt-hero--page">
+                <div class="container">
+                    <span class="tt-eyebrow">{{ request()->routeIs('tools.*') ? 'Free tool' : config('app.name') }}</span>
+                    <h1>{{ $pageTitle }}</h1>
+                    @if (!empty($seo['description']))<p class="tt-lead">{{ $seo['description'] }}</p>@endif
+                    <ul class="tt-crumbs">
+                        <li><a href="/">Home</a></li>
+                        <li aria-current="page">{{ $pageTitle }}</li>
+                    </ul>
+                </div>
+            </section>
+            <div class="tt-prose-wrap">
+                <main class="container" style="max-width: {{ ($wide ?? false) ? '1140px' : '900px' }};">
+                    <div class="tt-prose">
+                        @yield('content')
+                    </div>
+                </main>
+            </div>
         @endif
 
         @include('partials.footer')

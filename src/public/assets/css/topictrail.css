@@ -1,0 +1,179 @@
+/* topictrail.me — shared polish layered on top of the theme */
+:root {
+    --tt-primary: #ff773d;
+    --tt-primary-d: #e8601f;
+    --tt-gold: #ffc600;
+    --tt-ink: #1b2a41;
+    --tt-muted: #64748b;
+    --tt-line: #f0e6da;
+    --tt-warm: #fff8f1;
+    --tt-green: #2e9e5b;
+    --tt-radius: 16px;
+    --tt-shadow: 0 10px 30px rgba(27, 42, 65, .08);
+}
+
+/* ---------- Hero (home + static pages + tools) ---------- */
+.tt-hero {
+    background: radial-gradient(circle at 85% 15%, rgba(255, 198, 0, .30), transparent 45%),
+        radial-gradient(circle at 5% 90%, rgba(255, 119, 61, .18), transparent 40%),
+        linear-gradient(135deg, #fff3e6 0%, #ffe5d1 100%);
+    padding: 150px 0 80px;
+    position: relative;
+    overflow: hidden;
+}
+.tt-hero .container { max-width: 1140px; position: relative; z-index: 1; }
+.tt-hero--page { padding-bottom: 64px; text-align: center; }
+.tt-eyebrow {
+    display: inline-block; background: #fff; color: var(--tt-primary-d); font-weight: 700; font-size: .78rem;
+    letter-spacing: .08em; text-transform: uppercase; padding: .35rem .9rem; border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(255, 119, 61, .15); margin-bottom: 1rem;
+}
+.tt-hero h1 { color: var(--tt-ink); font-size: clamp(2rem, 5vw, 3.3rem); line-height: 1.12; margin-bottom: .8rem; }
+.tt-hero h1 span { color: var(--tt-primary); }
+.tt-hero .tt-lead { color: #475569; font-size: 1.1rem; max-width: 640px; margin: 0 auto; }
+.tt-hero:not(.tt-hero--page) .tt-lead { margin: 0; }
+.tt-crumbs { list-style: none; display: flex; justify-content: center; gap: .5rem; padding: 0; margin: 1.1rem 0 0; font-size: .9rem; color: var(--tt-muted); }
+.tt-crumbs li + li::before { content: "\203A"; margin-right: .5rem; }
+.tt-crumbs a { color: var(--tt-muted); }
+.tt-crumbs a:hover { color: var(--tt-primary-d); }
+
+.tt-search {
+    display: flex; max-width: 560px; background: #fff; border-radius: 999px; padding: 6px;
+    box-shadow: 0 8px 24px rgba(27, 42, 65, .12); margin-top: 1.5rem;
+}
+.tt-hero--page .tt-search { margin-left: auto; margin-right: auto; }
+.tt-search input { flex: 1; border: 0 !important; outline: 0; box-shadow: none !important; background: transparent !important; height: auto !important; padding: 0 1.1rem !important; font-size: 1rem; min-width: 0; color: var(--tt-ink); }
+.tt-search button { border: 0; border-radius: 999px; background: linear-gradient(135deg, var(--tt-primary), var(--tt-primary-d)); color: #fff; font-weight: 700; padding: .75rem 1.6rem; cursor: pointer; transition: transform .15s, box-shadow .15s; }
+.tt-search button:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(255, 119, 61, .4); }
+
+.tt-hero-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.25rem; }
+.tt-btn {
+    display: inline-flex; align-items: center; gap: .5rem; border-radius: 999px; padding: .7rem 1.5rem; font-weight: 700;
+    border: 2px solid transparent; transition: transform .15s, box-shadow .15s, background .15s; text-decoration: none !important; line-height: 1.2;
+}
+.tt-btn:hover { transform: translateY(-2px); }
+.tt-btn--primary { background: linear-gradient(135deg, var(--tt-primary), var(--tt-primary-d)); color: #fff !important; box-shadow: 0 6px 18px rgba(255, 119, 61, .35); }
+.tt-btn--ghost { background: #fff; color: var(--tt-ink) !important; border-color: #fff; box-shadow: 0 4px 14px rgba(27, 42, 65, .08); }
+.tt-btn--gold { background: var(--tt-gold); color: var(--tt-ink) !important; box-shadow: 0 6px 18px rgba(255, 198, 0, .4); }
+
+.tt-stats { display: flex; flex-wrap: wrap; gap: 1.75rem; margin-top: 2rem; }
+.tt-stats div { color: var(--tt-muted); font-size: .9rem; }
+.tt-stats strong { display: block; color: var(--tt-ink); font-size: 1.5rem; line-height: 1.1; }
+
+/* ---------- Prose card for static pages and tools ---------- */
+.tt-prose-wrap { margin-top: -36px; position: relative; z-index: 2; padding-bottom: 70px; }
+.tt-prose {
+    background: #fff; border-radius: 20px; box-shadow: var(--tt-shadow); border: 1px solid var(--tt-line); padding: 2.25rem 2.5rem;
+    color: #475569; line-height: 1.75;
+}
+.tt-prose h2 { color: var(--tt-ink); font-size: 1.35rem; margin-top: 2rem; padding-left: .8rem; border-left: 4px solid var(--tt-primary); }
+.tt-prose h2:first-child { margin-top: 0; }
+.tt-prose h3 { color: var(--tt-ink); font-size: 1.1rem; }
+.tt-prose a { color: var(--tt-primary-d); text-decoration: underline; text-underline-offset: 2px; }
+.tt-prose a:hover { color: var(--tt-ink); }
+.tt-prose ul, .tt-prose ol { padding-left: 1.25rem; }
+.tt-prose li { margin-bottom: .3rem; }
+.tt-prose .table { color: var(--tt-ink); }
+.tt-prose .table thead th { border-top: 0; border-bottom: 2px solid var(--tt-primary); background: var(--tt-warm); color: var(--tt-ink); }
+.tt-prose .table tbody tr:hover { background: var(--tt-warm); }
+.tt-prose .form-control, .tt-prose select.form-control { height: 52px; border-radius: 12px; border: 1px solid #e5ddd2; background: #fff; }
+.tt-prose .form-control:focus { border-color: var(--tt-primary); box-shadow: 0 0 0 3px rgba(255, 119, 61, .18); }
+.tt-prose .card { border-radius: var(--tt-radius); border: 1px solid var(--tt-line); background: var(--tt-warm); box-shadow: none; }
+.tt-prose .btn-primary, .tt-prose button[type=submit] { background: linear-gradient(135deg, var(--tt-primary), var(--tt-primary-d)); color: #fff; border: 0; border-radius: 12px; font-weight: 700; padding: 0 1.6rem; height: 52px; }
+.tt-prose .input-group { flex-wrap: nowrap; gap: .6rem; }
+.tt-prose .input-group .form-control { border-radius: 12px !important; }
+.tt-prose .input-group-append { margin: 0; }
+.tt-prose .form-row { display: flex; flex-wrap: wrap; align-items: center; margin: 0 -6px; }
+.tt-prose .form-row > [class*="col-"] { padding: 0 6px; }
+.tt-prose .form-row .col-md-1 { padding-top: 0 !important; font-size: 1.4rem; color: var(--tt-primary); }
+.tt-prose #cv-result { color: var(--tt-ink); font-weight: 800; }
+.tt-prose .table td, .tt-prose .table th { white-space: nowrap; }
+.tt-prose .table td:first-child { white-space: normal; }
+.tt-prose .row > [class*="col-"] img { border-radius: 12px; }
+
+/* ---------- Recipe filter chips + search ---------- */
+.tt-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.5rem; }
+.tt-chip {
+    display: inline-block; padding: .45rem 1.05rem; border-radius: 999px; background: #fff; border: 1px solid var(--tt-line);
+    color: var(--tt-ink); font-weight: 600; font-size: .9rem; transition: all .15s; text-decoration: none !important;
+}
+.tt-chip:hover { border-color: var(--tt-primary); color: var(--tt-primary-d); transform: translateY(-1px); }
+.tt-chip.is-active { background: var(--tt-primary); border-color: var(--tt-primary); color: #fff; box-shadow: 0 4px 12px rgba(255, 119, 61, .3); }
+.tt-searchbar { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; margin-bottom: 2.5rem; }
+.tt-searchbar .tt-search { flex: 1 1 380px; max-width: none; margin: 0; box-shadow: 0 4px 16px rgba(27, 42, 65, .08); border: 1px solid var(--tt-line); }
+
+/* ---------- Recipe cards (home + listing) ---------- */
+.single-course, .single-teachers { transition: transform .2s, box-shadow .2s; border-radius: var(--tt-radius); overflow: hidden; }
+.single-course:hover, .single-teachers:hover { transform: translateY(-5px); box-shadow: 0 16px 36px rgba(27, 42, 65, .14); }
+.single-course .image img, .single-teachers .image img { transition: transform .4s; }
+.single-course:hover .image img, .single-teachers:hover .image img { transform: scale(1.05); }
+.single-course .thum .image, .single-teachers .image { overflow: hidden; }
+.single-course .content .title { font-size: 1.1rem; }
+.single-course .content .title:hover { color: var(--tt-primary-d); }
+
+.tt-pager { display: flex; justify-content: center; align-items: center; gap: 1rem; margin-top: 2rem; color: var(--tt-muted); }
+
+/* ---------- Home sections ---------- */
+.edubin-category-section-07 .category-item-02 { border-radius: var(--tt-radius); transition: transform .2s, box-shadow .2s, background .2s; }
+.edubin-category-section-07 .category-item-02:hover { transform: translateY(-4px); box-shadow: var(--tt-shadow); background: var(--tt-warm); }
+.tt-cta {
+    background: linear-gradient(135deg, var(--tt-ink), #243b5c); color: #fff; border-radius: 24px; padding: 2.5rem; margin: 0 0 4rem;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem; box-shadow: var(--tt-shadow);
+}
+.tt-cta h2 { color: #fff; font-size: 1.6rem; margin: 0 0 .3rem; }
+.tt-cta p { color: #cbd5e1; margin: 0; }
+
+/* ---------- Recipe page ---------- */
+.tt-recipe-meta { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0 1.25rem; }
+.tt-pill { background: var(--tt-warm); border: 1px solid var(--tt-line); color: var(--tt-ink); border-radius: 999px; padding: .4rem 1rem; font-weight: 600; font-size: .92rem; }
+.tt-pill i { color: var(--tt-primary); margin-right: .35rem; }
+.tt-recipe-img { border-radius: 20px; box-shadow: var(--tt-shadow); width: 100%; height: auto; }
+.tt-recipe-side { position: sticky; top: 24px; }
+.tt-recipe-lead { color: #475569; font-size: 1.05rem; line-height: 1.75; }
+.tt-box { background: #fff; border: 1px solid var(--tt-line); border-radius: var(--tt-radius); padding: 1.5rem 1.75rem; margin-top: 1.5rem; box-shadow: 0 4px 16px rgba(27, 42, 65, .05); }
+.tt-box h2 { font-size: 1.3rem; color: var(--tt-ink); margin: 0 0 1rem; }
+.tt-box h6 { color: var(--tt-primary-d); text-transform: uppercase; letter-spacing: .05em; font-size: .8rem; margin: 1rem 0 .5rem; }
+.tt-ingredients { list-style: none; padding: 0; margin: 0; }
+.tt-ingredients li { position: relative; padding: .5rem 0 .5rem 1.8rem; border-bottom: 1px dashed var(--tt-line); color: #334155; }
+.tt-ingredients li:last-child { border-bottom: 0; }
+.tt-ingredients li::before { content: ""; position: absolute; left: 0; top: .85rem; width: 12px; height: 12px; border-radius: 50%; background: var(--tt-gold); box-shadow: 0 0 0 3px #fff3c4; }
+.tt-steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+.tt-steps li { counter-increment: step; position: relative; padding: .25rem 0 1.25rem 3.4rem; color: #334155; line-height: 1.7; }
+.tt-steps li::before {
+    content: counter(step); position: absolute; left: 0; top: 0; width: 2.3rem; height: 2.3rem; border-radius: 50%;
+    background: linear-gradient(135deg, var(--tt-primary), var(--tt-primary-d)); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center;
+}
+.tt-steps li:not(:last-child)::after { content: ""; position: absolute; left: 1.15rem; top: 2.5rem; bottom: .25rem; width: 2px; background: var(--tt-line); }
+.tt-note { background: var(--tt-warm); border: 1px solid var(--tt-line); border-left: 4px solid var(--tt-gold); border-radius: 12px; padding: 1rem 1.25rem; margin-top: 1rem; color: #475569; }
+.tt-note a { color: var(--tt-primary-d); font-weight: 600; }
+.tt-related-card img { width: 100%; height: 190px; object-fit: cover; border-radius: var(--tt-radius); transition: transform .3s; }
+.tt-related-card { display: block; overflow: hidden; border-radius: var(--tt-radius); }
+.tt-related-card:hover img { transform: scale(1.04); }
+
+/* ---------- Brand colour over theme blue ---------- */
+.section-title2 .title.color-3 span, .section-title2 .title span { color: var(--tt-primary) !important; }
+.course-section .course-btn .btn, .course-btn .btn {
+    background: linear-gradient(135deg, var(--tt-primary), var(--tt-primary-d)) !important; border-radius: 999px; color: #fff !important;
+    box-shadow: 0 6px 18px rgba(255, 119, 61, .3); transition: transform .15s;
+}
+.course-btn .btn:hover { transform: translateY(-2px); }
+.header-section .main-menu li:hover > a, .header-section .main-menu li.active > a,
+.header-section .main-menu li a:hover { color: var(--tt-primary-d) !important; }
+.progress-wrap::after { color: var(--tt-primary); }
+.progress-wrap svg.progress-circle path { stroke: var(--tt-primary); }
+.single-course .course-teacher .course-lesson i, .single-course .course-lesson li i { color: var(--tt-primary) !important; }
+
+/* ---------- Recipe pages hero (replaces dark banner) ---------- */
+.tt-recipe-hero h1 { font-size: clamp(1.8rem, 4.5vw, 2.8rem); }
+.tt-hero--page .tt-crumbs a:hover { color: var(--tt-primary-d); }
+
+@media (max-width: 767px) {
+    .tt-hero { padding: 120px 0 56px; }
+    .tt-prose { padding: 1.5rem 1.25rem; }
+    .tt-recipe-side { position: static; }
+    .tt-cta { padding: 1.75rem; }
+}
+@media print {
+    .tt-hero, .tt-search, .tt-chips { display: none !important; }
+    .tt-prose-wrap { margin-top: 0; }
+}

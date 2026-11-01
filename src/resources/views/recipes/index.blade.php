@@ -30,6 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=1">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -71,39 +72,19 @@
 
 
 
-        <!-- Page Banner Start -->
-        <div class="section page-banner-section" style="background-image: url(/assets/images/bg/banner-bg.jpeg)">
+        @endverbatim
+        <section class="tt-hero tt-hero--page">
             <div class="container">
-                <div class="page-banner-wrap">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!-- Page Banner Content Start -->
-                            <div class="page-banner text-center">
-                                <div class="section-title text-center">
-                                    <h1 class="title">
-@endverbatim
-{{ $category ? $category['label'].' Recipes' : 'Cooking Recipes' }}
-@verbatim
-</h1>
-                                </div>
-                                <ul class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="/">Home</a></li>
-                                    @endverbatim
-@if ($category)
-<li class="breadcrumb-item"><a href="/recipes">Recipes</a></li><li class="breadcrumb-item active" aria-current="page">{{ $category['label'] }}</li>
-@else
-<li class="breadcrumb-item active" aria-current="page">Recipes</li>
-@endif
-@verbatim
-                                </ul>
-                            </div>
-                            <!-- Page Banner Content End -->
-                        </div>
-                    </div>
-                </div>
+                <span class="tt-eyebrow">{{ $category ? 'Category' : 'All recipes' }}</span>
+                <h1>{{ $category ? $category['label'].' Recipes' : 'Cooking Recipes' }}</h1>
+                @if ($category)<p class="tt-lead">{{ $category['intro'] }}</p>@endif
+                <ul class="tt-crumbs">
+                    <li><a href="/">Home</a></li>
+                    @if ($category)<li><a href="/recipes">Recipes</a></li><li aria-current="page">{{ $category['label'] }}</li>@else<li aria-current="page">Recipes</li>@endif
+                </ul>
             </div>
-        </div>
-        <!-- Page Banner End -->
+        </section>
+@verbatim
 
         <!-- Teachers Start -->
 
@@ -114,33 +95,24 @@
                 @if (session('success'))<div class="alert alert-success">{{ session('success') }}</div>@endif
                 @if (session('error'))<div class="alert alert-danger">{{ session('error') }}</div>@endif
 
-                @if ($category)
-                    <p class="lead mb-4">{{ $category['intro'] }}</p>
-                @endif
-                <div class="mb-4 d-flex flex-wrap" style="gap:8px">
-                    <a class="btn btn-sm {{ ! $category ? 'btn-primary' : 'btn-outline-primary' }}" href="{{ route('recipes.index') }}">All</a>
+                <div class="tt-chips">
+                    <a class="tt-chip {{ ! $category ? 'is-active' : '' }}" href="{{ route('recipes.index') }}">All</a>
                     @foreach (\App\Support\Categories::all() as $c)
-                        <a class="btn btn-sm {{ $category && $category['slug'] === $c['slug'] ? 'btn-primary' : 'btn-outline-primary' }}" href="{{ route('categories.show', $c['slug']) }}">{{ $c['label'] }}</a>
+                        <a class="tt-chip {{ $category && $category['slug'] === $c['slug'] ? 'is-active' : '' }}" href="{{ route('categories.show', $c['slug']) }}">{{ $c['label'] }}</a>
                     @endforeach
                 </div>
 
-                <div class="row mb-5">
-                    <div class="col-lg-8">
-                        <form method="GET" action="{{ route('recipes.index') }}">
-                            <div class="input-group">
-                                <input type="text" name="q" value="{{ $q }}" class="form-control" placeholder="Search recipes...">
-                                <div class="input-group-append"><button class="btn btn-primary" type="submit">Search</button></div>
-                            </div>
-                        </form>
-                    </div>
+                <div class="tt-searchbar">
+                    <form class="tt-search" method="GET" action="{{ route('recipes.index') }}" role="search">
+                        <input type="text" name="q" value="{{ $q }}" placeholder="Search recipes..." aria-label="Search recipes">
+                        <button type="submit">Search</button>
+                    </form>
                     @if (app()->environment('local'))
-                    <div class="col-lg-4 text-lg-right mt-3 mt-lg-0">
                         <form method="POST" action="{{ route('recipes.import') }}">
                             @csrf
                             <input type="hidden" name="q" value="{{ $q }}">
-                            <button type="submit" class="btn btn-success">Fetch recipes{{ $q !== '' ? ' “'.$q.'”' : '' }}</button>
+                            <button type="submit" class="tt-btn tt-btn--ghost" style="border-color:#f0e6da;cursor:pointer">Fetch recipes{{ $q !== '' ? ' “'.$q.'”' : '' }}</button>
                         </form>
-                    </div>
                     @endif
                 </div>
 
@@ -165,13 +137,13 @@
                 </div>
 
                 @if ($category)
-                    <div class="alert alert-light border mt-5"><strong>Tip:</strong> {{ $category['tip'] }} <a href="{{ route('meal-planner.index') }}">Plan a full week of meals &raquo;</a></div>
+                    <div class="tt-note mt-5"><strong>Tip:</strong> {{ $category['tip'] }} <a href="{{ route('meal-planner.index') }}">Plan a full week of meals &raquo;</a></div>
                 @endif
                 @if ($recipes->hasPages())
-                    <div class="text-center mt-4">
-                        @if ($recipes->previousPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->previousPageUrl() }}">&laquo; Previous</a>@endif
-                        <span class="mx-3">Page {{ $recipes->currentPage() }} / {{ $recipes->lastPage() }}</span>
-                        @if ($recipes->nextPageUrl())<a class="btn btn-outline-primary" href="{{ $recipes->nextPageUrl() }}">Next &raquo;</a>@endif
+                    <div class="tt-pager">
+                        @if ($recipes->previousPageUrl())<a class="tt-chip" href="{{ $recipes->previousPageUrl() }}">&laquo; Previous</a>@endif
+                        <span>Page {{ $recipes->currentPage() }} / {{ $recipes->lastPage() }}</span>
+                        @if ($recipes->nextPageUrl())<a class="tt-chip" href="{{ $recipes->nextPageUrl() }}">Next &raquo;</a>@endif
                     </div>
                 @endif
             </div>

@@ -30,6 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=1">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -71,36 +72,19 @@
 
 
 
-        <!-- Page Banner Start -->
-        <div class="section page-banner-section" style="background-image: url(/assets/images/bg/banner-bg.jpeg)">
+        @endverbatim
+        <section class="tt-hero tt-hero--page tt-recipe-hero">
             <div class="container">
-                <div class="page-banner-wrap">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!-- Page Banner Content Start -->
-                            <div class="page-banner text-center">
-                                <div class="section-title text-center">
-
-@endverbatim
-                                    <h1 class="title">{{ $recipe['name'] }}</h1>
-@verbatim
-                                </div>
-                                <ul class="breadcrumb justify-content-center">
-                                    <li class="breadcrumb-item"><a href="/">Home</a></li><li class="breadcrumb-item"><a href="/recipes">Recipes</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">
-@endverbatim
-{{ $recipe['name'] }}
-@verbatim
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- Page Banner Content End -->
-                        </div>
-                    </div>
-                </div>
+                <span class="tt-eyebrow">{{ $category ? $category['label'] : 'Recipe' }}</span>
+                <h1>{{ $recipe['name'] }}</h1>
+                <ul class="tt-crumbs">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/recipes">Recipes</a></li>
+                    <li aria-current="page">{{ \Illuminate\Support\Str::limit($recipe['name'], 40) }}</li>
+                </ul>
             </div>
-        </div>
-        <!-- Page Banner End -->
+        </section>
+@verbatim
 
         <!-- Teachers Start -->
 
@@ -109,13 +93,19 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
-                        <img src="{{ $recipe['image'] }}" alt="{{ $recipe['name'] }}" class="img-fluid mb-4" width="600" height="400" fetchpriority="high">
+                        <div class="tt-recipe-side">
+                            <img src="{{ $recipe['image'] }}" alt="{{ $recipe['name'] }}" class="tt-recipe-img mb-4" width="600" height="400" fetchpriority="high">
+                        </div>
                     </div>
                     <div class="col-lg-7">
-                        
-                        @if (!empty($recipe['description']))<p>{!! strip_tags($recipe['description']) !!}</p>@endif
-                        @if (!empty($recipe['num_servings']))<p><strong>Servings:</strong> {{ $recipe['num_servings'] }}</p>@endif
-                        @if (!empty($recipe['total_time_minutes']))<p><strong>Time:</strong> {{ $recipe['total_time_minutes'] }} min</p>@endif
+                        @if (!empty($recipe['total_time_minutes']) || !empty($recipe['num_servings']))
+                            <div class="tt-recipe-meta">
+                                @if (!empty($recipe['total_time_minutes']))<span class="tt-pill"><i class="far fa-clock"></i>{{ $recipe['total_time_minutes'] }} min</span>@endif
+                                @if (!empty($recipe['num_servings']))<span class="tt-pill"><i class="fas fa-users"></i>{{ $recipe['num_servings'] }} servings</span>@endif
+                                @if (!empty($recipe['instructions']))<span class="tt-pill"><i class="fas fa-list-ol"></i>{{ count($recipe['instructions']) }} steps</span>@endif
+                            </div>
+                        @endif
+                        @if (!empty($recipe['description']))<p class="tt-recipe-lead">{!! strip_tags($recipe['description']) !!}</p>@endif
                         @include('partials.share', [
                             'url' => $seo['canonical'],
                             'title' => $recipe['name'],
@@ -126,27 +116,31 @@
                             ])->filter()->implode(' · '),
                         ])
                         @if (!empty($recipe['sections']))
-                            <h2 class="h5 mt-4">Ingredients</h2>
-                            @foreach ($recipe['sections'] as $section)
-                                @if (!empty($section['name']))<h6>{{ $section['name'] }}</h6>@endif
-                                <ul>
-                                    @foreach ($section['components'] ?? [] as $c)<li>{{ $c['raw_text'] ?? '' }}</li>@endforeach
-                                </ul>
-                            @endforeach
+                            <div class="tt-box">
+                                <h2>Ingredients</h2>
+                                @foreach ($recipe['sections'] as $section)
+                                    @if (!empty($section['name']))<h6>{{ $section['name'] }}</h6>@endif
+                                    <ul class="tt-ingredients">
+                                        @foreach ($section['components'] ?? [] as $c)<li>{{ $c['raw_text'] ?? '' }}</li>@endforeach
+                                    </ul>
+                                @endforeach
+                            </div>
                         @endif
                         @if (!empty($recipe['instructions']))
-                            <h2 class="h5 mt-4">Instructions</h2>
-                            <ol>
-                                @foreach ($recipe['instructions'] as $step)<li id="step-{{ $loop->iteration }}">{{ $step['display_text'] ?? '' }}</li>@endforeach
-                            </ol>
+                            <div class="tt-box">
+                                <h2>Instructions</h2>
+                                <ol class="tt-steps">
+                                    @foreach ($recipe['instructions'] as $step)<li id="step-{{ $loop->iteration }}">{{ $step['display_text'] ?? '' }}</li>@endforeach
+                                </ol>
+                            </div>
                         @endif
                         <p class="mt-4 mb-0"><small class="text-muted">Photo and recipe data provided via Tasty. Adjust seasoning and cooking times to your taste and oven.</small></p>
                         @if ($category)
-                            <div class="alert alert-light border mt-4"><strong>{{ $category['label'] }} tip:</strong> {{ $category['tip'] }}
+                            <div class="tt-note"><strong>{{ $category['label'] }} tip:</strong> {{ $category['tip'] }}
                                 <a href="{{ route('categories.show', $category['slug']) }}">More {{ strtolower($category['label']) }} recipes &raquo;</a></div>
                         @endif
-                        <div class="alert alert-light border mt-3">Planning your week? <a href="{{ route('meal-planner.index') }}">Build a meal plan and grocery list with our free Weekly Meal Planner &raquo;</a></div>
-                        <a href="{{ route('recipes.index') }}" class="btn btn-outline-primary mt-3">&laquo; Back to recipes</a>
+                        <div class="tt-note">Planning your week? <a href="{{ route('meal-planner.index') }}">Build a meal plan and grocery list with our free Weekly Meal Planner &raquo;</a></div>
+                        <a href="{{ route('recipes.index') }}" class="tt-chip mt-3">&laquo; Back to recipes</a>
                     </div>
                 </div>
                 @if ($related->isNotEmpty())
@@ -154,7 +148,7 @@
                     <div class="row">
                         @foreach ($related as $r)
                             <div class="col-lg-3 col-md-6 mb-4">
-                                <a href="{{ route('recipes.show', $r) }}"><img src="{{ $r->image }}" alt="{{ $r->name }}" loading="lazy" width="300" height="200" style="height:200px;width:100%;object-fit:cover" class="mb-2"></a>
+                                <a href="{{ route('recipes.show', $r) }}" class="tt-related-card mb-2"><img src="{{ $r->image }}" alt="{{ $r->name }}" loading="lazy" width="300" height="190"></a>
                                 <h3 class="h6"><a href="{{ route('recipes.show', $r) }}">{{ $r->name }}</a></h3>
                             </div>
                         @endforeach

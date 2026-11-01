@@ -30,6 +30,7 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=1">
 
 
     <!--====== Use the minified version files listed below for better performance and remove the files listed above ======-->
@@ -68,10 +69,25 @@
 
         <div class="body-overlay"></div>
 
-
+        <section class="tt-hero">
+            <div class="container">
+                <span class="tt-eyebrow">Easy &amp; delicious recipes</span>
+                <h1>What are we <span>cooking</span> today?</h1>
+                <p class="tt-lead">Browse photo-rich recipes with clear ingredients and step-by-step instructions, then plan your whole week in one click.</p>
+                <form class="tt-search" method="GET" action="/recipes" role="search">
+                    <input type="text" name="q" placeholder="Search recipes: chicken, pasta, brownies..." aria-label="Search recipes" maxlength="100">
+                    <button type="submit">Search</button>
+                </form>
+                <div class="tt-hero-actions">
+                    <a class="tt-btn tt-btn--primary" href="/weekly-meal-planner">Weekly Meal Planner</a>
+                    <a class="tt-btn tt-btn--ghost" href="/what-can-i-cook">What can I cook?</a>
+                    <a class="tt-btn tt-btn--ghost" href="/tools/cooking-converter">Cooking converter</a>
+                </div>
+            </div>
+        </section>
 
         <!-- Course Start -->
-        <div class="section course-section course-section-05 section-padding" style="margin-top:60px">
+        <div class="section course-section course-section-05 section-padding" style="margin-top:20px">
             <div class="container">
                 <div class="row">
                     <div class="col-md-7">
@@ -125,7 +141,7 @@
         <div class="section edubin-category-section-06 edubin-category-section-07 section-padding-02" style="margin-top:30px;margin-bottom:80px">
             <div class="container">
                 <div class="section-title2 text-center">
-                    <h1 class="title color-3">Explore by <span>category</span></h1>
+                    <h2 class="title color-3">Explore by <span>category</span></h2>
                 </div>
                 <div class="category-wrap-03">
                     <div class="row">
@@ -140,7 +156,15 @@
                             </a>
                         </div>
                         @endforeach
-                        <div class="col-12 text-center mt-4"><a href="{{ route('meal-planner.index') }}" class="btn btn-outline-primary">Plan your week with our free Weekly Meal Planner &raquo;</a></div>
+                        <div class="col-12 mt-5">
+                            <div class="tt-cta">
+                                <div>
+                                    <h2>Plan your week in one click</h2>
+                                    <p>Free Weekly Meal Planner with a ready-made grocery list.</p>
+                                </div>
+                                <a href="{{ route('meal-planner.index') }}" class="tt-btn tt-btn--gold">Build my meal plan &raquo;</a>
+                            </div>
+                        </div>
 @verbatim
                     </div>
                 </div>
