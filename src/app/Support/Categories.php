@@ -16,7 +16,7 @@ final class Categories
             'icon' => 'fa-drumstick-bite',
             'keywords' => ['chicken'],
             'intro' => 'Chicken is the weeknight hero: affordable, quick to cook and easy to flavour. From creamy bakes to crispy fried chicken, these recipes cover every mood.',
-            'tip' => 'Cook chicken to an internal temperature of 165Â°F (74Â°C) and let it rest for 5 minutes so it stays juicy. Leftovers keep 3-4 days in the fridge.',
+            'tip' => 'Cook chicken to an internal temperature of 165°F (74°C) and let it rest for 5 minutes so it stays juicy. Leftovers keep 3-4 days in the fridge.',
         ],
         'pasta' => [
             'label' => 'Pasta',

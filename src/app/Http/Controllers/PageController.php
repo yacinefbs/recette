@@ -9,6 +9,7 @@ class PageController extends Controller
         'contact' => 'Contact',
         'privacy-policy' => 'Privacy Policy',
         'terms' => 'Terms of Use',
+        'editorial-policy' => 'Editorial Policy & Sources',
     ];
 
     public function show(string $slug)
@@ -23,6 +24,7 @@ class PageController extends Controller
             'contact' => "Contact the $site team for questions, suggestions or content requests.",
             'privacy-policy' => "How $site collects, uses and protects your data, including cookies, Google Analytics and Google AdSense.",
             'terms' => "Terms of use of $site.",
+            'editorial-policy' => "Where $site recipes come from, what we add, credits, corrections and how we handle advertising.",
         ];
 
         $seo = [

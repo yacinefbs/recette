@@ -21,6 +21,12 @@
                                                     @endforeach
                                                 </ul>
                                             </li>
+                                            <li class="has-dropdown"><a href="{{ route('tools.converter') }}">Tools</a>
+                                                <ul class="sub-menu">
+                                                    <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
+                                                    <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>
+                                                </ul>
+                                            </li>
                                             <li><a href="{{ route('pages.show', 'about') }}">About</a></li>
                                             <li><a href="{{ route('pages.show', 'contact') }}">Contact</a></li>
                                         </ul>

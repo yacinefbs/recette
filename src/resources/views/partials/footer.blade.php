@@ -17,6 +17,8 @@
                                         <ul class="link">
                                             <li><a href="{{ url('/') }}">Home</a></li>
                                             <li><a href="{{ route('recipes.index') }}">All recipes</a></li>
+                                            <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
+                                            <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>
                                             <li><a href="{{ url('/sitemap.xml') }}">Sitemap</a></li>
                                         </ul>
                                     </div>
@@ -54,7 +56,7 @@
                                 <div class="copyright-text">
                                     <p>&copy; {{ date('Y') }} {{ config('app.name') }}. All rights reserved.</p>
                                     <p>
-                                        <a href="{{ route('pages.show', 'about') }}">About</a> ·
+                                         <a href="{{ route('pages.show', 'about') }}">About</a> · <a href="{{ route('pages.show', 'editorial-policy') }}">Editorial Policy</a> ·
                                         <a href="{{ route('pages.show', 'contact') }}">Contact</a> ·
                                         <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> ·
                                         <a href="{{ route('pages.show', 'terms') }}">Terms of Use</a> ·

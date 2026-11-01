@@ -20,5 +20,7 @@ Route::get('/{slug}', [PageController::class, 'show'])
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
+Route::get('/tools/cooking-converter', [\App\Http\Controllers\ToolController::class, 'converter'])->name('tools.converter');
+Route::get('/what-can-i-cook', [\App\Http\Controllers\ToolController::class, 'whatCanICook'])->name('tools.what');
 Route::get('/category/{slug}', [RecipeController::class, 'categoryPage'])->whereIn('slug', array_keys(\App\Support\Categories::ALL))->name('categories.show');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->whereNumber('recipe')->name('recipes.show');

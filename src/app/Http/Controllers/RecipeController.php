@@ -27,7 +27,7 @@ class RecipeController extends Controller
         $canonical = ! $filtered && $page > 1 ? route('recipes.index', ['page' => $page]) : route('recipes.index');
 
         $seo = [
-            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " â€“ page $page" : '')." | $site",
+            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
             'description' => 'Browse our easy cooking recipes: photos, ingredients, detailed steps and preparation times. Find your next recipe.',
             'canonical' => $canonical,
             // Search result pages are low-value duplicates: do not index them
@@ -135,7 +135,7 @@ class RecipeController extends Controller
         ]);
 
         $seo = [
-            'title' => Str::limit($recipe->name, 38, '').' â€“ Recipe | '.$site,
+            'title' => Str::limit($recipe->name, 38, '').' – Recipe | '.$site,
             'description' => Str::limit($description, 155),
             'canonical' => route('recipes.show', $recipe),
             'type' => 'article',

@@ -18,7 +18,9 @@
             <a href="{{ url('/') }}"><img src="/assets/images/logo.svg" alt="{{ $site }}" width="200" height="44"></a>
             <nav>
                 <a class="mr-3" href="{{ url('/') }}">Home</a>
-                <a href="{{ route('recipes.index') }}">Recipes</a>
+                <a class="mr-3" href="{{ route('recipes.index') }}">Recipes</a>
+                <a class="mr-3" href="{{ route('tools.converter') }}">Cooking Converter</a>
+                <a href="{{ route('tools.what') }}">What Can I Cook?</a>
             </nav>
         </div>
     </header>
