@@ -48,6 +48,12 @@ return [
         'feed_token' => env('RECIPES_FEED_TOKEN'),
     ],
 
+    'facebook' => [
+        'page_id' => env('FACEBOOK_PAGE_ID'),
+        'page_token' => env('FACEBOOK_PAGE_TOKEN'),
+        'graph_version' => env('FACEBOOK_GRAPH_VERSION', 'v21.0'),
+    ],
+
     'adsense' => [
         // Ad unit IDs (create them in AdSense); a slot renders nothing until its ID is set.
         'slots' => [

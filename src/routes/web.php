@@ -5,6 +5,7 @@ use App\Http\Controllers\IngredientSubstitutionController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SeoController;
+use App\Http\Controllers\SocialAdminController;
 use App\Http\Controllers\WeeklyMealPlannerController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,5 +40,17 @@ Route::prefix('weekly-meal-planner')->name('meal-planner.')->group(function () {
         Route::post('/shopping-list', [WeeklyMealPlannerController::class, 'shoppingList'])->name('shopping-list');
     });
 });
+Route::prefix('social-admin')->name('social.')->group(function () {
+    Route::get('/login', [SocialAdminController::class, 'loginForm'])->name('login');
+    Route::post('/login', [SocialAdminController::class, 'login'])->middleware('throttle:5,1')->name('login.submit');
+
+    Route::middleware('auth')->group(function () {
+        Route::get('/', [SocialAdminController::class, 'index'])->name('index');
+        Route::post('/logout', [SocialAdminController::class, 'logout'])->name('logout');
+        Route::post('/recipes/{recipe}/facebook', [SocialAdminController::class, 'publishFacebook'])->whereNumber('recipe')->middleware('throttle:20,1')->name('facebook.publish');
+        Route::post('/recipes/{recipe}/facebook/toggle', [SocialAdminController::class, 'toggleFacebook'])->whereNumber('recipe')->name('facebook.toggle');
+    });
+});
+
 Route::get('/category/{slug}', [RecipeController::class, 'categoryPage'])->whereIn('slug', array_keys(\App\Support\Categories::ALL))->name('categories.show');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->whereNumber('recipe')->name('recipes.show');
