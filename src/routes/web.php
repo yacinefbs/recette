@@ -15,6 +15,9 @@ Route::get('/robots.txt', [SeoController::class, 'robots']);
 Route::get('/ads.txt', [SeoController::class, 'ads']);
 Route::get('/llms.txt', [SeoController::class, 'llms']);
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap']);
+Route::get('/.well-known/mcp/server-card.json', [\App\Http\Controllers\McpController::class, 'card'])->name('mcp.card');
+Route::post('/mcp', [\App\Http\Controllers\McpController::class, 'handle'])->middleware('throttle:60,1')->name('mcp.handle');
+Route::get('/mcp', fn () => response('Use POST (MCP Streamable HTTP).', 405, ['Allow' => 'POST']));
 
 Route::get('/{slug}', [PageController::class, 'show'])
     ->whereIn('slug', array_keys(PageController::PAGES))
