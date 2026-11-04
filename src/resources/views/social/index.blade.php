@@ -27,14 +27,14 @@
                 @endif
                 <div class="actions">
                     @unless ($recipe->posted_facebook)
-                        <form method="post" action="{{ route('social.facebook.publish', $recipe) }}" style="width:100%">
+                        <form method="post" action="{{ route('social.facebook.publish', $recipe) }}" style="width:100%" class="js-fb-form">
                             @csrf
                             <details>
                                 <summary>Edit the message</summary>
                                 <textarea name="message" rows="4" maxlength="2000">{{ $publisher->message($recipe) }}</textarea>
                             </details>
                             <div class="actions">
-                                <button class="btn btn--fb" type="submit" @disabled(! $facebookReady) onclick="return confirm('Post this recipe on the Facebook page?')">Post to Facebook</button>
+                                <button class="btn btn--fb" type="submit" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Post to Facebook</span></button>
                             </div>
                         </form>
                     @endunless
@@ -56,4 +56,47 @@
         @if ($recipes->nextPageUrl())<a class="btn btn--ghost" href="{{ $recipes->nextPageUrl() }}">Next &rarr;</a>@endif
     </div>
 @endif</div>
+<div id="toasts" aria-live="polite"></div>
+<script>
+document.querySelectorAll('.js-fb-form').forEach(function (form) {
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        var btn = form.querySelector('button[type=submit]');
+        if (btn.disabled) return;
+        var row = form.closest('.row');
+        var name = row.querySelector('h3').textContent.trim();
+        if (!confirm('Post "' + name + '" on the Facebook page?')) return;
+
+        btn.disabled = true;
+        btn.querySelector('.spin').hidden = false;
+        btn.querySelector('.lbl').textContent = 'Posting…';
+        try {
+            var res = await fetch(form.action, {
+                method: 'POST',
+                headers: {'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
+                body: new FormData(form)
+            });
+            var data = await res.json().catch(function () { return {}; });
+            if (!res.ok || !data.ok) throw new Error(data.message || 'Request failed (' + res.status + ')');
+            toast(data.message, true);
+            row.style.transition = 'opacity .4s';
+            row.style.opacity = '.35';
+            form.outerHTML = '<span class="badge">Posted just now</span>';
+            setTimeout(function () { row.remove(); }, 1200);
+        } catch (err) {
+            toast(err.message, false);
+            btn.disabled = false;
+            btn.querySelector('.spin').hidden = true;
+            btn.querySelector('.lbl').textContent = 'Retry';
+        }
+    });
+});
+function toast(msg, ok) {
+    var el = document.createElement('div');
+    el.className = 'toast ' + (ok ? 'toast--ok' : 'toast--err');
+    el.textContent = msg;
+    document.getElementById('toasts').appendChild(el);
+    setTimeout(function () { el.remove(); }, ok ? 4000 : 9000);
+}
+</script>
 @endsection

@@ -33,6 +33,12 @@
         details summary{cursor:pointer;color:#1877f2;font-size:13px;margin-top:6px}
         .badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:#e6f4ec;color:var(--ok)}
         .pager{margin-top:16px}
+        .spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
+        .spin[hidden]{display:none}
+        @keyframes sp{to{transform:rotate(360deg)}}
+        #toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;max-width:360px;z-index:9}
+        .toast{padding:10px 14px;border-radius:8px;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2)}
+        .toast--ok{background:var(--ok)}.toast--err{background:var(--err)}
         @media(max-width:600px){.row{flex-direction:column}.row img{width:100%;height:160px}}
     </style>
 </head>

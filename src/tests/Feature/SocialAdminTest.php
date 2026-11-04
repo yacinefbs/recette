@@ -59,6 +59,18 @@ class SocialAdminTest extends TestCase
         $this->assertFalse($recipe->fresh()->posted_facebook);
     }
 
+    public function test_ajax_publish_returns_json(): void
+    {
+        config(['services.facebook.page_id' => '123', 'services.facebook.page_token' => 'tok']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => '1_2'])]);
+        $recipe = $this->recipe();
+
+        $this->actingAs(User::factory()->create())
+            ->postJson("/social-admin/recipes/{$recipe->id}/facebook")
+            ->assertOk()->assertJson(['ok' => true]);
+        $this->assertTrue($recipe->fresh()->posted_facebook);
+    }
+
     public function test_dashboard_and_toggle(): void
     {
         $recipe = $this->recipe();

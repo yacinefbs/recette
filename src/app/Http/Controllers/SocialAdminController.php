@@ -71,7 +71,9 @@ class SocialAdminController extends Controller
         $data = $request->validate(['message' => ['nullable', 'string', 'max:2000']]);
 
         if ($recipe->posted_facebook) {
-            return back()->with('error', "\"{$recipe->name}\" is already marked as posted.");
+            $msg = "\"{$recipe->name}\" is already marked as posted.";
+
+            return $request->expectsJson() ? response()->json(['ok' => false, 'message' => $msg], 409) : back()->with('error', $msg);
         }
 
         try {
@@ -79,10 +81,14 @@ class SocialAdminController extends Controller
         } catch (Throwable $e) {
             report($e);
 
-            return back()->with('error', 'Facebook: '.$e->getMessage());
+            return $request->expectsJson()
+                ? response()->json(['ok' => false, 'message' => 'Facebook: '.$e->getMessage()], 422)
+                : back()->with('error', 'Facebook: '.$e->getMessage());
         }
 
-        return back()->with('status', "\"{$recipe->name}\" posted to Facebook.");
+        $msg = "\"{$recipe->name}\" posted to Facebook.";
+
+        return $request->expectsJson() ? response()->json(['ok' => true, 'message' => $msg]) : back()->with('status', $msg);
     }
 
     /** Manual override, e.g. a recipe posted by hand outside this tool. */
