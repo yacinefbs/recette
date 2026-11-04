@@ -57,3 +57,18 @@ $ogImage = $seo['image'] ?? ($social['url'] ?? asset('assets/images/hero-img7.pn
     @foreach ($seo['schema'] ?? [] as $schema)
     <script type="application/ld+json">{!! json_encode($schema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) !!}</script>
     @endforeach
+    <script>
+    if (navigator.modelContext && navigator.modelContext.registerTool) {
+        navigator.modelContext.registerTool({
+            name: 'search_recipes',
+            description: 'Search topictrail.me recipes by name or ingredient keyword and open the results page.',
+            inputSchema: {type: 'object', properties: {query: {type: 'string', description: 'Recipe name or keyword, e.g. chicken'}}, required: ['query']},
+            execute: async function (args) {
+                var q = String((args && args.query) || '').trim().slice(0, 100);
+                var url = '{{ route('recipes.index') }}?q=' + encodeURIComponent(q);
+                window.location.assign(url);
+                return {content: [{type: 'text', text: 'Opening recipe search results: ' + url}]};
+            }
+        });
+    }
+    </script>

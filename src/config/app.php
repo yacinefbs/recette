@@ -16,6 +16,15 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     'contact_email' => env('CONTACT_EMAIL', 'contact@topictrail.me'),
+    // Optional: only published in the structured data when set (never invented)
+    'contact_phone' => env('CONTACT_PHONE'),
+    'contact_address' => [
+        'street' => env('CONTACT_STREET'),
+        'city' => env('CONTACT_CITY'),
+        'region' => env('CONTACT_REGION'),
+        'postal_code' => env('CONTACT_POSTAL_CODE'),
+        'country' => env('CONTACT_COUNTRY'),
+    ],
 
     // Google Search Console "HTML tag" verification token (content value only)
     'google_site_verification' => env('GOOGLE_SITE_VERIFICATION'),
