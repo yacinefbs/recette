@@ -15,7 +15,7 @@ class SeoController extends Controller
         foreach ($bots as $bot) {
             $body .= "User-agent: $bot\nAllow: /\n\n";
         }
-        $body .= "User-agent: *\nAllow: /\n\nSitemap: ".url('/sitemap.xml')."\n";
+        $body .= "User-agent: *\nContent-Signal: search=yes, ai-input=yes, ai-train=no\nAllow: /\n\nSitemap: ".url('/sitemap.xml')."\n";
 
         return response($body, 200, ['Content-Type' => 'text/plain; charset=UTF-8']);
     }

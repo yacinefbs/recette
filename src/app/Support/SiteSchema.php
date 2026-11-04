@@ -18,6 +18,7 @@ class SiteSchema
                     'url' => $root,
                     'logo' => asset('assets/images/logo.svg'),
                     'email' => config('app.contact_email'),
+                    'sameAs' => array_values(array_filter([config('services.facebook.page_url')])),
                 ],
                 [
                     '@type' => 'WebSite',

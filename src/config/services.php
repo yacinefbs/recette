@@ -52,6 +52,7 @@ return [
         'page_id' => env('FACEBOOK_PAGE_ID'),
         'page_token' => env('FACEBOOK_PAGE_TOKEN'),
         'graph_version' => env('FACEBOOK_GRAPH_VERSION', 'v21.0'),
+        'page_url' => env('FACEBOOK_PAGE_URL', 'https://www.facebook.com/profile.php?id=1418868981309476'),
     ],
 
     'adsense' => [
