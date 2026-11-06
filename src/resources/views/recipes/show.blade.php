@@ -1,4 +1,4 @@
-﻿@verbatim
+@verbatim
 <!doctype html>
 <html class="no-js" lang="en">
 
@@ -95,6 +95,7 @@
                     <div class="col-lg-5">
                         <div class="tt-recipe-side">
                             <img src="{{ $recipe['image'] }}" alt="{{ $recipe['name'] }}" class="tt-recipe-img mb-4" width="600" height="400" fetchpriority="high">
+                            @include('recipes.partials.nutrition-card')
                         </div>
                     </div>
                     <div class="col-lg-7">

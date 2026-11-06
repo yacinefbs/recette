@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
+use App\Http\Controllers\NutritionCalculatorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SeoController;
@@ -27,6 +28,9 @@ Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index'
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
 Route::get('/tools/cooking-converter', [\App\Http\Controllers\ToolController::class, 'converter'])->name('tools.converter');
+Route::get('/tools/nutrition-calculator', [NutritionCalculatorController::class, 'index'])->name('tools.nutrition-calculator');
+Route::get('/tools/nutrition-calculator/search', [NutritionCalculatorController::class, 'search'])->middleware('throttle:60,1')->name('tools.nutrition-calculator.search');
+Route::post('/tools/nutrition-calculator/calculate', [NutritionCalculatorController::class, 'calculate'])->middleware('throttle:60,1')->name('tools.nutrition-calculator.calculate');
 Route::get('/what-can-i-cook', [\App\Http\Controllers\ToolController::class, 'whatCanICook'])->name('tools.what');
 
 Route::get('/tools/ingredient-substitution', [IngredientSubstitutionController::class, 'index'])->name('tools.ingredient-substitution');
