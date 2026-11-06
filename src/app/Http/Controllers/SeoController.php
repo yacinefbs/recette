@@ -32,6 +32,7 @@ class SeoController extends Controller
             .'- [All recipes]('.route('recipes.index')."): searchable list of every recipe\n"
             .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
+            .'- [Nutrition Calculator]('.route('tools.nutrition-calculator')."): estimate calories, protein, carbs and fat per serving\n"
             .'- [What Can I Cook?]('.route('tools.what')."): find recipes from the ingredients you have\n"
             .'- [Ingredient Substitution Tool]('.route('tools.ingredient-substitution')."): find substitutes with ratios for missing ingredients\n"
             .'- [Editorial policy]('.route('pages.show', 'editorial-policy')."): sources, credits, corrections\n"
@@ -63,7 +64,7 @@ class SeoController extends Controller
 
         $entries[] = [route('meal-planner.index'), null, 'monthly', '0.8'];
 
-        foreach ([route('tools.converter'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
+        foreach ([route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
         }
 

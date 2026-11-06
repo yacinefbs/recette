@@ -18,6 +18,7 @@
                                             <li><a href="{{ url('/') }}">Home</a></li>
                                             <li><a href="{{ route('recipes.index') }}">All recipes</a></li>
                                             <li><a href="{{ route('meal-planner.index') }}">Weekly Meal Planner</a></li>
+                                            <li><a href="{{ route('tools.nutrition-calculator') }}">Nutrition Calculator</a></li>
                                             <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
                                             <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>
                                             <li><a href="{{ route('tools.ingredient-substitution') }}">Ingredient Substitutions</a></li>
