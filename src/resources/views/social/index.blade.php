@@ -98,7 +98,7 @@ document.querySelectorAll('.js-fb-form').forEach(function (form) {
         var originalLabel = label.textContent;
         label.textContent = scheduling ? 'Scheduling…' : 'Posting…';
         try {
-            var res = await fetch(btn.formAction, {
+            var res = await fetch(scheduling ? btn.formAction : form.action, {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
                 body: new FormData(form)
