@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Services\FacebookPublisher;
+use App\Services\TastyService;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
 use DateTimeZone;
+use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -72,6 +74,21 @@ class SocialAdminController extends Controller
             ],
             'publisher' => $facebook,
         ]);
+    }
+
+    public function fetchRecipes(TastyService $tasty)
+    {
+        try {
+            $count = $tasty->import();
+        } catch (RequestException $e) {
+            report($e);
+
+            return back()->with('error', $e->response->status() === 429
+                ? 'Recipe API quota reached. Please try again later.'
+                : 'Unable to fetch recipes from the recipe API.');
+        }
+
+        return back()->with('status', "$count recipe(s) processed. Total recipes: ".Recipe::count().'.');
     }
 
     public function publishFacebook(Request $request, Recipe $recipe, FacebookPublisher $facebook)

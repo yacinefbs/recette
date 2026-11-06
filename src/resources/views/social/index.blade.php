@@ -5,16 +5,21 @@
     <div class="flash flash--err">Facebook is not configured: set <code>FACEBOOK_PAGE_ID</code> and <code>FACEBOOK_PAGE_TOKEN</code> in .env. You can still mark recipes as posted manually.</div>
 @endunless
 
+<form method="post" action="{{ route('social.recipes.fetch') }}" id="recipe-fetch" style="margin-bottom:16px">
+    @csrf
+    <button class="btn" type="submit"><span class="spin" hidden aria-hidden="true"></span><span class="fetch-label" role="status" aria-live="polite">Get recipes</span></button>
+</form>
+
 <div class="tabs">
     <a href="{{ route('social.index', ['status' => 'pending', 'q' => $q ?: null]) }}" class="{{ $status === 'pending' ? 'on' : '' }}">Not posted (<span data-count="pending">{{ $counts['pending'] }}</span>)</a>
     <a href="{{ route('social.index', ['status' => 'scheduled', 'q' => $q ?: null]) }}" class="{{ $status === 'scheduled' ? 'on' : '' }}">Scheduled (<span data-count="scheduled">{{ $counts['scheduled'] }}</span>)</a>
     <a href="{{ route('social.index', ['status' => 'posted', 'q' => $q ?: null]) }}" class="{{ $status === 'posted' ? 'on' : '' }}">Posted on Facebook (<span data-count="posted">{{ $counts['posted'] }}</span>)</a>
 </div>
 
-<form method="get" class="card" style="margin-bottom:16px;display:flex;gap:8px">
+<form method="get" class="card" id="recipe-search" style="margin-bottom:16px;display:flex;gap:8px">
     <input type="hidden" name="status" value="{{ $status }}">
     <input type="text" name="q" value="{{ $q }}" placeholder="Search a recipe" aria-label="Search a recipe">
-    <button class="btn" type="submit">Search</button>
+    <button class="btn" type="submit"><span class="spin" hidden aria-hidden="true"></span><span class="search-label" role="status" aria-live="polite">Search</span></button>
 </form>
 
 <div class="card">
@@ -129,5 +134,53 @@ function toast(msg, ok) {
     document.getElementById('toasts').appendChild(el);
     setTimeout(function () { el.remove(); }, ok ? 4000 : 9000);
 }
+</script>
+<script>
+var recipeSearch = document.getElementById('recipe-search');
+var searchButton = recipeSearch.querySelector('button[type=submit]');
+var searchLabel = searchButton.querySelector('.search-label');
+var searchSpinner = searchButton.querySelector('.spin');
+
+recipeSearch.addEventListener('submit', function (event) {
+    if (searchButton.disabled) {
+        event.preventDefault();
+        return;
+    }
+    searchButton.disabled = true;
+    searchSpinner.hidden = false;
+    searchLabel.textContent = 'Loading recipes…';
+    recipeSearch.setAttribute('aria-busy', 'true');
+});
+
+window.addEventListener('pageshow', function () {
+    searchButton.disabled = false;
+    searchSpinner.hidden = true;
+    searchLabel.textContent = 'Search';
+    recipeSearch.removeAttribute('aria-busy');
+});
+</script>
+<script>
+var recipeFetch = document.getElementById('recipe-fetch');
+var fetchButton = recipeFetch.querySelector('button[type=submit]');
+var fetchLabel = fetchButton.querySelector('.fetch-label');
+var fetchSpinner = fetchButton.querySelector('.spin');
+
+recipeFetch.addEventListener('submit', function (event) {
+    if (fetchButton.disabled) {
+        event.preventDefault();
+        return;
+    }
+    fetchButton.disabled = true;
+    fetchSpinner.hidden = false;
+    fetchLabel.textContent = 'Fetching recipes…';
+    recipeFetch.setAttribute('aria-busy', 'true');
+});
+
+window.addEventListener('pageshow', function () {
+    fetchButton.disabled = false;
+    fetchSpinner.hidden = true;
+    fetchLabel.textContent = 'Get recipes';
+    recipeFetch.removeAttribute('aria-busy');
+});
 </script>
 @endsection
