@@ -51,6 +51,8 @@ Route::prefix('social-admin')->name('social.')->group(function () {
         Route::get('/', [SocialAdminController::class, 'index'])->name('index');
         Route::post('/logout', [SocialAdminController::class, 'logout'])->name('logout');
         Route::post('/recipes/{recipe}/facebook', [SocialAdminController::class, 'publishFacebook'])->whereNumber('recipe')->middleware('throttle:20,1')->name('facebook.publish');
+        Route::post('/recipes/{recipe}/facebook/schedule', [SocialAdminController::class, 'scheduleFacebook'])->whereNumber('recipe')->middleware('throttle:20,1')->name('facebook.schedule');
+        Route::post('/recipes/{recipe}/facebook/sync', [SocialAdminController::class, 'syncFacebook'])->whereNumber('recipe')->middleware('throttle:20,1')->name('facebook.sync');
         Route::post('/recipes/{recipe}/facebook/toggle', [SocialAdminController::class, 'toggleFacebook'])->whereNumber('recipe')->name('facebook.toggle');
     });
 });

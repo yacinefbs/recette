@@ -13,7 +13,7 @@
         header strong{font-size:17px}
         main{max-width:1000px;margin:24px auto;padding:0 16px}
         .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
-        input[type=text],input[type=email],input[type=password],textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit}
+        input[type=text],input[type=email],input[type=password],input[type=datetime-local],input[type=number],select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font:inherit}
         label{display:block;font-weight:600;margin:12px 0 4px}
         .btn{display:inline-block;border:0;border-radius:8px;padding:9px 16px;font:inherit;font-weight:600;cursor:pointer;background:var(--navy);color:#fff;text-decoration:none}
         .btn--fb{background:#1877f2}.btn--ghost{background:#fff;color:var(--navy);border:1px solid var(--line)}
@@ -52,6 +52,7 @@
 <main>
     @if (session('status'))<div class="flash flash--ok">{{ session('status') }}</div>@endif
     @if (session('error'))<div class="flash flash--err">{{ session('error') }}</div>@endif
+    @if ($errors->any())<div class="flash flash--err" role="alert">{{ $errors->first() }}</div>@endif
     @yield('content')
 </main>
 </body>

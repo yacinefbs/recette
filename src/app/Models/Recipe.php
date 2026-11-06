@@ -21,6 +21,7 @@ class Recipe extends Model
             'nutrition' => 'array',
             'posted_facebook' => 'boolean',
             'facebook_posted_at' => 'datetime',
+            'facebook_scheduled_at' => 'datetime',
         ];
     }
 }
