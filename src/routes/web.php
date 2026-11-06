@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CookingGuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
 use App\Http\Controllers\NutritionCalculatorController;
@@ -38,6 +39,13 @@ Route::post('/tools/ingredient-substitution/search', [IngredientSubstitutionCont
     ->middleware('throttle:60,1')->name('tools.ingredient-substitution.search');
 Route::get('/ingredient-substitutes/{slug}', [IngredientSubstitutionController::class, 'guide'])
     ->where('slug', '[a-z0-9-]+')->name('ingredient-guides.show');
+
+Route::prefix('cooking-tips')->name('cooking-tips.')->group(function () {
+    Route::get('/', [CookingGuideController::class, 'index'])->name('index');
+    Route::get('/search', [CookingGuideController::class, 'search'])->middleware('throttle:60,1')->name('search');
+    Route::get('/{category}', [CookingGuideController::class, 'category'])->name('category');
+    Route::get('/{category}/{guide}', [CookingGuideController::class, 'show'])->name('show');
+});
 
 Route::prefix('weekly-meal-planner')->name('meal-planner.')->group(function () {
     Route::get('/', [WeeklyMealPlannerController::class, 'index'])->name('index');

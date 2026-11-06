@@ -30,6 +30,7 @@ class SeoController extends Controller
             ."## Main pages\n\n"
             .'- ['.'Home]('.url('/')."): featured and latest recipes\n"
             .'- [All recipes]('.route('recipes.index')."): searchable list of every recipe\n"
+            .'- [Cooking Tips & Guides]('.route('cooking-tips.index')."): practical kitchen techniques, ingredient guides, storage and hacks\n"
             .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
             .'- [Nutrition Calculator]('.route('tools.nutrition-calculator')."): estimate calories, protein, carbs and fat per serving\n"
@@ -63,6 +64,20 @@ class SeoController extends Controller
         ];
 
         $entries[] = [route('meal-planner.index'), null, 'monthly', '0.8'];
+        $entries[] = [route('cooking-tips.index'), null, 'weekly', '0.8'];
+
+        try {
+            foreach (\App\Models\CookingGuideCategory::all() as $cat) {
+                $entries[] = [route('cooking-tips.category', $cat->slug), null, 'weekly', '0.7'];
+            }
+            foreach (\App\Models\CookingGuide::with('category')->published()->get() as $g) {
+                if ($g->category) {
+                    $entries[] = [route('cooking-tips.show', ['category' => $g->category->slug, 'guide' => $g->slug]), $g->updated_at, 'monthly', '0.8'];
+                }
+            }
+        } catch (\Throwable) {
+            // Tables not migrated yet.
+        }
 
         foreach ([route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
