@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/topictrail.css?v=3">
+    
     @stack('head')
 </head>
 
@@ -90,6 +91,7 @@
     <script src="/assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="/assets/js/plugins/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/main.js"></script>
+    @include('partials.montag')
     @stack('scripts')
 </body>
 
