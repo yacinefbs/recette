@@ -28,6 +28,8 @@ return [
 
     // Google Search Console "HTML tag" verification token (content value only)
     'google_site_verification' => env('GOOGLE_SITE_VERIFICATION'),
+    // Monetag website verification token (content value only)
+    'monetag_site_verification' => env('MONETAG_SITE_VERIFICATION'),
 
     /*
     |--------------------------------------------------------------------------

@@ -13,6 +13,9 @@ $ogImage = $seo['image'] ?? ($social['url'] ?? asset('assets/images/hero-img7.pn
 @if (config('app.google_site_verification'))
     <meta name="google-site-verification" content="{{ config('app.google_site_verification') }}">
 @endif
+@if (config('app.monetag_site_verification'))
+    <meta name="monetag" content="{{ config('app.monetag_site_verification') }}">
+@endif
     <title>{{ $seo['title'] }}</title>
     <meta name="description" content="{{ $seo['description'] }}">
     <meta name="robots" content="{{ $seo['robots'] ?? 'index,follow,max-image-preview:large,max-snippet:-1' }}">

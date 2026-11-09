@@ -18,4 +18,13 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_monetag_site_verification_meta_tag_is_rendered_when_configured(): void
+    {
+        config(['app.monetag_site_verification' => 'test-verification-token']);
+
+        $this->get('/')
+            ->assertOk()
+            ->assertSee('<meta name="monetag" content="test-verification-token">', false);
+    }
 }
