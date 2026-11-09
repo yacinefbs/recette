@@ -91,7 +91,6 @@
     <script src="/assets/js/plugins/jquery.nice-select.min.js"></script>
     <script src="/assets/js/plugins/jquery.magnific-popup.min.js"></script>
     <script src="/assets/js/main.js"></script>
-    @include('partials.montag')
     @stack('scripts')
 </body>
 

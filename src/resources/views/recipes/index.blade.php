@@ -195,6 +195,7 @@
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
+    @include('partials.montag')
 
 </body>
 
