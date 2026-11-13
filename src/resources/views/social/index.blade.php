@@ -2,10 +2,7 @@
 @section('title', 'Recipes to post')
 @section('content')
 @unless ($facebookReady)
-    <div class="flash flash--err">Facebook is not configured: set <code>FACEBOOK_PAGE_ID</code> and <code>FACEBOOK_PAGE_TOKEN</code> in the server environment.</div>
-@endunless
-@unless ($pinterestReady)
-    <div class="flash flash--err">Pinterest is not configured: set <code>PINTEREST_ACCESS_TOKEN</code> in the server environment.</div>
+    <div class="flash flash--err">Facebook is not configured: set <code>FACEBOOK_PAGE_ID</code> and <code>FACEBOOK_PAGE_TOKEN</code> in .env. You can still mark recipes as posted manually.</div>
 @endunless
 
 <form method="post" action="{{ route('social.recipes.fetch') }}" id="recipe-fetch" style="margin-bottom:16px">
@@ -16,7 +13,7 @@
 <div class="tabs">
     <a href="{{ route('social.index', ['status' => 'pending', 'q' => $q ?: null]) }}" class="{{ $status === 'pending' ? 'on' : '' }}">Not posted (<span data-count="pending">{{ $counts['pending'] }}</span>)</a>
     <a href="{{ route('social.index', ['status' => 'scheduled', 'q' => $q ?: null]) }}" class="{{ $status === 'scheduled' ? 'on' : '' }}">Scheduled (<span data-count="scheduled">{{ $counts['scheduled'] }}</span>)</a>
-    <a href="{{ route('social.index', ['status' => 'posted', 'q' => $q ?: null]) }}" class="{{ $status === 'posted' ? 'on' : '' }}">Posted on all configured networks (<span data-count="posted">{{ $counts['posted'] }}</span>)</a>
+    <a href="{{ route('social.index', ['status' => 'posted', 'q' => $q ?: null]) }}" class="{{ $status === 'posted' ? 'on' : '' }}">Posted on Facebook (<span data-count="posted">{{ $counts['posted'] }}</span>)</a>
 </div>
 
 <form method="get" class="card" id="recipe-search" style="margin-bottom:16px;display:flex;gap:8px">
@@ -32,40 +29,24 @@
             <div class="body">
                 <h3><a href="{{ route('recipes.show', $recipe) }}" target="_blank" rel="noopener">{{ $recipe->name }}</a></h3>
                 @if ($recipe->posted_facebook)
-                    <span class="badge">Posted on Facebook{{ $recipe->facebook_posted_at ? ' on '.$recipe->facebook_posted_at->format('Y-m-d H:i') : '' }}</span>
-                @endif
-                @if ($recipe->posted_pinterest)
-                    <span class="badge">Posted on Pinterest{{ $recipe->pinterest_posted_at ? ' on '.$recipe->pinterest_posted_at->format('Y-m-d H:i') : '' }}</span>
-                @endif
-                @if ($recipe->facebook_scheduled_at && ! $recipe->posted_facebook)
+                    <span class="badge">Posted{{ $recipe->facebook_posted_at ? ' on '.$recipe->facebook_posted_at->format('Y-m-d H:i') : '' }}</span>
+                @elseif ($recipe->facebook_scheduled_at)
                     <span class="badge">Scheduled for {{ $recipe->facebook_scheduled_at->copy()->setTimezone('Africa/Casablanca')->format('Y-m-d H:i T') }} (Morocco). Publication not yet verified.</span>
                 @endif
                 <div class="actions">
-                    @if ((! $recipe->posted_facebook && ! $recipe->facebook_scheduled_at) || ! $recipe->posted_pinterest)
-                        <form method="post" action="{{ route('social.recipes.publish', $recipe) }}" style="width:100%" class="js-publish-form" data-pinterest-ready="{{ $pinterestReady ? 'true' : 'false' }}" data-pinterest-boards-url="{{ route('social.pinterest.boards') }}">
+                    @if (! $recipe->posted_facebook && ! $recipe->facebook_scheduled_at)
+                        <form method="post" action="{{ route('social.facebook.publish', $recipe) }}" style="width:100%" class="js-fb-form">
                             @csrf
-                            <fieldset class="network-picker">
-                                <legend>Publish to</legend>
-                                <label><input type="checkbox" name="networks[]" value="facebook" @checked(! $recipe->posted_facebook && ! $recipe->facebook_scheduled_at && $facebookReady) @disabled($recipe->posted_facebook || $recipe->facebook_scheduled_at || ! $facebookReady)> Facebook @if ($recipe->posted_facebook)<span class="muted">(already posted)</span>@elseif ($recipe->facebook_scheduled_at)<span class="muted">(already scheduled)</span>@elseif (! $facebookReady)<span class="muted">(not configured)</span>@endif</label>
-                                <label><input type="checkbox" name="networks[]" value="pinterest" @checked(! $recipe->posted_pinterest && $pinterestReady) @disabled($recipe->posted_pinterest || ! $pinterestReady)> Pinterest @if ($recipe->posted_pinterest)<span class="muted">(already posted)</span>@elseif (! $pinterestReady)<span class="muted">(not configured)</span>@endif</label>
-                                <label class="pinterest-board-label">Pinterest board
-                                    <select name="board_id" class="pinterest-board" @disabled(! $pinterestReady)>
-                                        <option value="">Loading Pinterest boards…</option>
-                                    </select>
-                                </label>
-                                <span class="pinterest-board-status muted" role="status" aria-live="polite"></span>
-                            </fieldset>
                             <details>
                                 <summary>Edit the message</summary>
                                 <textarea name="message" rows="4" maxlength="2000">{{ $publisher->message($recipe) }}</textarea>
                             </details>
                             <div class="actions">
-                                <button class="btn btn--fb js-publish-button" type="submit" @disabled(! ($facebookReady || $pinterestReady))><span class="spin" hidden></span><span class="lbl">Publish to selected networks</span></button>
+                                <button class="btn btn--fb" type="submit" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Post to Facebook</span></button>
                             </div>
-                            @if (! $recipe->posted_facebook && ! $recipe->facebook_scheduled_at)
                             <details>
                                 <summary>Schedule on Facebook</summary>
-                                <p class="muted">Scheduling is Facebook-only; network selection above applies to immediate publishing. Times use Morocco (Africa/Casablanca). Choose at least 10 minutes from now. Facebook may impose additional limits.</p>
+                                <p class="muted">Times use Morocco (Africa/Casablanca). Choose at least 10 minutes from now. Facebook may impose additional limits.</p>
                                 <label><input type="radio" name="schedule_mode" value="calendar" checked> Date and time</label>
                                 <label for="schedule-at-{{ $recipe->id }}">Date and time in Morocco</label>
                                 <input id="schedule-at-{{ $recipe->id }}" type="datetime-local" name="scheduled_at">
@@ -74,12 +55,10 @@
                                     <div><label for="delay-{{ $recipe->id }}">Amount</label><input id="delay-{{ $recipe->id }}" type="number" name="delay" min="1" max="525600" step="1"></div>
                                     <div><label for="unit-{{ $recipe->id }}">Unit</label><select id="unit-{{ $recipe->id }}" name="delay_unit"><option value="minutes" selected>Minutes</option><option value="hours">Hours</option></select></div>
                                 </div>
-                                <div class="actions"><button class="btn btn--fb js-schedule-button" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" @disabled(! $facebookReady || $recipe->posted_facebook)><span class="spin" hidden></span><span class="lbl">Schedule on Facebook</span></button></div>
+                                <div class="actions"><button class="btn btn--fb" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Schedule on Facebook</span></button></div>
                             </details>
-                            @endif
                         </form>
-                    @endif
-                    @if ($recipe->facebook_scheduled_at && ! $recipe->posted_facebook)
+                    @elseif ($recipe->facebook_scheduled_at && ! $recipe->posted_facebook)
                         <form method="post" action="{{ route('social.facebook.sync', $recipe) }}">
                             @csrf
                             <button class="btn btn--ghost" type="submit">Check publication on Facebook</button>
@@ -107,55 +86,7 @@
 @endif</div>
 <div id="toasts" aria-live="polite"></div>
 <script>
-var boardRequests = [];
-document.querySelectorAll('.js-publish-form').forEach(function (form) {
-    var networkInputs = form.querySelectorAll('input[name="networks[]"]');
-    var facebookInput = form.querySelector('input[value="facebook"]');
-    var pinterestInput = form.querySelector('input[value="pinterest"]');
-    var boardSelect = form.querySelector('.pinterest-board');
-    var boardStatus = form.querySelector('.pinterest-board-status');
-    var publishButton = form.querySelector('.js-publish-button');
-    var scheduleButton = form.querySelector('.js-schedule-button');
-
-    function syncControls() {
-        var selected = Array.prototype.some.call(networkInputs, function (input) { return input.checked && !input.disabled; });
-        var needsBoard = pinterestInput && pinterestInput.checked && !pinterestInput.disabled;
-        publishButton.disabled = !selected || (needsBoard && !boardSelect.value);
-        if (scheduleButton) scheduleButton.disabled = !facebookInput.checked || facebookInput.disabled;
-        boardSelect.disabled = !needsBoard || !boardSelect.options.length;
-    }
-
-    networkInputs.forEach(function (input) { input.addEventListener('change', syncControls); });
-    boardSelect.addEventListener('change', syncControls);
-    if (form.dataset.pinterestReady === 'true') {
-        if (!boardRequests.length) {
-            boardRequests.push(fetch(form.dataset.pinterestBoardsUrl, {headers: {'Accept': 'application/json'}})
-                .then(function (res) {
-                    return res.json().then(function (data) {
-                        if (!res.ok) throw new Error(data.message || 'Could not load Pinterest boards.');
-                        return data.items;
-                    });
-                }));
-        }
-        boardRequests[0].then(function (boards) {
-            if (!boards.length) throw new Error('No Pinterest boards are available for this account.');
-            boardSelect.innerHTML = '';
-            boards.forEach(function (board) {
-                var option = document.createElement('option');
-                option.value = board.id;
-                option.textContent = board.name;
-                boardSelect.appendChild(option);
-            });
-            boardStatus.textContent = '';
-            syncControls();
-        }).catch(function (error) {
-            boardSelect.innerHTML = '<option value="">Pinterest boards unavailable</option>';
-            boardStatus.textContent = error.message;
-            syncControls();
-        });
-    }
-    syncControls();
-
+document.querySelectorAll('.js-fb-form').forEach(function (form) {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         var btn = e.submitter || form.querySelector('button[type=submit]');
@@ -163,10 +94,7 @@ document.querySelectorAll('.js-publish-form').forEach(function (form) {
         var row = form.closest('.row');
         var name = row.querySelector('h3').textContent.trim();
         var scheduling = btn.hasAttribute('formaction');
-        var destinations = Array.prototype.filter.call(networkInputs, function (input) { return input.checked && !input.disabled; })
-            .map(function (input) { return input.value; });
-        var destinationText = destinations.map(function (network) { return network === 'facebook' ? 'Facebook' : 'Pinterest'; }).join(' and ');
-        if (!confirm((scheduling ? 'Schedule "' : 'Publish "') + name + (scheduling ? '" on Facebook?' : '" to ' + destinationText + '?'))) return;
+        if (!confirm((scheduling ? 'Schedule "' : 'Post "') + name + '" on the Facebook page?')) return;
 
         var buttons = form.querySelectorAll('button[type=submit]');
         buttons.forEach(function (button) { button.disabled = true; });
@@ -181,19 +109,8 @@ document.querySelectorAll('.js-publish-form').forEach(function (form) {
                 body: new FormData(form)
             });
             var data = await res.json().catch(function () { return {}; });
-            if (!res.ok || !data.ok) {
-                if (data.partial) {
-                    toast(data.message || 'Some networks were published, others failed.', false);
-                    setTimeout(function () { window.location.reload(); }, 1200);
-                    return;
-                }
-                throw new Error(data.message || 'Request failed (' + res.status + ')');
-            }
+            if (!res.ok || !data.ok) throw new Error(data.message || 'Request failed (' + res.status + ')');
             toast(data.message, true);
-            if (!scheduling) {
-                setTimeout(function () { window.location.reload(); }, 800);
-                return;
-            }
             var pendingCount = document.querySelector('[data-count="pending"]');
             var destinationCount = document.querySelector('[data-count="' + (scheduling ? 'scheduled' : 'posted') + '"]');
             pendingCount.textContent = Math.max(0, Number(pendingCount.textContent) - 1);
@@ -203,11 +120,10 @@ document.querySelectorAll('.js-publish-form').forEach(function (form) {
             form.outerHTML = '<span class="badge">' + (scheduling ? 'Scheduled on Facebook' : 'Posted just now') + '</span>';
             setTimeout(function () { row.remove(); }, 1200);
         } catch (err) {
-            toast(err.message || 'Request failed. Check the selected networks before retrying.', false);
+            toast(err.message || 'Request failed. Check Facebook before retrying.', false);
             buttons.forEach(function (button) { button.disabled = false; });
             btn.querySelector('.spin').hidden = true;
             label.textContent = originalLabel;
-            syncControls();
         }
     });
 });

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Recipe;
 use App\Services\FacebookPublisher;
-use App\Services\PinterestPublisher;
 use App\Services\TastyService;
 use Carbon\CarbonImmutable;
 use DateTimeImmutable;
@@ -48,153 +47,33 @@ class SocialAdminController extends Controller
         return redirect()->route('social.login');
     }
 
-    public function index(Request $request, FacebookPublisher $facebook, PinterestPublisher $pinterest)
+    public function index(Request $request, FacebookPublisher $facebook)
     {
         $q = trim((string) $request->query('q', ''));
         $status = in_array($request->query('status'), ['pending', 'scheduled', 'posted'], true) ? $request->query('status') : 'pending';
-        $facebookReady = $facebook->isConfigured();
-        $pinterestReady = $pinterest->isConfigured();
-        $configuredNetworks = array_filter([
-            'facebook' => $facebookReady,
-            'pinterest' => $pinterestReady,
-        ]);
 
         $recipes = Recipe::query()
-            ->select(['id', 'name', 'description', 'image_path', 'posted_facebook', 'facebook_posted_at', 'facebook_post_id', 'facebook_scheduled_at', 'posted_pinterest', 'pinterest_posted_at', 'pinterest_pin_id'])
+            ->select(['id', 'name', 'description', 'image_path', 'posted_facebook', 'facebook_posted_at', 'facebook_post_id', 'facebook_scheduled_at'])
             ->when($q !== '', fn ($query) => $query->where('name', 'like', '%'.$q.'%'))
-            ->when($status === 'posted', function ($query) use ($configuredNetworks) {
-                if ($configuredNetworks === []) {
-                    return $query->whereRaw('1 = 0');
-                }
-                foreach ($configuredNetworks as $network => $ready) {
-                    $query->where('posted_'.$network, true);
-                }
-
-                return $query;
-            })
+            ->when($status === 'posted', fn ($query) => $query->where('posted_facebook', true))
             ->when($status === 'scheduled', fn ($query) => $query->where('posted_facebook', false)->whereNotNull('facebook_scheduled_at'))
-            ->when($status === 'pending', function ($query) use ($configuredNetworks) {
-                $query->whereNull('facebook_scheduled_at');
-                if ($configuredNetworks === []) {
-                    return $query;
-                }
-
-                return $query->where(function ($missing) use ($configuredNetworks) {
-                    foreach ($configuredNetworks as $network => $ready) {
-                        $missing->orWhere('posted_'.$network, false);
-                    }
-                });
-            })
+            ->when($status === 'pending', fn ($query) => $query->where('posted_facebook', false)->whereNull('facebook_scheduled_at'))
             ->orderByDesc('id')
             ->paginate(20)
             ->withQueryString();
-
-        $pendingCount = Recipe::whereNull('facebook_scheduled_at');
-        $postedCount = Recipe::query();
-        if ($configuredNetworks === []) {
-            $postedCount->whereRaw('1 = 0');
-        } else {
-            $pendingCount->where(function ($missing) use ($configuredNetworks) {
-                foreach ($configuredNetworks as $network => $ready) {
-                    $missing->orWhere('posted_'.$network, false);
-                }
-            });
-            foreach ($configuredNetworks as $network => $ready) {
-                $postedCount->where('posted_'.$network, true);
-            }
-        }
 
         return view('social.index', [
             'recipes' => $recipes,
             'q' => $q,
             'status' => $status,
-            'facebookReady' => $facebookReady,
-            'pinterestReady' => $pinterestReady,
+            'facebookReady' => $facebook->isConfigured(),
             'counts' => [
-                'pending' => $pendingCount->count(),
+                'pending' => Recipe::where('posted_facebook', false)->whereNull('facebook_scheduled_at')->count(),
                 'scheduled' => Recipe::where('posted_facebook', false)->whereNotNull('facebook_scheduled_at')->count(),
-                'posted' => $postedCount->count(),
+                'posted' => Recipe::where('posted_facebook', true)->count(),
             ],
             'publisher' => $facebook,
         ]);
-    }
-
-    public function pinterestBoards(PinterestPublisher $pinterest)
-    {
-        try {
-            return response()->json(['items' => $pinterest->boards()]);
-        } catch (Throwable $e) {
-            report($e);
-
-            return response()->json(['message' => 'Unable to load Pinterest boards. Check the Pinterest access token and permissions.'], 422);
-        }
-    }
-
-    public function publishNetworks(Request $request, Recipe $recipe, FacebookPublisher $facebook, PinterestPublisher $pinterest)
-    {
-        $data = $request->validate([
-            'networks' => ['required', 'array', 'min:1', 'max:2'],
-            'networks.*' => ['required', 'string', 'distinct', 'in:facebook,pinterest'],
-            'message' => ['nullable', 'string', 'max:2000'],
-            'board_id' => ['nullable', 'string', 'max:255'],
-        ]);
-        $networks = $data['networks'];
-
-        if (in_array('pinterest', $networks, true)) {
-            try {
-                $boardIds = array_column($pinterest->boards(), 'id');
-            } catch (Throwable $e) {
-                report($e);
-
-                return $this->respond($request, false, 'Pinterest: Unable to load boards. Check the access token and permissions.', 422);
-            }
-            if (! in_array($data['board_id'] ?? '', $boardIds, true)) {
-                return $this->respond($request, false, 'Choose a valid Pinterest board.', 422);
-            }
-        }
-
-        $published = [];
-        $errors = [];
-        foreach ($networks as $network) {
-            try {
-                if ($network === 'facebook') {
-                    if (! $facebook->isConfigured()) {
-                        throw new \RuntimeException('Facebook is not configured.');
-                    }
-                    DB::transaction(function () use ($recipe, $facebook, $data) {
-                        $locked = Recipe::whereKey($recipe->id)->lockForUpdate()->firstOrFail();
-                        if ($locked->posted_facebook || $locked->facebook_scheduled_at) {
-                            throw new \RuntimeException('This recipe is already posted or scheduled on Facebook.');
-                        }
-                        $facebook->publish($locked, $data['message'] ?? null);
-                    });
-                } else {
-                    DB::transaction(function () use ($recipe, $pinterest, $data) {
-                        $locked = Recipe::whereKey($recipe->id)->lockForUpdate()->firstOrFail();
-                        if ($locked->posted_pinterest) {
-                            throw new \RuntimeException('This recipe is already posted on Pinterest.');
-                        }
-                        $pinterest->publish($locked, $data['board_id']);
-                    });
-                }
-                $published[] = ucfirst($network);
-            } catch (Throwable $e) {
-                report($e);
-                $errors[] = ucfirst($network).': '.$e->getMessage();
-            }
-        }
-
-        if ($errors !== []) {
-            $message = $published === []
-                ? implode(' ', $errors)
-                : implode(' and ', $published).' published. '.implode(' ', $errors);
-
-            return $request->expectsJson()
-                ? response()->json(['ok' => false, 'partial' => $published !== [], 'message' => $message], 422)
-                : back()->with('error', $message);
-        }
-
-        return $this->respond($request, true, 'Published to '.implode(' and ', $published).'.');
     }
 
     public function fetchRecipes(TastyService $tasty)

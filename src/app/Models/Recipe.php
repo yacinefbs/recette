@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Model;
 
-#[Fillable(['tasty_id', 'name', 'description', 'thumbnail_url', 'image_path', 'total_time_minutes', 'prep_time_minutes', 'cook_time_minutes', 'num_servings', 'nutrition', 'sections', 'instructions', 'posted_facebook', 'facebook_posted_at', 'facebook_post_id', 'posted_pinterest', 'pinterest_posted_at', 'pinterest_pin_id'])]
+#[Fillable(['tasty_id', 'name', 'description', 'thumbnail_url', 'image_path', 'total_time_minutes', 'prep_time_minutes', 'cook_time_minutes', 'num_servings', 'nutrition', 'sections', 'instructions', 'posted_facebook', 'facebook_posted_at', 'facebook_post_id'])]
 class Recipe extends Model
 {
     public function getImageAttribute(): string
@@ -22,8 +22,6 @@ class Recipe extends Model
             'posted_facebook' => 'boolean',
             'facebook_posted_at' => 'datetime',
             'facebook_scheduled_at' => 'datetime',
-            'posted_pinterest' => 'boolean',
-            'pinterest_posted_at' => 'datetime',
         ];
     }
 }
