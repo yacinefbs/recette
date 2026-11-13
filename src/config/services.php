@@ -55,6 +55,10 @@ return [
         'page_url' => env('FACEBOOK_PAGE_URL', 'https://www.facebook.com/profile.php?id=1418868981309476'),
     ],
 
+    'pinterest' => [
+        'access_token' => env('PINTEREST_ACCESS_TOKEN'),
+    ],
+
     'adsense' => [
         // Ad unit IDs (create them in AdSense); a slot renders nothing until its ID is set.
         'slots' => [
