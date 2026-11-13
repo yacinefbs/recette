@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/assets/css/plugins/nice-select.css">
     <link rel="stylesheet" href="/assets/css/plugins/magnific-popup.css">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/topictrail.css?v=3">
+    <link rel="stylesheet" href="/assets/css/topictrail.css?v=4">
     
     @stack('head')
 </head>

@@ -25,6 +25,7 @@
                                             <li class="{{ request()->is('cooking-tips*') ? 'active-menu' : '' }}"><a href="{{ route('cooking-tips.index') }}">Cooking Tips</a></li>
                                             <li class="has-dropdown"><a href="{{ route('tools.converter') }}">Tools</a>
                                                 <ul class="sub-menu">
+                                                    <li><a href="{{ route('tools.cooking-timer') }}">Cooking Timer</a></li>
                                                     <li><a href="{{ route('tools.nutrition-calculator') }}">Nutrition Calculator</a></li>
                                                     <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>
                                                     <li><a href="{{ route('tools.what') }}">What Can I Cook?</a></li>

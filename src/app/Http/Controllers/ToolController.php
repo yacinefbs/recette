@@ -7,6 +7,42 @@ use Illuminate\Http\Request;
 
 class ToolController extends Controller
 {
+    public function cookingTimer()
+    {
+        $site = config('app.name', 'TopicTrail');
+        $canonical = route('tools.cooking-timer');
+
+        return view('tools.cooking-timer', [
+            'pageTitle' => 'Free Online Cooking Timer',
+            'seo' => [
+                'title' => 'Free Cooking Timer – Multiple Kitchen Timers Online',
+                'description' => 'Use our free online cooking timer to manage multiple timers for eggs, pasta, rice, baking and everyday cooking.',
+                'canonical' => $canonical,
+                'schema' => [
+                    [
+                        '@context' => 'https://schema.org',
+                        '@type' => 'BreadcrumbList',
+                        'itemListElement' => [
+                            ['@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => url('/')],
+                            ['@type' => 'ListItem', 'position' => 2, 'name' => 'Tools', 'item' => route('tools.converter')],
+                            ['@type' => 'ListItem', 'position' => 3, 'name' => 'Cooking Timer', 'item' => $canonical],
+                        ],
+                    ],
+                    [
+                        '@context' => 'https://schema.org',
+                        '@type' => 'WebApplication',
+                        'name' => 'Free Cooking Timer – '.$site,
+                        'applicationCategory' => 'LifestyleApplication',
+                        'operatingSystem' => 'All',
+                        'url' => $canonical,
+                        'description' => 'Manage multiple cooking timers for everyday kitchen tasks.',
+                        'offers' => ['@type' => 'Offer', 'price' => '0', 'priceCurrency' => 'USD'],
+                    ],
+                ],
+            ],
+        ]);
+    }
+
     public function converter()
     {
         $site = config('app.name');

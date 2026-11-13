@@ -28,6 +28,7 @@ Route::get('/{slug}', [PageController::class, 'show'])
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
+Route::get('/tools/cooking-timer', [\App\Http\Controllers\ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
 Route::get('/tools/cooking-converter', [\App\Http\Controllers\ToolController::class, 'converter'])->name('tools.converter');
 Route::get('/tools/nutrition-calculator', [NutritionCalculatorController::class, 'index'])->name('tools.nutrition-calculator');
 Route::get('/tools/nutrition-calculator/search', [NutritionCalculatorController::class, 'search'])->middleware('throttle:60,1')->name('tools.nutrition-calculator.search');
