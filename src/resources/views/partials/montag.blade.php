@@ -1,1 +1,2 @@
 <script src="https://quge5.com/88/tag.min.js" data-zone="308071" async data-cfasync="false"></script>
+<script>(function(s){s.dataset.zone='12272817',s.src='https://n6wxm.com/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>

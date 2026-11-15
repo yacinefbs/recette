@@ -25,6 +25,8 @@ class ExampleTest extends TestCase
 
         $this->get('/')
             ->assertOk()
-            ->assertSee('<meta name="monetag" content="test-verification-token">', false);
+            ->assertSee('<meta name="monetag" content="test-verification-token">', false)
+            ->assertSee("s.dataset.zone='12272817'", false)
+            ->assertSee("s.src='https://n6wxm.com/vignette.min.js'", false);
     }
 }
