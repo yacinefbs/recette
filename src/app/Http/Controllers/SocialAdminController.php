@@ -67,6 +67,7 @@ class SocialAdminController extends Controller
             'q' => $q,
             'status' => $status,
             'facebookReady' => $facebook->isConfigured(),
+            'toolPosts' => $this->toolPosts(),
             'counts' => [
                 'pending' => Recipe::where('posted_facebook', false)->whereNull('facebook_scheduled_at')->count(),
                 'scheduled' => Recipe::where('posted_facebook', false)->whereNotNull('facebook_scheduled_at')->count(),
@@ -119,6 +120,83 @@ class SocialAdminController extends Controller
         $msg = "\"{$recipe->name}\" posted to Facebook.";
 
         return $request->expectsJson() ? response()->json(['ok' => true, 'message' => $msg]) : back()->with('status', $msg);
+    }
+
+    public function publishTool(Request $request, string $tool, FacebookPublisher $facebook)
+    {
+        $tools = $this->toolPosts();
+        abort_unless(isset($tools[$tool]), 404);
+        $data = $request->validate(['message' => ['required', 'string', 'min:5', 'max:2000']]);
+
+        try {
+            $facebook->publishLink($tools[$tool]['url'], trim($data['message']));
+        } catch (Throwable $e) {
+            report($e);
+
+            return $this->respond($request, false, 'Facebook: '.$e->getMessage(), 422);
+        }
+
+        return $this->respond($request, true, '"'.$tools[$tool]['title'].'" posted to Facebook.');
+    }
+
+    /**
+     * Public pages available for manual, repeatable Facebook promotion.
+     *
+     * @return array<string, array{title:string,description:string,url:string,image:string,message:string}>
+     */
+    private function toolPosts(): array
+    {
+        return [
+            'meal-planner' => [
+                'title' => 'Weekly Meal Planner',
+                'description' => 'Plan a week of meals and build a grocery list in one place.',
+                'url' => route('meal-planner.index'),
+                'image' => asset('assets/images/social/weekly-meal-planner-og.jpg'),
+                'message' => "Make the week’s meals easier to plan. 🍽️\n\nCreate a flexible 7-day meal plan, find recipe ideas and put together a grocery list — all in one free tool, with no account needed.\n\nStart planning your week with TopicTrail:",
+            ],
+            'cooking-timer' => [
+                'title' => 'Cooking Timer',
+                'description' => 'Run multiple kitchen timers together, with quick presets and custom countdowns.',
+                'url' => route('tools.cooking-timer'),
+                'image' => asset('assets/images/social/cooking-timer-og.jpg'),
+                'message' => "Juggling dinner and side dishes? ⏲️\n\nKeep several kitchen timers running on one page. Pick a quick cooking preset or set a custom countdown — free and ready when you are.\n\nGive the Cooking Timer a try:",
+            ],
+            'pantry-inventory' => [
+                'title' => 'Pantry Inventory Manager',
+                'description' => 'Keep track of kitchen ingredients, quantities and the dates you record, right in your browser.',
+                'url' => route('tools.pantry-inventory'),
+                'image' => asset('assets/images/social/pantry-inventory-og.jpg'),
+                'message' => "What’s already in your kitchen? 🥕\n\nKeep a simple pantry inventory, track quantities and recorded package dates, and discover recipe ideas using ingredients you have. Your inventory stays in your browser.\n\nTake a look at the Pantry Inventory Manager:",
+            ],
+            'cooking-converter' => [
+                'title' => 'Cooking Converter',
+                'description' => 'Convert common cooking measurements and temperatures while you follow a recipe.',
+                'url' => route('tools.converter'),
+                'image' => asset('assets/images/social/cooking-converter-og.jpg'),
+                'message' => "Cups, grams, tablespoons or oven temperatures? 🥄\n\nConvert common kitchen measurements and temperature units with TopicTrail’s free Cooking Converter.\n\nOpen the Cooking Converter:",
+            ],
+            'nutrition-calculator' => [
+                'title' => 'Nutrition Calculator',
+                'description' => 'Estimate nutrition for recipe ingredients and serving sizes.',
+                'url' => route('tools.nutrition-calculator'),
+                'image' => asset('assets/images/hero-img7.png'),
+                'message' => "Curious about the nutrition in your ingredients? 🥗\n\nUse the free TopicTrail Nutrition Calculator to estimate nutrition for foods and serving quantities. It’s a handy guide for meal planning.\n\nTry the Nutrition Calculator:",
+            ],
+            'what-can-i-cook' => [
+                'title' => 'What Can I Cook?',
+                'description' => 'Enter ingredients you have and find recipes that use them.',
+                'url' => route('tools.what'),
+                'image' => asset('assets/images/social/what-can-i-cook-og.jpg'),
+                'message' => "Not sure what to cook with what’s in the kitchen? 🍳\n\nEnter a few ingredients you have and find recipe ideas that use them with TopicTrail’s free What Can I Cook? tool.\n\nFind your next recipe with TopicTrail:",
+            ],
+            'ingredient-substitution' => [
+                'title' => 'Ingredient Substitution Tool',
+                'description' => 'Find practical substitutes and ratios when a recipe ingredient is missing.',
+                'url' => route('tools.ingredient-substitution'),
+                'image' => asset('assets/images/social/ingredient-substitution-og.jpg'),
+                'message' => "Missing an ingredient halfway through a recipe? 🧈\n\nLook up practical substitutions and suggested ratios with TopicTrail’s free Ingredient Substitution Tool.\n\nFind an ingredient substitute with TopicTrail:",
+            ],
+        ];
     }
 
     public function scheduleFacebook(Request $request, Recipe $recipe, FacebookPublisher $facebook)

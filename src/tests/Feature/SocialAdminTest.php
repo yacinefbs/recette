@@ -81,6 +81,62 @@ class SocialAdminTest extends TestCase
         $this->assertTrue($recipe->fresh()->posted_facebook);
     }
 
+    public function test_dashboard_shows_reusable_facebook_posts_for_meal_planner_and_tools(): void
+    {
+        $response = $this->actingAs(User::factory()->create())->get('/social-admin')->assertOk()
+            ->assertSee('Promote TopicTrail tools')
+            ->assertSee('Ready-to-edit Facebook posts')
+            ->assertSee(route('social.tools.publish', 'meal-planner'))
+            ->assertSee(route('social.tools.publish', 'cooking-timer'))
+            ->assertSee(route('social.tools.publish', 'pantry-inventory'))
+            ->assertSee(route('social.tools.publish', 'cooking-converter'))
+            ->assertSee(route('social.tools.publish', 'nutrition-calculator'))
+            ->assertSee(route('social.tools.publish', 'what-can-i-cook'))
+            ->assertSee(route('social.tools.publish', 'ingredient-substitution'))
+            ->assertSee('Make the week’s meals easier to plan.');
+
+        $this->assertSame(7, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
+    }
+
+    public function test_tool_post_publishes_the_selected_page_without_changing_recipe_status(): void
+    {
+        config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => 'page-123_post-456'])]);
+        $recipe = $this->recipe();
+
+        $this->actingAs(User::factory()->create())
+            ->postJson(route('social.tools.publish', 'cooking-timer'), [
+                'message' => 'Keep multiple kitchen timers in one place! ⏲️',
+            ])
+            ->assertOk()
+            ->assertJson(['ok' => true, 'message' => '"Cooking Timer" posted to Facebook.']);
+
+        Http::assertSent(function ($request) {
+            return str_ends_with($request->url(), '/page-123/feed')
+                && $request['link'] === route('tools.cooking-timer')
+                && $request['message'] === 'Keep multiple kitchen timers in one place! ⏲️'
+                && $request['access_token'] === 'secret-page-token';
+        });
+        $this->assertFalse($recipe->fresh()->posted_facebook);
+        $this->assertNull($recipe->fresh()->facebook_post_id);
+    }
+
+    public function test_tool_post_reports_facebook_errors_and_rejects_unknown_pages(): void
+    {
+        config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['error' => ['message' => 'Page permission denied']], 400)]);
+        $user = User::factory()->create();
+
+        $this->actingAs($user)
+            ->postJson(route('social.tools.publish', 'meal-planner'), ['message' => 'Try this free meal planner.'])
+            ->assertUnprocessable()
+            ->assertJsonPath('ok', false)
+            ->assertJsonPath('message', 'Facebook: Page permission denied');
+
+        $this->postJson(route('social.tools.publish', 'unknown-tool'), ['message' => 'A valid length post.'])
+            ->assertNotFound();
+    }
+
     public function test_only_authenticated_users_can_fetch_recipes(): void
     {
         $this->post(route('social.recipes.fetch'))->assertRedirect('/social-admin/login');

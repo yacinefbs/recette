@@ -26,7 +26,7 @@ class FacebookPublisher
     /** Publishes a link post (Facebook builds the preview from the page's Open Graph tags). */
     public function publish(Recipe $recipe, ?string $message = null): string
     {
-        $id = $this->send($recipe, $message);
+        $id = $this->send(route('recipes.show', $recipe), $message ?: $this->message($recipe));
 
         $recipe->update([
             'posted_facebook' => true,
@@ -37,9 +37,15 @@ class FacebookPublisher
         return $id;
     }
 
+    /** Publishes a reusable public-page link without changing recipe publication state. */
+    public function publishLink(string $url, string $message): string
+    {
+        return $this->send($url, $message);
+    }
+
     public function schedule(Recipe $recipe, CarbonInterface $when, ?string $message = null): string
     {
-        $id = $this->send($recipe, $message, $when);
+        $id = $this->send(route('recipes.show', $recipe), $message ?: $this->message($recipe), $when);
         $recipe->forceFill([
             'facebook_scheduled_at' => $when->copy()->utc(),
             'facebook_post_id' => $id,
@@ -66,7 +72,7 @@ class FacebookPublisher
         return $response->json('is_published');
     }
 
-    private function send(Recipe $recipe, ?string $message, ?CarbonInterface $when = null): string
+    private function send(string $url, string $message, ?CarbonInterface $when = null): string
     {
         if (! $this->isConfigured()) {
             throw new RuntimeException('Facebook is not configured (FACEBOOK_PAGE_ID / FACEBOOK_PAGE_TOKEN).');
@@ -74,8 +80,8 @@ class FacebookPublisher
 
         $version = config('services.facebook.graph_version');
         $payload = [
-            'message' => $message ?: $this->message($recipe),
-            'link' => route('recipes.show', $recipe),
+            'message' => $message,
+            'link' => $url,
             'access_token' => config('services.facebook.page_token'),
         ];
         if ($when) {

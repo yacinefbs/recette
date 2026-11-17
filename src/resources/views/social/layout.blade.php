@@ -32,6 +32,14 @@
         .actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
         details summary{cursor:pointer;color:#1877f2;font-size:13px;margin-top:6px}
         .badge{display:inline-block;padding:2px 8px;border-radius:99px;font-size:12px;background:#e6f4ec;color:var(--ok)}
+        .tool-post-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+        .tool-post{min-width:0;border:1px solid var(--line);border-radius:10px;padding:12px;background:#fff}
+        .tool-post__preview{display:flex;gap:12px;align-items:center;color:var(--navy);text-decoration:none}
+        .tool-post__preview img{width:120px;height:76px;object-fit:cover;border-radius:7px;background:#eee;flex:none}
+        .tool-post__preview span{display:grid;gap:4px}
+        .tool-post__preview small{color:#6b7280;line-height:1.35}
+        .tool-post form label{font-size:13px}
+        .tool-post__actions{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}
         .pager{margin-top:16px}
         .spin{display:inline-block;width:14px;height:14px;margin-right:8px;vertical-align:-2px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite}
         .spin[hidden]{display:none}
@@ -39,7 +47,8 @@
         #toasts{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:8px;max-width:360px;z-index:9}
         .toast{padding:10px 14px;border-radius:8px;color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.2)}
         .toast--ok{background:var(--ok)}.toast--err{background:var(--err)}
-        @media(max-width:600px){.row{flex-direction:column}.row img{width:100%;height:160px}}
+        @media(max-width:700px){.tool-post-grid{grid-template-columns:1fr}}
+        @media(max-width:600px){.row{flex-direction:column}.row img{width:100%;height:160px}.tool-post__preview img{width:100px;height:70px}}
     </style>
 </head>
 <body>

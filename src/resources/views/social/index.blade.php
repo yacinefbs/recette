@@ -22,6 +22,37 @@
     <button class="btn" type="submit"><span class="spin" hidden aria-hidden="true"></span><span class="search-label" role="status" aria-live="polite">Search</span></button>
 </form>
 
+<section class="card tool-posts" aria-labelledby="tool-posts-title" style="margin-bottom:16px">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap">
+        <div>
+            <h2 id="tool-posts-title" style="margin:0 0 4px;font-size:21px">Promote TopicTrail tools</h2>
+            <p class="muted" style="margin:0 0 14px">Ready-to-edit Facebook posts for the Meal Planner and free kitchen tools. Update the copy and publish whenever you want; these posts can be shared again later.</p>
+        </div>
+        <span class="badge">Facebook link posts</span>
+    </div>
+    <div class="tool-post-grid">
+        @foreach ($toolPosts as $slug => $tool)
+            <article class="tool-post">
+                <a href="{{ $tool['url'] }}" target="_blank" rel="noopener" class="tool-post__preview">
+                    <img src="{{ $tool['image'] }}" alt="" loading="lazy">
+                    <span><strong>{{ $tool['title'] }}</strong><small>{{ $tool['description'] }}</small></span>
+                </a>
+                <form method="post" action="{{ route('social.tools.publish', $slug) }}" class="js-tool-fb-form" data-tool-title="{{ $tool['title'] }}">
+                    @csrf
+                    <label for="tool-message-{{ $slug }}">Facebook message</label>
+                    <textarea id="tool-message-{{ $slug }}" name="message" rows="5" maxlength="2000" required>{{ $tool['message'] }}</textarea>
+                    <div class="tool-post__actions">
+                        <a href="{{ $tool['url'] }}" target="_blank" rel="noopener" class="muted">Preview page</a>
+                        <button class="btn btn--fb" type="submit" @disabled(! $facebookReady)>
+                            <span class="spin" hidden aria-hidden="true"></span><span class="lbl">Post to Facebook</span>
+                        </button>
+                    </div>
+                </form>
+            </article>
+        @endforeach
+    </div>
+</section>
+
 <div class="card">
     @forelse ($recipes as $recipe)
         <div class="row">
@@ -181,6 +212,41 @@ window.addEventListener('pageshow', function () {
     fetchSpinner.hidden = true;
     fetchLabel.textContent = 'Get recipes';
     recipeFetch.removeAttribute('aria-busy');
+});
+</script>
+<script>
+document.querySelectorAll('.js-tool-fb-form').forEach(function (form) {
+    form.addEventListener('submit', async function (event) {
+        event.preventDefault();
+        var button = form.querySelector('button[type=submit]');
+        if (button.disabled || !confirm('Post "' + form.dataset.toolTitle + '" to the Facebook page?')) return;
+
+        var spinner = button.querySelector('.spin');
+        var label = button.querySelector('.lbl');
+        button.disabled = true;
+        spinner.hidden = false;
+        label.textContent = 'Posting…';
+        form.setAttribute('aria-busy', 'true');
+
+        try {
+            var response = await fetch(form.action, {
+                method: 'POST',
+                headers: {'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
+                body: new FormData(form)
+            });
+            var result = await response.json().catch(function () { return {}; });
+            if (!response.ok || !result.ok) throw new Error(result.message || 'Facebook post failed (' + response.status + ').');
+            toast(result.message + ' You can publish this page again later.', true);
+            label.textContent = 'Post again';
+        } catch (error) {
+            toast(error.message || 'Facebook post failed. Check the page before retrying.', false);
+            label.textContent = 'Post to Facebook';
+        } finally {
+            button.disabled = false;
+            spinner.hidden = true;
+            form.removeAttribute('aria-busy');
+        }
+    });
 });
 </script>
 @endsection
