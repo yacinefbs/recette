@@ -27,4 +27,5 @@
     @endif
 
     <p class="mt-4">Need to convert a measurement? Use the <a href="{{ route('tools.converter') }}">Cooking Converter</a>.</p>
+    <p>Want to save ingredients for later? Try the <a href="{{ route('tools.pantry-inventory') }}">Pantry Inventory Manager</a>.</p>
 @endsection
