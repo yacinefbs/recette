@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="noindex,nofollow,noarchive">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('assets/images/social-admin-favicon.svg') }}">
     <title>@yield('title', 'Social admin') | topictrail.me</title>
     <style>
         :root{--navy:#14213d;--bg:#f6f4ef;--line:#e3ded3;--ok:#2d6a4f;--err:#b3261e}

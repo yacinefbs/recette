@@ -26,7 +26,10 @@ class SocialAdminTest extends TestCase
 
     public function test_login_page_is_noindex(): void
     {
-        $this->get('/social-admin/login')->assertOk()->assertSee('noindex', false);
+        $this->get('/social-admin/login')
+            ->assertOk()
+            ->assertSee('noindex', false)
+            ->assertSee('<link rel="icon" type="image/svg+xml" href="'.asset('assets/images/social-admin-favicon.svg').'">', false);
     }
 
     public function test_bad_and_good_login(): void
@@ -84,6 +87,7 @@ class SocialAdminTest extends TestCase
     public function test_dashboard_shows_reusable_facebook_posts_for_meal_planner_and_tools(): void
     {
         $response = $this->actingAs(User::factory()->create())->get('/social-admin')->assertOk()
+            ->assertSee('<link rel="icon" type="image/svg+xml" href="'.asset('assets/images/social-admin-favicon.svg').'">', false)
             ->assertSee('Promote TopicTrail tools')
             ->assertSee('Ready-to-edit Facebook posts')
             ->assertSee(route('social.tools.publish', 'meal-planner'))
