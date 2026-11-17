@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CookingGuideController;
+use App\Http\Controllers\AirFryerCalculatorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
 use App\Http\Controllers\NutritionCalculatorController;
@@ -29,6 +30,9 @@ Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index'
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
 Route::get('/tools/cooking-timer', [\App\Http\Controllers\ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
+Route::get('/tools/air-fryer-calculator', [AirFryerCalculatorController::class, 'index'])->name('tools.air-fryer-calculator');
+Route::post('/tools/air-fryer-calculator/calculate', [AirFryerCalculatorController::class, 'calculate'])
+    ->middleware('throttle:60,1')->name('tools.air-fryer-calculator.calculate');
 Route::get('/tools/pantry-inventory', [\App\Http\Controllers\PantryInventoryController::class, 'index'])->name('tools.pantry-inventory');
 Route::post('/tools/pantry-inventory/recipes', [\App\Http\Controllers\PantryInventoryController::class, 'recipes'])
     ->middleware('throttle:30,1')->name('tools.pantry-inventory.recipes');

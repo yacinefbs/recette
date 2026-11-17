@@ -7,6 +7,7 @@ class SocialImage
     private const MAP = [
         'weekly-meal-planner' => 'weekly-meal-planner',
         'tools/cooking-timer' => 'cooking-timer',
+        'tools/air-fryer-calculator' => 'air-fryer-calculator',
         'tools/pantry-inventory' => 'pantry-inventory',
         'tools/nutrition-calculator' => 'nutrition-calculator',
         'tools/cooking-converter' => 'cooking-converter',

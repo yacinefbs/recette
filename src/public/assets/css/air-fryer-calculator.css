@@ -1,0 +1,403 @@
+.tt-air-fryer {
+    --air-ink: #20352d;
+    --air-muted: #60716a;
+    --air-green: #287452;
+    --air-green-dark: #1d5b40;
+    --air-border: #dce8df;
+    --air-surface: #f5f9f5;
+    color: var(--air-ink);
+    margin: 0 auto 2.5rem;
+    max-width: 1000px;
+}
+
+.tt-air-fryer__panel,
+.tt-air-fryer__result {
+    background: #fff;
+    border: 1px solid var(--air-border);
+    border-radius: 22px;
+    box-shadow: 0 16px 48px rgba(32, 53, 45, .08);
+    padding: clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.tt-air-fryer__intro {
+    margin-bottom: 1.5rem;
+    max-width: 650px;
+}
+
+.tt-air-fryer__eyebrow {
+    color: var(--air-green);
+    display: block;
+    font-size: .76rem;
+    font-weight: 800;
+    letter-spacing: .11em;
+    margin-bottom: .45rem;
+    text-transform: uppercase;
+}
+
+.tt-air-fryer__intro h2,
+.tt-air-fryer__result h2 {
+    color: var(--air-ink);
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin: 0 0 .45rem;
+}
+
+.tt-air-fryer__intro p,
+.tt-air-fryer__result-head p,
+.tt-air-fryer__disclaimer,
+.tt-air-fryer__source {
+    color: var(--air-muted);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.tt-air-fryer__fields {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tt-air-fryer__field {
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    margin: 0;
+    min-width: 0;
+}
+
+.tt-air-fryer__field > span,
+.tt-air-fryer__field legend {
+    color: var(--air-ink);
+    font-size: .92rem;
+    font-weight: 700;
+}
+
+.tt-air-fryer__field input:not([type="radio"]),
+.tt-air-fryer__field select {
+    background: #fff;
+    border: 1px solid #cbd9cf;
+    border-radius: 10px;
+    color: var(--air-ink);
+    font: inherit;
+    min-height: 48px;
+    padding: .65rem .8rem;
+    width: 100%;
+}
+
+.tt-air-fryer__field input:focus,
+.tt-air-fryer__field select:focus,
+.tt-air-fryer button:focus-visible,
+.tt-air-fryer a:focus-visible {
+    outline: 3px solid rgba(40, 116, 82, .3);
+    outline-offset: 2px;
+}
+
+.tt-air-fryer__field small {
+    color: var(--air-muted);
+    font-size: .78rem;
+}
+
+.tt-air-fryer__units {
+    border: 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: .7rem;
+    padding: 0;
+}
+
+.tt-air-fryer__units legend {
+    float: left;
+    margin: 0 0 .45rem;
+    width: 100%;
+}
+
+.tt-air-fryer__units label {
+    align-items: center;
+    background: var(--air-surface);
+    border: 1px solid var(--air-border);
+    border-radius: 9px;
+    display: inline-flex;
+    gap: .4rem;
+    min-height: 42px;
+    padding: .4rem .8rem;
+}
+
+.tt-air-fryer__button {
+    align-items: center;
+    background: var(--air-green);
+    border: 1px solid var(--air-green);
+    border-radius: 10px;
+    color: #fff !important;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 750;
+    justify-content: center;
+    min-height: 48px;
+    padding: .7rem 1rem;
+    text-align: center;
+    text-decoration: none !important;
+    transition: background .15s ease, transform .15s ease;
+}
+
+.tt-air-fryer__button:hover {
+    background: var(--air-green-dark);
+    transform: translateY(-1px);
+}
+
+.tt-air-fryer__button:disabled {
+    cursor: wait;
+    opacity: .7;
+    transform: none;
+}
+
+.tt-air-fryer__button--secondary {
+    background: #fff;
+    color: var(--air-green-dark) !important;
+}
+
+.tt-air-fryer__button--secondary:hover {
+    background: var(--air-surface);
+}
+
+#air-fryer-submit {
+    margin-top: 1.25rem;
+    width: 100%;
+}
+
+.tt-air-fryer__error {
+    background: #fff3f0;
+    border-left: 4px solid #b33a29;
+    color: #762b21;
+    margin: 1rem 0 0;
+    padding: .7rem .9rem;
+}
+
+.tt-air-fryer__result {
+    margin-top: 1.25rem;
+}
+
+.tt-air-fryer__result-head {
+    align-items: flex-start;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.tt-air-fryer__unit-switch {
+    background: var(--air-surface);
+    border: 1px solid var(--air-border);
+    border-radius: 9px;
+    display: inline-flex;
+    flex: 0 0 auto;
+    padding: 3px;
+}
+
+.tt-air-fryer__unit-switch button,
+.tt-air-fryer__timer-adjust button {
+    background: transparent;
+    border: 0;
+    border-radius: 7px;
+    color: var(--air-muted);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 750;
+    padding: .45rem .7rem;
+}
+
+.tt-air-fryer__unit-switch button[aria-pressed="true"] {
+    background: var(--air-green);
+    color: #fff;
+}
+
+.tt-air-fryer__metrics {
+    display: grid;
+    gap: .8rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 1.5rem 0 1rem;
+}
+
+.tt-air-fryer__metric {
+    background: var(--air-surface);
+    border: 1px solid var(--air-border);
+    border-radius: 14px;
+    min-width: 0;
+    padding: 1rem;
+}
+
+.tt-air-fryer__metric span {
+    color: var(--air-muted);
+    display: block;
+    font-size: .82rem;
+    line-height: 1.4;
+    min-height: 2.3em;
+}
+
+.tt-air-fryer__metric strong {
+    color: var(--air-green-dark);
+    display: block;
+    font-size: clamp(1.35rem, 4vw, 2rem);
+    line-height: 1.2;
+    margin-top: .55rem;
+}
+
+.tt-air-fryer__timer-adjust {
+    align-items: center;
+    border: 1px solid var(--air-border);
+    border-radius: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+    justify-content: center;
+    margin: 1rem 0 1.5rem;
+    padding: .5rem;
+}
+
+.tt-air-fryer__timer-adjust span {
+    color: var(--air-muted);
+    font-size: .85rem;
+    font-weight: 700;
+    margin: 0 .35rem;
+}
+
+.tt-air-fryer__timer-adjust button {
+    background: var(--air-surface);
+    color: var(--air-green-dark);
+}
+
+.tt-air-fryer__timer-adjust strong {
+    min-width: 4.5rem;
+    text-align: center;
+}
+
+.tt-air-fryer__result-columns {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tt-air-fryer__result-columns section {
+    background: #fff;
+    border: 1px solid var(--air-border);
+    border-radius: 14px;
+    padding: 1rem;
+}
+
+.tt-air-fryer__result-columns h3 {
+    color: var(--air-ink);
+    font-size: 1.05rem;
+    margin: 0 0 .5rem;
+}
+
+.tt-air-fryer__result-columns ul,
+.tt-air-fryer__warnings {
+    margin: 0;
+    padding-left: 1.2rem;
+}
+
+.tt-air-fryer__result-columns li,
+.tt-air-fryer__result-columns p,
+.tt-air-fryer__warnings li {
+    line-height: 1.55;
+    margin: .35rem 0;
+}
+
+.tt-air-fryer__safety {
+    background: #fff9e9 !important;
+    border-color: #efdfb1 !important;
+}
+
+.tt-air-fryer__warnings {
+    background: #f5f8fc;
+    border-radius: 10px;
+    color: #3c5269;
+    margin-top: 1rem;
+    padding: .7rem .7rem .7rem 2rem;
+}
+
+.tt-air-fryer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin-top: 1.2rem;
+}
+
+.tt-air-fryer__source {
+    border-top: 1px solid var(--air-border);
+    font-size: .83rem;
+    margin-top: 1.2rem;
+    padding-top: .8rem;
+}
+
+.tt-air-fryer__disclaimer {
+    background: #f5f8fc;
+    border-left: 4px solid #7d9bb4;
+    border-radius: 0 10px 10px 0;
+    margin: 1rem 0 2.5rem;
+    padding: .9rem 1rem;
+}
+
+.tt-air-fryer__article-source {
+    font-size: .9rem;
+}
+
+.tt-air-fryer__article h2 {
+    color: var(--air-ink);
+}
+
+@media (max-width: 640px) {
+    .tt-air-fryer__fields,
+    .tt-air-fryer__result-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .tt-air-fryer__metrics {
+        grid-template-columns: 1fr;
+    }
+
+    .tt-air-fryer__metric {
+        align-items: center;
+        display: flex;
+        gap: 1rem;
+        justify-content: space-between;
+    }
+
+    .tt-air-fryer__metric span {
+        min-height: 0;
+    }
+
+    .tt-air-fryer__metric strong {
+        margin-top: 0;
+        text-align: right;
+    }
+
+    .tt-air-fryer__actions {
+        flex-direction: column;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #air-fryer-result,
+    #air-fryer-result * {
+        visibility: visible !important;
+    }
+
+    #air-fryer-result {
+        border: 0;
+        box-shadow: none;
+        left: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    #air-fryer-result .tt-air-fryer__actions,
+    #air-fryer-result .tt-air-fryer__timer-adjust {
+        display: none;
+    }
+}

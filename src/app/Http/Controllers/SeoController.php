@@ -33,6 +33,7 @@ class SeoController extends Controller
             .'- [Cooking Tips & Guides]('.route('cooking-tips.index')."): practical kitchen techniques, ingredient guides, storage and hacks\n"
             .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Timer]('.route('tools.cooking-timer')."): free multi-timer kitchen countdown tool\n"
+            .'- [Air Fryer Calculator]('.route('tools.air-fryer-calculator')."): sourced starting temperatures and cooking times for air fryer foods\n"
             .'- [Pantry Inventory Manager]('.route('tools.pantry-inventory')."): private browser-based ingredient, quantity and date tracker\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
             .'- [Nutrition Calculator]('.route('tools.nutrition-calculator')."): estimate calories, protein, carbs and fat per serving\n"
@@ -81,7 +82,7 @@ class SeoController extends Controller
             // Tables not migrated yet.
         }
 
-        foreach ([route('tools.cooking-timer'), route('tools.pantry-inventory'), route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
+        foreach ([route('tools.cooking-timer'), route('tools.air-fryer-calculator'), route('tools.pantry-inventory'), route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
         }
 

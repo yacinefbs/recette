@@ -26,6 +26,7 @@
                                             <li class="has-dropdown"><a href="{{ route('tools.converter') }}">Tools</a>
                                                 <ul class="sub-menu">
                                                     <li><a href="{{ route('tools.cooking-timer') }}">Cooking Timer</a></li>
+                                                    <li><a href="{{ route('tools.air-fryer-calculator') }}">Air Fryer Calculator</a></li>
                                                     <li><a href="{{ route('tools.pantry-inventory') }}">Pantry Inventory</a></li>
                                                     <li><a href="{{ route('tools.nutrition-calculator') }}">Nutrition Calculator</a></li>
                                                     <li><a href="{{ route('tools.converter') }}">Cooking Converter</a></li>

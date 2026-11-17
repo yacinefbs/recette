@@ -457,6 +457,25 @@
         }
     });
 
+    var timerParams = new URLSearchParams(window.location.search);
+    if (timerParams.has('timerName') || timerParams.has('durationSeconds')) {
+        var linkedName = (timerParams.get('timerName') || '').trim();
+        var linkedDuration = Number(timerParams.get('durationSeconds'));
+        if (linkedName && linkedName.length <= 60 && Number.isInteger(linkedDuration)
+            && linkedDuration >= 1 && linkedDuration <= window.CookingTimerCore.MAX_DURATION) {
+            rememberAndStart(linkedName, linkedDuration, { category: 'Custom', sound: manager.preferences.sound });
+            status.classList.remove('is-error');
+            status.textContent = linkedName + ' started from the Air Fryer Calculator.';
+            timerParams.delete('timerName');
+            timerParams.delete('durationSeconds');
+            var remainingQuery = timerParams.toString();
+            window.history.replaceState(null, '', window.location.pathname
+                + (remainingQuery ? '?' + remainingQuery : '') + window.location.hash);
+        } else {
+            reportError('This timer link is invalid. Create a timer using the form below.');
+        }
+    }
+
     renderCategories();
     renderPresets();
     renderSettings();
