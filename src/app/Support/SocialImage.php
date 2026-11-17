@@ -8,6 +8,7 @@ class SocialImage
         'weekly-meal-planner' => 'weekly-meal-planner',
         'tools/cooking-timer' => 'cooking-timer',
         'tools/pantry-inventory' => 'pantry-inventory',
+        'tools/nutrition-calculator' => 'nutrition-calculator',
         'tools/cooking-converter' => 'cooking-converter',
         'what-can-i-cook' => 'what-can-i-cook',
         'tools/ingredient-substitution' => 'ingredient-substitution',

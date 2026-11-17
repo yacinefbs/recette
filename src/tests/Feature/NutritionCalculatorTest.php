@@ -27,6 +27,11 @@ class NutritionCalculatorTest extends TestCase
         $response->assertOk();
         $response->assertSee('Free Nutrition Calculator', false);
         $response->assertSee('<link rel="canonical" href="'.route('tools.nutrition-calculator').'">', false);
+        $response->assertSee('<meta property="og:image" content="'.asset('assets/images/social/nutrition-calculator-og.jpg').'">', false);
+        $response->assertSee('<meta property="og:image:secure_url" content="'.asset('assets/images/social/nutrition-calculator-og.jpg').'">', false);
+        $response->assertSee('<meta name="twitter:image" content="'.asset('assets/images/social/nutrition-calculator-og.jpg').'">', false);
+        $response->assertSee('<meta property="og:image:width" content="1200">', false);
+        $response->assertSee('<meta property="og:image:height" content="630">', false);
         $response->assertSee('"@type":"WebApplication"', false);
         $response->assertSee('"@type":"FAQPage"', false);
         $response->assertSee('"@type":"BreadcrumbList"', false);

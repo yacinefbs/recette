@@ -179,7 +179,7 @@ class SocialAdminController extends Controller
                 'title' => 'Nutrition Calculator',
                 'description' => 'Estimate nutrition for recipe ingredients and serving sizes.',
                 'url' => route('tools.nutrition-calculator'),
-                'image' => asset('assets/images/hero-img7.png'),
+                'image' => asset('assets/images/social/nutrition-calculator-og.jpg'),
                 'message' => "Curious about the nutrition in your ingredients? 🥗\n\nUse the free TopicTrail Nutrition Calculator to estimate nutrition for foods and serving quantities. It’s a handy guide for meal planning.\n\nTry the Nutrition Calculator:",
             ],
             'what-can-i-cook' => [
