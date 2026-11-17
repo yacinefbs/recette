@@ -161,6 +161,13 @@ class SocialAdminController extends Controller
                 'image' => asset('assets/images/social/cooking-timer-og.jpg'),
                 'message' => "Juggling dinner and side dishes? ⏲️\n\nKeep several kitchen timers running on one page. Pick a quick cooking preset or set a custom countdown — free and ready when you are.\n\nGive the Cooking Timer a try:",
             ],
+            'air-fryer-calculator' => [
+                'title' => 'Air Fryer Calculator',
+                'description' => 'Find sourced starting temperatures and cooking times for vegetables, meat, seafood, and frozen foods.',
+                'url' => route('tools.air-fryer-calculator'),
+                'image' => asset('assets/images/social/air-fryer-calculator-og.jpg'),
+                'message' => "Not sure how long to cook it in your air fryer? 🍟\n\nFind a sourced starting temperature and cooking time for vegetables, chicken, fish, and frozen favorites. Search 49 foods, switch between °C and °F, and start a kitchen timer — free on TopicTrail.\n\nTry the Air Fryer Calculator:",
+            ],
             'pantry-inventory' => [
                 'title' => 'Pantry Inventory Manager',
                 'description' => 'Keep track of kitchen ingredients, quantities and the dates you record, right in your browser.',

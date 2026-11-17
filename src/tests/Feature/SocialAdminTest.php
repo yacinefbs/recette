@@ -92,6 +92,9 @@ class SocialAdminTest extends TestCase
             ->assertSee('Ready-to-edit Facebook posts')
             ->assertSee(route('social.tools.publish', 'meal-planner'))
             ->assertSee(route('social.tools.publish', 'cooking-timer'))
+            ->assertSee(route('social.tools.publish', 'air-fryer-calculator'))
+            ->assertSee(route('tools.air-fryer-calculator'))
+            ->assertSee(asset('assets/images/social/air-fryer-calculator-og.jpg'))
             ->assertSee(route('social.tools.publish', 'pantry-inventory'))
             ->assertSee(route('social.tools.publish', 'cooking-converter'))
             ->assertSee(route('social.tools.publish', 'nutrition-calculator'))
@@ -99,7 +102,7 @@ class SocialAdminTest extends TestCase
             ->assertSee(route('social.tools.publish', 'ingredient-substitution'))
             ->assertSee('Make the week’s meals easier to plan.');
 
-        $this->assertSame(7, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
+        $this->assertSame(8, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
     }
 
     public function test_tool_post_publishes_the_selected_page_without_changing_recipe_status(): void
@@ -123,6 +126,26 @@ class SocialAdminTest extends TestCase
         });
         $this->assertFalse($recipe->fresh()->posted_facebook);
         $this->assertNull($recipe->fresh()->facebook_post_id);
+    }
+
+    public function test_air_fryer_tool_post_publishes_its_page_link(): void
+    {
+        config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => 'page-123_post-air-fryer'])]);
+
+        $this->actingAs(User::factory()->create())
+            ->postJson(route('social.tools.publish', 'air-fryer-calculator'), [
+                'message' => 'Find sourced air fryer cooking times with TopicTrail.',
+            ])
+            ->assertOk()
+            ->assertJson(['ok' => true, 'message' => '"Air Fryer Calculator" posted to Facebook.']);
+
+        Http::assertSent(function ($request) {
+            return str_ends_with($request->url(), '/page-123/feed')
+                && $request['link'] === route('tools.air-fryer-calculator')
+                && $request['message'] === 'Find sourced air fryer cooking times with TopicTrail.'
+                && $request['access_token'] === 'secret-page-token';
+        });
     }
 
     public function test_tool_post_reports_facebook_errors_and_rejects_unknown_pages(): void
