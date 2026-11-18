@@ -1,15 +1,20 @@
 <?php
 
-use App\Http\Controllers\CookingGuideController;
 use App\Http\Controllers\AirFryerCalculatorController;
+use App\Http\Controllers\CookingGuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
+use App\Http\Controllers\McpController;
 use App\Http\Controllers\NutritionCalculatorController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\PantryInventoryController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\RecipeCostCalculatorController;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\SocialAdminController;
+use App\Http\Controllers\ToolController;
 use App\Http\Controllers\WeeklyMealPlannerController;
+use App\Support\Categories;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -18,8 +23,8 @@ Route::get('/robots.txt', [SeoController::class, 'robots']);
 Route::get('/ads.txt', [SeoController::class, 'ads']);
 Route::get('/llms.txt', [SeoController::class, 'llms']);
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap']);
-Route::get('/.well-known/mcp/server-card.json', [\App\Http\Controllers\McpController::class, 'card'])->name('mcp.card');
-Route::post('/mcp', [\App\Http\Controllers\McpController::class, 'handle'])->middleware('throttle:60,1')->name('mcp.handle');
+Route::get('/.well-known/mcp/server-card.json', [McpController::class, 'card'])->name('mcp.card');
+Route::post('/mcp', [McpController::class, 'handle'])->middleware('throttle:60,1')->name('mcp.handle');
 Route::get('/mcp', fn () => response('Use POST (MCP Streamable HTTP).', 405, ['Allow' => 'POST']));
 
 Route::get('/{slug}', [PageController::class, 'show'])
@@ -29,18 +34,19 @@ Route::get('/{slug}', [PageController::class, 'show'])
 Route::get('/recipes', [RecipeController::class, 'index'])->name('recipes.index');
 Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recipes.import');
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
-Route::get('/tools/cooking-timer', [\App\Http\Controllers\ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
+Route::get('/tools/cooking-timer', [ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
 Route::get('/tools/air-fryer-calculator', [AirFryerCalculatorController::class, 'index'])->name('tools.air-fryer-calculator');
+Route::get('/tools/recipe-cost-calculator', [RecipeCostCalculatorController::class, 'index'])->name('tools.recipe-cost-calculator');
 Route::post('/tools/air-fryer-calculator/calculate', [AirFryerCalculatorController::class, 'calculate'])
     ->middleware('throttle:60,1')->name('tools.air-fryer-calculator.calculate');
-Route::get('/tools/pantry-inventory', [\App\Http\Controllers\PantryInventoryController::class, 'index'])->name('tools.pantry-inventory');
-Route::post('/tools/pantry-inventory/recipes', [\App\Http\Controllers\PantryInventoryController::class, 'recipes'])
+Route::get('/tools/pantry-inventory', [PantryInventoryController::class, 'index'])->name('tools.pantry-inventory');
+Route::post('/tools/pantry-inventory/recipes', [PantryInventoryController::class, 'recipes'])
     ->middleware('throttle:30,1')->name('tools.pantry-inventory.recipes');
-Route::get('/tools/cooking-converter', [\App\Http\Controllers\ToolController::class, 'converter'])->name('tools.converter');
+Route::get('/tools/cooking-converter', [ToolController::class, 'converter'])->name('tools.converter');
 Route::get('/tools/nutrition-calculator', [NutritionCalculatorController::class, 'index'])->name('tools.nutrition-calculator');
 Route::get('/tools/nutrition-calculator/search', [NutritionCalculatorController::class, 'search'])->middleware('throttle:60,1')->name('tools.nutrition-calculator.search');
 Route::post('/tools/nutrition-calculator/calculate', [NutritionCalculatorController::class, 'calculate'])->middleware('throttle:60,1')->name('tools.nutrition-calculator.calculate');
-Route::get('/what-can-i-cook', [\App\Http\Controllers\ToolController::class, 'whatCanICook'])->name('tools.what');
+Route::get('/what-can-i-cook', [ToolController::class, 'whatCanICook'])->name('tools.what');
 
 Route::get('/tools/ingredient-substitution', [IngredientSubstitutionController::class, 'index'])->name('tools.ingredient-substitution');
 Route::post('/tools/ingredient-substitution/search', [IngredientSubstitutionController::class, 'search'])
@@ -80,5 +86,5 @@ Route::prefix('social-admin')->name('social.')->group(function () {
     });
 });
 
-Route::get('/category/{slug}', [RecipeController::class, 'categoryPage'])->whereIn('slug', array_keys(\App\Support\Categories::ALL))->name('categories.show');
+Route::get('/category/{slug}', [RecipeController::class, 'categoryPage'])->whereIn('slug', array_keys(Categories::ALL))->name('categories.show');
 Route::get('/recipes/{recipe}', [RecipeController::class, 'show'])->whereNumber('recipe')->name('recipes.show');

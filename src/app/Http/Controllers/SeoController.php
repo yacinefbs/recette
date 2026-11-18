@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CookingGuide;
+use App\Models\CookingGuideCategory;
 use App\Models\Recipe;
+use App\Services\IngredientSubstitutionService;
+use App\Support\Categories;
+use Illuminate\Support\Carbon;
 
 class SeoController extends Controller
 {
@@ -34,6 +39,7 @@ class SeoController extends Controller
             .'- [Weekly Meal Planner]('.route('meal-planner.index')."): free 7-day meal plan generator with grocery list\n"
             .'- [Cooking Timer]('.route('tools.cooking-timer')."): free multi-timer kitchen countdown tool\n"
             .'- [Air Fryer Calculator]('.route('tools.air-fryer-calculator')."): sourced starting temperatures and cooking times for air fryer foods\n"
+            .'- [Recipe Cost Calculator]('.route('tools.recipe-cost-calculator')."): calculate ingredient cost and cost per serving using your own prices\n"
             .'- [Pantry Inventory Manager]('.route('tools.pantry-inventory')."): private browser-based ingredient, quantity and date tracker\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
             .'- [Nutrition Calculator]('.route('tools.nutrition-calculator')."): estimate calories, protein, carbs and fat per serving\n"
@@ -70,10 +76,10 @@ class SeoController extends Controller
         $entries[] = [route('cooking-tips.index'), null, 'weekly', '0.8'];
 
         try {
-            foreach (\App\Models\CookingGuideCategory::all() as $cat) {
+            foreach (CookingGuideCategory::all() as $cat) {
                 $entries[] = [route('cooking-tips.category', $cat->slug), null, 'weekly', '0.7'];
             }
-            foreach (\App\Models\CookingGuide::with('category')->published()->get() as $g) {
+            foreach (CookingGuide::with('category')->published()->get() as $g) {
                 if ($g->category) {
                     $entries[] = [route('cooking-tips.show', ['category' => $g->category->slug, 'guide' => $g->slug]), $g->updated_at, 'monthly', '0.8'];
                 }
@@ -82,19 +88,19 @@ class SeoController extends Controller
             // Tables not migrated yet.
         }
 
-        foreach ([route('tools.cooking-timer'), route('tools.air-fryer-calculator'), route('tools.pantry-inventory'), route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
+        foreach ([route('tools.cooking-timer'), route('tools.air-fryer-calculator'), route('tools.recipe-cost-calculator'), route('tools.pantry-inventory'), route('tools.converter'), route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution')] as $toolUrl) {
             $entries[] = [$toolUrl, null, 'monthly', '0.7'];
         }
 
         try {
-            foreach (app(\App\Services\IngredientSubstitutionService::class)->catalog()->where('guide_published', true) as $g) {
+            foreach (app(IngredientSubstitutionService::class)->catalog()->where('guide_published', true) as $g) {
                 $entries[] = [route('ingredient-guides.show', $g->slug), null, 'monthly', '0.6'];
             }
         } catch (\Throwable) {
             // Tables not migrated yet.
         }
 
-        foreach (array_keys(\App\Support\Categories::ALL) as $slug) {
+        foreach (array_keys(Categories::ALL) as $slug) {
             $entries[] = [route('categories.show', $slug), $latest, 'weekly', '0.8'];
         }
 
@@ -112,7 +118,7 @@ class SeoController extends Controller
             $img = $entry[4] ?? null;
             $xml .= '  <url><loc>'.e($loc).'</loc>';
             if ($lastmod) {
-                $xml .= '<lastmod>'.\Illuminate\Support\Carbon::parse($lastmod)->toAtomString().'</lastmod>';
+                $xml .= '<lastmod>'.Carbon::parse($lastmod)->toAtomString().'</lastmod>';
             }
             $xml .= "<changefreq>$freq</changefreq><priority>$prio</priority>";
             if ($img) {

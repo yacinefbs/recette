@@ -27,7 +27,7 @@ class RecipeController extends Controller
         $canonical = ! $filtered && $page > 1 ? route('recipes.index', ['page' => $page]) : route('recipes.index');
 
         $seo = [
-            'title' => "Cooking recipes".($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
+            'title' => 'Cooking recipes'.($page > 1 && ! $filtered ? " – page $page" : '')." | $site",
             'description' => 'Browse our easy cooking recipes: photos, ingredients, detailed steps and preparation times. Find your next recipe.',
             'canonical' => $canonical,
             // Search result pages are low-value duplicates: do not index them
@@ -171,9 +171,58 @@ class RecipeController extends Controller
         return view('recipes.show', [
             'recipe' => $recipe->toArray() + ['image' => $recipe->image],
             'seo' => $seo,
+            'recipeCostPreset' => [
+                'name' => $recipe->name,
+                'servings' => (int) ($recipe->num_servings ?: 1),
+                'ingredients' => $ingredients->map(fn ($text) => $this->recipeCostIngredient((string) $text))->all(),
+            ],
             'category' => $categorySlug ? Categories::find($categorySlug) : null,
             'related' => $related,
         ]);
+    }
+
+    private function recipeCostIngredient(string $text): array
+    {
+        $units = [
+            'g' => 'g', 'gram' => 'g', 'grams' => 'g',
+            'kg' => 'kg', 'kilogram' => 'kg', 'kilograms' => 'kg',
+            'oz' => 'oz', 'ounce' => 'oz', 'ounces' => 'oz',
+            'lb' => 'lb', 'lbs' => 'lb', 'pound' => 'lb', 'pounds' => 'lb',
+            'ml' => 'ml', 'milliliter' => 'ml', 'milliliters' => 'ml', 'millilitre' => 'ml', 'millilitres' => 'ml',
+            'l' => 'l', 'liter' => 'l', 'liters' => 'l', 'litre' => 'l', 'litres' => 'l',
+            'cup' => 'cup', 'cups' => 'cup',
+            'tbsp' => 'tbsp', 'tablespoon' => 'tbsp', 'tablespoons' => 'tbsp',
+            'tsp' => 'tsp', 'teaspoon' => 'tsp', 'teaspoons' => 'tsp',
+            'fl oz' => 'fl oz', 'fluid ounce' => 'fl oz', 'fluid ounces' => 'fl oz',
+            'piece' => 'piece', 'pieces' => 'piece', 'item' => 'piece', 'items' => 'piece',
+            'clove' => 'piece', 'cloves' => 'piece', 'slice' => 'piece', 'slices' => 'piece',
+            'pack' => 'pack', 'packs' => 'pack', 'can' => 'can', 'cans' => 'can',
+            'bottle' => 'bottle', 'bottles' => 'bottle', 'bag' => 'bag', 'bags' => 'bag',
+        ];
+        $amount = '';
+        $unit = 'g';
+        $name = trim($text);
+        $pattern = '/^\s*(\d+(?:\.\d+)?)\s+(fl\s+oz|fluid\s+ounces?|[a-z]+)\s+(.+?)\s*$/i';
+
+        if (preg_match($pattern, $text, $matches)) {
+            $sourceUnit = strtolower(preg_replace('/\s+/', ' ', $matches[2]));
+            if (isset($units[$sourceUnit])) {
+                $amount = $matches[1];
+                $unit = $units[$sourceUnit];
+                $name = trim($matches[3]);
+            }
+        } elseif (! preg_match('/^\s*\d+\s+\d+\/\d+\b/', $text)
+            && preg_match('/^\s*(\d+(?:\.\d+)?)\s+(?!\d|\/)(.+?)\s*$/', $text, $matches)) {
+            $name = trim($matches[2]);
+            $amount = $matches[1];
+            $unit = 'piece';
+        }
+
+        return [
+            'name' => mb_substr($name, 0, 120),
+            'quantity' => $amount,
+            'unit' => $unit,
+        ];
     }
 
     private function nutrition(?array $n): ?array

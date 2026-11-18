@@ -93,6 +93,9 @@ class SocialAdminTest extends TestCase
             ->assertSee(route('social.tools.publish', 'meal-planner'))
             ->assertSee(route('social.tools.publish', 'cooking-timer'))
             ->assertSee(route('social.tools.publish', 'air-fryer-calculator'))
+            ->assertSee(route('social.tools.publish', 'recipe-cost-calculator'))
+            ->assertSee(route('tools.recipe-cost-calculator'))
+            ->assertSee(asset('assets/images/social/recipe-cost-calculator-og.jpg'))
             ->assertSee(route('tools.air-fryer-calculator'))
             ->assertSee(asset('assets/images/social/air-fryer-calculator-og.jpg'))
             ->assertSee(route('social.tools.publish', 'pantry-inventory'))
@@ -102,7 +105,7 @@ class SocialAdminTest extends TestCase
             ->assertSee(route('social.tools.publish', 'ingredient-substitution'))
             ->assertSee('Make the week’s meals easier to plan.');
 
-        $this->assertSame(8, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
+        $this->assertSame(9, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
     }
 
     public function test_tool_post_publishes_the_selected_page_without_changing_recipe_status(): void
@@ -144,6 +147,26 @@ class SocialAdminTest extends TestCase
             return str_ends_with($request->url(), '/page-123/feed')
                 && $request['link'] === route('tools.air-fryer-calculator')
                 && $request['message'] === 'Find sourced air fryer cooking times with TopicTrail.'
+                && $request['access_token'] === 'secret-page-token';
+        });
+    }
+
+    public function test_recipe_cost_tool_post_publishes_its_page_link(): void
+    {
+        config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => 'page-123_post-recipe-cost'])]);
+
+        $this->actingAs(User::factory()->create())
+            ->postJson(route('social.tools.publish', 'recipe-cost-calculator'), [
+                'message' => 'Estimate the ingredient cost for your recipes.',
+            ])
+            ->assertOk()
+            ->assertJson(['ok' => true, 'message' => '"Recipe Cost Calculator" posted to Facebook.']);
+
+        Http::assertSent(function ($request) {
+            return str_ends_with($request->url(), '/page-123/feed')
+                && $request['link'] === route('tools.recipe-cost-calculator')
+                && $request['message'] === 'Estimate the ingredient cost for your recipes.'
                 && $request['access_token'] === 'secret-page-token';
         });
     }

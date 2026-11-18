@@ -168,6 +168,13 @@ class SocialAdminController extends Controller
                 'image' => asset('assets/images/social/air-fryer-calculator-og.jpg'),
                 'message' => "Not sure how long to cook it in your air fryer? 🍟\n\nFind a sourced starting temperature and cooking time for vegetables, chicken, fish, and frozen favorites. Search 49 foods, switch between °C and °F, and start a kitchen timer — free on TopicTrail.\n\nTry the Air Fryer Calculator:",
             ],
+            'recipe-cost-calculator' => [
+                'title' => 'Recipe Cost Calculator',
+                'description' => 'Estimate ingredient costs and cost per serving with your own grocery prices.',
+                'url' => route('tools.recipe-cost-calculator'),
+                'image' => asset('assets/images/social/recipe-cost-calculator-og.jpg'),
+                'message' => "Wondering what a recipe really costs to make? 🧾\n\nEnter your ingredient amounts and the package prices you paid to estimate the full recipe cost and cost per serving. Compare two recipes, save them in your browser, and keep your grocery prices private.\n\nTry the free Recipe Cost Calculator:",
+            ],
             'pantry-inventory' => [
                 'title' => 'Pantry Inventory Manager',
                 'description' => 'Keep track of kitchen ingredients, quantities and the dates you record, right in your browser.',

@@ -126,6 +126,11 @@
                                         @foreach ($section['components'] ?? [] as $c)<li>{{ $c['raw_text'] ?? '' }}</li>@endforeach
                                     </ul>
                                 @endforeach
+                                <div class="tt-note"><strong>Plan your ingredient budget:</strong>
+                                    <a href="{{ route('tools.recipe-cost-calculator') }}" id="recipe-cost-prefill-link">Calculate the cost of this recipe</a>
+                                    <span>Ingredient names and clearly recognized quantities can be prefilled; add your own package sizes and prices.</span>
+                                </div>
+                                <script type="application/json" id="recipe-cost-page-preset">@json($recipeCostPreset)</script>
                             </div>
                         @endif
                         @if (!empty($recipe['instructions']))
@@ -204,6 +209,9 @@
 
     <!-- Main JS -->
     <script src="/assets/js/main.js"></script>
+    @if (!empty($recipe['sections']))
+        <script src="{{ asset('assets/js/recipe-cost-prefill.js') }}" defer></script>
+    @endif
 
 </body>
 
