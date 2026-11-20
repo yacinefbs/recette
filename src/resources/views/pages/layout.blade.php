@@ -68,6 +68,7 @@
             </div>
         @endif
 
+        @include('partials.adsterra-units')
         @include('partials.footer')
 
         <div class="progress-wrap">

@@ -9,6 +9,9 @@ $ogImage = $seo['image'] ?? ($social['url'] ?? asset('assets/images/hero-img7.pn
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     @include('partials.analytics')
     @include('partials.adsense')
+    <link rel="stylesheet" href="{{ asset('assets/css/adsterra.css') }}">
+    <script>window.ttAdsterraConfig = {!! json_encode(config('services.adsterra'), JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT) !!};</script>
+    <script defer src="{{ asset('assets/js/adsterra.js') }}"></script>
 @endunless
 @if (config('app.google_site_verification'))
     <meta name="google-site-verification" content="{{ config('app.google_site_verification') }}">

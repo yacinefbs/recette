@@ -6,7 +6,7 @@
 
   // Consent Mode v2: everything denied until the visitor chooses
   var tcConsent = null;
-  try { tcConsent = localStorage.getItem('tt_consent'); } catch (e) {}
+  try { tcConsent = localStorage.getItem('tt_consent_v2'); } catch (e) {}
   var tcState = tcConsent === 'granted' ? 'granted' : 'denied';
   gtag('consent', 'default', {
     ad_storage: tcState,

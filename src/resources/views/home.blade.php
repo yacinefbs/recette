@@ -174,6 +174,7 @@
 
         
         @endverbatim
+@include('partials.adsterra-units')
 @include('partials.footer')
 @verbatim
 

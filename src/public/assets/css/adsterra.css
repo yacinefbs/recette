@@ -1,0 +1,96 @@
+[data-adsterra-placement] {
+    display: none;
+}
+
+.tt-adsterra {
+    margin: 2rem auto;
+    max-width: 1140px;
+    padding: 0 16px;
+    text-align: center;
+}
+
+.tt-adsterra__content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.tt-adsterra__unit {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.tt-adsterra__native,
+.tt-adsterra__responsive-banner,
+.tt-adsterra__rectangle {
+    min-height: 1px;
+    width: 100%;
+}
+
+.tt-adsterra__smartlink {
+    color: #555;
+    font-size: .85rem;
+    text-decoration: underline;
+}
+
+.tt-adsterra__rail {
+    display: none;
+}
+
+html.tt-adsterra-consented [data-adsterra-placement] {
+    display: block;
+}
+
+html.tt-adsterra-consented .tt-adsterra__rail[data-adsterra-active] {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    right: max(8px, calc((100vw - 1140px) / 2 - 170px));
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 20;
+}
+
+@media (max-width: 767px) {
+    html.tt-adsterra-consented .tt-adsterra__responsive-banner[data-size="320x50"] {
+        min-height: 50px;
+        width: 320px;
+    }
+
+    .tt-adsterra__rail[data-adsterra-active] {
+        display: none !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+    html.tt-adsterra-consented .tt-adsterra__responsive-banner[data-size="468x60"] {
+        min-height: 60px;
+        width: 468px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html.tt-adsterra-consented .tt-adsterra__responsive-banner[data-size="728x90"] {
+        min-height: 90px;
+        width: 728px;
+    }
+}
+
+@media (min-width: 1480px) and (max-width: 1699px) {
+    html.tt-adsterra-consented .tt-adsterra__rail[data-size="160x300"] {
+        height: 300px;
+        width: 160px;
+    }
+}
+
+@media (min-width: 1700px) {
+    html.tt-adsterra-consented .tt-adsterra__rail[data-size="160x600"] {
+        height: 600px;
+        width: 160px;
+    }
+}

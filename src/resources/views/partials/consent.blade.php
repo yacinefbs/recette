@@ -10,13 +10,21 @@
 <script>
   (function () {
     function save(value) {
-      try { localStorage.setItem('tt_consent', value); } catch (e) {}
+      var previous = null;
+      try {
+        previous = localStorage.getItem('tt_consent_v2');
+        localStorage.setItem('tt_consent_v2', value);
+      } catch (e) {
+        console.error('Unable to save cookie consent.', e);
+      }
       var s = value === 'granted' ? 'granted' : 'denied';
       gtag('consent', 'update', {
         ad_storage: s, ad_user_data: s, ad_personalization: s, analytics_storage: s
       });
+      window.dispatchEvent(new CustomEvent('tt:consent-change', { detail: { granted: value === 'granted' } }));
       var el = document.getElementById('tt-consent');
       if (el) el.style.display = 'none';
+      if (previous === 'granted' && value === 'denied') window.location.reload();
     }
 
     function build() {
@@ -25,7 +33,7 @@
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-label', 'Cookie consent');
       box.innerHTML =
-        '<p>We use cookies to measure audience (Google Analytics) and to show ads (Google AdSense). ' +
+        '<p>We use cookies to measure audience (Google Analytics) and to show ads (Google AdSense and Adsterra). ' +
         'You can accept or refuse them. Read our <a href="/privacy-policy">Privacy Policy</a>.</p>' +
         '<div class="tt-btns">' +
         '<button type="button" class="tt-accept">Accept all</button>' +
@@ -43,7 +51,7 @@
 
     document.addEventListener('DOMContentLoaded', function () {
       var stored = null;
-      try { stored = localStorage.getItem('tt_consent'); } catch (e) {}
+      try { stored = localStorage.getItem('tt_consent_v2'); } catch (e) {}
       if (!stored) window.openCookieSettings();
     });
   })();

@@ -14,7 +14,7 @@
     <p>Recipes and images come from third-party sources, including the Tasty API, and remain the property of their respective owners. If you believe content infringes your rights, contact us at <a href="mailto:{{ $contactEmail }}">{{ $contactEmail }}</a> and we will review it promptly.</p>
 
     <h2 class="h4 mt-4">Advertising</h2>
-    <p>The site displays advertising, notably through Google AdSense. See our <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> for details.</p>
+    <p>The site displays advertising through Google AdSense and Adsterra, including sponsored links. See our <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> for details.</p>
 
     <h2 class="h4 mt-4">Limitation of liability</h2>
     <p>We make no warranty about the accuracy or availability of the content and are not liable for any damage resulting from the use of the site or the recipes it contains.</p>

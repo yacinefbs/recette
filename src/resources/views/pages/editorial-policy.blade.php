@@ -21,5 +21,5 @@
     <p>Found an error in a recipe, a broken link or a wrong image? Tell us through the <a href="{{ route('pages.show', 'contact') }}">contact page</a> with the page address and we will review and fix it as quickly as we can.</p>
 
     <h2 class="h4 mt-4">Advertising</h2>
-    <p>The site is supported by advertising. Ads never change how recipes are written or ranked. See our <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> for how cookies are used.</p>
+    <p>The site is supported by Google AdSense and Adsterra advertising. Ads never change how recipes are written or ranked. See our <a href="{{ route('pages.show', 'privacy-policy') }}">Privacy Policy</a> for how cookies are used.</p>
 @endsection

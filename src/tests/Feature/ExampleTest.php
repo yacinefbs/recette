@@ -27,4 +27,15 @@ class ExampleTest extends TestCase
             ->assertDontSee('quge5.com/88/tag.min.js')
             ->assertDontSee('n6wxm.com/vignette.min.js');
     }
+
+    public function test_adsterra_units_are_rendered_for_public_pages_and_wait_for_consent(): void
+    {
+        $this->get('/', ['HTTP_HOST' => 'topictrail.me'])
+            ->assertOk()
+            ->assertSee('assets/js/adsterra.js')
+            ->assertSee('tt_consent_v2')
+            ->assertSee('data-adsterra-placement')
+            ->assertSee('https://araplhn.org/4/b0f8fcde3e47c50b13231d916fc6d51b')
+            ->assertSee('Adsterra');
+    }
 }

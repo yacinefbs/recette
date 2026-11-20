@@ -64,6 +64,24 @@ return [
         ],
     ],
 
+    'adsterra' => [
+        'smartlink' => 'https://araplhn.org/4/b0f8fcde3e47c50b13231d916fc6d51b',
+        'popunder' => 'https://abscloud.org/1/2c75d7e9139c3b0c6c543c9f182f6511',
+        'native_banner' => [
+            'src' => 'https://bauval.org/21/369a58ad8cfdf0a84ff51651b76d395b',
+            'container_id' => 'container-369a58ad8cfdf0a84ff51651b76d395b',
+        ],
+        'social_bar' => 'https://bauval.org/14/ed99a98b1b24489c7100d620b03db333',
+        'banners' => [
+            '320x50' => ['key' => 'e5410955d34c5324f74a598138fc7a6a', 'width' => 320, 'height' => 50],
+            '728x90' => ['key' => '664f39179c9c9438a444d8fbbe0bf8af', 'width' => 728, 'height' => 90],
+            '160x300' => ['key' => '87145d5362ccc16d8738d9ff3b58440e', 'width' => 160, 'height' => 300],
+            '160x600' => ['key' => '60274566898069ef08a3c67c755f4abb', 'width' => 160, 'height' => 600],
+            '468x60' => ['key' => '37034b38cde760a9412cb5d31dc4642f', 'width' => 468, 'height' => 60],
+            '300x250' => ['key' => '25dd9fc655827593059beb1f8c4d7c96', 'width' => 300, 'height' => 250],
+        ],
+    ],
+
     'slack' => [
         'notifications' => [
             'bot_user_oauth_token' => env('SLACK_BOT_USER_OAUTH_TOKEN'),

@@ -17,6 +17,9 @@
     <p>We use Google AdSense to display ads. Google and its partners, including third-party vendors, use cookies to serve ads based on your previous visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.</p>
     <p>You can opt out of personalised advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>, or learn how to opt out of third-party vendors' use of cookies at <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>.</p>
 
+    <h2 class="h4 mt-4">Adsterra advertising</h2>
+    <p>We use Adsterra to display advertising, including banner, native, social bar and popunder ads, and to provide sponsored links. Adsterra scripts are loaded only after you accept cookies. Adsterra may use cookies or similar technologies and process information about your browser and interaction with ads under its own privacy practices. You can refuse or withdraw consent using Cookie settings. Sponsored links open an external website when selected.</p>
+
     <h2 class="h4 mt-4">Your rights</h2>
     <p>Depending on where you live (for example under the GDPR), you may have the right to access, correct or delete your personal data, to object to its processing, and to withdraw your consent at any time. You can also control cookies through your browser settings.</p>
 
