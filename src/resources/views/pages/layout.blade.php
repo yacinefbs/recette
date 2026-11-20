@@ -2,7 +2,6 @@
 <html class="no-js" lang="en">
 
 <head>
-    @include('partials.montag')
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     @include('partials.seo')

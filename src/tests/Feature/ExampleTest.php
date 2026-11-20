@@ -19,14 +19,12 @@ class ExampleTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_monetag_site_verification_meta_tag_is_rendered_when_configured(): void
+    public function test_monetag_scripts_and_verification_tag_are_not_rendered(): void
     {
-        config(['app.monetag_site_verification' => 'test-verification-token']);
-
         $this->get('/')
             ->assertOk()
-            ->assertSee('<meta name="monetag" content="test-verification-token">', false)
-            ->assertSee("s.dataset.zone='12272817'", false)
-            ->assertSee("s.src='https://n6wxm.com/vignette.min.js'", false);
+            ->assertDontSee('monetag')
+            ->assertDontSee('quge5.com/88/tag.min.js')
+            ->assertDontSee('n6wxm.com/vignette.min.js');
     }
 }
