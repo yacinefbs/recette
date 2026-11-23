@@ -209,7 +209,7 @@
   /*--
 		nice select
 	-----------------------------------*/
-	$('select').not('.tt-air-fryer select, .tt-recipe-cost select, .tt-baking select, .tt-electricity select').niceSelect();
+	$('select').not('.tt-air-fryer select, .tt-recipe-cost select, .tt-baking select, .tt-electricity select, .tt-fuel select').niceSelect();
 
   
     /*--    

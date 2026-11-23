@@ -1,0 +1,533 @@
+.tt-fuel {
+    --fuel-ink: #20352d;
+    --fuel-muted: #60716a;
+    --fuel-green: #287452;
+    --fuel-green-dark: #1d5b40;
+    --fuel-border: #dce8df;
+    --fuel-surface: #f5f9f5;
+    color: var(--fuel-ink);
+    margin: 0 auto 2.5rem;
+    max-width: 1050px;
+}
+
+.tt-fuel h2,
+.tt-fuel h3 {
+    color: var(--fuel-ink);
+}
+
+.tt-fuel__panel,
+.tt-fuel__results {
+    background: #fff;
+    border: 1px solid var(--fuel-border);
+    border-radius: 20px;
+    box-shadow: 0 14px 40px rgba(32, 53, 45, .07);
+    margin: 0 0 1.15rem;
+    padding: clamp(1.15rem, 3.5vw, 2rem);
+}
+
+.tt-fuel__intro {
+    margin-bottom: 1.25rem;
+}
+
+.tt-fuel__eyebrow {
+    color: var(--fuel-green);
+    display: block;
+    font-size: .75rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    margin-bottom: .35rem;
+    text-transform: uppercase;
+}
+
+.tt-fuel__intro h2,
+.tt-fuel__results h2,
+.tt-fuel__tools h2 {
+    font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+    margin: 0 0 .45rem;
+}
+
+.tt-fuel__intro p,
+.tt-fuel__results-head p,
+.tt-fuel__tools > p,
+.tt-fuel__note,
+.tt-fuel__guide-intro p {
+    color: var(--fuel-muted);
+    line-height: 1.65;
+}
+
+.tt-fuel__intro p,
+.tt-fuel__results-head p,
+.tt-fuel__tools > p {
+    margin: 0;
+}
+
+.tt-fuel__mode {
+    background: #eef4ef;
+    border-radius: 12px;
+    display: flex;
+    gap: .45rem;
+    margin-bottom: 1.4rem;
+    padding: .35rem;
+}
+
+.tt-fuel__mode button {
+    background: transparent;
+    border: 0;
+    border-radius: 9px;
+    color: var(--fuel-muted);
+    cursor: pointer;
+    flex: 1;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    min-height: 44px;
+    padding: .55rem .8rem;
+}
+
+.tt-fuel__mode button.is-active {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(32, 53, 45, .1);
+    color: var(--fuel-green-dark);
+}
+
+.tt-fuel__grid {
+    display: grid;
+    gap: .9rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tt-fuel__field {
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    margin: 0;
+    min-width: 0;
+}
+
+.tt-fuel__field > span {
+    color: var(--fuel-ink);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.tt-fuel__field input,
+.tt-fuel__field select {
+    background: #fff;
+    border: 1px solid #cbd9cf;
+    border-radius: 9px;
+    color: var(--fuel-ink);
+    font: inherit;
+    min-height: 45px;
+    min-width: 0;
+    padding: .55rem .7rem;
+    width: 100%;
+}
+
+.tt-fuel__field small {
+    color: var(--fuel-muted);
+    font-size: .75rem;
+    line-height: 1.45;
+}
+
+.tt-fuel input:focus,
+.tt-fuel select:focus,
+.tt-fuel button:focus-visible,
+.tt-fuel a:focus-visible {
+    outline: 3px solid rgba(40, 116, 82, .25);
+    outline-offset: 2px;
+}
+
+.tt-fuel [hidden] {
+    display: none !important;
+}
+
+.tt-fuel select {
+    display: block !important;
+    visibility: visible !important;
+}
+
+.tt-fuel .nice-select {
+    display: none !important;
+}
+
+.tt-fuel__advanced {
+    border-top: 1px solid var(--fuel-border);
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+}
+
+.tt-fuel__advanced > h3,
+.tt-fuel__expense-head h3,
+.tt-fuel__breakdown h3 {
+    font-size: 1.1rem;
+    margin: 0 0 .8rem;
+}
+
+.tt-fuel__expense-head {
+    align-items: center;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    margin: 1.5rem 0 .8rem;
+}
+
+.tt-fuel__expense-head h3 {
+    margin: 0 0 .25rem;
+}
+
+.tt-fuel__expense-head p {
+    color: var(--fuel-muted);
+    font-size: .83rem;
+    margin: 0;
+}
+
+.tt-fuel__expenses {
+    display: grid;
+    gap: .7rem;
+}
+
+.tt-fuel__expense-row {
+    align-items: end;
+    background: var(--fuel-surface);
+    border: 1px solid var(--fuel-border);
+    border-radius: 12px;
+    display: grid;
+    gap: .7rem;
+    grid-template-columns: minmax(0, 1.5fr) minmax(120px, 1fr) auto;
+    padding: .8rem;
+}
+
+.tt-fuel__check {
+    align-items: center;
+    color: var(--fuel-ink);
+    display: flex;
+    font-size: .88rem;
+    gap: .55rem;
+    margin: .9rem 0 0;
+}
+
+.tt-fuel__check input {
+    accent-color: var(--fuel-green);
+    height: 18px;
+    width: 18px;
+}
+
+.tt-fuel__note {
+    background: var(--fuel-surface);
+    border-left: 3px solid #85b99a;
+    border-radius: 0 8px 8px 0;
+    font-size: .82rem;
+    margin: 1rem 0;
+    padding: .65rem .85rem;
+}
+
+.tt-fuel__actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    margin-top: 1rem;
+}
+
+.tt-fuel__button {
+    align-items: center;
+    background: var(--fuel-green);
+    border: 1px solid var(--fuel-green);
+    border-radius: 9px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 43px;
+    padding: .55rem .95rem;
+    text-align: center;
+}
+
+.tt-fuel__button:hover {
+    background: var(--fuel-green-dark);
+    color: #fff;
+}
+
+.tt-fuel__button--secondary {
+    background: #fff;
+    border-color: #b7c9bd;
+    color: var(--fuel-green-dark);
+}
+
+.tt-fuel__button--secondary:hover {
+    background: #eef4ef;
+    color: var(--fuel-green-dark);
+}
+
+.tt-fuel__button--remove {
+    background: #fff;
+    border-color: #ddc7c3;
+    color: #873a2b;
+}
+
+.tt-fuel__button--remove:hover {
+    background: #fff1ee;
+    color: #873a2b;
+}
+
+.tt-fuel__error {
+    background: #fff2ef;
+    border-left: 4px solid #b23a2b;
+    border-radius: 0 9px 9px 0;
+    color: #7e2f24;
+    margin: .85rem 0;
+    padding: .8rem 1rem;
+}
+
+.tt-fuel__results {
+    scroll-margin-top: 1.2rem;
+}
+
+.tt-fuel__results-head {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+}
+
+.tt-fuel__results-head .tt-fuel__actions {
+    margin: 0;
+}
+
+.tt-fuel__metrics {
+    display: grid;
+    gap: .8rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin-top: 1.2rem;
+}
+
+.tt-fuel__metric {
+    background: var(--fuel-surface);
+    border: 1px solid var(--fuel-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: .25rem;
+    min-width: 0;
+    padding: 1rem;
+}
+
+.tt-fuel__metric--primary {
+    background: #eaf5ee;
+    border-color: #bfd9c7;
+}
+
+.tt-fuel__metric-label,
+.tt-fuel__metric-detail {
+    color: var(--fuel-muted);
+    font-size: .78rem;
+}
+
+.tt-fuel__metric-value {
+    color: var(--fuel-ink);
+    font-size: clamp(1.1rem, 2.8vw, 1.45rem);
+    overflow-wrap: anywhere;
+}
+
+.tt-fuel__breakdown {
+    border-top: 1px solid var(--fuel-border);
+    margin-top: 1.4rem;
+    padding-top: 1.2rem;
+}
+
+.tt-fuel__cost-chart {
+    display: grid;
+    gap: .9rem;
+}
+
+.tt-fuel__cost-row-head {
+    align-items: baseline;
+    color: var(--fuel-muted);
+    display: flex;
+    font-size: .84rem;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: .3rem;
+}
+
+.tt-fuel__cost-row-head strong {
+    color: var(--fuel-ink);
+    white-space: nowrap;
+}
+
+.tt-fuel__bar-track {
+    background: #edf2ee;
+    border-radius: 99px;
+    height: 9px;
+    overflow: hidden;
+}
+
+.tt-fuel__bar {
+    background: linear-gradient(90deg, #287452, #66a982);
+    border-radius: inherit;
+    display: block;
+    height: 100%;
+}
+
+.tt-fuel__tools {
+    margin-top: 1.15rem;
+}
+
+.tt-fuel__tools .tt-fuel__grid {
+    margin-top: 1rem;
+}
+
+.tt-fuel__tool-result {
+    color: var(--fuel-green-dark);
+    font-weight: 700;
+    line-height: 1.6;
+    margin: .85rem 0 0;
+}
+
+.tt-fuel__comparison-grid {
+    display: grid;
+    gap: .9rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 1rem;
+}
+
+.tt-fuel__comparison-grid fieldset {
+    border: 1px solid var(--fuel-border);
+    border-radius: 12px;
+    display: grid;
+    gap: .8rem;
+    min-width: 0;
+    padding: 1rem;
+}
+
+.tt-fuel__comparison-grid legend {
+    color: var(--fuel-green-dark);
+    float: none;
+    font-size: .9rem;
+    font-weight: 800;
+    padding: 0 .35rem;
+    width: auto;
+}
+
+.tt-fuel__saved-list {
+    display: grid;
+    gap: .7rem;
+    margin-top: 1rem;
+}
+
+.tt-fuel__saved-trip {
+    align-items: center;
+    border: 1px solid var(--fuel-border);
+    border-radius: 11px;
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    padding: .8rem 1rem;
+}
+
+.tt-fuel__saved-trip > div:first-child {
+    display: grid;
+    gap: .2rem;
+    min-width: 0;
+}
+
+.tt-fuel__saved-trip span,
+.tt-fuel__empty {
+    color: var(--fuel-muted);
+    font-size: .84rem;
+}
+
+.tt-fuel__saved-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem;
+}
+
+.tt-fuel__guide-intro,
+.tt-fuel__article {
+    line-height: 1.75;
+    margin: 1.5rem auto;
+    max-width: 850px;
+}
+
+.tt-fuel__guide-intro h2,
+.tt-fuel__article h2 {
+    font-size: clamp(1.25rem, 3vw, 1.65rem);
+    margin: 1.8rem 0 .6rem;
+}
+
+.tt-fuel__article h3 {
+    font-size: 1.08rem;
+    margin: 1.1rem 0 .35rem;
+}
+
+.tt-fuel__article li {
+    margin: .3rem 0;
+}
+
+@media (min-width: 760px) {
+    .tt-fuel__grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .tt-fuel__mode {
+        flex-direction: column;
+    }
+
+    .tt-fuel__grid,
+    .tt-fuel__metrics,
+    .tt-fuel__comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tt-fuel__expense-row {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .tt-fuel__expense-row .tt-fuel__button {
+        grid-column: 1 / -1;
+    }
+
+    .tt-fuel__expense-head,
+    .tt-fuel__results-head,
+    .tt-fuel__saved-trip {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .tt-fuel__results-head .tt-fuel__actions {
+        margin-top: .5rem;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #fuel-results,
+    #fuel-results * {
+        visibility: visible !important;
+    }
+
+    #fuel-results {
+        border: 0;
+        box-shadow: none;
+        left: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    #fuel-results .tt-fuel__actions,
+    #fuel-results .tt-fuel__note {
+        display: none !important;
+    }
+}

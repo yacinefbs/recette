@@ -41,6 +41,9 @@ class SeoController extends Controller
             .'- [Air Fryer Calculator]('.route('tools.air-fryer-calculator')."): sourced starting temperatures and cooking times for air fryer foods\n"
             .'- [Baking Calculator]('.route('tools.baking-calculator')."): scale bread and pizza dough ingredients, hydration, baker’s percentages, flour blends and sourdough starter\n"
             .'- [Electricity Cost Calculator]('.route('tools.electricity.calculator')."): estimate appliance electricity consumption and costs using your own rate\n"
+            .'- [Fuel Cost Calculator]('.route('tools.fuel.calculator')."): estimate fuel or charging costs, road-trip expenses, passenger shares, recurring budgets and vehicle comparisons\n"
+            .'- [Road Trip Cost Calculator]('.route('tools.fuel.guide', 'road-trip-cost-calculator')."): estimate the full cost of a road trip with user-entered distances, rates and expenses\n"
+            .'- [Fuel Consumption Calculator]('.route('tools.fuel.guide', 'fuel-consumption-calculator')."): estimate trip fuel use and compare L/100 km, km/L, US MPG and UK MPG\n"
             .'- [Recipe Cost Calculator]('.route('tools.recipe-cost-calculator')."): calculate ingredient cost and cost per serving using your own prices\n"
             .'- [Pantry Inventory Manager]('.route('tools.pantry-inventory')."): private browser-based ingredient, quantity and date tracker\n"
             .'- [Cooking Converter]('.route('tools.converter')."): cups to grams, oven temperatures, unit conversion\n"
@@ -94,6 +97,8 @@ class SeoController extends Controller
             route('tools.cooking-timer'), route('tools.air-fryer-calculator'), route('tools.baking-calculator'),
             route('tools.electricity.calculator'), route('tools.electricity.appliance', 'air-conditioner'),
             route('tools.electricity.appliance', 'refrigerator'), route('tools.electricity.appliance', 'electric-water-heater'),
+            route('tools.fuel.calculator'), route('tools.fuel.guide', 'road-trip-cost-calculator'),
+            route('tools.fuel.guide', 'fuel-consumption-calculator'),
             route('tools.recipe-cost-calculator'), route('tools.pantry-inventory'), route('tools.converter'),
             route('tools.nutrition-calculator'), route('tools.what'), route('tools.ingredient-substitution'),
         ] as $toolUrl) {

@@ -166,6 +166,7 @@
                             </div>
                             <p class="text-center mt-3"><a href="{{ route('tools.baking-calculator') }}">Scale bread and pizza dough with the free Baking Calculator &raquo;</a></p>
                             <p class="text-center mt-2"><a href="{{ route('tools.electricity.calculator') }}">Estimate home appliance energy use with the free Electricity Cost Calculator &raquo;</a></p>
+                            <p class="text-center mt-2"><a href="{{ route('tools.fuel.calculator') }}">Plan a road trip with the free Fuel Cost Calculator &raquo;</a></p>
                         </div>
 @verbatim
                     </div>

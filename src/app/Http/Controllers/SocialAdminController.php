@@ -182,6 +182,13 @@ class SocialAdminController extends Controller
                 'image' => asset('assets/images/social/electricity-cost-calculator-og.jpg'),
                 'message' => "Curious how much your home appliances use? ⚡\n\nEstimate daily, monthly, and yearly electricity use and cost, compare multiple appliances, and explore possible savings using your own electricity rate. Free to use on TopicTrail:\n\n",
             ],
+            'fuel-cost-calculator' => [
+                'title' => 'Fuel Cost Calculator',
+                'description' => 'Estimate trip fuel or charging costs, road expenses, passenger shares, and recurring travel budgets.',
+                'url' => route('tools.fuel.calculator'),
+                'image' => asset('assets/images/social/fuel-cost-calculator-og.jpg'),
+                'message' => "Planning your next road trip? 🚗\n\nEstimate fuel or charging needs, add tolls and other expenses, and see an estimated cost per passenger. Compare vehicles or plan a recurring travel budget with your own prices — free on TopicTrail.\n\nTry the Fuel Cost Calculator:",
+            ],
             'recipe-cost-calculator' => [
                 'title' => 'Recipe Cost Calculator',
                 'description' => 'Estimate ingredient costs and cost per serving with your own grocery prices.',

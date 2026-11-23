@@ -61,6 +61,7 @@
     <p class="mt-4">Looking for something to cook? Try <a href="{{ route('tools.what') }}">What Can I Cook?</a> or browse <a href="{{ route('recipes.index') }}">all recipes</a>.</p>
     <p>Scaling bread or pizza dough? Try the <a href="{{ route('tools.baking-calculator') }}">Baking Calculator</a> for baker’s percentages, hydration, flour blends, and sourdough.</p>
     <p>Estimate appliance energy use and electricity costs with the <a href="{{ route('tools.electricity.calculator') }}">Electricity Cost Calculator</a>.</p>
+    <p>Planning a drive? Estimate fuel, charging and road-trip expenses with the <a href="{{ route('tools.fuel.calculator') }}">Fuel Cost Calculator</a>.</p>
 
     <script>
         (function () {
