@@ -59,6 +59,7 @@
     <p class="text-muted small">Fan ovens usually need about 20°C (25°F) less. Values are rounded and may vary by brand and how ingredients are packed.</p>
 
     <p class="mt-4">Looking for something to cook? Try <a href="{{ route('tools.what') }}">What Can I Cook?</a> or browse <a href="{{ route('recipes.index') }}">all recipes</a>.</p>
+    <p>Scaling bread or pizza dough? Try the <a href="{{ route('tools.baking-calculator') }}">Baking Calculator</a> for baker’s percentages, hydration, flour blends, and sourdough.</p>
 
     <script>
         (function () {

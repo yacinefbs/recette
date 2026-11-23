@@ -21,6 +21,7 @@
                                             <li><a href="{{ route('meal-planner.index') }}">Weekly Meal Planner</a></li>
                                             <li><a href="{{ route('tools.cooking-timer') }}">Cooking Timer</a></li>
                                             <li><a href="{{ route('tools.air-fryer-calculator') }}">Air Fryer Calculator</a></li>
+                                            <li><a href="{{ route('tools.baking-calculator') }}">Baking Calculator</a></li>
                                             <li><a href="{{ route('tools.recipe-cost-calculator') }}">Recipe Cost Calculator</a></li>
                                             <li><a href="{{ route('tools.pantry-inventory') }}">Pantry Inventory</a></li>
                                             <li><a href="{{ route('tools.nutrition-calculator') }}">Nutrition Calculator</a></li>

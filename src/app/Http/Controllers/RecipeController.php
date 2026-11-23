@@ -171,6 +171,7 @@ class RecipeController extends Controller
         return view('recipes.show', [
             'recipe' => $recipe->toArray() + ['image' => $recipe->image],
             'seo' => $seo,
+            'bakingRelevant' => preg_match('/\b(bread|pizza|dough|focaccia|baguette|sourdough)\b/i', $recipe->name) === 1,
             'recipeCostPreset' => [
                 'name' => $recipe->name,
                 'servings' => (int) ($recipe->num_servings ?: 1),

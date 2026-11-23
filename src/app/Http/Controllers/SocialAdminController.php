@@ -168,6 +168,13 @@ class SocialAdminController extends Controller
                 'image' => asset('assets/images/social/air-fryer-calculator-og.jpg'),
                 'message' => "Not sure how long to cook it in your air fryer? 🍟\n\nFind a sourced starting temperature and cooking time for vegetables, chicken, fish, and frozen favorites. Search 49 foods, switch between °C and °F, and start a kitchen timer — free on TopicTrail.\n\nTry the Air Fryer Calculator:",
             ],
+            'baking-calculator' => [
+                'title' => 'Baking Calculator',
+                'description' => 'Scale bread and pizza dough recipes with hydration, baker’s percentages, flour blends, and sourdough starter.',
+                'url' => route('tools.baking-calculator'),
+                'image' => asset('assets/images/social/baking-calculator-og.jpg'),
+                'message' => "Scaling bread or pizza dough? 🍞🍕\n\nCalculate flour, water, salt, and yeast by total dough weight, flour weight, or portions. Adjust baker’s percentages, mix flour types, and account for sourdough starter without counting its flour and water twice.\n\nTry TopicTrail’s free Baking Calculator:",
+            ],
             'recipe-cost-calculator' => [
                 'title' => 'Recipe Cost Calculator',
                 'description' => 'Estimate ingredient costs and cost per serving with your own grocery prices.',

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AirFryerCalculatorController;
+use App\Http\Controllers\BakingCalculatorController;
 use App\Http\Controllers\CookingGuideController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
@@ -36,6 +37,7 @@ Route::post('/recipes/import', [RecipeController::class, 'import'])->name('recip
 Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('throttle:30,1')->name('recipes.feed');
 Route::get('/tools/cooking-timer', [ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
 Route::get('/tools/air-fryer-calculator', [AirFryerCalculatorController::class, 'index'])->name('tools.air-fryer-calculator');
+Route::get('/tools/baking-calculator', [BakingCalculatorController::class, 'index'])->name('tools.baking-calculator');
 Route::get('/tools/recipe-cost-calculator', [RecipeCostCalculatorController::class, 'index'])->name('tools.recipe-cost-calculator');
 Route::post('/tools/air-fryer-calculator/calculate', [AirFryerCalculatorController::class, 'calculate'])
     ->middleware('throttle:60,1')->name('tools.air-fryer-calculator.calculate');

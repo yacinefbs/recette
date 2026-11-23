@@ -129,6 +129,12 @@
                                     <a href="{{ route('tools.recipe-cost-calculator') }}" id="recipe-cost-prefill-link">Calculate the cost of this recipe</a>
                                     <span>Ingredient names and clearly recognized quantities can be prefilled; add your own package sizes and prices.</span>
                                 </div>
+                                @if ($bakingRelevant)
+                                    <div class="tt-note"><strong>Scale your dough:</strong>
+                                        <a href="{{ route('tools.baking-calculator') }}">Open the Baking Calculator</a>
+                                        <span>Adjust dough weight, portions, hydration, and baker’s percentages.</span>
+                                    </div>
+                                @endif
                                 <script type="application/json" id="recipe-cost-page-preset">@json($recipeCostPreset)</script>
                             </div>
                         @endif

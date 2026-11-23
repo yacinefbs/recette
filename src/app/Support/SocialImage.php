@@ -8,6 +8,7 @@ class SocialImage
         'weekly-meal-planner' => 'weekly-meal-planner',
         'tools/cooking-timer' => 'cooking-timer',
         'tools/air-fryer-calculator' => 'air-fryer-calculator',
+        'tools/baking-calculator' => 'baking-calculator',
         'tools/recipe-cost-calculator' => 'recipe-cost-calculator',
         'tools/pantry-inventory' => 'pantry-inventory',
         'tools/nutrition-calculator' => 'nutrition-calculator',

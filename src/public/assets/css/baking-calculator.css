@@ -1,0 +1,448 @@
+.tt-baking {
+    --baking-ink: #172f28;
+    --baking-muted: #61716a;
+    --baking-green: #236747;
+    --baking-border: #dce7df;
+    --baking-soft: #f5f8f4;
+    color: var(--baking-ink);
+    margin: 0 auto;
+    max-width: 1040px;
+}
+
+.tt-baking__panel,
+.tt-baking__result {
+    background: #fff;
+    border: 1px solid var(--baking-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 34px rgba(27, 66, 45, .07);
+    margin-bottom: 28px;
+    padding: clamp(20px, 4vw, 36px);
+}
+
+.tt-baking__intro {
+    margin-bottom: 24px;
+}
+
+.tt-baking__eyebrow {
+    color: var(--baking-green);
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.tt-baking__intro h2,
+.tt-baking__result h2 {
+    color: var(--baking-ink);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 10px;
+}
+
+.tt-baking__intro p,
+.tt-baking__sourdough p,
+.tt-baking__result-note {
+    color: var(--baking-muted);
+    line-height: 1.65;
+    margin: 0;
+}
+
+.tt-baking__grid,
+.tt-baking__mode-fields {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tt-baking__grid {
+    margin-bottom: 20px;
+}
+
+.tt-baking__mode-fields {
+    margin: 18px 0;
+}
+
+.tt-baking__field,
+.tt-baking__row label {
+    color: var(--baking-ink);
+    display: flex;
+    flex-direction: column;
+    font-size: .92rem;
+    font-weight: 700;
+    gap: 7px;
+    min-width: 0;
+}
+
+.tt-baking__field input,
+.tt-baking__field select,
+.tt-baking__row input {
+    background: #fff;
+    border: 1px solid #cbd9ce;
+    border-radius: 10px;
+    color: var(--baking-ink);
+    font: inherit;
+    min-height: 46px;
+    padding: 10px 12px;
+    width: 100%;
+}
+
+.tt-baking__field input:focus,
+.tt-baking__field select:focus,
+.tt-baking__row input:focus {
+    border-color: var(--baking-green);
+    box-shadow: 0 0 0 3px rgba(35, 103, 71, .14);
+    outline: none;
+}
+
+.tt-baking__field small {
+    color: var(--baking-muted);
+    font-size: .78rem;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+.tt-baking__input-unit {
+    align-items: center;
+    display: flex;
+    gap: 8px;
+}
+
+.tt-baking__input-unit input {
+    flex: 1;
+}
+
+.tt-baking__input-unit > span {
+    color: var(--baking-muted);
+    min-width: 28px;
+}
+
+.tt-baking__group {
+    border: 1px solid var(--baking-border);
+    border-radius: 14px;
+    margin: 20px 0;
+    min-width: 0;
+    padding: 18px;
+}
+
+.tt-baking__group legend {
+    color: var(--baking-ink);
+    font-size: 1rem;
+    font-weight: 800;
+    padding: 0 8px;
+}
+
+.tt-baking__group legend span {
+    color: var(--baking-muted);
+    display: block;
+    font-size: .78rem;
+    font-weight: 400;
+    margin-top: 3px;
+}
+
+.tt-baking__rows {
+    display: grid;
+    gap: 10px;
+}
+
+.tt-baking__row {
+    align-items: end;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: minmax(0, 1fr) minmax(100px, 160px) 40px;
+}
+
+.tt-baking__row label {
+    font-size: .8rem;
+}
+
+.tt-baking__row input {
+    min-height: 42px;
+}
+
+.tt-baking__remove {
+    align-items: center;
+    background: #fff5f1;
+    border: 1px solid #f0d7cd;
+    border-radius: 10px;
+    color: #963c26;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 1.3rem;
+    height: 42px;
+    justify-content: center;
+    width: 40px;
+}
+
+.tt-baking__remove:disabled {
+    cursor: not-allowed;
+    opacity: .4;
+}
+
+.tt-baking__add {
+    background: transparent;
+    border: 0;
+    color: var(--baking-green);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 800;
+    margin-top: 12px;
+    padding: 7px 0;
+}
+
+.tt-baking__sum {
+    color: var(--baking-green);
+    font-size: .85rem;
+    font-weight: 700;
+    margin: 6px 0 0;
+}
+
+.tt-baking__sum.is-invalid,
+.tt-baking__error {
+    color: #a33120;
+}
+
+.tt-baking__note,
+.tt-baking__error {
+    background: #fff5ef;
+    border-left: 4px solid #d27d38;
+    border-radius: 8px;
+    line-height: 1.55;
+    margin: 12px 0;
+    padding: 11px 14px;
+}
+
+.tt-baking__sourdough {
+    background: var(--baking-soft);
+}
+
+.tt-baking__sourdough p {
+    font-size: .88rem;
+    margin: 8px 0 16px;
+}
+
+.tt-baking__checkbox {
+    align-items: center;
+    display: flex;
+    font-weight: 800;
+    gap: 10px;
+}
+
+.tt-baking__checkbox input {
+    accent-color: var(--baking-green);
+    height: 18px;
+    width: 18px;
+}
+
+.tt-baking__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.tt-baking__button {
+    background: var(--baking-green);
+    border: 1px solid var(--baking-green);
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-flex;
+    font: inherit;
+    font-weight: 800;
+    justify-content: center;
+    padding: 11px 16px;
+    text-decoration: none;
+}
+
+.tt-baking__button--secondary {
+    background: #fff;
+    color: var(--baking-green);
+}
+
+.tt-baking__button:hover {
+    filter: brightness(.95);
+}
+
+.tt-baking__result-head {
+    align-items: center;
+    display: flex;
+    gap: 18px;
+    justify-content: space-between;
+    margin-bottom: 22px;
+}
+
+.tt-baking__metrics {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-bottom: 26px;
+}
+
+.tt-baking__metrics > div {
+    background: var(--baking-soft);
+    border: 1px solid var(--baking-border);
+    border-radius: 14px;
+    padding: 16px;
+}
+
+.tt-baking__metrics span,
+.tt-baking__metrics strong {
+    display: block;
+}
+
+.tt-baking__metrics span {
+    color: var(--baking-muted);
+    font-size: .82rem;
+    margin-bottom: 7px;
+}
+
+.tt-baking__metrics strong {
+    color: var(--baking-ink);
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+}
+
+.tt-baking__ingredients h3 {
+    color: var(--baking-ink);
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+}
+
+.tt-baking__ingredients ul,
+.tt-baking__warnings {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.tt-baking__ingredients li {
+    align-items: center;
+    border-bottom: 1px solid var(--baking-border);
+    display: grid;
+    gap: 12px;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    padding: 12px 2px;
+}
+
+.tt-baking__ingredients li small {
+    color: var(--baking-muted);
+}
+
+.tt-baking__ingredients li strong {
+    min-width: 95px;
+    text-align: right;
+}
+
+.tt-baking__warnings {
+    margin-top: 14px;
+}
+
+.tt-baking__warnings li {
+    background: #fff7e6;
+    border-left: 4px solid #d29a33;
+    border-radius: 6px;
+    color: #634b16;
+    margin-top: 8px;
+    padding: 10px 12px;
+}
+
+.tt-baking__result-note,
+.tt-baking__status {
+    font-size: .84rem;
+    margin-top: 16px;
+}
+
+.tt-baking__status {
+    color: var(--baking-green);
+}
+
+.tt-baking__article {
+    line-height: 1.75;
+}
+
+.tt-baking__article h2 {
+    margin-top: 2rem;
+}
+
+.tt-baking__article h2:first-child {
+    margin-top: 0;
+}
+
+@media (max-width: 700px) {
+    .tt-baking__grid,
+    .tt-baking__mode-fields {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .tt-baking__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .tt-baking__result-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 420px) {
+    .tt-baking__panel,
+    .tt-baking__result {
+        border-radius: 14px;
+        padding: 17px;
+    }
+
+    .tt-baking__row {
+        gap: 7px;
+        grid-template-columns: minmax(0, 1fr) 92px 36px;
+    }
+
+    .tt-baking__remove {
+        width: 36px;
+    }
+
+    .tt-baking__metrics > div {
+        padding: 12px;
+    }
+
+    .tt-baking__ingredients li {
+        gap: 7px;
+        grid-template-columns: minmax(0, 1fr) auto;
+    }
+
+    .tt-baking__ingredients li small {
+        grid-column: 1;
+        grid-row: 2;
+    }
+
+    .tt-baking__ingredients li strong {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        min-width: auto;
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    #baking-calculator .tt-baking__result,
+    #baking-calculator .tt-baking__result * {
+        visibility: visible !important;
+    }
+
+    #baking-calculator .tt-baking__result {
+        border: 0;
+        box-shadow: none;
+        left: 0;
+        margin: 0;
+        padding: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    #baking-calculator .tt-baking__actions,
+    #baking-calculator .tt-baking__status {
+        display: none !important;
+    }
+}
