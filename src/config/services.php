@@ -29,7 +29,7 @@ return [
     ],
 
     'social' => [
-        'facebook_app_id' => env('FACEBOOK_APP_ID'),
+        'facebook_app_id' => env('FACEBOOK_APP_ID') ?: '1166005632599541',
         'twitter' => env('TWITTER_HANDLE'),
         // Profile URLs: icons are only shown for the ones that are set
         'urls' => [
