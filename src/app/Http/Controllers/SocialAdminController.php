@@ -175,6 +175,13 @@ class SocialAdminController extends Controller
                 'image' => asset('assets/images/social/baking-calculator-og.jpg'),
                 'message' => "Scaling bread or pizza dough? 🍞🍕\n\nCalculate flour, water, salt, and yeast by total dough weight, flour weight, or portions. Adjust baker’s percentages, mix flour types, and account for sourdough starter without counting its flour and water twice.\n\nTry TopicTrail’s free Baking Calculator:",
             ],
+            'electricity-cost-calculator' => [
+                'title' => 'Electricity Cost Calculator',
+                'description' => 'Estimate appliance electricity use, monthly costs, and potential savings with your own energy rate.',
+                'url' => route('tools.electricity.calculator'),
+                'image' => asset('assets/images/social/electricity-cost-calculator-og.jpg'),
+                'message' => "Curious how much your home appliances use? ⚡\n\nEstimate daily, monthly, and yearly electricity use and cost, compare multiple appliances, and explore possible savings using your own electricity rate. Free to use on TopicTrail:\n\n",
+            ],
             'recipe-cost-calculator' => [
                 'title' => 'Recipe Cost Calculator',
                 'description' => 'Estimate ingredient costs and cost per serving with your own grocery prices.',
