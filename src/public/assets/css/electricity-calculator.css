@@ -1,0 +1,503 @@
+.tt-electricity {
+    --electricity-ink: #19342b;
+    --electricity-muted: #61736b;
+    --electricity-green: #236747;
+    --electricity-border: #dce7df;
+    --electricity-soft: #f5f8f4;
+    color: var(--electricity-ink);
+    max-width: 1040px;
+    margin: 0 auto;
+}
+
+.tt-electricity [hidden] {
+    display: none !important;
+}
+
+.tt-electricity__panel,
+.tt-electricity__results,
+.tt-electricity__device-intro {
+    background: #fff;
+    border: 1px solid var(--electricity-border);
+    border-radius: 20px;
+    box-shadow: 0 12px 34px rgba(27, 66, 45, .07);
+    margin-bottom: 26px;
+    padding: clamp(20px, 4vw, 36px);
+}
+
+.tt-electricity__device-intro {
+    background: var(--electricity-soft);
+    box-shadow: none;
+}
+
+.tt-electricity__intro {
+    margin-bottom: 24px;
+}
+
+.tt-electricity__eyebrow {
+    color: var(--electricity-green);
+    display: inline-block;
+    font-size: .78rem;
+    font-weight: 800;
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.tt-electricity h2,
+.tt-electricity h3 {
+    color: var(--electricity-ink);
+}
+
+.tt-electricity__intro h2,
+.tt-electricity__results-head h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin: 0 0 10px;
+}
+
+.tt-electricity__intro p,
+.tt-electricity__note,
+.tt-electricity__article p,
+.tt-electricity__device-intro p {
+    color: var(--electricity-muted);
+    line-height: 1.65;
+}
+
+.tt-electricity__mode {
+    background: var(--electricity-soft);
+    border-radius: 12px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 6px;
+}
+
+.tt-electricity__mode button,
+.tt-electricity__appliance-head button,
+.tt-electricity__saved button,
+.tt-electricity__clear-saved button,
+.tt-electricity__link-button {
+    background: transparent;
+    border: 0;
+    color: var(--electricity-green);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    padding: 10px 14px;
+}
+
+.tt-electricity__mode button {
+    border-radius: 9px;
+    flex: 1;
+}
+
+.tt-electricity__mode button.is-active {
+    background: var(--electricity-green);
+    color: #fff;
+}
+
+.tt-electricity__grid {
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.tt-electricity__grid--compact {
+    align-items: end;
+}
+
+.tt-electricity__field {
+    display: block;
+    min-width: 0;
+}
+
+.tt-electricity__field > span {
+    color: var(--electricity-ink);
+    display: block;
+    font-size: .93rem;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.tt-electricity__field input,
+.tt-electricity__field select {
+    background: #fff;
+    border: 1px solid #cbd9d0;
+    border-radius: 8px;
+    color: #25372f;
+    display: block !important;
+    font: inherit;
+    height: 48px;
+    max-width: 100%;
+    padding: 10px 12px;
+    width: 100%;
+}
+
+.tt-electricity .nice-select {
+    display: none !important;
+}
+
+.tt-electricity__field input:focus,
+.tt-electricity__field select:focus {
+    border-color: var(--electricity-green);
+    box-shadow: 0 0 0 3px rgba(35, 103, 71, .14);
+    outline: none;
+}
+
+.tt-electricity__field small {
+    color: var(--electricity-muted);
+    display: block;
+    line-height: 1.45;
+    margin-top: 6px;
+}
+
+.tt-electricity__note {
+    font-size: .9rem;
+    margin: 15px 0;
+}
+
+.tt-electricity__actions {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.tt-electricity__button {
+    background: var(--electricity-green);
+    border: 1px solid var(--electricity-green);
+    border-radius: 9px;
+    color: #fff;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 700;
+    min-height: 46px;
+    padding: 11px 18px;
+}
+
+.tt-electricity__button:hover {
+    background: #174e34;
+    color: #fff;
+}
+
+.tt-electricity__button--secondary {
+    background: #fff;
+    color: var(--electricity-green);
+}
+
+.tt-electricity__button--secondary:hover {
+    background: var(--electricity-soft);
+    color: var(--electricity-green);
+}
+
+.tt-electricity__appliance {
+    background: #fbfcfa;
+    border: 1px solid var(--electricity-border);
+    border-radius: 14px;
+    margin: 0 0 16px;
+    padding: clamp(16px, 3vw, 24px);
+}
+
+.tt-electricity__appliance-head,
+.tt-electricity__results-head {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: space-between;
+    margin-bottom: 18px;
+}
+
+.tt-electricity__appliance-head h3 {
+    font-size: 1.1rem;
+    margin: 0;
+    overflow-wrap: anywhere;
+}
+
+.tt-electricity__appliance-head > div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tt-electricity__appliance-head button {
+    font-size: .88rem;
+    padding: 6px 9px;
+}
+
+.tt-electricity__appliance-result {
+    color: var(--electricity-green);
+    font-weight: 700;
+    margin: 10px 0 0;
+}
+
+.tt-electricity__error,
+.tt-electricity__saved {
+    background: #fff3f1;
+    border: 1px solid #e8b6ad;
+    border-radius: 9px;
+    color: #872e23;
+    margin: 16px 0 0;
+    padding: 12px 14px;
+}
+
+.tt-electricity__error.is-success {
+    background: #edf7f0;
+    border-color: #b7d7c1;
+    color: #205738;
+}
+
+.tt-electricity__saved {
+    background: var(--electricity-soft);
+    border-color: var(--electricity-border);
+    color: var(--electricity-ink);
+}
+
+.tt-electricity__saved p {
+    margin: 0 0 8px;
+}
+
+.tt-electricity__results {
+    scroll-margin-top: 20px;
+}
+
+.tt-electricity__results-head h2 {
+    margin-bottom: 0;
+}
+
+.tt-electricity__metrics {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.tt-electricity__metric {
+    background: var(--electricity-soft);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+    padding: 18px;
+}
+
+.tt-electricity__metric span,
+.tt-electricity__metric small {
+    color: var(--electricity-muted);
+    font-size: .9rem;
+}
+
+.tt-electricity__metric strong {
+    color: var(--electricity-green);
+    font-size: clamp(1.1rem, 2vw, 1.45rem);
+    overflow-wrap: anywhere;
+}
+
+.tt-electricity__charts {
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 28px;
+}
+
+.tt-electricity__charts h3 {
+    font-size: 1.1rem;
+    margin: 0 0 16px;
+}
+
+.tt-electricity__bars {
+    display: grid;
+    gap: 13px;
+}
+
+.tt-electricity__bar-row {
+    align-items: center;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: 58px minmax(35px, 1fr) minmax(75px, auto);
+}
+
+.tt-electricity__bar-row > span:first-child {
+    color: var(--electricity-muted);
+    font-size: .88rem;
+}
+
+.tt-electricity__bar-row > strong {
+    font-size: .88rem;
+    text-align: right;
+}
+
+.tt-electricity__bar-track {
+    background: #e8eee9;
+    border-radius: 99px;
+    height: 11px;
+    overflow: hidden;
+}
+
+.tt-electricity__bar-fill {
+    background: var(--electricity-green);
+    border-radius: inherit;
+    display: block;
+    height: 100%;
+}
+
+.tt-electricity__cost-list {
+    margin: 0;
+    padding-left: 22px;
+}
+
+.tt-electricity__cost-list li {
+    align-items: center;
+    border-bottom: 1px solid var(--electricity-border);
+    display: grid;
+    gap: 8px 12px;
+    grid-template-columns: minmax(0, 1fr) auto;
+    padding: 9px 0;
+}
+
+.tt-electricity__cost-list .tt-electricity__cost-name {
+    overflow-wrap: anywhere;
+}
+
+.tt-electricity__cost-list li strong {
+    text-align: right;
+}
+
+.tt-electricity__cost-share {
+    background: #e8eee9;
+    border-radius: 99px;
+    grid-column: 1;
+    height: 8px;
+    overflow: hidden;
+}
+
+.tt-electricity__cost-share span {
+    background: var(--electricity-green);
+    border-radius: inherit;
+    display: block;
+    height: 100%;
+}
+
+.tt-electricity__cost-list li small {
+    color: var(--electricity-muted);
+    grid-column: 2;
+    grid-row: 2;
+    text-align: right;
+}
+
+.tt-electricity__extra h2 {
+    margin: 0 0 10px;
+}
+
+.tt-electricity__extra > p {
+    color: var(--electricity-muted);
+}
+
+.tt-electricity__extra-result {
+    color: var(--electricity-green) !important;
+    font-weight: 700;
+    line-height: 1.65;
+    margin-top: 16px;
+}
+
+.tt-electricity__clear-saved {
+    margin: 8px 0 28px;
+    text-align: right;
+}
+
+.tt-electricity__clear-saved button {
+    color: var(--electricity-muted);
+    text-decoration: underline;
+}
+
+.tt-electricity__article {
+    line-height: 1.7;
+    margin: 38px auto;
+    max-width: 850px;
+}
+
+.tt-electricity__article h2 {
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    margin: 30px 0 10px;
+}
+
+.tt-electricity__article h3 {
+    font-size: 1.1rem;
+    margin: 22px 0 6px;
+}
+
+.tt-electricity__article ul {
+    padding-left: 22px;
+}
+
+@media (max-width: 680px) {
+    .tt-electricity__grid,
+    .tt-electricity__metrics,
+    .tt-electricity__charts {
+        grid-template-columns: 1fr;
+    }
+
+    .tt-electricity__mode {
+        flex-direction: column;
+    }
+
+    .tt-electricity__mode button {
+        min-height: 44px;
+    }
+
+    .tt-electricity__bar-row {
+        gap: 7px;
+        grid-template-columns: 48px minmax(25px, 1fr) minmax(68px, auto);
+    }
+
+    .tt-electricity__bar-row > strong,
+    .tt-electricity__bar-row > span:first-child {
+        font-size: .78rem;
+    }
+
+    .tt-electricity__actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .tt-electricity__actions .tt-electricity__button {
+        width: 100%;
+    }
+
+    .tt-electricity__results-head {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (min-width: 681px) and (max-width: 900px) {
+    .tt-electricity__metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+
+    .tt-electricity__results,
+    .tt-electricity__results * {
+        visibility: visible !important;
+    }
+
+    .tt-electricity__results {
+        border: 0;
+        box-shadow: none;
+        left: 0;
+        margin: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    .tt-electricity__results .tt-electricity__actions,
+    .tt-electricity__results .tt-electricity__link-button {
+        display: none !important;
+    }
+}

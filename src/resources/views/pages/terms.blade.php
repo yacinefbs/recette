@@ -5,7 +5,10 @@
     <p>By using {{ $site }} you agree to these terms.</p>
 
     <h2 class="h4 mt-4">Use of the website</h2>
-    <p>The content of this website is provided for personal, non-commercial information and cooking inspiration. You agree not to misuse the site, attempt to disrupt it, or scrape it in an abusive way.</p>
+    <p>The content and tools on this website are provided for personal, non-commercial information and cooking inspiration. You agree not to misuse the site, attempt to disrupt it, or scrape it in an abusive way.</p>
+
+    <h2 class="h4 mt-4">Calculators and estimates</h2>
+    <p>Electricity consumption, cost, savings and appliance power figures shown by our calculators are estimates based on the information you enter. Catalog values are indicative, not guaranteed. Actual energy use and bills vary by appliance, usage, tariff, taxes and other charges. Calculator results are for general information only; check appliance specifications and your electricity provider’s rates. We do not guarantee a particular cost or saving.</p>
 
     <h2 class="h4 mt-4">Recipes and food safety</h2>
     <p>Recipes are provided as-is. Cooking times, quantities and nutritional information are indicative. You are responsible for checking ingredients for allergies and following proper food-safety practices. Some recipes include alcohol and are intended only for people of legal drinking age.</p>

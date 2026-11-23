@@ -3,6 +3,7 @@
 use App\Http\Controllers\AirFryerCalculatorController;
 use App\Http\Controllers\BakingCalculatorController;
 use App\Http\Controllers\CookingGuideController;
+use App\Http\Controllers\ElectricityCalculatorController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IngredientSubstitutionController;
 use App\Http\Controllers\McpController;
@@ -38,6 +39,10 @@ Route::get('/recipes/feed', [RecipeController::class, 'feed'])->middleware('thro
 Route::get('/tools/cooking-timer', [ToolController::class, 'cookingTimer'])->name('tools.cooking-timer');
 Route::get('/tools/air-fryer-calculator', [AirFryerCalculatorController::class, 'index'])->name('tools.air-fryer-calculator');
 Route::get('/tools/baking-calculator', [BakingCalculatorController::class, 'index'])->name('tools.baking-calculator');
+Route::get('/tools/electricity/electricity-cost-calculator', [ElectricityCalculatorController::class, 'index'])->name('tools.electricity.calculator');
+Route::get('/tools/electricity/{slug}', [ElectricityCalculatorController::class, 'appliance'])
+    ->whereIn('slug', ['air-conditioner', 'refrigerator', 'electric-water-heater'])
+    ->name('tools.electricity.appliance');
 Route::get('/tools/recipe-cost-calculator', [RecipeCostCalculatorController::class, 'index'])->name('tools.recipe-cost-calculator');
 Route::post('/tools/air-fryer-calculator/calculate', [AirFryerCalculatorController::class, 'calculate'])
     ->middleware('throttle:60,1')->name('tools.air-fryer-calculator.calculate');
