@@ -21,6 +21,13 @@
       gtag('consent', 'update', {
         ad_storage: s, ad_user_data: s, ad_personalization: s, analytics_storage: s
       });
+      if (previous !== 'granted' && value === 'granted') {
+        gtag('event', 'page_view', {
+          page_title: document.title,
+          page_location: window.location.href,
+          page_path: window.location.pathname + window.location.search
+        });
+      }
       window.dispatchEvent(new CustomEvent('tt:consent-change', { detail: { granted: value === 'granted' } }));
       var el = document.getElementById('tt-consent');
       if (el) el.style.display = 'none';

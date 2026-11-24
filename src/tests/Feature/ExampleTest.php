@@ -38,4 +38,13 @@ class ExampleTest extends TestCase
             ->assertSee('https://araplhn.org/4/b0f8fcde3e47c50b13231d916fc6d51b')
             ->assertSee('Adsterra');
     }
+
+    public function test_ga4_page_view_waits_for_consent_and_is_sent_when_granted(): void
+    {
+        $this->get('/', ['HTTP_HOST' => 'topictrail.me'])
+            ->assertOk()
+            ->assertSee("send_page_view: tcConsent === 'granted'", false)
+            ->assertSee("previous !== 'granted' && value === 'granted'", false)
+            ->assertSee("gtag('event', 'page_view'", false);
+    }
 }

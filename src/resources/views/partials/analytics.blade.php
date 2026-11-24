@@ -18,7 +18,7 @@
 
   gtag('js', new Date());
 
-  gtag('config', 'G-0ZPBSY263K');
+  gtag('config', 'G-0ZPBSY263K', {send_page_view: tcConsent === 'granted'});
 </script>
 <!-- Google Tag Manager -->
 <script>
