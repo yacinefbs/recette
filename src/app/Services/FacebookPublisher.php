@@ -43,6 +43,11 @@ class FacebookPublisher
         return $this->send($url, $message);
     }
 
+    public function scheduleLink(string $url, string $message, CarbonInterface $when): string
+    {
+        return $this->send($url, $message, $when);
+    }
+
     public function schedule(Recipe $recipe, CarbonInterface $when, ?string $message = null): string
     {
         $id = $this->send(route('recipes.show', $recipe), $message ?: $this->message($recipe), $when);

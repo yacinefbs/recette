@@ -47,6 +47,13 @@
                             <span class="spin" hidden aria-hidden="true"></span><span class="lbl">Post to Facebook</span>
                         </button>
                     </div>
+                    <div class="actions" aria-label="Quick schedule">
+                        @foreach ([10, 15, 20, 25, 30] as $minutes)
+                            <button class="btn btn--fb" type="submit" data-delay-minutes="{{ $minutes }}" @disabled(! $facebookReady)>
+                                <span class="spin" hidden aria-hidden="true"></span><span class="lbl">Publish in {{ $minutes }} min</span>
+                            </button>
+                        @endforeach
+                    </div>
                 </form>
             </article>
         @endforeach
@@ -78,6 +85,13 @@
                             <details>
                                 <summary>Schedule on Facebook</summary>
                                 <p class="muted">Times use Morocco (Africa/Casablanca). Choose at least 10 minutes from now. Facebook may impose additional limits.</p>
+                                <div class="actions" aria-label="Quick schedule">
+                                    @foreach ([10, 15, 20, 25, 30] as $minutes)
+                                        <button class="btn btn--fb" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" data-delay-minutes="{{ $minutes }}" formnovalidate @disabled(! $facebookReady)>
+                                            <span class="spin" hidden></span><span class="lbl">Publish in {{ $minutes }} min</span>
+                                        </button>
+                                    @endforeach
+                                </div>
                                 <label><input type="radio" name="schedule_mode" value="calendar" checked> Date and time</label>
                                 <label for="schedule-at-{{ $recipe->id }}">Date and time in Morocco</label>
                                 <input id="schedule-at-{{ $recipe->id }}" type="datetime-local" name="scheduled_at">
@@ -125,7 +139,13 @@ document.querySelectorAll('.js-fb-form').forEach(function (form) {
         var row = form.closest('.row');
         var name = row.querySelector('h3').textContent.trim();
         var scheduling = btn.hasAttribute('formaction');
+        var quickDelay = btn.dataset.delayMinutes;
         if (!confirm((scheduling ? 'Schedule "' : 'Post "') + name + '" on the Facebook page?')) return;
+        if (quickDelay) {
+            form.querySelector('input[name="schedule_mode"][value="delay"]').checked = true;
+            form.querySelector('[name="delay"]').value = quickDelay;
+            form.querySelector('[name="delay_unit"]').value = 'minutes';
+        }
 
         var buttons = form.querySelectorAll('button[type=submit]');
         buttons.forEach(function (button) { button.disabled = true; });
@@ -218,31 +238,35 @@ window.addEventListener('pageshow', function () {
 document.querySelectorAll('.js-tool-fb-form').forEach(function (form) {
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
-        var button = form.querySelector('button[type=submit]');
-        if (button.disabled || !confirm('Post "' + form.dataset.toolTitle + '" to the Facebook page?')) return;
+        var button = event.submitter || form.querySelector('button[type=submit]');
+        var scheduling = Boolean(button.dataset.delayMinutes);
+        if (button.disabled || !confirm((scheduling ? 'Schedule "' : 'Post "') + form.dataset.toolTitle + '"' + (scheduling ? ' in ' + button.dataset.delayMinutes + ' minutes' : '') + ' on the Facebook page?')) return;
 
         var spinner = button.querySelector('.spin');
         var label = button.querySelector('.lbl');
-        button.disabled = true;
+        var buttons = form.querySelectorAll('button[type=submit]');
+        buttons.forEach(function (item) { item.disabled = true; });
         spinner.hidden = false;
-        label.textContent = 'Posting…';
+        label.textContent = scheduling ? 'Scheduling…' : 'Posting…';
         form.setAttribute('aria-busy', 'true');
 
         try {
+            var body = new FormData(form);
+            if (scheduling) body.append('schedule_minutes', button.dataset.delayMinutes);
             var response = await fetch(form.action, {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
-                body: new FormData(form)
+                body: body
             });
             var result = await response.json().catch(function () { return {}; });
             if (!response.ok || !result.ok) throw new Error(result.message || 'Facebook post failed (' + response.status + ').');
-            toast(result.message + ' You can publish this page again later.', true);
-            label.textContent = 'Post again';
+            toast(result.message + (scheduling ? '' : ' You can publish this page again later.'), true);
+            label.textContent = scheduling ? 'Schedule again' : 'Post again';
         } catch (error) {
             toast(error.message || 'Facebook post failed. Check the page before retrying.', false);
-            label.textContent = 'Post to Facebook';
+            label.textContent = scheduling ? 'Publish in ' + button.dataset.delayMinutes + ' min' : 'Post to Facebook';
         } finally {
-            button.disabled = false;
+            buttons.forEach(function (item) { item.disabled = false; });
             spinner.hidden = true;
             form.removeAttribute('aria-busy');
         }

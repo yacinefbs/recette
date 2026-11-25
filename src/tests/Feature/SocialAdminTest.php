@@ -5,7 +5,9 @@ namespace Tests\Feature;
 use App\Models\Recipe;
 use App\Models\User;
 use App\Services\TastyService;
+use Carbon\CarbonImmutable;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
@@ -84,6 +86,16 @@ class SocialAdminTest extends TestCase
         $this->assertTrue($recipe->fresh()->posted_facebook);
     }
 
+    public function test_pending_recipes_have_quick_facebook_schedule_buttons(): void
+    {
+        $response = $this->actingAs(User::factory()->create())->get('/social-admin')->assertOk();
+
+        foreach ([10, 15, 20, 25, 30] as $minutes) {
+            $response->assertSee('data-delay-minutes="'.$minutes.'"', false)
+                ->assertSee("Publish in {$minutes} min");
+        }
+    }
+
     public function test_dashboard_shows_reusable_facebook_posts_for_meal_planner_and_tools(): void
     {
         $response = $this->actingAs(User::factory()->create())->get('/social-admin')->assertOk()
@@ -115,6 +127,32 @@ class SocialAdminTest extends TestCase
             ->assertSee('Make the week’s meals easier to plan.');
 
         $this->assertSame(12, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
+        $this->assertSame(60, substr_count($response->getContent(), 'data-delay-minutes='));
+    }
+
+    public function test_tool_post_can_be_scheduled_with_a_quick_delay(): void
+    {
+        config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => 'page-123_scheduled-456'])]);
+        CarbonImmutable::setTestNow('2026-04-15 12:00:00 UTC');
+
+        try {
+            $response = $this->actingAs(User::factory()->create())
+                ->postJson(route('social.tools.publish', 'cooking-timer'), [
+                    'message' => 'Keep multiple kitchen timers in one place!',
+                    'schedule_minutes' => 15,
+                ])
+                ->assertOk()
+                ->assertJsonPath('ok', true);
+
+            $this->assertStringContainsString('scheduled on Facebook for 2026-04-15 13:15', $response->json('message'));
+            Http::assertSent(fn (Request $request) => str_ends_with($request->url(), '/page-123/feed')
+                && $request['link'] === route('tools.cooking-timer')
+                && $request['published'] === 'false'
+                && (int) $request['scheduled_publish_time'] === CarbonImmutable::parse('2026-04-15 12:15:00 UTC')->timestamp);
+        } finally {
+            CarbonImmutable::setTestNow();
+        }
     }
 
     public function test_tool_post_publishes_the_selected_page_without_changing_recipe_status(): void

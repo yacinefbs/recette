@@ -71,6 +71,18 @@ class FacebookSchedulingTest extends TestCase
         $this->assertSame('2026-04-15 14:00:00', $second->fresh()->facebook_scheduled_at->utc()->format('Y-m-d H:i:s'));
     }
 
+    public function test_ten_minute_delay_is_accepted_at_the_minimum_schedule_time(): void
+    {
+        Http::fake(['graph.facebook.com/*' => Http::response(['id' => '123_456'])]);
+        $recipe = $this->recipe();
+
+        $this->actingAs(User::factory()->create())->postJson(route('social.facebook.schedule', $recipe), [
+            'schedule_mode' => 'delay', 'delay' => 10, 'delay_unit' => 'minutes',
+        ])->assertOk()->assertJson(['ok' => true]);
+
+        $this->assertSame('2026-04-15 12:10:00', $recipe->fresh()->facebook_scheduled_at->utc()->format('Y-m-d H:i:s'));
+    }
+
     public function test_short_invalid_and_unauthenticated_requests_are_rejected(): void
     {
         Http::fake();

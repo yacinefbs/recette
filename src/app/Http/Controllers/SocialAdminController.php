@@ -126,14 +126,26 @@ class SocialAdminController extends Controller
     {
         $tools = $this->toolPosts();
         abort_unless(isset($tools[$tool]), 404);
-        $data = $request->validate(['message' => ['required', 'string', 'min:5', 'max:2000']]);
+        $data = $request->validate([
+            'message' => ['required', 'string', 'min:5', 'max:2000'],
+            'schedule_minutes' => ['sometimes', 'required', 'integer', 'in:10,15,20,25,30'],
+        ]);
 
         try {
-            $facebook->publishLink($tools[$tool]['url'], trim($data['message']));
+            if (isset($data['schedule_minutes'])) {
+                $when = CarbonImmutable::now('UTC')->addMinutes((int) $data['schedule_minutes']);
+                $facebook->scheduleLink($tools[$tool]['url'], trim($data['message']), $when);
+            } else {
+                $facebook->publishLink($tools[$tool]['url'], trim($data['message']));
+            }
         } catch (Throwable $e) {
             report($e);
 
             return $this->respond($request, false, 'Facebook: '.$e->getMessage(), 422);
+        }
+
+        if (isset($data['schedule_minutes'])) {
+            return $this->respond($request, true, '"'.$tools[$tool]['title'].'" scheduled on Facebook for '.$when->setTimezone('Africa/Casablanca')->format('Y-m-d H:i T').'.');
         }
 
         return $this->respond($request, true, '"'.$tools[$tool]['title'].'" posted to Facebook.');
@@ -244,14 +256,15 @@ class SocialAdminController extends Controller
             'delay_unit' => ['required_if:schedule_mode,delay', 'nullable', 'in:minutes,hours'],
         ]);
 
+        $now = CarbonImmutable::now('UTC');
         if ($data['schedule_mode'] === 'calendar') {
             $when = $this->moroccoTime($data['scheduled_at']);
         } else {
             $seconds = (int) $data['delay'] * ($data['delay_unit'] === 'hours' ? 3600 : 60);
-            $when = CarbonImmutable::now('UTC')->addSeconds($seconds);
+            $when = $now->addSeconds($seconds);
         }
 
-        if ($when->getTimestamp() - CarbonImmutable::now('UTC')->getTimestamp() < 600) {
+        if ($when->getTimestamp() - $now->getTimestamp() < 600) {
             throw ValidationException::withMessages(['schedule' => 'Choose a time at least 10 minutes from now. Facebook may impose additional limits.']);
         }
 
