@@ -21,6 +21,9 @@
       gtag('consent', 'update', {
         ad_storage: s, ad_user_data: s, ad_personalization: s, analytics_storage: s
       });
+      if (s === 'granted' && typeof window.ttLoadClarity === 'function') {
+        window.ttLoadClarity();
+      }
       if (previous !== 'granted' && value === 'granted') {
         gtag('event', 'page_view', {
           page_title: document.title,
@@ -40,7 +43,7 @@
       box.setAttribute('role', 'dialog');
       box.setAttribute('aria-label', 'Cookie consent');
       box.innerHTML =
-        '<p>We use cookies to measure audience (Google Analytics) and to show ads (Google AdSense and Adsterra). ' +
+        '<p>We use cookies to measure audience and site usage (Google Analytics and Microsoft Clarity) and to show ads (Google AdSense and Adsterra). ' +
         'You can accept or refuse them. Read our <a href="/privacy-policy">Privacy Policy</a>.</p>' +
         '<div class="tt-btns">' +
         '<button type="button" class="tt-accept">Accept all</button>' +
