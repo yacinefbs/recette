@@ -13,6 +13,9 @@
     <h2 class="h4 mt-4">Google Analytics</h2>
     <p>We use Google Analytics to understand how visitors use the site (pages viewed, time on site, approximate location). Google Analytics uses cookies to collect this information in an aggregated form. More information: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses data when you use our partners' sites</a>.</p>
 
+    <h2 class="h4 mt-4">Microsoft Clarity</h2>
+    <p>With your consent, we use Microsoft Clarity to understand how visitors interact with pages through usage analytics, heatmaps and session recordings. Clarity may collect information about your device, browser and interactions with the site. More information: <a href="https://privacy.microsoft.com/privacystatement" target="_blank" rel="noopener">Microsoft's Privacy Statement</a>.</p>
+
     <h2 class="h4 mt-4">Google AdSense and advertising</h2>
     <p>We use Google AdSense to display ads. Google and its partners, including third-party vendors, use cookies to serve ads based on your previous visits to this and other websites. Google's use of advertising cookies enables it and its partners to serve ads to you based on your visit to our site and/or other sites on the Internet.</p>
     <p>You can opt out of personalised advertising by visiting <a href="https://adssettings.google.com" target="_blank" rel="noopener">Google Ads Settings</a>, or learn how to opt out of third-party vendors' use of cookies at <a href="https://www.aboutads.info" target="_blank" rel="noopener">aboutads.info</a>.</p>

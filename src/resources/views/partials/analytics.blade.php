@@ -19,6 +19,17 @@
   gtag('js', new Date());
 
   gtag('config', 'G-0ZPBSY263K', {send_page_view: tcConsent === 'granted'});
+
+  window.ttLoadClarity = function () {
+    if (window.ttClarityLoaded) return;
+    window.ttClarityLoaded = true;
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments);};
+      t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, 'clarity', 'script', 'zjemo7u4oo');
+  };
+  if (tcConsent === 'granted') window.ttLoadClarity();
 </script>
 <!-- Google Tag Manager -->
 <script>

@@ -30,7 +30,7 @@ class ExampleTest extends TestCase
 
     public function test_adsterra_units_are_rendered_for_public_pages_and_wait_for_consent(): void
     {
-        $this->get('/', ['HTTP_HOST' => 'topictrail.me'])
+        $this->get('http://topictrail.me/')
             ->assertOk()
             ->assertSee('assets/js/adsterra.js')
             ->assertSee('tt_consent_v2')
@@ -39,9 +39,19 @@ class ExampleTest extends TestCase
             ->assertSee('Adsterra');
     }
 
+    public function test_clarity_only_loads_after_analytics_consent(): void
+    {
+        $this->get('http://topictrail.me/')
+            ->assertOk()
+            ->assertSee("if (tcConsent === 'granted') window.ttLoadClarity()", false)
+            ->assertSee("s === 'granted' && typeof window.ttLoadClarity === 'function'", false)
+            ->assertSee('https://www.clarity.ms/tag/', false)
+            ->assertSee('Microsoft Clarity', false);
+    }
+
     public function test_ga4_page_view_waits_for_consent_and_is_sent_when_granted(): void
     {
-        $this->get('/', ['HTTP_HOST' => 'topictrail.me'])
+        $this->get('http://topictrail.me/')
             ->assertOk()
             ->assertSee("send_page_view: tcConsent === 'granted'", false)
             ->assertSee("previous !== 'granted' && value === 'granted'", false)
