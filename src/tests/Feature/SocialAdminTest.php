@@ -86,14 +86,16 @@ class SocialAdminTest extends TestCase
         $this->assertTrue($recipe->fresh()->posted_facebook);
     }
 
-    public function test_pending_recipes_have_quick_facebook_schedule_buttons(): void
+    public function test_pending_recipes_have_one_button_to_open_the_schedule_picker(): void
     {
+        $this->recipe();
         $response = $this->actingAs(User::factory()->create())->get('/social-admin')->assertOk();
 
-        foreach ([10, 15, 20, 25, 30] as $minutes) {
-            $response->assertSee('data-delay-minutes="'.$minutes.'"', false)
-                ->assertSee("Publish in {$minutes} min");
-        }
+        $response->assertSee('Publish in…')
+            ->assertSee('Schedule Facebook post')
+            ->assertSee('Load more options (+5 min)');
+        $this->assertSame(5, substr_count($response->getContent(), 'data-delay-minutes='));
+        $this->assertSame(13, substr_count($response->getContent(), 'class="btn btn--ghost js-open-schedule"'));
     }
 
     public function test_dashboard_shows_reusable_facebook_posts_for_meal_planner_and_tools(): void
@@ -127,10 +129,14 @@ class SocialAdminTest extends TestCase
             ->assertSee('Make the week’s meals easier to plan.');
 
         $this->assertSame(12, substr_count($response->getContent(), 'class="js-tool-fb-form"'));
-        $this->assertSame(60, substr_count($response->getContent(), 'data-delay-minutes='));
+        $this->assertSame(12, substr_count($response->getContent(), 'class="btn btn--ghost js-open-schedule"'));
+        $this->assertSame(5, substr_count($response->getContent(), 'data-delay-minutes='));
+        $response->assertSee('nextDelayMinutes = 35', false)
+            ->assertSee('minutes += 5', false)
+            ->assertSee("loadMoreLabel.textContent = 'Loading…'", false);
     }
 
-    public function test_tool_post_can_be_scheduled_with_a_quick_delay(): void
+    public function test_tool_post_can_be_scheduled_with_a_loaded_delay_option(): void
     {
         config(['services.facebook.page_id' => 'page-123', 'services.facebook.page_token' => 'secret-page-token']);
         Http::fake(['graph.facebook.com/*' => Http::response(['id' => 'page-123_scheduled-456'])]);
@@ -140,16 +146,16 @@ class SocialAdminTest extends TestCase
             $response = $this->actingAs(User::factory()->create())
                 ->postJson(route('social.tools.publish', 'cooking-timer'), [
                     'message' => 'Keep multiple kitchen timers in one place!',
-                    'schedule_minutes' => 15,
+                    'schedule_minutes' => 35,
                 ])
                 ->assertOk()
                 ->assertJsonPath('ok', true);
 
-            $this->assertStringContainsString('scheduled on Facebook for 2026-04-15 13:15', $response->json('message'));
+            $this->assertStringContainsString('scheduled on Facebook for 2026-04-15 13:35', $response->json('message'));
             Http::assertSent(fn (Request $request) => str_ends_with($request->url(), '/page-123/feed')
                 && $request['link'] === route('tools.cooking-timer')
                 && $request['published'] === 'false'
-                && (int) $request['scheduled_publish_time'] === CarbonImmutable::parse('2026-04-15 12:15:00 UTC')->timestamp);
+                && (int) $request['scheduled_publish_time'] === CarbonImmutable::parse('2026-04-15 12:35:00 UTC')->timestamp);
         } finally {
             CarbonImmutable::setTestNow();
         }

@@ -46,14 +46,9 @@
                         <button class="btn btn--fb" type="submit" @disabled(! $facebookReady)>
                             <span class="spin" hidden aria-hidden="true"></span><span class="lbl">Post to Facebook</span>
                         </button>
+                        <button class="btn btn--ghost js-open-schedule" type="button" @disabled(! $facebookReady)>Publish in…</button>
                     </div>
-                    <div class="actions" aria-label="Quick schedule">
-                        @foreach ([10, 15, 20, 25, 30] as $minutes)
-                            <button class="btn btn--fb" type="submit" data-delay-minutes="{{ $minutes }}" @disabled(! $facebookReady)>
-                                <span class="spin" hidden aria-hidden="true"></span><span class="lbl">Publish in {{ $minutes }} min</span>
-                            </button>
-                        @endforeach
-                    </div>
+                    <input type="hidden" name="schedule_minutes" value="">
                 </form>
             </article>
         @endforeach
@@ -81,17 +76,11 @@
                             </details>
                             <div class="actions">
                                 <button class="btn btn--fb" type="submit" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Post to Facebook</span></button>
+                                <button class="btn btn--ghost js-open-schedule" type="button" @disabled(! $facebookReady)>Publish in…</button>
                             </div>
                             <details>
                                 <summary>Schedule on Facebook</summary>
                                 <p class="muted">Times use Morocco (Africa/Casablanca). Choose at least 10 minutes from now. Facebook may impose additional limits.</p>
-                                <div class="actions" aria-label="Quick schedule">
-                                    @foreach ([10, 15, 20, 25, 30] as $minutes)
-                                        <button class="btn btn--fb" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" data-delay-minutes="{{ $minutes }}" formnovalidate @disabled(! $facebookReady)>
-                                            <span class="spin" hidden></span><span class="lbl">Publish in {{ $minutes }} min</span>
-                                        </button>
-                                    @endforeach
-                                </div>
                                 <label><input type="radio" name="schedule_mode" value="calendar" checked> Date and time</label>
                                 <label for="schedule-at-{{ $recipe->id }}">Date and time in Morocco</label>
                                 <input id="schedule-at-{{ $recipe->id }}" type="datetime-local" name="scheduled_at">
@@ -100,7 +89,7 @@
                                     <div><label for="delay-{{ $recipe->id }}">Amount</label><input id="delay-{{ $recipe->id }}" type="number" name="delay" min="1" max="525600" step="1"></div>
                                     <div><label for="unit-{{ $recipe->id }}">Unit</label><select id="unit-{{ $recipe->id }}" name="delay_unit"><option value="minutes" selected>Minutes</option><option value="hours">Hours</option></select></div>
                                 </div>
-                                <div class="actions"><button class="btn btn--fb" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Schedule on Facebook</span></button></div>
+                                <div class="actions"><button class="btn btn--fb js-schedule-submit" type="submit" formaction="{{ route('social.facebook.schedule', $recipe) }}" @disabled(! $facebookReady)><span class="spin" hidden></span><span class="lbl">Schedule on Facebook</span></button></div>
                             </details>
                         </form>
                     @elseif ($recipe->facebook_scheduled_at && ! $recipe->posted_facebook)
@@ -130,7 +119,94 @@
     </div>
 @endif</div>
 <div id="toasts" aria-live="polite"></div>
+<dialog id="publish-delay-dialog" aria-labelledby="publish-delay-title">
+    <div class="publish-delay-dialog__header">
+        <h2 id="publish-delay-title">Schedule Facebook post</h2>
+        <button class="btn btn--ghost" type="button" data-close-schedule aria-label="Close">Close</button>
+    </div>
+    <p class="muted">Choose how many minutes from now to publish.</p>
+    <div id="publish-delay-options" class="publish-delay-options">
+        @foreach ([10, 15, 20, 25, 30] as $minutes)
+            <button class="btn btn--fb" type="button" data-delay-minutes="{{ $minutes }}">Publish in {{ $minutes }} min</button>
+        @endforeach
+    </div>
+    <button class="btn btn--ghost" type="button" id="load-more-delays">
+        <span class="load-more-spinner" hidden aria-hidden="true"></span><span class="load-more-label" aria-live="polite">Load more options (+5 min)</span>
+    </button>
+    <p class="muted">Additional options are added in 5-minute increments. Facebook may impose scheduling limits.</p>
+</dialog>
 <script>
+var scheduleDialog = document.getElementById('publish-delay-dialog');
+var scheduleOptions = document.getElementById('publish-delay-options');
+var loadMoreDelays = document.getElementById('load-more-delays');
+var loadMoreSpinner = loadMoreDelays.querySelector('.load-more-spinner');
+var loadMoreLabel = loadMoreDelays.querySelector('.load-more-label');
+var scheduleForm = null;
+var nextDelayMinutes = 35;
+var maximumDelayMinutes = 108000;
+
+document.querySelectorAll('.js-open-schedule').forEach(function (button) {
+    button.addEventListener('click', function () {
+        scheduleForm = button.closest('form');
+        scheduleDialog.showModal();
+    });
+});
+
+scheduleDialog.querySelector('[data-close-schedule]').addEventListener('click', function () {
+    scheduleDialog.close();
+});
+
+scheduleDialog.addEventListener('click', function (event) {
+    if (event.target === scheduleDialog) scheduleDialog.close();
+});
+
+scheduleOptions.addEventListener('click', function (event) {
+    var option = event.target.closest('[data-delay-minutes]');
+    if (!option || !scheduleForm) return;
+
+    var minutes = option.dataset.delayMinutes;
+    scheduleDialog.close();
+    if (scheduleForm.classList.contains('js-fb-form')) {
+        var scheduleButton = scheduleForm.querySelector('.js-schedule-submit');
+        scheduleForm.querySelector('input[name="schedule_mode"][value="delay"]').checked = true;
+        scheduleForm.querySelector('[name="delay"]').value = minutes;
+        scheduleForm.querySelector('[name="delay_unit"]').value = 'minutes';
+        scheduleButton.dataset.delayMinutes = minutes;
+        scheduleForm.requestSubmit(scheduleButton);
+    } else {
+        scheduleForm.querySelector('[name="schedule_minutes"]').value = minutes;
+        scheduleForm.requestSubmit(scheduleForm.querySelector('button[type="submit"]'));
+    }
+    scheduleForm = null;
+});
+
+loadMoreDelays.addEventListener('click', function () {
+    if (nextDelayMinutes > maximumDelayMinutes) return;
+    var button = loadMoreDelays;
+    button.disabled = true;
+    loadMoreSpinner.hidden = false;
+    loadMoreLabel.textContent = 'Loading…';
+    window.setTimeout(function () {
+        var end = Math.min(nextDelayMinutes + 20, maximumDelayMinutes);
+        for (var minutes = nextDelayMinutes; minutes <= end; minutes += 5) {
+            var option = document.createElement('button');
+            option.type = 'button';
+            option.className = 'btn btn--fb';
+            option.dataset.delayMinutes = String(minutes);
+            option.textContent = 'Publish in ' + minutes + ' min';
+            scheduleOptions.appendChild(option);
+        }
+        nextDelayMinutes = end + 5;
+        if (nextDelayMinutes > maximumDelayMinutes) {
+            button.hidden = true;
+        } else {
+            button.disabled = false;
+            loadMoreSpinner.hidden = true;
+            loadMoreLabel.textContent = 'Load more options (+5 min)';
+        }
+    }, 350);
+});
+
 document.querySelectorAll('.js-fb-form').forEach(function (form) {
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -239,8 +315,13 @@ document.querySelectorAll('.js-tool-fb-form').forEach(function (form) {
     form.addEventListener('submit', async function (event) {
         event.preventDefault();
         var button = event.submitter || form.querySelector('button[type=submit]');
-        var scheduling = Boolean(button.dataset.delayMinutes);
-        if (button.disabled || !confirm((scheduling ? 'Schedule "' : 'Post "') + form.dataset.toolTitle + '"' + (scheduling ? ' in ' + button.dataset.delayMinutes + ' minutes' : '') + ' on the Facebook page?')) return;
+        var delayInput = form.querySelector('[name="schedule_minutes"]');
+        var scheduling = Boolean(delayInput.value);
+        if (button.disabled) return;
+        if (!confirm((scheduling ? 'Schedule "' : 'Post "') + form.dataset.toolTitle + '"' + (scheduling ? ' in ' + delayInput.value + ' minutes' : '') + ' on the Facebook page?')) {
+            delayInput.value = '';
+            return;
+        }
 
         var spinner = button.querySelector('.spin');
         var label = button.querySelector('.lbl');
@@ -252,7 +333,7 @@ document.querySelectorAll('.js-tool-fb-form').forEach(function (form) {
 
         try {
             var body = new FormData(form);
-            if (scheduling) body.append('schedule_minutes', button.dataset.delayMinutes);
+            if (!scheduling) body.delete('schedule_minutes');
             var response = await fetch(form.action, {
                 method: 'POST',
                 headers: {'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest'},
@@ -264,11 +345,12 @@ document.querySelectorAll('.js-tool-fb-form').forEach(function (form) {
             label.textContent = scheduling ? 'Schedule again' : 'Post again';
         } catch (error) {
             toast(error.message || 'Facebook post failed. Check the page before retrying.', false);
-            label.textContent = scheduling ? 'Publish in ' + button.dataset.delayMinutes + ' min' : 'Post to Facebook';
+            label.textContent = 'Post to Facebook';
         } finally {
             buttons.forEach(function (item) { item.disabled = false; });
             spinner.hidden = true;
             form.removeAttribute('aria-busy');
+            delayInput.value = '';
         }
     });
 });
