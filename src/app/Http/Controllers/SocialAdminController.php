@@ -128,7 +128,7 @@ class SocialAdminController extends Controller
         abort_unless(isset($tools[$tool]), 404);
         $data = $request->validate([
             'message' => ['required', 'string', 'min:5', 'max:2000'],
-            'schedule_minutes' => ['sometimes', 'required', 'integer', 'in:10,15,20,25,30'],
+            'schedule_minutes' => ['sometimes', 'required', 'integer', 'min:10', 'max:108000', 'multiple_of:5'],
         ]);
 
         try {
